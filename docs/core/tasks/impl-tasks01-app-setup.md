@@ -34,11 +34,11 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Add recommended extensions to `.vscode/extensions.json`
 
 **Acceptance Criteria**:
-- [ ] Project is created with Next.js 13+ App Router
-- [ ] TypeScript is properly configured
-- [ ] Tailwind CSS is properly configured
-- [ ] ESLint is set up correctly
-- [ ] VSCode settings are optimized for development
+- [X] Project is created with Next.js 13+ App Router
+- [X] TypeScript is properly configured
+- [X] Tailwind CSS is properly configured
+- [X] ESLint is set up correctly
+- [X] VSCode settings are optimized for development
 
 **Common Pitfalls & Tips**:
 - Make sure to select "App Router (recommended)" and not "Pages Router" during setup
@@ -62,7 +62,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Time Estimate**: 1-2 hours  
 **Story Points**: 2  
 **Dependencies**: None  
-**Status**: TODO
+**Status**: DONE
 
 ### SETUP-02: Dependency Installation
 **Type**: Task  

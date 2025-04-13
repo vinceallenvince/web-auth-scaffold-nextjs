@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    "ms-vscode.vscode-typescript-next",
+    "Prisma.prisma",
+    "moalamri.inline-fold",
+    "meganrogge.template-string-converter",
+    "styled-components.vscode-styled-components",
+    "eamodio.gitlens",
+    "yoavbls.pretty-ts-errors"
+  ]
+} 
