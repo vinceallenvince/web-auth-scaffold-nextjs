@@ -15,6 +15,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Follow these steps:
   1. **Create the Next.js project**:
      - Run `pnpm create next-app web-auth-scaffold-nextjs`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm create next-app web-auth-scaffold-nextjs --registry=https://registry.npmjs.org/
+       ```
      - Select TypeScript when prompted
      - Select ESLint when prompted
      - Select Tailwind CSS when prompted
@@ -48,15 +52,31 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Follow these steps:
   1. **Install authentication and database dependencies**:
      - Run `pnpm add @auth/core @auth/prisma-adapter @prisma/client zod`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm add @auth/core @auth/prisma-adapter @prisma/client zod --registry=https://registry.npmjs.org/
+       ```
      - Verify packages are correctly added to package.json
 
   2. **Install development and testing dependencies**:
      - Run `pnpm add -D prisma vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom playwright @playwright/test`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm add -D prisma vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom playwright @playwright/test --registry=https://registry.npmjs.org/
+       ```
      - Verify packages are correctly added to package.json
 
   3. **Install UI dependencies**:
      - Run `pnpm add daisyui @tailwindcss/forms`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm add daisyui @tailwindcss/forms --registry=https://registry.npmjs.org/
+       ```
      - Configure Tailwind CSS to use DaisyUI in `tailwind.config.js`
+     
+  4. **Configure Registry**:
+     - Note: A local `.npmrc` file is included that configures npm to use the public registry for this project
+     - Verify the `.npmrc` file contains: `registry=https://registry.npmjs.org/`
 
 **Expected Outcomes**:
 - All required dependencies installed and properly configured
@@ -112,6 +132,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Follow these steps:
   1. **Verify Next.js setup**:
      - Run `pnpm dev` to start the development server
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm dev --registry=https://registry.npmjs.org/
+       ```
      - Verify the app loads at http://localhost:3000
      - Test that hot reloading works correctly
      - Ensure TypeScript compilation is functioning
@@ -178,6 +202,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Follow these steps:
   1. **Initialize Prisma**:
      - Run `pnpm prisma init`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm prisma init --registry=https://registry.npmjs.org/
+       ```
      - Configure PostgreSQL provider in `schema.prisma`
      - Ensure connection with Supabase database
 
@@ -212,6 +240,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Follow these steps:
   1. **Push schema to database**:
      - Run `pnpm prisma db push`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm prisma db push --registry=https://registry.npmjs.org/
+       ```
      - Verify schema changes are applied in Supabase
      - Check for any deployment errors
 
@@ -222,6 +254,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
   3. **Run seed script**:
      - Execute `pnpm prisma db seed`
+     - If you face issues with company npm registry:
+       ```bash
+       pnpm prisma db seed --registry=https://registry.npmjs.org/
+       ```
      - Verify data is correctly created
      - Document seed data for development reference
 

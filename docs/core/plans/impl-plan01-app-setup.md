@@ -33,6 +33,9 @@ This implementation will serve as the foundation for a portable, maintainable we
    - Create new Next.js project with App Router:
      ```bash
      pnpm create next-app web-auth-scaffold-nextjs
+     
+     # If you face issues with company npm registry:
+     pnpm create next-app web-auth-scaffold-nextjs --registry=https://registry.npmjs.org/
      ```
    - Select TypeScript, ESLint, and Tailwind CSS during setup
    - Configure VSCode for TypeScript and ESLint
@@ -43,11 +46,19 @@ This implementation will serve as the foundation for a portable, maintainable we
      pnpm add @auth/core @auth/prisma-adapter @prisma/client zod
      pnpm add -D prisma vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom 
      pnpm add -D playwright @playwright/test
+     
+     # If you face issues with company npm registry:
+     pnpm add @auth/core @auth/prisma-adapter @prisma/client zod --registry=https://registry.npmjs.org/
+     pnpm add -D prisma vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom playwright @playwright/test --registry=https://registry.npmjs.org/
      ```
    - Install UI dependencies:
      ```bash
      pnpm add daisyui @tailwindcss/forms
+     
+     # If you face issues with company npm registry:
+     pnpm add daisyui @tailwindcss/forms --registry=https://registry.npmjs.org/
      ```
+   - Note: A local `.npmrc` file is included that configures npm to use the public registry for this project
 
 3. **Environment Configuration**
    - Create `.env.example` template with required variables:
@@ -64,6 +75,9 @@ This implementation will serve as the foundation for a portable, maintainable we
      ```bash
      # Start development server
      pnpm dev
+     
+     # If you face issues with company npm registry:
+     pnpm dev --registry=https://registry.npmjs.org/
      ```
    - Verify the following:
      - Next.js development server starts successfully at http://localhost:3000
@@ -103,6 +117,9 @@ This implementation will serve as the foundation for a portable, maintainable we
    - Initialize Prisma:
      ```bash
      pnpm prisma init
+     
+     # If you face issues with company npm registry:
+     pnpm prisma init --registry=https://registry.npmjs.org/
      ```
    - Configure `schema.prisma` with PostgreSQL provider
    - Define core data models:
@@ -115,6 +132,9 @@ This implementation will serve as the foundation for a portable, maintainable we
    - Push schema to Supabase:
      ```bash
      pnpm prisma db push
+     
+     # If you face issues with company npm registry:
+     pnpm prisma db push --registry=https://registry.npmjs.org/
      ```
    - Create database seed script for development data
 
@@ -191,20 +211,32 @@ This implementation will serve as the foundation for a portable, maintainable we
    - Run linting and fix issues:
      ```bash
      pnpm lint
+     
+     # If you face issues with company npm registry:
+     pnpm lint --registry=https://registry.npmjs.org/
      ```
    - Ensure consistent code formatting:
      ```bash
      pnpm format
+     
+     # If you face issues with company npm registry:
+     pnpm format --registry=https://registry.npmjs.org/
      ```
    - Validate TypeScript types:
      ```bash
      pnpm tsc --noEmit
+     
+     # If you face issues with company npm registry:
+     pnpm tsc --noEmit --registry=https://registry.npmjs.org/
      ```
 
 3. **Final Testing**
    - Run complete test suite:
      ```bash
      pnpm test
+     
+     # If you face issues with company npm registry:
+     pnpm test --registry=https://registry.npmjs.org/
      ```
    - Verify all critical flows work end-to-end
    - Fix any remaining issues

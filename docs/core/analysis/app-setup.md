@@ -20,6 +20,11 @@ This document outlines the setup process for the web authentication scaffold Nex
 1. **Node.js & pnpm**
    - Install Node.js v18 or higher
    - Install pnpm: `npm install -g pnpm`
+   - If you face issues with company npm registry:
+     ```bash
+     npm install -g pnpm --registry=https://registry.npmjs.org/
+     ```
+   - Note: A local `.npmrc` file is included that configures npm to use the public registry for this project
 
 2. **Supabase Database Setup**
    - Create a Supabase account at [https://supabase.com](https://supabase.com) if you don't have one
@@ -46,6 +51,9 @@ cd web-auth-scaffold-nextjs
 
 # Install dependencies
 pnpm install
+
+# If you face issues with company npm registry:
+pnpm install --registry=https://registry.npmjs.org/
 
 # Set up database schema with Prisma
 pnpm db:push
@@ -97,6 +105,10 @@ For local development, magic links will be output to the console logs rather tha
 
 ```bash
 pnpm dev             # Start development server
+
+# If you face issues with company npm registry, add the registry flag to any pnpm command:
+# pnpm <command> --registry=https://registry.npmjs.org/
+
 pnpm test            # Run all tests
 pnpm test:db         # Run database tests
 pnpm test:server     # Run server tests

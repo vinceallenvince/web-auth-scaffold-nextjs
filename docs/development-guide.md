@@ -2,10 +2,10 @@
 
 ## 🧐 Overview
 
-We’re building a full-stack TypeScript web app using **Next.js 13+ with the App Router**.\
+We're building a full-stack TypeScript web app using **Next.js 13+ with the App Router**.\
 This app is modern, scalable, portable, and optimized for fast developer workflows.
 
-You’ll be working across:
+You'll be working across:
 
 - The **frontend** (UI components, pages)
 - The **backend** (API routes and Server Actions)
@@ -143,14 +143,14 @@ middleware.ts        → Optional route guards or localization
 
 ## 🚀 Deployment & Portability
 
-We’re building this project to be **platform-agnostic** — meaning it should run smoothly on a variety of environments including **Replit**, **Vercel**, **Render**, **Fly.io**, or your local machine.
+We're building this project to be **platform-agnostic** — meaning it should run smoothly on a variety of environments including **Replit**, **Vercel**, **Render**, **Fly.io**, or your local machine.
 
 To support that flexibility, our codebase avoids assumptions or dependencies tied to any one hosting platform.
 
 ### ✅ Portability Guidelines
 
 - **Avoid provider-specific features**
-  - Don’t use platform-only APIs, edge runtime hacks, or logging/analytics tools tied to a single host
+  - Don't use platform-only APIs, edge runtime hacks, or logging/analytics tools tied to a single host
   - Stick with standard **Next.js features** like API routes and Server Actions
 - **Use environment variables**, not hardcoded secrets
   - All configuration (e.g., DB URLs, auth secrets) should come from `.env.local`
@@ -228,21 +228,31 @@ pnpm format          # Prettier formatting
 pnpm test            # Run Vitest tests
 pnpm db:push         # Apply schema changes with Prisma
 pnpm db:seed         # Seed DB with test data
+
+# If you face issues with company npm registry, use:
+pnpm <command> --registry=https://registry.npmjs.org/
+# Example: pnpm install --registry=https://registry.npmjs.org/
 ```
+
+> **Note**: A local `.npmrc` file is included that configures npm to use the public registry for this project
 
 ---
 
 ## 📍 Onboarding Checklist for New Devs
 
-  ✅ Install Node + pnpm
+  ✅ Install Node + pnpm 
+     - If facing issues with company npm registry: `npm install -g pnpm --registry=https://registry.npmjs.org/`
 
   ✅ Clone the repo and run pnpm install
+     - If facing issues with company npm registry: `pnpm install --registry=https://registry.npmjs.org/`
 
   ✅ Copy .env.example to .env.local and fill in keys
 
   ✅ Run pnpm dev and visit http\://localhost:3000
+     - If facing issues with company npm registry: `pnpm dev --registry=https://registry.npmjs.org/`
 
   ✅ Run pnpm test to confirm everything is passing
+     - If facing issues with company npm registry: `pnpm test --registry=https://registry.npmjs.org/`
 
   ✅ Read this guide
 
