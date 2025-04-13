@@ -339,6 +339,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Summary**: Set up testing directory structure and configuration  
 **Description**:
 - Create the testing directory structure and configuration files for different test types
+- Implement ability to run tests separately and sequentially by category (database, server, client)
 
 **Implementation Details**:
 - Follow these steps:
@@ -354,15 +355,30 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Create Vitest configuration for unit and integration tests
      - Set up Playwright configuration for E2E tests
      - Add test environment setup files
+     - Configure test isolation between categories
 
   3. **Configure test scripts**:
-     - Add test scripts to package.json
-     - Create test utilities and helpers
-     - Set up test database configuration
+     - Add test scripts to package.json:
+       ```json
+       {
+         "scripts": {
+           "test": "pnpm test:db && pnpm test:server && pnpm test:client",
+           "test:db": "vitest run --config vitest.db.config.ts",
+           "test:server": "vitest run --config vitest.server.config.ts",
+           "test:client": "vitest run --config vitest.client.config.ts",
+           "test:e2e": "playwright test",
+           "test:watch": "vitest watch"
+         }
+       }
+       ```
+     - Ensure tests can be run in order: database → server → client
+     - Create separate configuration files for each test category
+     - Set up appropriate test database configuration for each category
 
 **Expected Outcomes**:
 - Complete test directory structure
 - Working test configuration for all test types
+- Ability to run tests by category (database, server, client) separately and sequentially
 - Helper utilities for testing different parts of the application
 
 **Story Points**: 3  

@@ -165,13 +165,6 @@ We follow a structured approach to testing with clear separation of concerns:
 - **Client Tests**: Verify component rendering, state management, and user interactions
 - **E2E Tests**: Ensure complete user journeys work from end to end
 
-### Testing Tools
-
-- **Vitest**: For unit and integration tests (server, client, and database)
-- **Playwright**: For end-to-end browser testing
-- **React Testing Library**: For component testing
-- **MSW (Mock Service Worker)**: For API mocking in tests
-
 ### Running Tests
 
 As mentioned in the development commands section:
@@ -185,6 +178,44 @@ pnpm test:e2e        # Run end-to-end tests
 ```
 
 Each test category can be run independently, allowing for focused testing during development.
+
+#### Sequential Test Running
+
+The test infrastructure is designed to support running tests separately by category and sequentially in a specific order. This follows the developer user story: "As a developer, when I run tests, I want to group them by database, server and client and run them separately and sequentially."
+
+The recommended sequence for running tests is:
+
+1. **Database tests first**: Run `pnpm test:db`
+   - Tests database models, relationships, and queries
+   - Should be run first as other tests may depend on data model integrity
+
+2. **Server tests second**: Run `pnpm test:server`
+   - Tests API routes and server actions
+   - Depends on working database integration
+
+3. **Client tests third**: Run `pnpm test:client`
+   - Tests UI components and client-side logic
+   - May mock server responses or depend on server implementation
+
+4. **E2E tests last**: Run `pnpm test:e2e`
+   - Tests complete user flows across the application
+   - Requires all other components to be working correctly
+
+Running `pnpm test` will automatically execute the first three categories in the correct order.
+
+#### Test Configuration
+
+Each test category has its own configuration file:
+- `vitest.db.config.ts` - Database test configuration
+- `vitest.server.config.ts` - Server test configuration
+- `vitest.client.config.ts` - Client test configuration
+- `playwright.config.ts` - E2E test configuration
+
+These configurations ensure that:
+- Tests have the correct environment variables
+- Test databases are properly isolated
+- Tests run with the appropriate mocks and fixtures
+- Tests can be run independently without conflicts
 
 ## Core Features Implementation
 
