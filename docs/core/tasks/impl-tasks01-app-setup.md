@@ -33,11 +33,33 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Set up `.vscode/settings.json` with appropriate TypeScript and ESLint settings
      - Add recommended extensions to `.vscode/extensions.json`
 
-**Expected Outcomes**:
-- A working Next.js project with App Router structure
-- TypeScript and ESLint correctly configured
-- VSCode settings optimized for development
+**Acceptance Criteria**:
+- [ ] Project is created with Next.js 13+ App Router
+- [ ] TypeScript is properly configured
+- [ ] Tailwind CSS is properly configured
+- [ ] ESLint is set up correctly
+- [ ] VSCode settings are optimized for development
 
+**Common Pitfalls & Tips**:
+- Make sure to select "App Router (recommended)" and not "Pages Router" during setup
+- The project name should match the directory name to avoid confusion
+- If using company VPN, you might encounter npm registry issues
+- Check that Node.js version is v18+ before starting
+
+**Testing Instructions**:
+- Run `pnpm dev` and verify the app loads at http://localhost:3000
+- Make a simple change to app/page.tsx and confirm hot reload works
+- Check that Tailwind styles are applied correctly by adding a Tailwind class
+
+**Relevant User Story**:
+- As a developer, I should be able to run this application locally with full database functionality
+   - [/docs/specs/product/core-specs.md](/docs/specs/product/core-specs.md) 
+
+**Reference Links**:
+- [Next.js Installation](https://nextjs.org/docs/getting-started/installation)
+- [Tailwind CSS with Next.js](https://tailwindcss.com/docs/guides/nextjs)
+
+**Time Estimate**: 1-2 hours  
 **Story Points**: 2  
 **Dependencies**: None  
 **Status**: TODO
@@ -78,11 +100,35 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Note: A local `.npmrc` file is included that configures npm to use the public registry for this project
      - Verify the `.npmrc` file contains: `registry=https://registry.npmjs.org/`
 
-**Expected Outcomes**:
-- All required dependencies installed and properly configured
-- Package.json updated with the correct versions
-- Tailwind and DaisyUI properly integrated
+**Acceptance Criteria**:
+- [ ] All core dependencies are installed successfully
+- [ ] Development and testing dependencies are installed
+- [ ] UI dependencies (DaisyUI, Tailwind Forms) are installed
+- [ ] Tailwind CSS is configured to use DaisyUI in config file
+- [ ] Registry is properly configured to avoid company npm issues
 
+**Common Pitfalls & Tips**:
+- Always verify package versions in package.json after installation
+- Some dependencies may have peer dependencies that need to be installed separately
+- Make sure your Node.js version is compatible with installed packages
+- If packages fail to install, try clearing the pnpm cache with `pnpm store prune`
+- DaisyUI needs specific configuration in tailwind.config.js to work properly
+
+**Testing Instructions**:
+- Check package.json to verify all dependencies are listed with correct versions
+- Run `pnpm install` to ensure dependencies resolve without conflicts
+- Check tailwind.config.js to verify DaisyUI is in the plugins array
+- Try importing a component from one of the packages in a test file to verify it's available
+
+**Relevant User Story**:
+- "As a developer, I should be able to run this application locally with full database functionality"
+
+**Reference Links**:
+- [Auth.js Documentation](https://authjs.dev/)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [DaisyUI Documentation](https://daisyui.com/docs/install/)
+
+**Time Estimate**: 1-2 hours  
 **Story Points**: 2  
 **Dependencies**: SETUP-01  
 **Status**: TODO
@@ -113,10 +159,32 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Update `next.config.js` as needed for environment configuration
      - Add validation for required environment variables on startup
 
-**Expected Outcomes**:
-- Well-documented environment templates
-- Secure local environment configuration
-- Proper protection of secrets in version control
+**Acceptance Criteria**:
+- [ ] `.env.example` file created with all required variables and documentation
+- [ ] `.env.local` file created with valid values for local development
+- [ ] `.gitignore` configured to exclude `.env.local` and other sensitive files
+- [ ] `next.config.js` updated with any necessary environment configuration
+- [ ] Environment validation added to prevent app startup with missing variables
+
+**Common Pitfalls & Tips**:
+- Never commit `.env.local` to version control as it contains sensitive information
+- Use a strong random value for `NEXTAUTH_SECRET` (e.g., generated with `openssl rand -base64 32`)
+- Make sure `NEXTAUTH_URL` matches your local development URL (usually http://localhost:3000)
+- Database URL format should follow Prisma's connection string format for PostgreSQL
+
+**Testing Instructions**:
+- Verify that the app starts correctly with all environment variables set
+- Test that the app correctly fails to start when a required variable is missing
+- Check that sensitive variables are not exposed in client-side code
+- Ensure environment variables are accessible in both server and client components as appropriate
+
+**Relevant User Story**:
+- "As a developer, I should be able to run this application locally with full database functionality"
+
+**Reference Links**:
+- [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
+- [Auth.js Environment Variables](https://next-auth.js.org/configuration/options#environment-variables)
+- [Prisma Connection Strings](https://www.prisma.io/docs/concepts/database-connectors/postgresql#connection-url)
 
 **Story Points**: 2  
 **Dependencies**: SETUP-01  
@@ -150,10 +218,33 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Note any issues encountered and their resolutions
      - Add troubleshooting guidance for common problems
 
-**Expected Outcomes**:
-- Verified working development environment
-- Connectivity testing endpoint
-- Documentation of setup verification process
+**Acceptance Criteria**:
+- [ ] Next.js development server starts without errors
+- [ ] Hot module reloading works when making changes to files
+- [ ] TypeScript compiles code without errors
+- [ ] Database connectivity test endpoint returns success
+- [ ] Verification checklist document created
+
+**Common Pitfalls & Tips**:
+- Make sure to use the correct Node.js version (v18+) for compatibility
+- If hot reloading isn't working, check that you haven't disabled it in Next.js config
+- The database connection may fail if your IP isn't authorized in Supabase settings
+- Keep the verification route secured or remove it before production deployment
+- Use Prisma Studio (`npx prisma studio`) for visual database inspection during verification
+
+**Testing Instructions**:
+- Run `pnpm dev` and navigate to http://localhost:3000 to verify the app loads
+- Make a small change to a visible component and verify it updates without full reload
+- Visit the database verification endpoint and confirm successful connection
+- Run `pnpm tsc --noEmit` to verify there are no TypeScript errors in the codebase
+
+**Relevant User Story**:
+- "As a developer, I should be able to run this application locally with full database functionality"
+
+**Reference Links**:
+- [Next.js Development Server](https://nextjs.org/docs/getting-started/development-server)
+- [Prisma Connection Testing](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/connection-management)
+- [TypeScript in Next.js](https://nextjs.org/docs/basic-features/typescript)
 
 **Story Points**: 3  
 **Dependencies**: SETUP-01, SETUP-02, SETUP-03  
@@ -183,10 +274,34 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Configure IP restrictions if needed
      - Update `.env.local` with the database URL
 
-**Expected Outcomes**:
-- Active Supabase project ready for use
-- Secure database connection configured
-- Environment variables updated with connection details
+**Acceptance Criteria**:
+- [ ] Supabase account created and verified
+- [ ] New project created with appropriate name and settings
+- [ ] PostgreSQL database instance provisioned
+- [ ] Database connection string obtained
+- [ ] IP restrictions configured as needed
+- [ ] Environment variables updated with connection details
+
+**Common Pitfalls & Tips**:
+- Choose a strong database password and store it securely
+- Select the closest region to reduce latency for your development team
+- Enable IP restrictions in production to enhance security
+- Make sure to use the correct connection string format for Prisma
+- Keep track of the Supabase project dashboard URL for future reference
+
+**Testing Instructions**:
+- Verify the database connection using a PostgreSQL client
+- Test connection with the provided credentials
+- Check that the connection string works with `npx prisma db pull` test
+- Confirm IP restrictions by testing from an unauthorized location
+
+**Relevant User Story**:
+- "As a developer, I should be able to run this application locally with full database functionality"
+
+**Reference Links**:
+- [Supabase Documentation](https://supabase.com/docs)
+- [Supabase PostgreSQL Setup](https://supabase.com/docs/guides/database)
+- [Connecting Prisma to Supabase](https://www.prisma.io/docs/guides/database/supabase)
 
 **Story Points**: 3  
 **Dependencies**: SETUP-03  
@@ -221,10 +336,35 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Set up appropriate relations
      - Add indexes for performance
 
-**Expected Outcomes**:
-- Complete Prisma schema with authentication models
-- Relations and constraints properly configured
-- Schema ready for deployment to Supabase
+**Acceptance Criteria**:
+- [ ] Prisma initialized with PostgreSQL provider
+- [ ] Authentication models (User, Account, Session, VerificationToken) defined
+- [ ] Relations between authentication models correctly established
+- [ ] Necessary indexes added for query performance
+- [ ] Application-specific models defined with appropriate fields
+- [ ] Schema compatible with Auth.js requirements
+
+**Common Pitfalls & Tips**:
+- Make sure to follow the Auth.js schema requirements exactly for authentication models
+- Use appropriate field types (e.g., String vs. Text) based on expected data size
+- Add indexes for fields that will be frequently queried
+- Configure cascade delete for related records to avoid orphaned data
+- Use enums for fields with a fixed set of possible values
+
+**Testing Instructions**:
+- Validate the schema with `npx prisma validate`
+- Try generating Prisma client with `npx prisma generate`
+- Check for any warnings or suggestions in the Prisma output
+- Review schema for consistency with Auth.js requirements
+
+**Relevant User Story**:
+- "As a developer, I should be able to run this application locally with full database functionality"
+- "As a user, I should be able to securely authenticate with the application"
+
+**Reference Links**:
+- [Prisma Schema Documentation](https://www.prisma.io/docs/concepts/components/prisma-schema)
+- [Auth.js with Prisma Adapter](https://authjs.dev/reference/adapter/prisma)
+- [Prisma Relation Guidelines](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
 
 **Story Points**: 5  
 **Dependencies**: DB-01  
@@ -261,10 +401,36 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Verify data is correctly created
      - Document seed data for development reference
 
-**Expected Outcomes**:
-- Schema successfully deployed to Supabase
-- Seed data script created and functioning
-- Development database populated with test data
+**Acceptance Criteria**:
+- [ ] Schema successfully pushed to Supabase database
+- [ ] Database tables created with correct structure
+- [ ] Seed script created in the Prisma folder
+- [ ] Test user accounts defined in seed script
+- [ ] Seed data successfully deployed to database
+- [ ] Seed data documented for team reference
+
+**Common Pitfalls & Tips**:
+- Use `db push` for development but consider migrations for production
+- Ensure seed data includes all required fields with valid formats
+- Hash passwords in seed data even for test accounts
+- Use Prisma's createMany when possible for better performance
+- Document seed user credentials for team testing purposes
+
+**Testing Instructions**:
+- Run `npx prisma db push` and check for successful deployment
+- Execute the seed script with `npx prisma db seed`
+- Use Prisma Studio (`npx prisma studio`) to verify data was created
+- Try querying the database using the Prisma client in a test script
+- Test logging in with a seeded user account
+
+**Relevant User Story**:
+- "As a developer, I should be able to run this application locally with full database functionality"
+- "As a tester, I should have access to test accounts to verify application behavior"
+
+**Reference Links**:
+- [Prisma db push](https://www.prisma.io/docs/reference/api-reference/command-reference#db-push)
+- [Prisma Seeding](https://www.prisma.io/docs/guides/migrate/seed-database)
+- [Supabase Database Management](https://supabase.com/docs/guides/database/overview)
 
 **Story Points**: 3  
 **Dependencies**: DB-02  
@@ -272,99 +438,191 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
 ## Phase 3: Authentication Implementation
 
-### AUTH-01: Auth.js Core Setup
+### AUTH-01: Authentication Setup
 **Type**: Task  
-**Summary**: Configure Auth.js with Prisma adapter for Next.js  
+**Summary**: Set up Auth.js (NextAuth) for user authentication  
 **Description**:
-- Set up the core authentication system using Auth.js with magic link strategy
+- Configure Auth.js (NextAuth) for user authentication with email/password
 
 **Implementation Details**:
 - Follow these steps:
-  1. **Create Auth.js API route**:
-     - Create `app/api/auth/[...nextauth]/route.ts`
-     - Import required dependencies
-     - Set up basic Auth.js configuration
+  1. **Install Auth.js dependencies**:
+     - Install the Auth.js Next.js package
+     - Install additional providers as needed
 
-  2. **Configure Prisma adapter**:
-     - Connect Auth.js to Prisma
-     - Set up proper callbacks
-     - Configure session strategy
+  2. **Create Auth.js configuration**:
+     - Set up `app/api/auth/[...nextauth]/route.ts`
+     - Configure Prisma adapter
+     - Set up database connection
+     - Configure authentication options
 
-  3. **Implement magic link provider**:
-     - Set up email provider for magic links
-     - Configure token settings and expiration
-     - Set up development email logging
+  3. **Implement session management**:
+     - Configure session strategy (JWT or database)
+     - Set up session callbacks
+     - Implement proper session expiration and refresh
 
-**Expected Outcomes**:
-- Functional Auth.js setup with Prisma adapter
-- Magic link authentication strategy implemented
-- Proper session handling configured
+**Acceptance Criteria**:
+- [ ] Auth.js packages installed and configured
+- [ ] Auth API routes created and functioning
+- [ ] Prisma adapter properly configured
+- [ ] Session management implemented and working
+- [ ] Authentication endpoints respond correctly
+- [ ] Environment variables properly utilized
 
-**Story Points**: 5  
+**Common Pitfalls & Tips**:
+- Make sure the Prisma schema matches Auth.js requirements exactly
+- Use JWT strategy for better performance or database for more security
+- The callback URL must be properly configured to redirect after login
+- Keep authentication logic on server components for security
+- Take extra care in configuring CSRF protection correctly
+
+**Testing Instructions**:
+- Test each authentication endpoint for correct behavior
+- Verify session persistence across page reloads
+- Check that protected routes properly restrict access
+- Test authentication error handling for invalid credentials
+- Verify that callbacks are working correctly for redirects
+
+**Relevant User Story**:
+- "As a user, I should be able to securely authenticate with the application"
+- "As a user, I should have persistent sessions when I return to the application"
+
+**Reference Links**:
+- [Auth.js Documentation](https://authjs.dev/getting-started/introduction)
+- [Auth.js with Next.js](https://authjs.dev/reference/nextjs)
+- [Prisma Adapter Configuration](https://authjs.dev/reference/adapter/prisma)
+
+**Story Points**: 8  
 **Dependencies**: DB-03  
 **Status**: TODO
 
-### AUTH-02: Authentication UI Components
+### AUTH-02: User Registration Flow
 **Type**: Task  
-**Summary**: Create UI components for authentication  
+**Summary**: Implement user registration functionality  
 **Description**:
-- Develop the necessary UI components for the authentication flow
+- Create user registration forms and backend functionality
+
+**Implementation Details**:
+- Follow these steps:
+  1. **Create registration form**:
+     - Design mobile-friendly registration form
+     - Implement client-side validation
+     - Add error handling and feedback
+
+  2. **Implement form submission**:
+     - Create server action for registration
+     - Validate registration data
+     - Create new user records
+     - Handle email verification
+
+  3. **Create success/error handling**:
+     - Design confirmation screens
+     - Implement proper error messaging
+     - Add redirect after successful registration
+
+**Acceptance Criteria**:
+- [ ] Registration form created with appropriate fields
+- [ ] Client-side validation implemented for all fields
+- [ ] Server-side validation handling malformed requests
+- [ ] User creation process functioning correctly
+- [ ] Email verification process configured
+- [ ] Success and error states properly handled
+- [ ] Redirect to appropriate page after registration
+
+**Common Pitfalls & Tips**:
+- Validate email formats on both client and server
+- Implement password strength requirements and validation
+- Use zod or similar for type-safe validation
+- Add rate limiting to prevent abuse of registration endpoint
+- Don't expose specific errors that could aid attackers
+- Hash passwords properly before storing in database
+
+**Testing Instructions**:
+- Test form submission with valid data
+- Test form validation with invalid data
+- Verify email verification process works
+- Test duplicate username/email handling
+- Check accessibility of form elements
+- Verify all error states display appropriate messages
+
+**Relevant User Story**:
+- "As a new user, I should be able to register for an account"
+- "As a user, I should receive feedback on registration errors"
+
+**Reference Links**:
+- [Next.js Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
+- [Form Validation Best Practices](https://web.dev/learn/forms/validation)
+- [Auth.js Email Provider](https://authjs.dev/getting-started/providers/email-tutorial)
+
+**Story Points**: 5  
+**Dependencies**: AUTH-01  
+**Status**: TODO
+
+### AUTH-03: Login and Logout Flow
+**Type**: Task  
+**Summary**: Implement user login and logout functionality  
+**Description**:
+- Create login forms and implement logout functionality
 
 **Implementation Details**:
 - Follow these steps:
   1. **Create login form**:
-     - Build form with email input
-     - Add validation with Zod
-     - Implement form submission handler
+     - Design mobile-friendly login form
+     - Implement client-side validation
+     - Add "Remember me" functionality
+     - Implement password reset link
 
-  2. **Develop authentication status components**:
-     - Create login button component
-     - Create logout button component
-     - Develop user profile display component
+  2. **Implement form submission**:
+     - Create login server action
+     - Validate credentials
+     - Handle authentication errors
+     - Implement proper session creation
 
-  3. **Implement magic link flow UI**:
-     - Create "check your email" page
-     - Design magic link email template
-     - Implement loading states during authentication
+  3. **Create logout functionality**:
+     - Implement logout button/link
+     - Create logout API route
+     - Handle session termination
+     - Implement redirect after logout
 
-**Expected Outcomes**:
-- Complete set of authentication UI components
-- Responsive design that works on all devices
-- Accessible components with proper ARIA attributes
+**Acceptance Criteria**:
+- [ ] Login form created with email/password fields
+- [ ] Client-side validation implemented
+- [ ] "Remember me" functionality working
+- [ ] Authentication errors properly handled and displayed
+- [ ] Password reset functionality implemented
+- [ ] Successful login redirects to appropriate page
+- [ ] Logout functionality implemented
+- [ ] Session properly terminated on logout
+
+**Common Pitfalls & Tips**:
+- Store only necessary data in the session
+- Implement proper CSRF protection
+- Use appropriate session expiration times
+- Add rate limiting to prevent brute force attacks
+- Implement secure password reset functionality
+- Provide clear feedback for authentication errors
+- Never store passwords in plaintext or session storage
+
+**Testing Instructions**:
+- Test login with valid credentials
+- Test login with invalid credentials
+- Verify "Remember me" functionality persists session
+- Test password reset flow
+- Verify logout terminates session properly
+- Check redirect behavior after login/logout
+- Test protection of routes requiring authentication
+
+**Relevant User Story**:
+- "As a user, I should be able to log in to my account"
+- "As a user, I should be able to log out of my account"
+- "As a user, I should be able to reset my password if forgotten"
+
+**Reference Links**:
+- [Auth.js Sign In](https://authjs.dev/getting-started/authentication/credentials-tutorial)
+- [Next.js Authentication](https://nextjs.org/docs/app/building-your-application/authentication)
+- [OWASP Authentication Best Practices](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 
 **Story Points**: 5  
-**Dependencies**: AUTH-01, SETUP-02  
-**Status**: TODO
-
-### AUTH-03: Protected Routes
-**Type**: Task  
-**Summary**: Implement route protection and session handling  
-**Description**:
-- Set up middleware and utilities to protect routes and validate sessions
-
-**Implementation Details**:
-- Follow these steps:
-  1. **Create authentication middleware**:
-     - Implement Next.js middleware for route protection
-     - Configure public and protected paths
-     - Set up redirect logic for unauthenticated users
-
-  2. **Add server-side session validation**:
-     - Create utility for getting session in Server Components
-     - Implement validation helpers
-     - Add error handling for invalid sessions
-
-  3. **Create sample protected page**:
-     - Develop dashboard page as a protected route
-     - Add session-dependent content
-     - Test access control functionality
-
-**Expected Outcomes**:
-- Working middleware for route protection
-- Server-side session validation utilities
-- Sample protected route demonstrating authentication
-
-**Story Points**: 4  
 **Dependencies**: AUTH-01  
 **Status**: TODO
 
@@ -411,12 +669,38 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Create separate configuration files for each test category
      - Set up appropriate test database configuration for each category
 
-**Expected Outcomes**:
-- Complete test directory structure
-- Working test configuration for all test types
-- Ability to run tests by category (database, server, client) separately and sequentially
-- Helper utilities for testing different parts of the application
+**Acceptance Criteria**:
+- [ ] `__tests__` directory created with appropriate subdirectories
+- [ ] Vitest configuration files created for each test category
+- [ ] Playwright configuration set up for E2E tests
+- [ ] Test scripts added to package.json
+- [ ] Test environment setup files created
+- [ ] Tests can be run by category and in sequence
 
+**Common Pitfalls & Tips**:
+- Ensure all test configs use the same Jest-compatible APIs
+- Set up proper mocking for external services in test environment
+- Configure proper isolation between test runs to prevent interference
+- Use separate test databases for different test categories
+- Make sure test timeouts are appropriate for the type of test
+
+**Testing Instructions**:
+- Run `pnpm test:db` and verify database tests execute successfully
+- Run `pnpm test:server` to test server components and API routes
+- Run `pnpm test:client` to verify client component tests
+- Run `pnpm test:e2e` to confirm Playwright tests are configured
+- Test the sequential execution with `pnpm test`
+
+**Relevant User Story**:
+- "As a developer, I should be able to easily run tests to verify my changes"
+- "As a CI/CD pipeline, I should be able to run tests in a specific order"
+
+**Reference Links**:
+- [Vitest Configuration](https://vitest.dev/config/)
+- [Playwright Configuration](https://playwright.dev/docs/test-configuration)
+- [Testing in Next.js](https://nextjs.org/docs/app/building-your-application/testing)
+
+**Time Estimate**: 3-4 hours  
 **Story Points**: 3  
 **Dependencies**: SETUP-02  
 **Status**: TODO
@@ -444,11 +728,38 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Test error handling
      - Verify transaction behavior
 
-**Expected Outcomes**:
-- Working database tests with isolation
-- Coverage of core data models
-- Verified database utility functions
+**Acceptance Criteria**:
+- [ ] Test database configuration with isolated environment
+- [ ] Database reset utilities implemented for test isolation
+- [ ] User model CRUD tests implemented and passing
+- [ ] Session and Account model tests implemented and passing
+- [ ] Relationship tests implemented and passing
+- [ ] Custom database utility tests implemented
+- [ ] Transaction behavior tests implemented
 
+**Common Pitfalls & Tips**:
+- Always use a separate test database, never your development database
+- Reset the database state between test runs to ensure isolation
+- Use transactions to speed up tests and ensure isolation
+- Mock any external services that might be called during database operations
+- Consider using a locally hosted database for tests rather than remote Supabase
+
+**Testing Instructions**:
+- Run `pnpm test:db` to execute all database tests
+- Check that tests properly clean up after themselves
+- Verify that failed tests don't impact subsequent test runs
+- Test the reset utilities separately to ensure they work correctly
+
+**Relevant User Story**:
+- "As a developer, I want to ensure database operations work correctly"
+- "As a user, I should have confidence that my data is stored and retrieved accurately"
+
+**Reference Links**:
+- [Prisma Testing Best Practices](https://www.prisma.io/docs/guides/testing/unit-testing)
+- [Database Isolation Techniques](https://martinfowler.com/articles/nonDeterminism.html#DatabaseIsolation)
+- [Vitest Database Testing](https://vitest.dev/guide/mocking.html)
+
+**Time Estimate**: 4-6 hours  
 **Story Points**: 4  
 **Dependencies**: TEST-01, DB-03  
 **Status**: TODO
@@ -476,11 +787,42 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Test authentication-dependent rendering
      - Verify data fetching behavior
 
-**Expected Outcomes**:
-- Comprehensive API route test coverage
-- Verified server action functionality
-- Tested server component rendering
+**Acceptance Criteria**:
+- [ ] Authentication API endpoint tests implemented and passing
+- [ ] API error handling tests implemented and passing
+- [ ] External service mocks created for API tests
+- [ ] Server action tests implemented for data mutations
+- [ ] Validation error handling tests implemented
+- [ ] Security control tests implemented
+- [ ] Server component rendering tests implemented
+- [ ] Authentication-dependent UI tests implemented
 
+**Common Pitfalls & Tips**:
+- Mock any database calls for faster and more reliable tests
+- Test both successful and error paths for all API endpoints
+- Ensure authentication is properly tested for protected routes
+- Use test doubles (mocks/stubs) for external services
+- Test for proper error handling with invalid inputs
+- Consider security aspects such as CSRF protection in your tests
+
+**Testing Instructions**:
+- Run `pnpm test:server` to execute all server-side tests
+- Verify that authentication tests pass with various credentials
+- Check that API error states return appropriate status codes
+- Test validation with both valid and invalid inputs
+- Verify that protected endpoints reject unauthorized requests
+
+**Relevant User Story**:
+- "As a user, I should see appropriate error messages when I provide invalid inputs"
+- "As a developer, I want to ensure API endpoints handle requests securely"
+- "As a user, I should only access resources I'm authorized to view"
+
+**Reference Links**:
+- [Testing Next.js API Routes](https://nextjs.org/docs/app/building-your-application/testing)
+- [Vitest Mocking](https://vitest.dev/guide/mocking.html)
+- [Test Doubles in JavaScript](https://martinfowler.com/bliki/TestDouble.html)
+
+**Time Estimate**: 5-8 hours  
 **Story Points**: 5  
 **Dependencies**: TEST-01, AUTH-03  
 **Status**: TODO
@@ -508,11 +850,42 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Verify responsive behavior
      - Test accessibility features
 
-**Expected Outcomes**:
-- Working component tests with React Testing Library
-- Verification of component behavior and rendering
-- UI component test coverage
+**Acceptance Criteria**:
+- [ ] React Testing Library configured correctly
+- [ ] Component test helpers implemented
+- [ ] Mock providers created for auth context, etc.
+- [ ] Login form component tests implemented and passing
+- [ ] Auth status component tests implemented and passing
+- [ ] Form validation tests implemented and passing
+- [ ] Core UI component tests implemented
+- [ ] Accessibility tests implemented for all components
 
+**Common Pitfalls & Tips**:
+- Focus on testing component behavior, not implementation details
+- Use data-testid attributes for stable element selection
+- Test both success and error states for form components
+- Mock any API calls or context providers
+- Include accessibility testing with axe or similar tools
+- Test keyboard navigation and screen reader compatibility
+
+**Testing Instructions**:
+- Run `pnpm test:client` to execute all client component tests
+- Check that all component tests pass in isolation
+- Test form components with various input combinations
+- Verify that error states render correctly
+- Run accessibility checks on all UI components
+
+**Relevant User Story**:
+- "As a user, I want to interact with a responsive and accessible UI"
+- "As a user with disabilities, I should be able to use the application with assistive technologies"
+- "As a developer, I want to ensure UI components behave correctly"
+
+**Reference Links**:
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Component Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+- [Accessibility Testing in React](https://www.smashingmagazine.com/2021/06/accessible-ui-components-reactjs-testing-library/)
+
+**Time Estimate**: 4-6 hours  
 **Story Points**: 4  
 **Dependencies**: TEST-01, AUTH-02  
 **Status**: TODO
@@ -540,11 +913,42 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Test form submissions
      - Verify complete user stories
 
-**Expected Outcomes**:
-- Working Playwright E2E test suite
-- Verified critical user flows
-- Automated testing of complete authentication journey
+**Acceptance Criteria**:
+- [ ] Playwright configured for multiple browsers
+- [ ] E2E test database configured and isolated
+- [ ] Complete authentication flow tests implemented
+- [ ] Protected route access tests implemented
+- [ ] Session handling tests implemented
+- [ ] Key user journey tests implemented
+- [ ] Form submission E2E tests implemented
+- [ ] Tests run on CI pipeline
 
+**Common Pitfalls & Tips**:
+- Keep E2E tests focused on critical user journeys, not every edge case
+- Use a dedicated test database that resets between test runs
+- Implement proper test isolation to prevent tests from interfering with each other
+- Consider using Playwright's built-in authentication state storage
+- Create test utilities for common operations like login
+- Test across multiple browsers to catch browser-specific issues
+
+**Testing Instructions**:
+- Run `pnpm test:e2e` to execute all Playwright tests
+- Verify tests run on all configured browsers
+- Check that authentication flows work end-to-end
+- Test protected routes with both authenticated and unauthenticated users
+- Verify critical user journeys complete successfully
+
+**Relevant User Story**:
+- "As a user, I should be able to complete critical workflows without errors"
+- "As a developer, I want to ensure the entire application works together correctly"
+- "As a product owner, I want confidence that key user journeys function properly"
+
+**Reference Links**:
+- [Playwright Documentation](https://playwright.dev/docs/intro)
+- [E2E Testing Best Practices](https://playwright.dev/docs/best-practices)
+- [Playwright Authentication](https://playwright.dev/docs/auth)
+
+**Time Estimate**: 6-8 hours  
 **Story Points**: 5  
 **Dependencies**: TEST-01, AUTH-03  
 **Status**: TODO
@@ -574,11 +978,42 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Create header and footer components
      - Set up page templates
 
-**Expected Outcomes**:
-- Complete project structure following best practices
-- Organized component and utility libraries
-- Base layout implemented
+**Acceptance Criteria**:
+- [ ] `app` directory organized with proper route structure
+- [ ] `components` directory created with appropriate subdirectories
+- [ ] `lib` directory created with utility structure
+- [ ] Core utility functions implemented
+- [ ] Type definitions established for shared data models
+- [ ] Layout components created and functioning
+- [ ] Project structure documented for team reference
 
+**Common Pitfalls & Tips**:
+- Follow Next.js 13+ App Router conventions strictly
+- Keep route handlers in appropriate app directories
+- Group components by function, not by page
+- Use barrel exports (index.ts) to simplify imports
+- Keep business logic separate from UI components
+- Consider colocating related files (.ts, .test.ts, etc.)
+- Create reusable layout components to maintain consistency
+
+**Testing Instructions**:
+- Run the application and navigate between routes
+- Verify that the layout components render correctly
+- Check that utility functions can be imported and used
+- Test that shared hooks work in multiple components
+- Verify type safety with `pnpm tsc --noEmit`
+
+**Relevant User Story**:
+- "As a developer, I want a well-organized codebase that follows best practices"
+- "As a team member, I should be able to easily find and modify code"
+- "As a user, I should experience consistent UI across the application"
+
+**Reference Links**:
+- [Next.js App Router](https://nextjs.org/docs/app/building-your-application/routing)
+- [React Project Structure Best Practices](https://react-file-structure.holt.courses/)
+- [TypeScript Project Organization](https://www.typescriptlang.org/docs/handbook/project-references.html)
+
+**Time Estimate**: 4-5 hours  
 **Story Points**: 3  
 **Dependencies**: SETUP-01  
 **Status**: TODO
@@ -606,11 +1041,45 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Implement navigation components
      - Build modal and dialog components
 
-**Expected Outcomes**:
-- Complete UI component library
-- Consistent styling with Tailwind and DaisyUI
-- Responsive design system
+**Acceptance Criteria**:
+- [ ] Tailwind CSS fully configured with theme settings
+- [ ] DaisyUI integrated and configured
+- [ ] Color palette and design tokens defined
+- [ ] Button component created with all necessary variants
+- [ ] Form input components implemented with proper styling
+- [ ] Card and container components created
+- [ ] Responsive layout grid implemented
+- [ ] Navigation components (header, sidebar, etc.) created
+- [ ] Modal and dialog components implemented with accessibility
 
+**Common Pitfalls & Tips**:
+- Maintain consistency with design tokens instead of hardcoded values
+- Create a component storybook or documentation for reference
+- Ensure all components are keyboard accessible
+- Test components at various viewport sizes
+- Follow a consistent naming convention for component classes
+- Make sure all interactive elements have appropriate hover/focus states
+- Consider dark mode support from the beginning
+
+**Testing Instructions**:
+- View components at different screen sizes to verify responsiveness
+- Test keyboard navigation through all interactive elements
+- Check color contrast for accessibility compliance
+- Verify that components work with screen readers
+- Test components with various content lengths
+
+**Relevant User Story**:
+- "As a user, I should experience a consistent and accessible interface"
+- "As a developer, I should have reusable UI components to build features quickly"
+- "As a user with disabilities, I should be able to use all features of the application"
+
+**Reference Links**:
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [DaisyUI Components](https://daisyui.com/components/)
+- [Accessible Component Patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)
+- [Responsive Design Best Practices](https://web.dev/responsive-web-design-basics/)
+
+**Time Estimate**: 8-10 hours  
 **Story Points**: 5  
 **Dependencies**: SETUP-02  
 **Status**: TODO
@@ -638,11 +1107,49 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Implement success/error messages
      - Create consistent notification patterns
 
-**Expected Outcomes**:
-- Robust data validation with Zod
-- Error handling at all application levels
-- User-friendly error messages and notifications
+**Acceptance Criteria**:
+- [ ] Zod schemas created for all form inputs
+- [ ] Validation helper functions implemented
+- [ ] User-friendly error formatting utilities created
+- [ ] Error boundary components implemented for React components
+- [ ] Fallback UI created for different error states
+- [ ] Error logging system implemented
+- [ ] Toast notification component created
+- [ ] Success/error/warning notification styles implemented
+- [ ] Notification system integrated with form submissions
 
+**Common Pitfalls & Tips**:
+- Provide clear, actionable error messages to users
+- Implement both client-side and server-side validation
+- Don't expose sensitive information in error messages
+- Make error states accessible to screen readers
+- Use error boundaries to prevent entire UI crashes
+- Keep notifications concise and dismissible
+- Consider timeout duration for toast notifications
+- Log errors in a format that's useful for debugging
+
+**Testing Instructions**:
+- Test form validation with various invalid inputs
+- Verify that error messages are clear and helpful
+- Test error boundaries by introducing intentional errors
+- Check that notifications appear and dismiss correctly
+- Verify that errors are properly logged
+- Test keyboard accessibility for dismissing notifications
+- Verify screen reader announcements for errors
+
+**Relevant User Story**:
+- "As a user, I should receive clear feedback when errors occur"
+- "As a user, I should be guided on how to fix form input errors"
+- "As a developer, I should have tools to validate user input reliably"
+- "As a support team member, I should have access to meaningful error logs"
+
+**Reference Links**:
+- [Zod Documentation](https://zod.dev/)
+- [React Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
+- [Accessible Error Message Patterns](https://www.a11yproject.com/posts/how-to-write-accessible-error-messages/)
+- [Toast Notification Best Practices](https://uxdesign.cc/toast-notifications-the-ux-behind-it-and-how-to-design-it-right-a49d35e560f)
+
+**Time Estimate**: 6-8 hours  
 **Story Points**: 4  
 **Dependencies**: CORE-01  
 **Status**: TODO
@@ -672,11 +1179,48 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Create usage examples
      - Include accessibility notes
 
-**Expected Outcomes**:
-- Complete README with setup instructions
-- API endpoint documentation
-- Component usage documentation
+**Acceptance Criteria**:
+- [ ] README updated with comprehensive project overview
+- [ ] Setup instructions documented with step-by-step guidance
+- [ ] Development workflow documented with conventions and practices
+- [ ] Authentication endpoints documented with request/response examples
+- [ ] API routes documented with parameters and response formats
+- [ ] Server actions documented with usage examples
+- [ ] Component library documented with props and examples
+- [ ] Accessibility considerations noted for component usage
+- [ ] Documentation is organized and easily navigable
 
+**Common Pitfalls & Tips**:
+- Keep documentation in sync with code changes
+- Include examples for all API endpoints and components
+- Document error responses and edge cases
+- Use consistent formatting throughout documentation
+- Include diagrams for complex workflows or architecture
+- Consider using TypeDoc or similar for automated API docs
+- Document environment variables and configuration options
+- Include troubleshooting sections for common issues
+
+**Testing Instructions**:
+- Verify README instructions by following them on a fresh setup
+- Test API documentation by making sample requests
+- Check component documentation by implementing example usage
+- Have a team member review documentation for clarity
+- Ensure all environment variables are documented
+- Verify that authentication flows are clearly explained
+
+**Relevant User Story**:
+- "As a new developer, I should be able to set up the project easily"
+- "As a developer, I should understand how to use the API endpoints"
+- "As a developer, I should know how to implement and use components"
+- "As a project maintainer, I should have clear documentation of the system architecture"
+
+**Reference Links**:
+- [README Best Practices](https://www.makeareadme.com/)
+- [API Documentation Standards](https://swagger.io/specification/)
+- [JSDoc Documentation](https://jsdoc.app/)
+- [TypeDoc for TypeScript Documentation](https://typedoc.org/)
+
+**Time Estimate**: 4-6 hours  
 **Story Points**: 3  
 **Dependencies**: All implementation tasks  
 **Status**: TODO
@@ -704,11 +1248,48 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Optimize imports
      - Check for performance issues
 
-**Expected Outcomes**:
-- Clean codebase with no linting errors
-- Type-safe code with no TypeScript errors
-- Optimized and maintainable code
+**Acceptance Criteria**:
+- [ ] ESLint runs without errors or warnings
+- [ ] Code follows consistent style guidelines
+- [ ] TypeScript compilation succeeds with no errors
+- [ ] Type definitions are complete and accurate
+- [ ] No unused dependencies in package.json
+- [ ] Imports are organized and optimized
+- [ ] Code is optimized for performance
+- [ ] No debug code or console logs in production code
+- [ ] PR review checklist created for future contributions
 
+**Common Pitfalls & Tips**:
+- Use ESLint plugins for React, Next.js, and accessibility
+- Configure Prettier to work with ESLint for consistent formatting
+- Add strict TypeScript settings to catch more potential issues
+- Use `// @ts-expect-error` or `// @ts-ignore` sparingly and with comments
+- Check for memory leaks in React components with useEffect cleanups
+- Review dependencies regularly and remove unused ones
+- Consider using bundle analyzers to identify large dependencies
+- Document technical debt for future improvement
+
+**Testing Instructions**:
+- Run `pnpm lint` and verify no warnings or errors
+- Execute `pnpm tsc --noEmit` to check TypeScript compliance
+- Run `pnpm build` to verify production build succeeds
+- Use Next.js bundle analyzer to check bundle sizes
+- Check loading performance in browser dev tools
+- Verify that no console logs appear in production build
+
+**Relevant User Story**:
+- "As a developer, I want to work with clean, consistent code"
+- "As a user, I want the application to load quickly and perform well"
+- "As a project maintainer, I want to ensure code quality standards are met"
+- "As a business owner, I want to minimize technical debt for future development"
+
+**Reference Links**:
+- [ESLint Configuration](https://eslint.org/docs/user-guide/configuring/)
+- [TypeScript Configuration](https://www.typescriptlang.org/tsconfig)
+- [Next.js Performance Optimization](https://nextjs.org/docs/app/building-your-application/optimizing)
+- [Web Vitals](https://web.dev/vitals/)
+
+**Time Estimate**: 3-4 hours  
 **Story Points**: 2  
 **Dependencies**: All implementation tasks  
 **Status**: TODO
@@ -736,11 +1317,52 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Resolve edge cases
      - Document any known issues
 
-**Expected Outcomes**:
-- All tests passing
-- Verified user flows
-- Known issues documented
+**Acceptance Criteria**:
+- [ ] All automated tests pass successfully
+- [ ] Test coverage meets or exceeds target thresholds
+- [ ] Authentication flows tested and verified
+- [ ] Critical user flows tested manually
+- [ ] Responsive design verified on mobile, tablet, and desktop
+- [ ] Accessibility tested with screen readers and keyboard navigation
+- [ ] All high-priority bugs fixed
+- [ ] Edge cases identified and handled
+- [ ] Known issues documented with workarounds
+- [ ] Final testing report created
 
+**Common Pitfalls & Tips**:
+- Test across multiple browsers (Chrome, Firefox, Safari, Edge)
+- Include mobile device testing on both iOS and Android
+- Test with various screen readers (NVDA, VoiceOver, JAWS)
+- Check keyboard navigation and focus management
+- Verify that all forms are accessible
+- Test with slow network connections
+- Verify error states and recovery paths
+- Include edge cases like large data sets or unusual inputs
+- Document any browser-specific issues
+
+**Testing Instructions**:
+- Run `pnpm test` to execute the full test suite
+- Check test coverage report to identify gaps
+- Test critical flows manually following user journey maps
+- Use browser dev tools to simulate various devices
+- Test with screen readers and keyboard-only navigation
+- Try intentionally breaking flows to verify error handling
+- Test with network throttling enabled
+- Verify all protected routes require authentication
+
+**Relevant User Story**:
+- "As a user, I should be able to complete all critical tasks without errors"
+- "As a user with disabilities, I should be able to use the application with assistive technologies"
+- "As a mobile user, I should have a good experience on small screens"
+- "As a product owner, I want confidence that the application works as expected"
+
+**Reference Links**:
+- [Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [Responsive Testing Techniques](https://www.browserstack.com/guide/responsive-testing)
+- [Manual Testing Best Practices](https://www.browserstack.com/guide/manual-testing-best-practices)
+- [Testing Checklist for Web Applications](https://github.com/nishantbarsainyan/qa-checklist)
+
+**Time Estimate**: 6-8 hours  
 **Story Points**: 3  
 **Dependencies**: All implementation tasks  
 **Status**: TODO

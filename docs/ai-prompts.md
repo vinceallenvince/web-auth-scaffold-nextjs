@@ -85,3 +85,17 @@ Please implement [insert task name] in /docs/plans/implementation-tasks[insert n
 ## Development loop
 
 At this point you should be able to iterate over all the tasks in the implementation plan, testing and merging as you go.
+
+
+-----
+
+# More Prompts
+
+## App setup
+Using @development-guide.mdand @core-specs.md, create an analysis in @app-setup.md around to set up this app to start development.
+
+Using @app-setup.md as a guide, please create a plan in @impl-plan-app-setup.md.
+
+Using @impl-plan01-app-setup.md and @task-template.md , please create implementation tasks in @impl-tasks01-app-setup.md . The maximum story point level for any task should be no greater than 5 points. 
+
+## 
