@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Styling
+
+- Use Tailwind utility classes + DaisyUI component classes
+- Avoid inline styles or custom CSS unless necessary
+- Group your class names logically and consistently

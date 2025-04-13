@@ -1,0 +1,24 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Portability
+
+## Avoid provider-specific features
+- Don’t use platform-only APIs, edge runtime hacks, or logging/analytics tools tied to a single host
+- Stick with standard Next.js features like API routes and Server Actions
+
+## Use environment variables, not hardcoded secrets
+- All configuration (e.g., DB URLs, auth secrets) should come from .env.local
+- Load them via process.env in code, and document required values in .env.example
+
+## Database should be externally hosted (e.g., Neon, PlanetScale, Supabase)
+- This avoids tying DB access to the host environment
+
+## Authentication, email services, and APIs should work in local dev and in the cloud
+- For example, sending magic links via SendGrid or Resend should work regardless of hosting platform
+
+## Testing and dev tools should not rely on a specific platform's CI/CD
+- Use Vitest, Playwright, and ESLint locally and in any CI pipeline (e.g., GitHub Actions, Replit Deploy Hooks)

@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Authentication
+
+- Use Auth.js with magic link strategy
+- Store user session in DB with Prisma adapter
+- Use getServerSession() from Auth.js in Server Components and API routes

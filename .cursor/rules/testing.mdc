@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Testing
+
+- Keep tests minimal and focused on essential functionality
+- Validate all user input with Zod
+- Write tests for all auth flows and DB access
+- Use testid attributes for Playwright selectors
+- Run pnpm lint and pnpm test before pushing
