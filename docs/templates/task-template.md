@@ -15,10 +15,6 @@
   3. **Step 3 Summary**:
      - ...
 
-**Sample Code**:
-```typescript
-// Sample code goes here
-```
 
 **Expected Outcomes**:
 - Expected outcomes go here
