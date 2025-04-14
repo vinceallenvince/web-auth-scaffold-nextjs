@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npm run validate-env && npx next dev",
+    "build": "npm run validate-env && npx next build",
+    "start": "npm run validate-env && npx next start",
+    "lint": "npx next lint",
+    "validate-env": "npx tsx scripts/validate-env.js"
   },
   "dependencies": {
     "@auth/core": "^0.38.0",
@@ -14,6 +15,7 @@
     "@prisma/client": "^6.6.0",
     "@tailwindcss/forms": "^0.5.10",
     "daisyui": "^5.0.19",
+    "dotenv": "^16.3.1",
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -35,6 +37,7 @@
     "playwright": "^1.51.1",
     "prisma": "^6.6.0",
     "tailwindcss": "^4",
+    "tsx": "^4.7.0",
     "typescript": "^5",
     "vitest": "^3.1.1"
   }
