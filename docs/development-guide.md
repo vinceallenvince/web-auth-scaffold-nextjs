@@ -257,3 +257,45 @@ pnpm <command> --registry=https://registry.npmjs.org/
   ✅ Read this guide
 
   ✅ Start with a small bug or feature ticket
+
+## Package Manager Instructions
+
+### Standard Usage (with PNPM)
+```bash
+pnpm dev             # Start dev server
+pnpm lint            # Run ESLint
+pnpm format          # Prettier formatting
+pnpm test            # Run Vitest tests
+pnpm db:push         # Apply schema changes with Prisma
+pnpm db:seed         # Seed DB with test data
+```
+
+If facing issues with company npm registry:
+```bash
+pnpm <command> --registry=https://registry.npmjs.org/
+# Example: pnpm install --registry=https://registry.npmjs.org/
+```
+
+### Temporary NPM Solution (SETUP-04 Verification)
+If you're experiencing issues with PNPM commands not running correctly, you can use the temporary helper script to run commands with NPM instead:
+
+```bash
+# Use the npm-to-pnpm.js helper script
+node scripts/npm-to-pnpm.js dev        # Equivalent to: npm run dev
+node scripts/npm-to-pnpm.js install    # Equivalent to: npm install
+node scripts/npm-to-pnpm.js add react  # Equivalent to: npm install react
+
+# For help with available commands
+node scripts/npm-to-pnpm.js --help
+```
+
+Alternatively, you can use npm directly:
+```bash
+npm run dev            # Start dev server
+npm run lint           # Run ESLint
+npm run test           # Run tests
+npx prisma db push     # Apply schema changes with Prisma
+npx prisma db seed     # Seed DB with test data
+```
+
+This temporary solution is implemented to unblock SETUP-04 verification while the PNPM issues are being resolved.

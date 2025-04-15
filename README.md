@@ -2,16 +2,23 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, verify your setup to ensure all requirements are met:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+npm run verify-setup
+```
+
+Then, run the development server:
+
+```bash
+# Using pnpm (recommended)
 pnpm dev
-# or
-bun dev
+
+# If experiencing pnpm issues, use the helper script
+npm run use-pnpm dev
+
+# Or use npm directly
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -19,6 +26,25 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## PNPM Issues (SETUP-04)
+
+If you're experiencing issues with PNPM commands not running correctly, you can:
+
+1. Run the verification script to check your environment:
+   ```bash
+   npm run verify-setup
+   ```
+
+2. Use the helper script that translates pnpm commands to npm:
+   ```bash
+   npm run use-pnpm <command>
+   # Examples:
+   npm run use-pnpm dev
+   npm run use-pnpm add react
+   ```
+
+3. See detailed troubleshooting steps in [docs/troubleshooting/pnpm-issues.md](docs/troubleshooting/pnpm-issues.md)
 
 ## Learn More
 
