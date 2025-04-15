@@ -7,7 +7,9 @@
     "build": "npm run validate-env && npx next build",
     "start": "npm run validate-env && npx next start",
     "lint": "npx next lint",
-    "validate-env": "npx tsx scripts/validate-env.js"
+    "validate-env": "npx tsx scripts/validate-env.js",
+    "verify-setup": "node scripts/verify-setup.js",
+    "use-pnpm": "node scripts/npm-to-pnpm.js"
   },
   "dependencies": {
     "@auth/core": "^0.38.0",
