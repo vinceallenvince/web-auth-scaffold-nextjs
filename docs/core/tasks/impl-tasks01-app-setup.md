@@ -275,12 +275,12 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Update `.env.local` with the database URL
 
 **Acceptance Criteria**:
-- [ ] Supabase account created and verified
-- [ ] New project created with appropriate name and settings
-- [ ] PostgreSQL database instance provisioned
-- [ ] Database connection string obtained
-- [ ] IP restrictions configured as needed
-- [ ] Environment variables updated with connection details
+- [X] Supabase account created and verified
+- [X] New project created with appropriate name and settings
+- [X] PostgreSQL database instance provisioned
+- [X] Database connection string obtained
+- [X] IP restrictions configured as needed
+- [X] Environment variables updated with connection details
 
 **Common Pitfalls & Tips**:
 - Choose a strong database password and store it securely
@@ -292,7 +292,6 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Testing Instructions**:
 - Verify the database connection using a PostgreSQL client
 - Test connection with the provided credentials
-- Check that the connection string works with `npx prisma db pull` test
 - Confirm IP restrictions by testing from an unauthorized location
 
 **Relevant User Story**:
@@ -305,7 +304,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
 **Story Points**: 3  
 **Dependencies**: SETUP-03  
-**Status**: TODO
+**Status**: DONE
 
 ### DB-02: Prisma Schema Configuration
 **Type**: Task  

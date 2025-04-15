@@ -9,6 +9,7 @@
     "lint": "npx next lint",
     "validate-env": "npx tsx scripts/validate-env.js",
     "verify-setup": "node scripts/verify-setup.js",
+    "verify-db": "node scripts/verify-db-connection.js",
     "use-pnpm": "node scripts/npm-to-pnpm.js"
   },
   "dependencies": {
