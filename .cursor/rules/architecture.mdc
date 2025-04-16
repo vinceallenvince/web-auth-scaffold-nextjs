@@ -6,4 +6,4 @@ alwaysApply: true
 
 # Architecture
 
-
+- All application code should be organized in /src/app

@@ -461,12 +461,12 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Implement proper session expiration and refresh
 
 **Acceptance Criteria**:
-- [ ] Auth.js packages installed and configured
-- [ ] Auth API routes created and functioning
-- [ ] Prisma adapter properly configured
-- [ ] Session management implemented and working
-- [ ] Authentication endpoints respond correctly
-- [ ] Environment variables properly utilized
+- [X] Auth.js packages installed and configured
+- [X] Auth API routes created and functioning
+- [X] Prisma adapter properly configured
+- [X] Session management implemented and working
+- [X] Authentication endpoints respond correctly
+- [X] Environment variables properly utilized
 
 **Common Pitfalls & Tips**:
 - Make sure the Prisma schema matches Auth.js requirements exactly
@@ -493,7 +493,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
 **Story Points**: 8  
 **Dependencies**: DB-03  
-**Status**: TODO
+**Status**: DONE
 
 ### AUTH-02: User Registration Flow
 **Type**: Task  
@@ -504,7 +504,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Implementation Details**:
 - Follow these steps:
   1. **Create registration form**:
-     - Design mobile-friendly registration form
+     - Design mobile-friendly and accessibility compliant registration form
      - Implement client-side validation
      - Add error handling and feedback
 
