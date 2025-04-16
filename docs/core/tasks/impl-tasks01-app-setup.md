@@ -336,12 +336,12 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Add indexes for performance
 
 **Acceptance Criteria**:
-- [ ] Prisma initialized with PostgreSQL provider
-- [ ] Authentication models (User, Account, Session, VerificationToken) defined
-- [ ] Relations between authentication models correctly established
-- [ ] Necessary indexes added for query performance
-- [ ] Application-specific models defined with appropriate fields
-- [ ] Schema compatible with Auth.js requirements
+- [X] Prisma initialized with PostgreSQL provider
+- [X] Authentication models (User, Account, Session, VerificationToken) defined
+- [X] Relations between authentication models correctly established
+- [X] Necessary indexes added for query performance
+- [X] Application-specific models defined with appropriate fields
+- [X] Schema compatible with Auth.js requirements
 
 **Common Pitfalls & Tips**:
 - Make sure to follow the Auth.js schema requirements exactly for authentication models
@@ -367,7 +367,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
 **Story Points**: 5  
 **Dependencies**: DB-01  
-**Status**: TODO
+**Status**: DONE
 
 ### DB-03: Database Schema Deployment
 **Type**: Task  

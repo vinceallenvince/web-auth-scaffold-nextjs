@@ -27,6 +27,26 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database Connection
+
+This project connects to a Supabase PostgreSQL database using Prisma ORM. For reliable external connections:
+
+1. Always use the Supabase connection pooler URL format:
+   ```
+   postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres
+   ```
+
+2. Direct connections to Supabase databases may fail from IPv4 networks
+
+3. For detailed instructions, see:
+   - [Supabase Connection Guide](docs/guides/supabase-connection.md)
+   - [Database Troubleshooting](docs/troubleshooting/database-connection.md)
+
+4. Test your connection with:
+   ```bash
+   npm run test-db-pooler
+   ```
+
 ## PNPM Issues (SETUP-04)
 
 If you're experiencing issues with PNPM commands not running correctly, you can:

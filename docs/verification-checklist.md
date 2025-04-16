@@ -100,8 +100,9 @@ If you're experiencing 404 errors when accessing the site:
 The database verification in SETUP-04 only checks configuration, not actual connection, since Supabase setup is part of DB-01. 
 
 1. Ensure `DATABASE_URL` is defined in `.env.local`
-2. It should be in the format: `postgresql://postgres:[PASSWORD]@[HOST]:[PORT]/postgres`
-3. Actual database connection will be verified in DB-01
+2. It should be in the format: `postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres`
+3. Always use the connection pooler URL from Supabase (not the direct connection) to ensure compatibility with IPv4 networks
+4. Actual database connection will be verified in DB-01
 
 ## Next Steps
 

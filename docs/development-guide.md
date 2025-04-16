@@ -61,6 +61,9 @@ You'll be working across:
   - Type-safe DB queries
   - Relations between models
 - DB access logic lives in `lib/db/` and never in components
+- Always use Supabase connection pooler URLs with format:
+  `postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres`
+  to ensure compatibility with IPv4 networks
 
 ### 5. **UI and Styling**
 
@@ -182,6 +185,7 @@ By avoiding lock-in and using web standards, we ensure this project can scale, m
 - Keep **business logic** in `lib/`, not in components or route handlers
 - Use **shared types** (e.g., `User`, `Session`) in `types/` to prevent drift
 - Keep your codebase clean — if it feels messy, it probably is. Refactor early.
+- For database connection issues, refer to [docs/troubleshooting/database-connection.md](./troubleshooting/database-connection.md)
 
 ---
 
