@@ -10,6 +10,10 @@ export function middleware(request: NextRequest) {
   // Add the pathname to the headers
   requestHeaders.set("x-pathname", pathname);
   
+  // Add protocol information (useful for auth redirects)
+  const protocol = request.nextUrl.protocol.replace(':', '');
+  requestHeaders.set("x-forwarded-proto", protocol);
+  
   // Return the response with the modified headers
   return NextResponse.next({
     request: {

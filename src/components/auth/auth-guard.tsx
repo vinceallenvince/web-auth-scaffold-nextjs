@@ -23,13 +23,23 @@ export async function AuthGuard({
     const headersList = headers();
     const pathname = headersList.get("x-pathname") || "";
     
-    const redirectUrl = new URL(redirectTo, "http://localhost");
+    // We can safely use URLSearchParams without needing an absolute URL
+    // First, separate the path from any existing query string
+    const [path, existingQuery] = redirectTo.split('?');
+    const searchParams = new URLSearchParams(existingQuery || '');
     
-    if (pathname) {
-      redirectUrl.searchParams.append("callbackUrl", pathname);
+    // Add the callback URL as a query parameter if available
+    if (pathname && pathname.length > 0) {
+      searchParams.set("callbackUrl", pathname);
     }
     
-    redirect(redirectUrl.pathname + redirectUrl.search);
+    // Reconstruct the final redirect path
+    const queryString = searchParams.toString();
+    const finalRedirectPath = queryString 
+      ? `${path}?${queryString}` 
+      : path;
+    
+    redirect(finalRedirectPath);
   }
 
   return <>{children}</>;
