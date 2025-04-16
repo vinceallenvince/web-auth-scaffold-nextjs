@@ -1,10 +1,26 @@
 import Image from "next/image";
+import Link from "next/link";
+import { AuthStatus } from "@/components/auth/auth-status";
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1 className="text-3xl font-bold text-gray-600 hover:text-blue-800 transition-colors">Hello World</h1>
+        <h1 className="text-3xl font-bold text-gray-600 hover:text-blue-800 transition-colors">Auth Scaffold</h1>
+        
+        {/* Authentication Status Component */}
+        <div className="w-full max-w-md">
+          <AuthStatus />
+        </div>
+        
+        {/* Dashboard Link */}
+        <Link 
+          href="/dashboard" 
+          className="px-4 py-2 bg-gray-100 text-gray-800 rounded-md text-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        >
+          View Dashboard (Protected Route)
+        </Link>
+        
         <Image
           className="dark:invert"
           src="/next.svg"
@@ -13,6 +29,7 @@ export default function Home() {
           height={38}
           priority
         />
+        
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
