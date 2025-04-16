@@ -15,6 +15,7 @@ To effectively work with this application, refer to these official documentation
 | Technology | Documentation Link | Description |
 |------------|-------------------|-------------|
 | Supabase | [https://supabase.com/docs](https://supabase.com/docs) | Supabase documentation for PostgreSQL database management |
+| Supabase Connection Pooling | [https://supabase.com/docs/guides/database/connection-pooling](https://supabase.com/docs/guides/database/connection-pooling) | Documentation for Supabase connection pooler (required for IPv4 networks) |
 | Prisma | [https://www.prisma.io/docs](https://www.prisma.io/docs) | Prisma ORM documentation for database access |
 | Auth.js | [https://authjs.dev/](https://authjs.dev/) | Authentication library documentation (formerly NextAuth.js) |
 

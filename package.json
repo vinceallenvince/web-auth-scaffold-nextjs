@@ -10,6 +10,7 @@
     "validate-env": "npx tsx scripts/validate-env.js",
     "verify-setup": "node scripts/verify-setup.js",
     "verify-db": "node scripts/verify-db-connection.js",
+    "test-db-pooler": "node scripts/test-pooler-connection.js",
     "use-pnpm": "node scripts/npm-to-pnpm.js"
   },
   "dependencies": {
