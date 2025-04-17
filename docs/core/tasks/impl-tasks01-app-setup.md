@@ -495,46 +495,45 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Dependencies**: DB-03  
 **Status**: DONE
 
-### AUTH-02: User Registration Flow
+### AUTH-02: User Magic Link Flow
 **Type**: Task  
-**Summary**: Implement user registration functionality  
+**Summary**: Implement magic link functionality  
 **Description**:
-- Create user registration forms and backend functionality
+- Create user magic link forms and backend functionality
 
 **Implementation Details**:
 - Follow these steps:
-  1. **Create registration form**:
-     - Design mobile-friendly and accessibility compliant registration form
+  1. **Create magic-link form**:
+     - The magic-link auth route should be /auth/magic-link
+     - Design mobile-friendly and accessibility compliant email form using Daisy UI components for fieldset and input fields
      - Implement client-side validation
      - Add error handling and feedback
 
   2. **Implement form submission**:
-     - Create server action for registration
-     - Validate registration data
+     - Create server action for magic link flow
+     - Validate email and magic link data
      - Create new user records
      - Handle email verification
 
   3. **Create success/error handling**:
-     - Design confirmation screens
+     - Design confirmation screens for email send
      - Implement proper error messaging
-     - Add redirect after successful registration
+     - Add redirect to the homepage after successful magic link
 
 **Acceptance Criteria**:
-- [ ] Registration form created with appropriate fields
-- [ ] Client-side validation implemented for all fields
+- [X] Magic link form created with appropriate fields
+- [X] Client-side validation implemented for all fields
 - [ ] Server-side validation handling malformed requests
 - [ ] User creation process functioning correctly
 - [ ] Email verification process configured
 - [ ] Success and error states properly handled
-- [ ] Redirect to appropriate page after registration
+- [X] Redirect to appropriate page after registration
 
 **Common Pitfalls & Tips**:
 - Validate email formats on both client and server
-- Implement password strength requirements and validation
 - Use zod or similar for type-safe validation
-- Add rate limiting to prevent abuse of registration endpoint
+- Add rate limiting to prevent abuse of magic link endpoint
 - Don't expose specific errors that could aid attackers
-- Hash passwords properly before storing in database
 
 **Testing Instructions**:
 - Test form submission with valid data
@@ -545,17 +544,18 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Verify all error states display appropriate messages
 
 **Relevant User Story**:
-- "As a new user, I should be able to register for an account"
-- "As a user, I should receive feedback on registration errors"
+- "As a user, I want to enter my email address to receive a magic link so that I can authenticate with a single click."
+- "As a developer, I should receive the magic link in the logs so I don't have to check my email"
 
 **Reference Links**:
+- [Daisy UI Form Components](https://daisyui.com/components/fieldset/)
 - [Next.js Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations)
 - [Form Validation Best Practices](https://web.dev/learn/forms/validation)
 - [Auth.js Email Provider](https://authjs.dev/getting-started/providers/email-tutorial)
 
 **Story Points**: 5  
 **Dependencies**: AUTH-01  
-**Status**: TODO
+**Status**: IN-PROGRESS
 
 ### AUTH-03: Login and Logout Flow
 **Type**: Task  

@@ -69,7 +69,7 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
     * As a user, I want to receive a clear confirmation that a magic link has been sent to my email so that I know to check my inbox.
     * As a user, I want to simply click the magic link in my email to authenticate without entering any codes.
     * As a user, I want to see a clear verification status when the magic link is being processed.
-   * As a user, I want to be automatically redirected to the home page after successful authentication so that I can begin using the application.
+    * As a user, I want to be automatically redirected to the home page after successful authentication so that I can begin using the application.
 
 3. **Error Handling**
    * **Magic Link Authentication**:

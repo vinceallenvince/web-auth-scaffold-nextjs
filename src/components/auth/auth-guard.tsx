@@ -14,14 +14,14 @@ interface AuthGuardProps {
  */
 export async function AuthGuard({
   children,
-  redirectTo = "/auth/signin",
+  redirectTo = "/auth/magic-link",
 }: AuthGuardProps): Promise<React.ReactElement> {
   const authenticated = await isAuthenticated();
 
   if (!authenticated) {
     // Get the current path from headers to use as callback URL
     const headersList = headers();
-    const pathname = headersList.get("x-pathname") || "";
+    const pathname = headersList.get?.("x-pathname") || "";
     
     // We can safely use URLSearchParams without needing an absolute URL
     // First, separate the path from any existing query string
