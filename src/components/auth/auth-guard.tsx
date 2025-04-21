@@ -20,8 +20,8 @@ export async function AuthGuard({
 
   if (!authenticated) {
     // Get the current path from headers to use as callback URL
-    const headersList = headers();
-    const pathname = headersList.get?.("x-pathname") || "";
+    const headersList = await headers();
+    const pathname = headersList.get("x-pathname") || "";
     
     // We can safely use URLSearchParams without needing an absolute URL
     // First, separate the path from any existing query string

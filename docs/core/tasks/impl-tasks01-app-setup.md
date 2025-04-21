@@ -495,11 +495,11 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Dependencies**: DB-03  
 **Status**: DONE
 
-### AUTH-02: User Magic Link Flow
+### AUTH-02: Developer Magic Link Flow
 **Type**: Task  
-**Summary**: Implement magic link functionality  
+**Summary**: Implement magic link functionality for developers
 **Description**:
-- Create user magic link forms and backend functionality
+- Create developer magic link forms and backend functionality
 
 **Implementation Details**:
 - Follow these steps:
@@ -523,10 +523,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Acceptance Criteria**:
 - [X] Magic link form created with appropriate fields
 - [X] Client-side validation implemented for all fields
-- [ ] Server-side validation handling malformed requests
-- [ ] User creation process functioning correctly
-- [ ] Email verification process configured
-- [ ] Success and error states properly handled
+- [X] Server-side validation handling malformed requests
+- [X] User creation process functioning correctly
+- [X] Email verification process configured
+- [X] Success and error states properly handled
 - [X] Redirect to appropriate page after registration
 
 **Common Pitfalls & Tips**:
@@ -544,7 +544,6 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Verify all error states display appropriate messages
 
 **Relevant User Story**:
-- "As a user, I want to enter my email address to receive a magic link so that I can authenticate with a single click."
 - "As a developer, I should receive the magic link in the logs so I don't have to check my email"
 
 **Reference Links**:
@@ -555,74 +554,78 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
 **Story Points**: 5  
 **Dependencies**: AUTH-01  
-**Status**: IN-PROGRESS
+**Status**: DONE
 
-### AUTH-03: Login and Logout Flow
+### AUTH-03: User Magic Link Flow
 **Type**: Task  
-**Summary**: Implement user login and logout functionality  
+**Summary**: Implement magic link functionality with Resend for production email delivery  
 **Description**:
-- Create login forms and implement logout functionality
+- Implement real email delivery for the magic link authentication flow using Resend
+- Create a reliable system that works in both development and production environments
 
 **Implementation Details**:
 - Follow these steps:
-  1. **Create login form**:
-     - Design mobile-friendly login form
-     - Implement client-side validation
-     - Add "Remember me" functionality
-     - Implement password reset link
+  1. **Install and configure Resend**:
+     - Install Resend SDK: `npm add resend`
+     - Add Resend API key to environment variables
+     - Create an abstraction layer in `src/lib/email.ts` for email delivery
 
-  2. **Implement form submission**:
-     - Create login server action
-     - Validate credentials
-     - Handle authentication errors
-     - Implement proper session creation
+  2. **Update Auth.js configuration**:
+     - Modify `app/api/auth/[...nextauth]/route.ts` to use Resend
+     - Enhance the `sendVerificationRequest` function to use Resend for delivery
+     - Maintain development mode fallback that logs links for local testing
+     - Implement environment-based conditional logic for email delivery
 
-  3. **Create logout functionality**:
-     - Implement logout button/link
-     - Create logout API route
-     - Handle session termination
-     - Implement redirect after logout
+  3. **Create HTML email template**:
+     - Design mobile-responsive HTML template for magic link emails
+     - Include proper branding and clear call-to-action button
+     - Ensure accessibility compliance for email template
+     - Create plain text fallback content for email clients that don't support HTML
+
+  4. **Implement error handling and logging**:
+     - Add proper error handling for email delivery failures
+     - Implement logging for both successful and failed email attempts
+     - Create graceful fallbacks for when Resend service is unavailable
+     - Add monitoring for email delivery success/failure rates
 
 **Acceptance Criteria**:
-- [ ] Login form created with email/password fields
-- [ ] Client-side validation implemented
-- [ ] "Remember me" functionality working
-- [ ] Authentication errors properly handled and displayed
-- [ ] Password reset functionality implemented
-- [ ] Successful login redirects to appropriate page
-- [ ] Logout functionality implemented
-- [ ] Session properly terminated on logout
+- [ ] Resend SDK integrated into the application
+- [ ] Auth.js configured to send actual emails in production
+- [ ] Development mode continues to log magic links for testing
+- [ ] Well-designed HTML email template for magic links
+- [ ] Error handling implemented for email delivery failures
+- [ ] Email deliverability tested with real email addresses
+- [ ] Logging system captures all email-related events
 
 **Common Pitfalls & Tips**:
-- Store only necessary data in the session
-- Implement proper CSRF protection
-- Use appropriate session expiration times
-- Add rate limiting to prevent brute force attacks
-- Implement secure password reset functionality
-- Provide clear feedback for authentication errors
-- Never store passwords in plaintext or session storage
+- Verify domain configuration in Resend dashboard to prevent emails going to spam
+- Test email templates across multiple email clients (Gmail, Outlook, etc.)
+- Do not hard-code email content; use templates that can be updated
+- Set proper timeouts for email delivery API calls
+- Be careful with rate limits on Resend's free tier
+- Use environment variables to control whether emails are sent or just logged
 
 **Testing Instructions**:
-- Test login with valid credentials
-- Test login with invalid credentials
-- Verify "Remember me" functionality persists session
-- Test password reset flow
-- Verify logout terminates session properly
-- Check redirect behavior after login/logout
-- Test protection of routes requiring authentication
+- Test in development mode by verifying links are logged correctly
+- Set up a test Resend account to verify actual email delivery
+- Check email delivery to multiple email providers (Gmail, Outlook, Yahoo, etc.)
+- Verify that HTML emails render correctly on mobile devices
+- Test the complete sign-in flow using the delivered magic links
+- Simulate email delivery failures to verify error handling
 
 **Relevant User Story**:
-- "As a user, I should be able to log in to my account"
-- "As a user, I should be able to log out of my account"
-- "As a user, I should be able to reset my password if forgotten"
+- "As a user, I want to enter my email address to receive a magic link so that I can authenticate with a single click."
 
 **Reference Links**:
-- [Auth.js Sign In](https://authjs.dev/getting-started/authentication/credentials-tutorial)
-- [Next.js Authentication](https://nextjs.org/docs/app/building-your-application/authentication)
-- [OWASP Authentication Best Practices](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
+- [Resend Documentation](https://resend.com/docs/send-with-nextjs)
+- [Auth.js Email Provider Configuration](https://authjs.dev/getting-started/providers/nodemailer)
+- [Email Template Best Practices](https://www.litmus.com/blog/email-design-best-practices/)
+- [HTML Email Accessibility Guidelines](https://www.emailonacid.com/blog/article/email-development/email-accessibility-in-2017/)
+- [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
 
+**Time Estimate**: 4-6 hours  
 **Story Points**: 5  
-**Dependencies**: AUTH-01  
+**Dependencies**: AUTH-01, AUTH-02  
 **Status**: TODO
 
 ## Phase 4: Testing Infrastructure
@@ -684,11 +687,10 @@ This document outlines the implementation tasks for setting up the Next.js authe
 - Make sure test timeouts are appropriate for the type of test
 
 **Testing Instructions**:
-- Run `pnpm test:db` and verify database tests execute successfully
-- Run `pnpm test:server` to test server components and API routes
-- Run `pnpm test:client` to verify client component tests
-- Run `pnpm test:e2e` to confirm Playwright tests are configured
-- Test the sequential execution with `pnpm test`
+- Run `pnpm test:db` to execute all database tests
+- Check that tests properly clean up after themselves
+- Verify that failed tests don't impact subsequent test runs
+- Test the reset utilities separately to ensure they work correctly
 
 **Relevant User Story**:
 - "As a developer, I should be able to easily run tests to verify my changes"

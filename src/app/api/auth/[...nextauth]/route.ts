@@ -5,10 +5,17 @@ import { prisma } from "@/lib/prisma";
 import { type NextAuthOptions } from "next-auth";
 import fs from 'fs';
 import path from 'path';
+import { sendEmail, isResendConfigured } from "@/lib/email";
+import generateMagicLinkEmail from "@/emails/magic-link-template";
 
-console.log('\n\n=============================================================');
-console.log('🔒 AUTH.JS SETUP - MAGIC LINK CONFIGURATION IS ACTIVE 🔒');
-console.log('=============================================================\n\n');
+console.log('✅ AUTH.JS setup - Magic Link configuration is active');;
+
+// Report on Resend configuration
+if (isResendConfigured()) {
+  console.log('✅ Resend is configured and ready for email delivery in production');
+} else {
+  console.log('ℹ️ Resend is not configured, magic links will be logged (not sent via email)');
+}
 
 // Create logs directory if it doesn't exist
 const logDir = path.join(process.cwd(), 'logs');
@@ -22,8 +29,15 @@ export const authOptions: NextAuthOptions = {
   debug: true,
   providers: [
     EmailProvider({
-      server: { host: "localhost", port: 25, auth: { user: "", pass: "" } },
-      from: "noreply@example.com",
+      server: process.env.EMAIL_SERVER || { 
+        host: process.env.EMAIL_SERVER_HOST || "localhost", 
+        port: Number(process.env.EMAIL_SERVER_PORT) || 25, 
+        auth: {
+          user: process.env.EMAIL_SERVER_USER || "",
+          pass: process.env.EMAIL_SERVER_PASSWORD || "",
+        }
+      },
+      from: process.env.EMAIL_FROM || "noreply@example.com",
       sendVerificationRequest: async ({ identifier: email, url }) => {
         // Create a log entry with the magic link
         const logEntry = `
@@ -46,8 +60,20 @@ export const authOptions: NextAuthOptions = {
           console.error('❌ Failed to save magic link to log file:', error);
         }
         
-        // In a real implementation, you would send an actual email here
-        // For development, we're just logging the link
+        // Generate the email content using our template
+        const { html, text } = generateMagicLinkEmail(url, email);
+        
+        // Extract domain from URL for subject line
+        const { host } = new URL(url);
+        
+        // Send the email using our abstracted email service
+        // This will log in development or send via Resend in production
+        await sendEmail({
+          to: email,
+          subject: `Sign in to ${host}`,
+          text,
+          html,
+        });
       },
     }),
   ],

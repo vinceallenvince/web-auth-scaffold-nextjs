@@ -154,7 +154,15 @@ This implementation will serve as the foundation for a portable, maintainable we
    - Create session handling utilities
    - Add authentication status components (login/logout buttons)
 
-3. **Protected Routes**
+3. **Implement Email Service with Resend**
+   - Install Resend SDK: `pnpm add resend`
+   - Create email service utility in `src/lib/email.ts`
+   - Update Auth.js configuration to use Resend for magic links
+   - Implement fallback to console logging for development mode
+   - Configure email templates with HTML/CSS for authentication emails
+   - Set up proper error handling for email delivery failures
+
+4. **Protected Routes**
    - Implement middleware for route protection
    - Create sample protected dashboard page
    - Add server-side session validation

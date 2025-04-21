@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run validate-env && npx next dev",
     "build": "npm run validate-env && npx next build",
-    "start": "npm run validate-env && npx next start",
+    "start": "NODE_ENV=production npm run validate-env && npx next start",
     "lint": "npx next lint",
     "validate-env": "npx tsx scripts/validate-env.js",
     "verify-setup": "node scripts/verify-setup.js",
@@ -28,6 +28,7 @@
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^4.3.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {

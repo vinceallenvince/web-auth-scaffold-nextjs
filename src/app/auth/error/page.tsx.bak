@@ -8,15 +8,13 @@ export const metadata: Metadata = {
 };
 
 interface ErrorPageProps {
-  params: Promise<Record<string, string>>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Record<string, string | string[] | undefined>;
 }
 
-export default async function AuthErrorPage({
+export default function AuthErrorPage({
   searchParams,
 }: ErrorPageProps) {
-  const resolvedParams = await searchParams;
-  const error = typeof resolvedParams.error === "string" ? resolvedParams.error : "";
+  const error = typeof searchParams.error === "string" ? searchParams.error : "";
 
   // If no error is provided, redirect to the sign in page
   if (!error) {
