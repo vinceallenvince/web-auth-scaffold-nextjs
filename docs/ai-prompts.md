@@ -98,4 +98,6 @@ Using @app-setup.md as a guide, please create a plan in @impl-plan-app-setup.md.
 
 Using @impl-plan01-app-setup.md and @task-template.md , please create implementation tasks in @impl-tasks01-app-setup.md . The maximum story point level for any task should be no greater than 5 points. 
 
-## 
+## Task implementation
+
+Please implement TEST-01 in @impl-tasks01-app-setup.md . Do not stop working until you have confirmed the Acceptance Criteria. Once confirmed, please mark the task's status as DONE.
