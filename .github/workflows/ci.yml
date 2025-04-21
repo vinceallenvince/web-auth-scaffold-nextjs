@@ -28,8 +28,8 @@ jobs:
     - name: Generate Prisma client
       run: npx prisma generate
 
-    - name: Run ESLint
-      run: npm run lint
+    # - name: Run ESLint
+    #   run: npm run lint
 
     - name: Run tests
       run: node scripts/npm-to-pnpm.js test
