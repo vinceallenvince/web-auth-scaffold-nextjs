@@ -8,7 +8,7 @@ import path from 'path';
 import { sendEmail, isResendConfigured } from "@/lib/email";
 import generateMagicLinkEmail from "@/emails/magic-link-template";
 
-console.log('✅ AUTH.JS setup - Magic Link configuration is active');;
+console.log('✅ AUTH.JS setup - Magic Link configuration is active');
 
 // Report on Resend configuration
 if (isResendConfigured()) {
