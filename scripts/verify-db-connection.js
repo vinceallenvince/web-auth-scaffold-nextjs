@@ -11,7 +11,8 @@
  */
 
 require('dotenv').config({ path: '.env.local' });
-const { PrismaClient } = require('@prisma/client');
+// Use explicit path to import PrismaClient
+const { PrismaClient } = require('../src/generated/prisma');
 
 // ANSI color codes for output formatting
 const colors = {
