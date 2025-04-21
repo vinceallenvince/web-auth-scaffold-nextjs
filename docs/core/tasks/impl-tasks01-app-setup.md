@@ -589,13 +589,13 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Add monitoring for email delivery success/failure rates
 
 **Acceptance Criteria**:
-- [ ] Resend SDK integrated into the application
-- [ ] Auth.js configured to send actual emails in production
-- [ ] Development mode continues to log magic links for testing
-- [ ] Well-designed HTML email template for magic links
-- [ ] Error handling implemented for email delivery failures
-- [ ] Email deliverability tested with real email addresses
-- [ ] Logging system captures all email-related events
+- [X] Resend SDK integrated into the application
+- [X] Auth.js configured to send actual emails in production
+- [X] Development mode continues to log magic links for testing
+- [X] Well-designed HTML email template for magic links
+- [X] Error handling implemented for email delivery failures
+- [X] Email deliverability tested with real email addresses
+- [X] Logging system captures all email-related events
 
 **Common Pitfalls & Tips**:
 - Verify domain configuration in Resend dashboard to prevent emails going to spam
@@ -626,536 +626,264 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Time Estimate**: 4-6 hours  
 **Story Points**: 5  
 **Dependencies**: AUTH-01, AUTH-02  
-**Status**: TODO
+**Status**: DONE
 
-## Phase 4: Testing Infrastructure
+## Phase 4: Authentication Testing
 
-### TEST-01: Test Directory Structure
+### TEST-01: Authentication Test Setup
 **Type**: Task  
-**Summary**: Set up testing directory structure and configuration  
+**Summary**: Set up testing infrastructure for authentication flows  
 **Description**:
-- Create the testing directory structure and configuration files for different test types
-- Implement ability to run tests separately and sequentially by category (database, server, client)
+- Create the necessary testing framework and configuration for authentication testing
 
 **Implementation Details**:
 - Follow these steps:
-  1. **Create test directories**:
-     - Create `__tests__` root directory
-     - Add subdirectories:
-       - `db` for database tests
-       - `server` with `api` and `actions` subdirectories
-       - `client` for component tests
-       - `e2e` for Playwright tests
+  1. **Configure test environment**:
+     - Set up test database configuration
+     - Create test environment variables
+     - Configure Vitest for authentication tests
 
-  2. **Set up test configuration**:
-     - Create Vitest configuration for unit and integration tests
-     - Set up Playwright configuration for E2E tests
-     - Add test environment setup files
-     - Configure test isolation between categories
+  2. **Set up test utilities**:
+     - Create authentication test helpers
+     - Set up mock user and session data
+     - Build testing utility functions for auth flows
 
-  3. **Configure test scripts**:
-     - Add test scripts to package.json:
-       ```json
-       {
-         "scripts": {
-           "test": "pnpm test:db && pnpm test:server && pnpm test:client",
-           "test:db": "vitest run --config vitest.db.config.ts",
-           "test:server": "vitest run --config vitest.server.config.ts",
-           "test:client": "vitest run --config vitest.client.config.ts",
-           "test:e2e": "playwright test",
-           "test:watch": "vitest watch"
-         }
-       }
-       ```
-     - Ensure tests can be run in order: database → server → client
-     - Create separate configuration files for each test category
-     - Set up appropriate test database configuration for each category
+  3. **Establish test database**:
+     - Configure isolated test database
+     - Create database seeding for authentication tests
+     - Set up database cleanup between tests
 
 **Acceptance Criteria**:
-- [ ] `__tests__` directory created with appropriate subdirectories
-- [ ] Vitest configuration files created for each test category
-- [ ] Playwright configuration set up for E2E tests
-- [ ] Test scripts added to package.json
-- [ ] Test environment setup files created
-- [ ] Tests can be run by category and in sequence
+- [ ] Test environment properly configured for auth testing
+- [ ] Test database set up and isolated from development database
+- [ ] Mock user data created for authentication testing
+- [ ] Test helpers implemented for common auth operations
+- [ ] Vitest configured properly for authentication tests
+- [ ] Database reset functionality implemented for tests
 
 **Common Pitfalls & Tips**:
-- Ensure all test configs use the same Jest-compatible APIs
-- Set up proper mocking for external services in test environment
-- Configure proper isolation between test runs to prevent interference
-- Use separate test databases for different test categories
-- Make sure test timeouts are appropriate for the type of test
+- Always use a separate database for testing to avoid corrupting development data
+- Create helper functions to reduce duplication in authentication tests
+- Don't use production API keys in test environment
+- Consider using in-memory databases for faster test execution
+- Set up proper cleanup routines to ensure test isolation
+- Mock external APIs like email delivery services during testing
 
 **Testing Instructions**:
-- Run `pnpm test:db` to execute all database tests
-- Check that tests properly clean up after themselves
-- Verify that failed tests don't impact subsequent test runs
-- Test the reset utilities separately to ensure they work correctly
+- Run a simple sanity test to verify test environment works
+- Verify that test database can be seeded correctly
+- Check that helper functions work as expected
+- Ensure Vitest configuration is correct by running a basic test
+- Verify database cleanup works properly between test runs
 
 **Relevant User Story**:
-- "As a developer, I should be able to easily run tests to verify my changes"
-- "As a CI/CD pipeline, I should be able to run tests in a specific order"
+- "As a developer, I want to run automated tests for authentication flows to ensure the magic link authentication works correctly"
 
 **Reference Links**:
-- [Vitest Configuration](https://vitest.dev/config/)
-- [Playwright Configuration](https://playwright.dev/docs/test-configuration)
-- [Testing in Next.js](https://nextjs.org/docs/app/building-your-application/testing)
-
-**Time Estimate**: 3-4 hours  
-**Story Points**: 3  
-**Dependencies**: SETUP-02  
-**Status**: TODO
-
-### TEST-02: Database Tests
-**Type**: Task  
-**Summary**: Implement database and model tests  
-**Description**:
-- Create tests for Prisma models and database interactions
-
-**Implementation Details**:
-- Follow these steps:
-  1. **Set up database test environment**:
-     - Configure test database connection
-     - Create database reset helpers
-     - Set up test isolation
-
-  2. **Write Prisma model tests**:
-     - Test User model CRUD operations
-     - Test Session and Account models
-     - Test model relationships
-
-  3. **Test database utilities**:
-     - Create tests for any custom database utilities
-     - Test error handling
-     - Verify transaction behavior
-
-**Acceptance Criteria**:
-- [ ] Test database configuration with isolated environment
-- [ ] Database reset utilities implemented for test isolation
-- [ ] User model CRUD tests implemented and passing
-- [ ] Session and Account model tests implemented and passing
-- [ ] Relationship tests implemented and passing
-- [ ] Custom database utility tests implemented
-- [ ] Transaction behavior tests implemented
-
-**Common Pitfalls & Tips**:
-- Always use a separate test database, never your development database
-- Reset the database state between test runs to ensure isolation
-- Use transactions to speed up tests and ensure isolation
-- Mock any external services that might be called during database operations
-- Consider using a locally hosted database for tests rather than remote Supabase
-
-**Testing Instructions**:
-- Run `pnpm test:db` to execute all database tests
-- Check that tests properly clean up after themselves
-- Verify that failed tests don't impact subsequent test runs
-- Test the reset utilities separately to ensure they work correctly
-
-**Relevant User Story**:
-- "As a developer, I want to ensure database operations work correctly"
-- "As a user, I should have confidence that my data is stored and retrieved accurately"
-
-**Reference Links**:
-- [Prisma Testing Best Practices](https://www.prisma.io/docs/guides/testing/unit-testing)
-- [Database Isolation Techniques](https://martinfowler.com/articles/nonDeterminism.html#DatabaseIsolation)
-- [Vitest Database Testing](https://vitest.dev/guide/mocking.html)
+- [Vitest Documentation](https://vitest.dev/guide/)
+- [Testing Next.js Applications](https://nextjs.org/docs/testing)
+- [Testing Authentication Flows](https://authjs.dev/guides/basics/testing)
+- [Database Testing Best Practices](https://www.prisma.io/docs/guides/testing/integration-testing)
 
 **Time Estimate**: 4-6 hours  
-**Story Points**: 4  
-**Dependencies**: TEST-01, DB-03  
-**Status**: TODO
-
-### TEST-03: API and Server Component Tests
-**Type**: Task  
-**Summary**: Create tests for API routes and server components  
-**Description**:
-- Implement tests for API endpoints, server actions, and server components
-
-**Implementation Details**:
-- Follow these steps:
-  1. **Test API routes**:
-     - Create tests for authentication endpoints
-     - Test API error handling
-     - Mock external services
-
-  2. **Test server actions**:
-     - Create tests for server mutation functions
-     - Test validation and error handling
-     - Verify security controls
-
-  3. **Test server components**:
-     - Create tests for server-rendered components
-     - Test authentication-dependent rendering
-     - Verify data fetching behavior
-
-**Acceptance Criteria**:
-- [ ] Authentication API endpoint tests implemented and passing
-- [ ] API error handling tests implemented and passing
-- [ ] External service mocks created for API tests
-- [ ] Server action tests implemented for data mutations
-- [ ] Validation error handling tests implemented
-- [ ] Security control tests implemented
-- [ ] Server component rendering tests implemented
-- [ ] Authentication-dependent UI tests implemented
-
-**Common Pitfalls & Tips**:
-- Mock any database calls for faster and more reliable tests
-- Test both successful and error paths for all API endpoints
-- Ensure authentication is properly tested for protected routes
-- Use test doubles (mocks/stubs) for external services
-- Test for proper error handling with invalid inputs
-- Consider security aspects such as CSRF protection in your tests
-
-**Testing Instructions**:
-- Run `pnpm test:server` to execute all server-side tests
-- Verify that authentication tests pass with various credentials
-- Check that API error states return appropriate status codes
-- Test validation with both valid and invalid inputs
-- Verify that protected endpoints reject unauthorized requests
-
-**Relevant User Story**:
-- "As a user, I should see appropriate error messages when I provide invalid inputs"
-- "As a developer, I want to ensure API endpoints handle requests securely"
-- "As a user, I should only access resources I'm authorized to view"
-
-**Reference Links**:
-- [Testing Next.js API Routes](https://nextjs.org/docs/app/building-your-application/testing)
-- [Vitest Mocking](https://vitest.dev/guide/mocking.html)
-- [Test Doubles in JavaScript](https://martinfowler.com/bliki/TestDouble.html)
-
-**Time Estimate**: 5-8 hours  
 **Story Points**: 5  
-**Dependencies**: TEST-01, AUTH-03  
+**Dependencies**: AUTH-01, AUTH-02, AUTH-03  
 **Status**: TODO
 
-### TEST-04: Client Component Tests
+### TEST-02: Magic Link Authentication Tests
 **Type**: Task  
-**Summary**: Create tests for client-side components  
+**Summary**: Implement tests for magic link authentication flow  
 **Description**:
-- Implement tests for React client components and interactions
+- Create comprehensive tests for the magic link authentication process
 
 **Implementation Details**:
 - Follow these steps:
-  1. **Set up component testing environment**:
-     - Configure React Testing Library
-     - Set up component test helpers
-     - Create mock providers
+  1. **Test magic link request**:
+     - Test email validation
+     - Test successful magic link generation
+     - Test error handling for invalid emails
+     - Verify rate limiting functionality
 
-  2. **Test authentication components**:
-     - Test login form behavior
-     - Test authentication status components
-     - Verify form validation
+  2. **Test magic link verification**:
+     - Test valid magic link verification
+     - Test expired link handling
+     - Test invalid token handling
+     - Verify user session creation after verification
 
-  3. **Test UI components**:
-     - Test core UI components
-     - Verify responsive behavior
-     - Test accessibility features
+  3. **Test user state after authentication**:
+     - Verify correct user data in session
+     - Check database records after authentication
+     - Test session persistence
 
 **Acceptance Criteria**:
-- [ ] React Testing Library configured correctly
-- [ ] Component test helpers implemented
-- [ ] Mock providers created for auth context, etc.
-- [ ] Login form component tests implemented and passing
-- [ ] Auth status component tests implemented and passing
-- [ ] Form validation tests implemented and passing
-- [ ] Core UI component tests implemented
-- [ ] Accessibility tests implemented for all components
+- [ ] Tests for magic link request endpoint implemented
+- [ ] Tests for email validation and error handling completed
+- [ ] Tests for rate limiting verification implemented
+- [ ] Tests for magic link verification process created
+- [ ] Tests for expired and invalid link handling implemented
+- [ ] Session verification tests completed
+- [ ] User data persistence tests implemented
+- [ ] All authentication tests pass successfully
 
 **Common Pitfalls & Tips**:
-- Focus on testing component behavior, not implementation details
-- Use data-testid attributes for stable element selection
-- Test both success and error states for form components
-- Mock any API calls or context providers
-- Include accessibility testing with axe or similar tools
-- Test keyboard navigation and screen reader compatibility
+- Mock email sending functionality to avoid actual email delivery
+- Test both success and failure cases for each step of the process
+- Set up fixtures for commonly used test data
+- Use realistic but safe test emails (e.g., `test@example.com`)
+- Test for proper security measures like CSRF protection
+- Verify that magic links are properly expired after use
+- Test the complete flow from request to verification
 
 **Testing Instructions**:
-- Run `pnpm test:client` to execute all client component tests
-- Check that all component tests pass in isolation
-- Test form components with various input combinations
-- Verify that error states render correctly
-- Run accessibility checks on all UI components
+- Run `pnpm test` with authentication test filters
+- Verify all tests pass for magic link request and verification
+- Check that rate limiting tests correctly detect limit violations
+- Confirm error handling tests verify proper error responses
+- Validate session creation tests confirm successful authentication
 
 **Relevant User Story**:
-- "As a user, I want to interact with a responsive and accessible UI"
-- "As a user with disabilities, I should be able to use the application with assistive technologies"
-- "As a developer, I want to ensure UI components behave correctly"
+* As a developer, I want to run automated tests for authentication flows to ensure the magic link authentication works correctly
+* As a developer, I want to ensure rate limiting for authentication requests functions as specified
 
 **Reference Links**:
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [Component Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-- [Accessibility Testing in React](https://www.smashingmagazine.com/2021/06/accessible-ui-components-reactjs-testing-library/)
+- [Testing Authentication in Next.js](https://nextjs.org/docs/app/building-your-application/testing)
+- [Auth.js Testing Guide](https://authjs.dev/guides/basics/testing)
+- [API Testing Best Practices](https://testfully.io/blog/api-testing-best-practices/)
+- [Testing Email Functionality](https://nodemailer.com/smtp/testing/)
+
+**Time Estimate**: 6-8 hours  
+**Story Points**: 8  
+**Dependencies**: TEST-01  
+**Status**: TODO
+
+### TEST-03: Protected Route Tests
+**Type**: Task  
+**Summary**: Implement tests for protected route access control  
+**Description**:
+- Create tests to verify that protected routes properly restrict access to unauthenticated users
+
+**Implementation Details**:
+- Follow these steps:
+  1. **Set up route testing infrastructure**:
+     - Configure route testing helpers
+     - Set up authentication state mocking
+     - Create test middleware
+
+  2. **Test unauthenticated access**:
+     - Test redirect to login page for unauthenticated users
+     - Verify correct status codes for API routes
+     - Test error handling for unauthorized access
+
+  3. **Test authenticated access**:
+     - Verify authenticated users can access protected routes
+     - Test session validation in protected routes
+     - Check proper content rendering for authenticated users
+
+**Acceptance Criteria**:
+- [ ] Route testing infrastructure correctly set up
+- [ ] Tests verify unauthenticated users are redirected to login
+- [ ] Tests confirm API routes return appropriate unauthorized status codes
+- [ ] Tests verify middleware properly restricts access
+- [ ] Tests confirm authenticated users can access protected content
+- [ ] Session validation tests implemented and passing
+- [ ] Edge cases tested (e.g., expired sessions, invalid tokens)
+
+**Common Pitfalls & Tips**:
+- Mock authentication state rather than performing full authentication flow
+- Test both page routes and API routes for proper protection
+- Verify correct redirect URLs contain the original target location
+- Test that protected API routes return proper HTTP status codes (401/403)
+- Create reusable auth state fixtures for different test scenarios
+- Test both server-side and client-side protection mechanisms
+
+**Testing Instructions**:
+- Run tests specifically for route protection functionality
+- Verify that all protected routes correctly reject unauthenticated access
+- Confirm authentication state is properly validated
+- Check that authenticated users can access protected content
+- Validate proper error handling for unauthorized access attempts
+
+**Relevant User Story**:
+- "As a developer, I want to verify that protected routes properly restrict access to unauthenticated users"
+- "As a user, I want to be properly redirected to login when trying to access protected content"
+
+**Reference Links**:
+- [Next.js Middleware Testing](https://nextjs.org/docs/messages/middleware-upgrade-guide)
+- [Testing Protected Routes in Next.js](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+- [Auth.js Route Protection](https://authjs.dev/getting-started/protecting-routes)
+- [Playwright E2E Testing](https://playwright.dev/docs/intro)
 
 **Time Estimate**: 4-6 hours  
-**Story Points**: 4  
-**Dependencies**: TEST-01, AUTH-02  
-**Status**: TODO
-
-### TEST-05: End-to-End Tests
-**Type**: Task  
-**Summary**: Create end-to-end tests with Playwright  
-**Description**:
-- Implement Playwright tests for complete user flows
-
-**Implementation Details**:
-- Follow these steps:
-  1. **Set up Playwright**:
-     - Configure Playwright for browser testing
-     - Set up test database for E2E tests
-     - Create test isolation for E2E runs
-
-  2. **Create authentication flow tests**:
-     - Test complete login flow
-     - Test protected route access
-     - Test session expiration
-
-  3. **Test key user journeys**:
-     - Test navigation between pages
-     - Test form submissions
-     - Verify complete user stories
-
-**Acceptance Criteria**:
-- [ ] Playwright configured for multiple browsers
-- [ ] E2E test database configured and isolated
-- [ ] Complete authentication flow tests implemented
-- [ ] Protected route access tests implemented
-- [ ] Session handling tests implemented
-- [ ] Key user journey tests implemented
-- [ ] Form submission E2E tests implemented
-- [ ] Tests run on CI pipeline
-
-**Common Pitfalls & Tips**:
-- Keep E2E tests focused on critical user journeys, not every edge case
-- Use a dedicated test database that resets between test runs
-- Implement proper test isolation to prevent tests from interfering with each other
-- Consider using Playwright's built-in authentication state storage
-- Create test utilities for common operations like login
-- Test across multiple browsers to catch browser-specific issues
-
-**Testing Instructions**:
-- Run `pnpm test:e2e` to execute all Playwright tests
-- Verify tests run on all configured browsers
-- Check that authentication flows work end-to-end
-- Test protected routes with both authenticated and unauthenticated users
-- Verify critical user journeys complete successfully
-
-**Relevant User Story**:
-- "As a user, I should be able to complete critical workflows without errors"
-- "As a developer, I want to ensure the entire application works together correctly"
-- "As a product owner, I want confidence that key user journeys function properly"
-
-**Reference Links**:
-- [Playwright Documentation](https://playwright.dev/docs/intro)
-- [E2E Testing Best Practices](https://playwright.dev/docs/best-practices)
-- [Playwright Authentication](https://playwright.dev/docs/auth)
-
-**Time Estimate**: 6-8 hours  
 **Story Points**: 5  
-**Dependencies**: TEST-01, AUTH-03  
+**Dependencies**: TEST-01, TEST-02  
 **Status**: TODO
 
-## Phase 5: Core Feature Implementation
-
-### CORE-01: Project Structure Implementation
+### TEST-04: Session Management Tests
 **Type**: Task  
-**Summary**: Set up complete project structure and organization  
+**Summary**: Implement tests for session management functionality  
 **Description**:
-- Implement the recommended folder structure and organization
+- Create tests to verify that user sessions are properly managed, including expiration and logout
 
 **Implementation Details**:
 - Follow these steps:
-  1. **Create base directory structure**:
-     - Organize `app` directory for page routes
-     - Set up `components` with subdirectories
-     - Create `lib` structure for utilities
+  1. **Test session creation**:
+     - Verify session is properly created after authentication
+     - Test session data contains correct user information
+     - Verify session token is properly stored
 
-  2. **Set up core utilities**:
-     - Create helper functions in `lib`
-     - Set up type definitions
-     - Implement shared hooks
+  2. **Test session validation**:
+     - Test getServerSession functionality
+     - Verify session persistence across page loads
+     - Test session data retrieval
 
-  3. **Create layout components**:
-     - Implement root layout with metadata
-     - Create header and footer components
-     - Set up page templates
-
-**Acceptance Criteria**:
-- [ ] `app` directory organized with proper route structure
-- [ ] `components` directory created with appropriate subdirectories
-- [ ] `lib` directory created with utility structure
-- [ ] Core utility functions implemented
-- [ ] Type definitions established for shared data models
-- [ ] Layout components created and functioning
-- [ ] Project structure documented for team reference
-
-**Common Pitfalls & Tips**:
-- Follow Next.js 13+ App Router conventions strictly
-- Keep route handlers in appropriate app directories
-- Group components by function, not by page
-- Use barrel exports (index.ts) to simplify imports
-- Keep business logic separate from UI components
-- Consider colocating related files (.ts, .test.ts, etc.)
-- Create reusable layout components to maintain consistency
-
-**Testing Instructions**:
-- Run the application and navigate between routes
-- Verify that the layout components render correctly
-- Check that utility functions can be imported and used
-- Test that shared hooks work in multiple components
-- Verify type safety with `pnpm tsc --noEmit`
-
-**Relevant User Story**:
-- "As a developer, I want a well-organized codebase that follows best practices"
-- "As a team member, I should be able to easily find and modify code"
-- "As a user, I should experience consistent UI across the application"
-
-**Reference Links**:
-- [Next.js App Router](https://nextjs.org/docs/app/building-your-application/routing)
-- [React Project Structure Best Practices](https://react-file-structure.holt.courses/)
-- [TypeScript Project Organization](https://www.typescriptlang.org/docs/handbook/project-references.html)
-
-**Time Estimate**: 4-5 hours  
-**Story Points**: 3  
-**Dependencies**: SETUP-01  
-**Status**: TODO
-
-### CORE-02: UI Implementation
-**Type**: Task  
-**Summary**: Create core UI components and styling  
-**Description**:
-- Implement the UI components and styling system using Tailwind CSS and DaisyUI
-
-**Implementation Details**:
-- Follow these steps:
-  1. **Configure Tailwind and DaisyUI**:
-     - Set up theme configuration
-     - Define color palette and variables
-     - Configure responsive breakpoints
-
-  2. **Implement base UI components**:
-     - Create button component with variants
-     - Implement input and form components
-     - Create card and container components
-
-  3. **Build layout components**:
-     - Create responsive layout grid
-     - Implement navigation components
-     - Build modal and dialog components
+  3. **Test session expiration**:
+     - Implement tests for session timeout (24 hours of inactivity)
+     - Test expired session handling
+     - Verify user is redirected to login after session expiration
+     - Test logout functionality
 
 **Acceptance Criteria**:
-- [ ] Tailwind CSS fully configured with theme settings
-- [ ] DaisyUI integrated and configured
-- [ ] Color palette and design tokens defined
-- [ ] Button component created with all necessary variants
-- [ ] Form input components implemented with proper styling
-- [ ] Card and container components created
-- [ ] Responsive layout grid implemented
-- [ ] Navigation components (header, sidebar, etc.) created
-- [ ] Modal and dialog components implemented with accessibility
+- [ ] Session creation tests implemented and passing
+- [ ] Tests verify correct user data in session
+- [ ] Session validation tests implemented
+- [ ] Tests for getServerSession functionality completed
+- [ ] Session persistence tests verify state across page loads
+- [ ] Session expiration tests implemented
+- [ ] Logout functionality tests completed
+- [ ] All session tests pass successfully
 
 **Common Pitfalls & Tips**:
-- Maintain consistency with design tokens instead of hardcoded values
-- Create a component storybook or documentation for reference
-- Ensure all components are keyboard accessible
-- Test components at various viewport sizes
-- Follow a consistent naming convention for component classes
-- Make sure all interactive elements have appropriate hover/focus states
-- Consider dark mode support from the beginning
+- Use jest.useFakeTimers() to simulate session expiration without waiting
+- Test both client-side and server-side session validation
+- Verify that sensitive information is not exposed in session tokens
+- Test that logout properly clears all session data
+- Ensure session expiration correctly requires re-authentication
+- Check that session data is properly updated when user data changes
 
 **Testing Instructions**:
-- View components at different screen sizes to verify responsiveness
-- Test keyboard navigation through all interactive elements
-- Check color contrast for accessibility compliance
-- Verify that components work with screen readers
-- Test components with various content lengths
+- Run `pnpm test` with session management test filters
+- Verify session creation tests confirm proper user data storage
+- Check that session validation tests pass for both client and server
+- Confirm session expiration tests verify timeout functionality
+- Validate logout tests confirm proper session termination
 
 **Relevant User Story**:
-- "As a user, I should experience a consistent and accessible interface"
-- "As a developer, I should have reusable UI components to build features quickly"
-- "As a user with disabilities, I should be able to use all features of the application"
+- "As a user, my session should expire after 24 hours of inactivity"
+- "As a user, I want to be securely logged out when I click the logout button"
+- "As a developer, I want to verify session expiration behavior works correctly"
 
 **Reference Links**:
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [DaisyUI Components](https://daisyui.com/components/)
-- [Accessible Component Patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)
-- [Responsive Design Best Practices](https://web.dev/responsive-web-design-basics/)
+- [Auth.js Session Management](https://authjs.dev/concepts/session-strategies)
+- [Testing Cookies and Sessions](https://jestjs.io/docs/manual-mocks)
+- [Next.js Authentication Testing](https://nextjs.org/docs/authentication)
+- [Testing Temporal Functionality](https://jestjs.io/docs/timer-mocks)
 
-**Time Estimate**: 8-10 hours  
+**Time Estimate**: 4-6 hours  
 **Story Points**: 5  
-**Dependencies**: SETUP-02  
+**Dependencies**: TEST-01, TEST-02, TEST-03  
 **Status**: TODO
 
-### CORE-03: Error Handling and Validation
-**Type**: Task  
-**Summary**: Implement error handling and data validation  
-**Description**:
-- Create comprehensive error handling and data validation system
-
-**Implementation Details**:
-- Follow these steps:
-  1. **Set up Zod validation**:
-     - Create schema for form inputs
-     - Implement validation helpers
-     - Add error formatting utilities
-
-  2. **Implement error boundaries**:
-     - Create error boundary components
-     - Set up fallback UI for errors
-     - Implement error logging
-
-  3. **Add toast notifications**:
-     - Set up toast notification system
-     - Implement success/error messages
-     - Create consistent notification patterns
-
-**Acceptance Criteria**:
-- [ ] Zod schemas created for all form inputs
-- [ ] Validation helper functions implemented
-- [ ] User-friendly error formatting utilities created
-- [ ] Error boundary components implemented for React components
-- [ ] Fallback UI created for different error states
-- [ ] Error logging system implemented
-- [ ] Toast notification component created
-- [ ] Success/error/warning notification styles implemented
-- [ ] Notification system integrated with form submissions
-
-**Common Pitfalls & Tips**:
-- Provide clear, actionable error messages to users
-- Implement both client-side and server-side validation
-- Don't expose sensitive information in error messages
-- Make error states accessible to screen readers
-- Use error boundaries to prevent entire UI crashes
-- Keep notifications concise and dismissible
-- Consider timeout duration for toast notifications
-- Log errors in a format that's useful for debugging
-
-**Testing Instructions**:
-- Test form validation with various invalid inputs
-- Verify that error messages are clear and helpful
-- Test error boundaries by introducing intentional errors
-- Check that notifications appear and dismiss correctly
-- Verify that errors are properly logged
-- Test keyboard accessibility for dismissing notifications
-- Verify screen reader announcements for errors
-
-**Relevant User Story**:
-- "As a user, I should receive clear feedback when errors occur"
-- "As a user, I should be guided on how to fix form input errors"
-- "As a developer, I should have tools to validate user input reliably"
-- "As a support team member, I should have access to meaningful error logs"
-
-**Reference Links**:
-- [Zod Documentation](https://zod.dev/)
-- [React Error Boundaries](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary)
-- [Accessible Error Message Patterns](https://www.a11yproject.com/posts/how-to-write-accessible-error-messages/)
-- [Toast Notification Best Practices](https://uxdesign.cc/toast-notifications-the-ux-behind-it-and-how-to-design-it-right-a49d35e560f)
-
-**Time Estimate**: 6-8 hours  
-**Story Points**: 4  
-**Dependencies**: CORE-01  
-**Status**: TODO
-
-## Phase 6: Documentation and Cleanup
+## Phase 5: Documentation and Cleanup
 
 ### DOC-01: Documentation
 **Type**: Task  

@@ -13,6 +13,7 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
 * **Login UX**: The app redirects the user to the home page upon successful login
 * **Session Duration**: User sessions expire after 24 hours of inactivity
 
+
 ## UI/UX Details
 
 * **Localization**: The app supports localized text. Note, a language selection UI should only appear there's at least one language provided
@@ -70,6 +71,7 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
     * As a user, I want to simply click the magic link in my email to authenticate without entering any codes.
     * As a user, I want to see a clear verification status when the magic link is being processed.
     * As a user, I want to be automatically redirected to the home page after successful authentication so that I can begin using the application.
+    * As a user, I want to be properly redirected to login when trying to access protected content
 
 3. **Error Handling**
    * **Magic Link Authentication**:
@@ -114,10 +116,17 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
    * As a user, I want to easily find and use the logout button so that I can securely end my session when finished.
    * As a user, I want confirmation that I've successfully logged out so that I know my session is secure.
 
-### Development
+### General Development
 
 1. * As a developer, I should be able to run this application locally with full database functionality
 2. * As a developer, when I'm running the application locally and enter my email address in the magic link auth flow, I want to retrieve the magic link from the logs rather than my email
 3. * As a developer, when I run tests, I want to group them by database, server and client and run them separately and sequentially
+
+### Authentication Development
+* As a developer, I want to run automated tests for authentication flows to ensure the magic link authentication works correctly
+* As a developer, I want to verify that protected routes properly restrict access to unauthenticated users
+* As a developer, I want to ensure rate limiting for authentication requests functions as specified
+
+
 
 
