@@ -28,7 +28,7 @@ export default async function RootLayout({
   const session = await getSession();
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="bumblebee">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

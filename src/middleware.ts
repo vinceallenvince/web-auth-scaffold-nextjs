@@ -11,8 +11,10 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("x-pathname", pathname);
   
   // Add protocol information (useful for auth redirects)
-  const protocol = request.nextUrl.protocol.replace(':', '');
-  requestHeaders.set("x-forwarded-proto", protocol);
+  const protocol = request.nextUrl.protocol;
+  // Use substring instead of replace for better compatibility with edge runtime
+  const protocolValue = protocol.substring(0, protocol.length - 1);
+  requestHeaders.set("x-forwarded-proto", protocolValue);
   
   // Return the response with the modified headers
   return NextResponse.next({

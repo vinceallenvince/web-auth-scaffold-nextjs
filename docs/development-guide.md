@@ -111,6 +111,21 @@ middleware.ts        → Optional route guards or localization
 - Prefer **server-first** patterns: fetch and mutate data on the server
 - Wrap third-party libraries in your own helpers/components
 
+### Environment Variables
+
+- **Never set `NODE_ENV` in `.env` files** – Next.js controls this internally:
+  - `next dev` automatically sets `NODE_ENV=development`
+  - `next build` and `next start` set `NODE_ENV=production`
+  - To override temporarily, use command line: `NODE_ENV=production npx next dev`
+- **Use custom environment variables** for application-specific settings
+- **For magic link authentication**:
+  - Use `FORCE_EMAIL_SENDING=true` in `.env.local` to actually send emails
+  - By default (when unset or false), magic links are logged to console for local development
+  - Example: `FORCE_EMAIL_SENDING=true pnpm dev` will send real emails even in development
+- **For different deployment environments**:
+  - Define `NEXT_PUBLIC_APP_ENV` (e.g., 'development', 'staging', 'production')
+  - Use `.env.development` and `.env.production` for environment-specific configs
+
 ### Styling
 
 - Use **Tailwind utility classes** + DaisyUI component classes

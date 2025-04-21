@@ -37,7 +37,7 @@ export default function VerifyRequestPage() {
         <div className="mt-6">
           <p className="text-sm text-gray-600">
             Didn't receive an email? Check your spam folder or{" "}
-            <Link href="/auth/signin" className="font-medium text-blue-600 hover:text-blue-500">
+            <Link href="/auth/magic-link" className="font-medium text-blue-600 hover:text-blue-500">
               try again
             </Link>
           </p>

@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
-const config: Config = {
+// Use a more flexible type to include DaisyUI properties
+const config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -17,6 +18,13 @@ const config: Config = {
     },
   },
   plugins: [require('@tailwindcss/forms'), require('daisyui')],
-};
+  daisyui: {
+    themes: ["bumblebee", "light", "dark"],
+    base: true,
+    styled: true,
+    utils: true,
+    themeRoot: "html",
+  },
+} as Config;
 
 export default config; 
