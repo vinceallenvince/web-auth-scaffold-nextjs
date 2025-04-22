@@ -25,6 +25,18 @@ if (TEST_MODE === 'mock') {
     },
     verificationToken: {
       deleteMany: async () => ({ count: 0 }),
+      create: async (data: { data: any }) => data.data,
+      findUnique: async (params: { where: { token: string } }) => {
+        // For mocking token verification
+        if (params.where.token === 'mock-valid-token') {
+          return {
+            identifier: 'test@example.com',
+            token: 'mock-valid-token',
+            expires: new Date(Date.now() + 3600000),
+          };
+        }
+        return null;
+      },
     },
     $disconnect: async () => {},
   } as unknown as PrismaClient;
@@ -136,4 +148,64 @@ export async function initializeTestDb() {
  */
 export async function closePrismaConnection() {
   await prisma.$disconnect();
+}
+
+/**
+ * Create a verification token for testing
+ */
+export async function createMockVerificationToken({
+  identifier,
+  token,
+  expires,
+}: {
+  identifier: string;
+  token: string;
+  expires: Date;
+}) {
+  try {
+    return await prisma.verificationToken.create({
+      data: {
+        identifier,
+        token,
+        expires,
+      },
+    });
+  } catch (error) {
+    console.error('Error creating verification token:', error);
+    throw error;
+  }
+}
+
+/**
+ * Find a verification token
+ */
+export async function findVerificationToken({
+  identifier,
+  token,
+}: {
+  identifier: string;
+  token: string;
+}) {
+  try {
+    return await prisma.verificationToken.findUnique({
+      where: {
+        token,
+      },
+    });
+  } catch (error) {
+    console.error('Error finding verification token:', error);
+    return null;
+  }
+}
+
+/**
+ * Delete all verification tokens
+ */
+export async function deleteVerificationTokens() {
+  try {
+    return await prisma.verificationToken.deleteMany();
+  } catch (error) {
+    console.error('Error deleting verification tokens:', error);
+    throw error;
+  }
 } 

@@ -3,9 +3,7 @@ import { sendEmail, isResendConfigured } from '@/lib/email';
 
 // Mock email service
 vi.mock('@/lib/email', async () => {
-  const actual = await vi.importActual('@/lib/email');
   return {
-    ...actual,
     sendEmail: vi.fn(),
     isResendConfigured: vi.fn().mockReturnValue(false),
   };
@@ -34,7 +32,7 @@ export function setupEmailTesting() {
   capturedEmails.length = 0;
   
   // Mock sendEmail to capture emails
-  vi.mocked(sendEmail).mockImplementation(async (email) => {
+  (sendEmail as any).mockImplementation(async (email: any) => {
     capturedEmails.push({
       to: typeof email.to === 'string' ? email.to : email.to[0],
       subject: email.subject || '',
@@ -46,7 +44,7 @@ export function setupEmailTesting() {
   });
   
   // Ensure isResendConfigured returns false in tests
-  vi.mocked(isResendConfigured).mockReturnValue(false);
+  (isResendConfigured as any).mockReturnValue(false);
 }
 
 /**
@@ -71,7 +69,7 @@ export function extractMagicLinkFromEmail(emailText: string): string | null {
  * Reset email testing mocks
  */
 export function resetEmailMocks() {
-  vi.mocked(sendEmail).mockReset();
-  vi.mocked(isResendConfigured).mockReset();
+  (sendEmail as any).mockReset();
+  (isResendConfigured as any).mockReset();
   capturedEmails.length = 0;
 } 

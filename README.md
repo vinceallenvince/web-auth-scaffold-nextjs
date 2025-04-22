@@ -27,6 +27,35 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Running Tests
+
+This project uses Vitest for testing with dedicated configuration files for different test categories:
+
+```bash
+# Run all tests
+npm test
+
+# Run auth tests using the auth config
+npm run test:auth
+
+# Run auth tests using the db config
+npm run test:db
+
+# Run auth tests using the email config
+npm run test:email
+
+```
+
+Each test category has its own Vitest configuration file:
+
+- `vitest.config.ts` - Default configuration for all tests
+- `vitest.auth.config.ts` - Configuration for auth-related tests
+- `vitest.db.config.ts` - Configuration for db-related tests
+- `vitest.email.config.ts` - Configuration for email-related tests
+
+
+To create a new test category, create a new config file with the appropriate include patterns and test name patterns, then add a corresponding script to package.json.
+
 ## Database Connection
 
 This project connects to a Supabase PostgreSQL database using Prisma ORM. For reliable external connections:

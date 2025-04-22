@@ -5,6 +5,19 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
+// Create mock functions for Next.js authentication
+vi.mock('next-auth', () => ({
+  getServerSession: vi.fn(),
+}));
+
+vi.mock('next-auth/react', () => ({
+  useSession: vi.fn(),
+}));
+
+vi.mock('next/navigation', () => ({
+  redirect: vi.fn(),
+}));
+
 /**
  * User mock data for testing
  */
@@ -44,17 +57,17 @@ export const mockJwt: JWT = {
  */
 export function mockAuthenticated() {
   // Mock server-side session
-  vi.mocked(getServerSession).mockResolvedValue(mockSession);
+  (getServerSession as any).mockResolvedValue(mockSession);
   
   // Mock client-side session
-  vi.mocked(useSession).mockReturnValue({
+  (useSession as any).mockReturnValue({
     data: mockSession,
     status: 'authenticated',
     update: vi.fn(),
   });
   
   // Clear any redirect mocks
-  vi.mocked(redirect).mockClear();
+  (redirect as any).mockClear();
 }
 
 /**
@@ -62,10 +75,10 @@ export function mockAuthenticated() {
  */
 export function mockUnauthenticated() {
   // Mock server-side session
-  vi.mocked(getServerSession).mockResolvedValue(null);
+  (getServerSession as any).mockResolvedValue(null);
   
   // Mock client-side session
-  vi.mocked(useSession).mockReturnValue({
+  (useSession as any).mockReturnValue({
     data: null,
     status: 'unauthenticated',
     update: vi.fn(),
@@ -76,7 +89,7 @@ export function mockUnauthenticated() {
  * Clear all auth-related mocks
  */
 export function clearAuthMocks() {
-  vi.mocked(getServerSession).mockReset();
-  vi.mocked(useSession).mockReset();
-  vi.mocked(redirect).mockReset();
+  (getServerSession as any).mockReset();
+  (useSession as any).mockReset();
+  (redirect as any).mockReset();
 } 
