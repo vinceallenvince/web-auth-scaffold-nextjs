@@ -764,6 +764,11 @@ This document outlines the implementation tasks for setting up the Next.js authe
 
 **Implementation Details**:
 - Follow these steps:
+  1. **Set up protected routes**
+     - Create a test protected route at http://localhost:3000/helloworld
+     - The page should have placeholder content and a "Hello World" page title
+     - The page should only be accessible to authenticated users
+
   1. **Set up route testing infrastructure**:
      - Configure route testing helpers
      - Set up authentication state mocking
@@ -780,13 +785,13 @@ This document outlines the implementation tasks for setting up the Next.js authe
      - Check proper content rendering for authenticated users
 
 **Acceptance Criteria**:
-- [ ] Route testing infrastructure correctly set up
-- [ ] Tests verify unauthenticated users are redirected to login
-- [ ] Tests confirm API routes return appropriate unauthorized status codes
-- [ ] Tests verify middleware properly restricts access
-- [ ] Tests confirm authenticated users can access protected content
-- [ ] Session validation tests implemented and passing
-- [ ] Edge cases tested (e.g., expired sessions, invalid tokens)
+- [X] Route testing infrastructure correctly set up
+- [X] Tests verify unauthenticated users are redirected to login
+- [X] Tests confirm API routes return appropriate unauthorized status codes
+- [X] Tests verify middleware properly restricts access
+- [X] Tests confirm authenticated users can access protected content
+- [X] Session validation tests implemented and passing
+- [X] Edge cases tested (e.g., expired sessions, invalid tokens)
 
 **Common Pitfalls & Tips**:
 - Mock authentication state rather than performing full authentication flow
@@ -816,7 +821,7 @@ This document outlines the implementation tasks for setting up the Next.js authe
 **Time Estimate**: 4-6 hours  
 **Story Points**: 5  
 **Dependencies**: TEST-01, TEST-02  
-**Status**: TODO
+**Status**: DONE
 
 ### TEST-04: Session Management Tests
 **Type**: Task  
