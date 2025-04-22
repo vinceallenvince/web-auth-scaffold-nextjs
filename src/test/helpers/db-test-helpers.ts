@@ -1,20 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { mockUser } from './auth-test-helpers';
 
-// Create a prisma client instance for testing with error handling
+// Determine test mode based on environment variables
+const TEST_MODE = process.env.TEST_MODE || 'mock'; // Options: 'mock', 'real'
+
 let prisma: PrismaClient;
 
-try {
-  prisma = new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL,
-      },
-    },
-  });
-} catch (error) {
-  console.warn('Could not initialize Prisma client:', error);
-  // Create a mock PrismaClient with no-op methods for tests to run when DB is not available
+if (TEST_MODE === 'mock') {
+  console.info('🧪 Running tests with MOCK database');
+  // Explicitly create a mock client
   prisma = {
     user: {
       findUnique: async () => null,
@@ -34,6 +28,22 @@ try {
     },
     $disconnect: async () => {},
   } as unknown as PrismaClient;
+} else {
+  console.info('🧪 Running tests with REAL database');
+  // Use a real Prisma client
+  try {
+    prisma = new PrismaClient({
+      datasources: {
+        db: {
+          url: process.env.DATABASE_URL,
+        },
+      },
+    });
+  } catch (error) {
+    console.error('❌ Failed to initialize Prisma client:', error);
+    // Don't mask the error - make it clear there's an issue
+    throw new Error('Failed to initialize database for tests. Set TEST_MODE=mock if you want to use mocks.');
+  }
 }
 
 /**

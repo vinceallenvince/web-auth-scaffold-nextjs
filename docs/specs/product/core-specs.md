@@ -13,7 +13,6 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
 * **Login UX**: The app redirects the user to the home page upon successful login
 * **Session Duration**: User sessions expire after 24 hours of inactivity
 
-
 ## UI/UX Details
 
 * **Localization**: The app supports localized text. Note, a language selection UI should only appear there's at least one language provided
