@@ -12,7 +12,13 @@
     "verify-db": "node scripts/verify-db-connection.js",
     "test-db-pooler": "node scripts/test-pooler-connection.js",
     "use-pnpm": "node scripts/npm-to-pnpm.js",
-    "db:seed": "npx prisma db seed"
+    "db:seed": "npx prisma db seed",
+    "test": "npm run test:db && npm run test:auth && npm run test:email",
+    "test:watch": "vitest watch",
+    "test:auth": "vitest run src/test/auth-setup.test.ts --pool=vmThreads --poolOptions.threads.singleThread",
+    "test:db": "vitest run src/test/db-setup.test.ts --pool=vmThreads --poolOptions.threads.singleThread",
+    "test:email": "vitest run src/test/email-setup.test.ts --pool=vmThreads --poolOptions.threads.singleThread",
+    "test:all": "vitest run --pool=vmThreads --poolOptions.threads.singleThread"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -44,6 +50,7 @@
     "autoprefixer": "^10",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
+    "jsdom": "^26.1.0",
     "playwright": "^1.51.1",
     "postcss-import": "^16.1.0",
     "prisma": "^6.6.0",

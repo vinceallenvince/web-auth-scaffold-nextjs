@@ -2,7 +2,7 @@
 
 ## Overview
 
-This implementation plan outlines the approach for setting up a Next.js authentication scaffold with App Router and Supabase integration. The plan covers environment setup, database configuration, authentication implementation, and testing infrastructure.
+This implementation plan outlines the approach for setting up a Next.js authentication scaffold with App Router and Supabase integration. The plan covers environment setup, database configuration, authentication implementation, and testing.
 
 ## Context
 
@@ -13,7 +13,7 @@ Based on the core specifications and development guide, we're building a full-st
 3. Auth.js (formerly NextAuth) with magic link authentication
 4. Server-first approach with React Server Components
 5. Tailwind CSS and DaisyUI for styling
-6. Comprehensive testing infrastructure
+6. Authentication testing
 
 This implementation will serve as the foundation for a portable, maintainable web application with a focus on developer experience and code quality.
 
@@ -22,7 +22,7 @@ This implementation will serve as the foundation for a portable, maintainable we
 1. Create a robust authentication system with magic link email flow
 2. Set up a type-safe database connection using Prisma ORM with Supabase
 3. Implement proper project structure following Next.js App Router conventions
-4. Establish comprehensive testing infrastructure for all application layers
+4. Establish testing infrastructure for authentication
 5. Ensure platform agnosticism by following portability guidelines
 
 ## Development Steps
@@ -167,47 +167,20 @@ This implementation will serve as the foundation for a portable, maintainable we
    - Create sample protected dashboard page
    - Add server-side session validation
 
-### Phase 4: Testing Infrastructure (2 days)
+### Phase 4: Authentication Testing (1-2 days)
 
-1. **Test Directory Structure**
-   - Set up `__tests__` directory with subdirectories:
-     - `db` - Database tests
-     - `server` - API and server action tests
-     - `client` - Component tests
-     - `e2e` - Playwright end-to-end tests
+1. **Authentication Test Setup**
+   - Set up minimal test infrastructure for authentication flows
+   - Configure test database for auth testing
 
-2. **Test Configuration**
-   - Configure Vitest for unit and integration tests
-   - Set up Playwright for E2E tests
-   - Create test utilities and helpers
-   - Configure test database for database tests
+2. **Core Authentication Tests**
+   - Test magic link request and verification flow
+   - Test rate limiting functionality (20 requests/day limit)
+   - Test protected route access control
+   - Verify session expiration behavior
 
-3. **Core Test Implementation**
-   - Write tests for authentication flow
-   - Create database access tests
-   - Implement component rendering tests
-   - Build E2E tests for critical user journeys
 
-### Phase 5: Core Feature Implementation (3-4 days)
-
-1. **Project Structure Setup**
-   - Implement recommended folder structure
-   - Create core components and layouts
-   - Set up utility functions and helpers
-
-2. **UI Implementation**
-   - Configure Tailwind CSS and DaisyUI
-   - Create base layout with header/footer
-   - Implement responsive design patterns
-   - Build form components with validation
-
-3. **Error Handling and Validation**
-   - Implement Zod schemas for data validation
-   - Create error boundary components
-   - Add proper error handling for API routes
-   - Implement toast notifications for user feedback
-
-### Phase 6: Documentation and Cleanup (1 day)
+### Phase 5: Documentation and Cleanup (1 day)
 
 1. **Documentation**
    - Update README with setup instructions
@@ -257,7 +230,6 @@ This implementation will serve as the foundation for a portable, maintainable we
 | Database Setup | 1-2 days | Working Prisma + Supabase connection |
 | Authentication | 2-3 days | Functional magic link auth flow |
 | Testing Infrastructure | 2 days | Test suite running successfully |
-| Core Features | 3-4 days | Essential UI and functionality working |
 | Documentation & Cleanup | 1 day | Polished codebase with documentation |
 
 **Total Estimated Time**: 10-14 days
@@ -269,15 +241,6 @@ The implementation will be considered successful when:
 1. Users can register and authenticate using magic links
 2. Authentication data is properly stored in the Supabase database
 3. Protected routes are only accessible to authenticated users
-4. The application is responsive across different device sizes
-5. All tests pass successfully
-6. The application can be deployed to multiple platforms without modification
-7. Development workflow is smooth with working commands for testing, linting, and development
-
-## Post-Implementation Tasks
-
-1. Load testing to ensure performance under load
-2. Security audit of authentication implementation
-3. Consideration of additional authentication methods (social login, etc.)
-4. Refinement of UI/UX based on user feedback
-5. Implementation of additional features based on product requirements
+4. All tests pass successfully
+5. The application can be deployed to multiple platforms without modification
+6. Development workflow is smooth with working commands for testing, linting, and development
