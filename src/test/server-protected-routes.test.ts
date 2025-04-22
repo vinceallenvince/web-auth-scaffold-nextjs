@@ -14,11 +14,14 @@ vi.mock('@/app/helloworld/protected-api/route', () => {
 
 // Mock the next/navigation module
 vi.mock('next/navigation', () => ({
-  redirect: vi.fn()
+  redirect: vi.fn(),
+  useRouter: vi.fn().mockReturnValue({
+    push: vi.fn()
+  })
 }));
 
-// Import redirect after mocking to spy on it
-import { redirect } from 'next/navigation';
+// Import after mocking to spy on them
+import { redirect, useRouter } from 'next/navigation';
 
 describe('Protected Routes', () => {
   beforeEach(() => {
@@ -56,46 +59,96 @@ describe('Protected Routes', () => {
     });
   });
 
-  describe('Route Middleware Protection', () => {
-    it('should redirect unauthenticated users to login', async () => {
-      // Arrange - auth state already set to false in beforeEach
-      const mockRedirectFn = redirect as unknown as Mock;
+  describe('Route Protection', () => {
+    describe('Server-side middleware', () => {
+      it('should redirect unauthenticated users to login', async () => {
+        // Arrange - auth state already set to false in beforeEach
+        const mockRedirectFn = redirect as unknown as Mock;
+        
+        // Act - simulate middleware redirecting unauthenticated user
+        const mockServerProtection = async () => {
+          setMockAuthenticated(false);
+          const isAuth = await isAuthenticated();
+          if (!isAuth) {
+            redirect('/auth/magic-link');
+          }
+          return null;
+        };
+        
+        await mockServerProtection();
+        
+        // Assert
+        expect(mockRedirectFn).toHaveBeenCalledWith('/auth/magic-link');
+      });
       
-      // Act - simulate middleware redirecting unauthenticated user
-      const mockAuthProtection = async () => {
-        setMockAuthenticated(false);
-        const isAuth = await isAuthenticated();
-        if (!isAuth) {
-          redirect('/auth/magic-link');
-        }
-        return null;
-      };
-      
-      await mockAuthProtection();
-      
-      // Assert
-      expect(mockRedirectFn).toHaveBeenCalledWith('/auth/magic-link');
-    });
-    
-    it('should allow authenticated users to access protected routes', async () => {
-      // Arrange
-      const mockRedirectFn = redirect as unknown as Mock;
-      setMockAuthenticated(true);
-      
-      // Act - simulate middleware with authenticated user
-      const mockAuthProtection = async () => {
+      it('should allow authenticated users to access protected routes', async () => {
+        // Arrange
+        const mockRedirectFn = redirect as unknown as Mock;
         setMockAuthenticated(true);
-        const isAuth = await isAuthenticated();
-        if (!isAuth) {
-          redirect('/auth/magic-link');
-        }
-        return null;
-      };
+        
+        // Act - simulate middleware with authenticated user
+        const mockServerProtection = async () => {
+          setMockAuthenticated(true);
+          const isAuth = await isAuthenticated();
+          if (!isAuth) {
+            redirect('/auth/magic-link');
+          }
+          return null;
+        };
+        
+        await mockServerProtection();
+        
+        // Assert
+        expect(mockRedirectFn).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('Client-side component', () => {
+      it('should navigate unauthenticated users to login', async () => {
+        // Arrange
+        const mockRouter = { push: vi.fn() };
+        (useRouter as unknown as Mock).mockReturnValue(mockRouter);
+        setMockAuthenticated(false);
+        
+        // Mock isAuthenticated to work synchronously for this test
+        const mockIsAuth = vi.fn().mockReturnValue(false);
+        
+        // Act - simulate client component redirecting unauthenticated user
+        const mockClientProtection = () => {
+          const router = useRouter();
+          if (!mockIsAuth()) {
+            router.push('/auth/magic-link');
+          }
+        };
+        
+        mockClientProtection();
+        
+        // Assert
+        expect(mockRouter.push).toHaveBeenCalledWith('/auth/magic-link');
+      });
       
-      await mockAuthProtection();
-      
-      // Assert
-      expect(mockRedirectFn).not.toHaveBeenCalled();
+      it('should not navigate authenticated users away from protected routes', async () => {
+        // Arrange
+        const mockRouter = { push: vi.fn() };
+        (useRouter as unknown as Mock).mockReturnValue(mockRouter);
+        setMockAuthenticated(true);
+        
+        // Mock isAuthenticated to work synchronously for this test
+        const mockIsAuth = vi.fn().mockReturnValue(true);
+        
+        // Act - simulate client component with authenticated user
+        const mockClientProtection = () => {
+          const router = useRouter();
+          if (!mockIsAuth()) {
+            router.push('/auth/magic-link');
+          }
+        };
+        
+        mockClientProtection();
+        
+        // Assert
+        expect(mockRouter.push).not.toHaveBeenCalled();
+      });
     });
   });
 }); 
