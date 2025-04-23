@@ -46,6 +46,23 @@ const eslintConfig = [
 
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   
+  // Add specific rules for script files
+  {
+    files: ["scripts/**/*.js"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  },
+  
+  // Add specific rules for prisma files
+  {
+    files: ["prisma/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  },
+  
   // Add specific rules for test files
   {
     files: ["**/test/**/*.ts", "**/test/**/*.tsx"],
