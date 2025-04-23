@@ -1,13 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import ThemeToggleWithContext from '../components/ui/theme-toggle-with-context';
+import ThemeToggle from '../components/ui/theme-toggle';
 
 export default function TestDaisyUI() {
   return (
     <div className="container-padded py-10">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">DaisyUI Test Page</h1>
-        <ThemeToggleWithContext />
+        <ThemeToggle />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

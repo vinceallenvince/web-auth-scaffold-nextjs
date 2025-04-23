@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useTheme } from '../../providers/theme-provider';
 
 const MoonIcon = () => (
   <svg
@@ -37,53 +38,7 @@ const SunIcon = () => (
 );
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'bumblebee' | 'night'>('bumblebee');
-
-  // Initialize theme on first load
-  useEffect(() => {
-    // Check for stored theme preference
-    const storedTheme = localStorage.getItem('theme');
-    // Check system preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Set initial theme - stored preference takes priority over system preference
-    const initialTheme = storedTheme || (prefersDark ? 'night' : 'bumblebee');
-    
-    // Validate theme value before setting
-    const validTheme = (
-      initialTheme === 'bumblebee' || initialTheme === 'night' 
-        ? initialTheme 
-        : 'bumblebee'
-    );
-    setTheme(validTheme);
-    document.documentElement.setAttribute('data-theme', validTheme);
-    
-    // Listen for system preference changes
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem('theme')) {
-        const newTheme = e.matches ? 'night' : 'bumblebee';
-        setTheme(newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-      }
-    };
-    
-    // Add event listener with proper cleanup
-    darkModeMediaQuery.addEventListener('change', handleChange);
-    
-    // Cleanup function
-    return () => {
-      darkModeMediaQuery.removeEventListener('change', handleChange);
-    };
-  }, []);
-
-  // Toggle theme function
-  const toggleTheme = () => {
-    const newTheme = theme === 'bumblebee' ? 'night' : 'bumblebee';
-    setTheme(newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button
