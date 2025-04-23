@@ -57,6 +57,24 @@ export default function ThemeToggle() {
     );
     setTheme(validTheme);
     document.documentElement.setAttribute('data-theme', validTheme);
+    
+    // Listen for system preference changes
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('theme')) {
+        const newTheme = e.matches ? 'night' : 'bumblebee';
+        setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+      }
+    };
+    
+    // Add event listener with proper cleanup
+    darkModeMediaQuery.addEventListener('change', handleChange);
+    
+    // Cleanup function
+    return () => {
+      darkModeMediaQuery.removeEventListener('change', handleChange);
+    };
   }, []);
 
   // Toggle theme function

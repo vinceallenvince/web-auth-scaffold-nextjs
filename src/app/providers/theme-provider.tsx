@@ -37,6 +37,24 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(validTheme);
     document.documentElement.setAttribute('data-theme', validTheme);
     setMounted(true);
+    
+    // Listen for system preference changes
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      // Only update theme based on system preference if the user hasn't set a preference
+      if (!localStorage.getItem('theme')) {
+        const newTheme = e.matches ? 'night' : 'bumblebee' as Theme;
+        setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+      }
+    };
+    
+    darkModeMediaQuery.addEventListener('change', handleChange);
+    
+    // Cleanup function
+    return () => {
+      darkModeMediaQuery.removeEventListener('change', handleChange);
+    };
   }, []);
   
   // Apply theme change (only after the component has mounted)
