@@ -15,8 +15,10 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
 
 ## UI/UX Details
 
+* **Layout**: The app uses a card-based layout for content organization across various pages
+* **Navigation**: The app uses a simple naviation menu with links to the various features
 * **Localization**: The app supports localized text. Note, a language selection UI should only appear there's at least one language provided
-* **Theme Configuration**: The app has Tailwind's dark mode class variant configured, but currently only implements a light theme without user-facing theme switching functionality
+* **Theme Configuration**: The app implements user-facing light and dark theme switching
 * **Responsive Design**: The UI is fully responsive with tailored layouts for mobile, tablet, and desktop viewports:
   * Mobile-first approach with progressive enhancement for larger screens
   * Grid layouts adapt from single column (mobile) to multi-column (tablet/desktop)
@@ -32,7 +34,7 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
   * Consistent styling patterns across all interactive elements
   * Modular components with variants for different use cases
   * Form validation with clear error states and guidance
-* **Notification System**: Toast notifications provide user feedback for:
+* **Toast Notification System**: Toast notifications provide user feedback for:
   * Authentication events (success/failure)
   * Form submission confirmations
   * Error messages
@@ -40,11 +42,10 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
 * **Loading States**: The application implements meaningful loading states:
   * Skeleton loaders for content areas during data fetching
   * Spinner indicators for button actions
-  * Page transition states for improved perceived performance
 
 ## Content
 
-* **Content Structure**: The app uses a card-based layout for content organization across various pages
+* **Content Structure**: The app organizes content using a card-based layout across various pages
 * **Public Content**: Non-authenticated users can view general information on the home page, about page, and contact page
 * **Protected Content**: Authenticated users gain access to profile management and other protected routes
 * **Role-based Content**: Admin users have access to additional administrative features including user management
