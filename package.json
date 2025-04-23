@@ -19,10 +19,16 @@
     "test:db": "vitest run --config vitest.db.config.ts --pool=vmThreads --poolOptions.threads.singleThread",
     "test:email": "vitest run --config vitest.email.config.ts --pool=vmThreads --poolOptions.threads.singleThread",
     "test:server": "vitest run --config vitest.server.config.ts --pool=vmThreads --poolOptions.threads.singleThread",
-    "test:all": "vitest run --pool=vmThreads --poolOptions.threads.singleThread"
+    "test:all": "vitest run --pool=vmThreads --poolOptions.threads.singleThread",
+    "prepare": "husky"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "@auth/core": "^0.38.0",
@@ -54,9 +60,12 @@
     "autoprefixer": "^10",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.1.0",
+    "lint-staged": "^15.5.1",
     "playwright": "^1.51.1",
     "postcss-import": "^16.1.0",
+    "prettier": "^3.5.3",
     "prisma": "^6.6.0",
     "tailwindcss": "^3.3.3",
     "tsx": "^4.7.0",
