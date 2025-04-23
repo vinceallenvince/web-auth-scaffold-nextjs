@@ -20,18 +20,18 @@ This document outlines the implementation tasks for building the core UX compone
   2. **Configure Tailwind**:
      - Update `tailwind.config.js` to include DaisyUI and set up themes
      - Configure content paths, theme extensions, and plugin settings
-     - Set up DaisyUI themes (light and dark)
+     - Set up DaisyUI custom themes, bumblebee for light and Night for dark ([DaisyUI themes](https://daisyui.com/docs/themes/))
 
   3. **Set up global CSS variables**:
      - Update `src/styles/globals.css` to include custom CSS variables for theming
      - Add base styles for the application
 
 **Acceptance Criteria**:
-- [ ] Tailwind CSS and DaisyUI are properly installed and configured
-- [ ] Theme colors and design tokens are defined in the Tailwind config
-- [ ] Basic utility classes are available for use in components
-- [ ] DaisyUI themes (light and dark) are properly configured
-- [ ] Global CSS variables are set up for custom theming needs
+- [X] Tailwind CSS and DaisyUI are properly installed and configured
+- [X] Theme colors and design tokens are defined in the Tailwind config
+- [X] Basic utility classes are available for use in components
+- [X] DaisyUI themes (light and dark) are properly configured
+- [X] Global CSS variables are set up for custom theming needs
 
 **Common Pitfalls & Tips**:
 - Ensure content paths in Tailwind config correctly match your project structure
@@ -52,7 +52,7 @@ This document outlines the implementation tasks for building the core UX compone
 **Time Estimate**: 3-4 hours
 **Story Points**: 2
 **Dependencies**: None  
-**Status**: TODO
+**Status**: DONE
 
 ### UX-02: Implement Theme Provider and Light/Dark Mode Toggle
 **Type**: Task  

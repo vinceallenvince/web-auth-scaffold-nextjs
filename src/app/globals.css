@@ -2,9 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for font variables */
+/* Custom CSS variables for theming */
 @layer base {
+  :root {
+    /* Base colors */
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f1f5f9;
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #64748b;
+    
+    /* Brand colors */
+    --color-primary: #0ea5e9;
+    --color-secondary: #64748b;
+    --color-accent: #84cc16;
+    
+    /* Feedback colors */
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: #3abff8;
+    
+    /* Animation speeds */
+    --transition-slow: 0.5s;
+    --transition-medium: 0.3s;
+    --transition-fast: 0.15s;
+    
+    /* Font settings */
+    --font-sans: var(--font-sans, system-ui, sans-serif);
+    --font-mono: var(--font-mono, ui-monospace, monospace);
+  }
+  
+  /* Dark mode overrides using DaisyUI's theme switching */
+  [data-theme="night"] {
+    --color-bg-primary: #1e293b;
+    --color-bg-secondary: #0f172a;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+  }
+
   body {
-    font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    transition: background-color var(--transition-medium), color var(--transition-medium);
+  }
+}
+
+/* Common utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .container-padded {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  .custom-btn-primary {
+    @apply btn btn-primary font-medium;
+  }
+  
+  .custom-btn-secondary {
+    @apply btn btn-secondary font-medium;
+  }
+  
+  .custom-btn-accent {
+    @apply btn btn-accent font-medium;
+  }
+  
+  .custom-btn-outline {
+    @apply btn btn-outline border-2;
+  }
+  
+  .card-custom {
+    @apply card bg-base-100 shadow-md;
   }
 }
