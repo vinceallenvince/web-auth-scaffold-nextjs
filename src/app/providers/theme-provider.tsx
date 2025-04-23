@@ -26,8 +26,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     // Set initial theme - stored preference takes priority over system preference
     const initialTheme = storedTheme || (prefersDark ? 'night' : 'bumblebee');
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
+    
+    // Validate theme value before setting
+    const validTheme = (
+      initialTheme === 'bumblebee' || initialTheme === 'night' 
+        ? initialTheme 
+        : 'bumblebee'
+    ) as Theme;
+    
+    setTheme(validTheme);
+    document.documentElement.setAttribute('data-theme', validTheme);
     setMounted(true);
   }, []);
   
