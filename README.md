@@ -1,6 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Web Authentication Scaffold with Next.js App Router
+
+This is a secure, production-ready authentication scaffold for Next.js applications built with the App Router. It features magic link authentication via Auth.js (formerly NextAuth.js), PostgreSQL database integration with Prisma, and a clean UI with DaisyUI and Tailwind CSS.
+
+## Features
+
+- **Magic Link Authentication** - Secure, passwordless authentication via Auth.js
+- **PostgreSQL Database** - Supabase PostgreSQL with Prisma ORM for data management
+- **Modern UI** - Clean, responsive interface using Tailwind CSS and DaisyUI
+- **TypeScript** - Full type safety throughout the codebase
+- **Testing** - Comprehensive test suite with Vitest and Playwright
+- **Accessibility** - WCAG 2.1 Level AA compliant components and pages
 
 ## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or pnpm
+- PostgreSQL database (recommended: Supabase)
+
+### Environment Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/web-auth-scaffold-nextjs.git
+   cd web-auth-scaffold-nextjs
+   ```
+
+2. Copy `.env.example` to `.env.local` and fill in your environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+
+3. Update the following variables in `.env.local`:
+   - `DATABASE_URL`: Your PostgreSQL connection string (Use Supabase connection pooler URL)
+   - `NEXTAUTH_SECRET`: Generate with `openssl rand -base64 32`
+   - `NEXTAUTH_URL`: Set to `http://localhost:3000` for development
+   - `EMAIL_FROM`: Email address for magic link sender
+
+### Installation and Verification
 
 First, verify your setup to ensure all requirements are met:
 
@@ -8,7 +46,17 @@ First, verify your setup to ensure all requirements are met:
 npm run verify-setup
 ```
 
-Then, run the development server:
+Then, install dependencies:
+
+```bash
+# Using npm
+npm install
+
+# Using pnpm (recommended)
+pnpm install
+```
+
+Run the development server:
 
 ```bash
 # Using pnpm (recommended)
@@ -23,11 +71,37 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development Workflow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Directory Structure
 
-## Running Tests
+```
+├── src/                    # Application source code
+│   ├── app/                # Next.js App Router pages and API routes
+│   │   ├── api/            # API routes including Auth.js endpoints
+│   │   ├── auth/           # Authentication pages
+│   │   └── dashboard/      # Protected dashboard pages
+│   ├── lib/                # Shared utilities and business logic
+│   ├── components/         # React components
+│   ├── emails/             # Email templates
+│   └── types/              # TypeScript type definitions
+├── prisma/                 # Prisma schema and migrations
+│   └── schema.prisma      # Database schema
+├── public/                 # Static assets
+└── docs/                   # Documentation
+```
+
+### Coding Standards
+
+- **TypeScript**: Use strict mode with proper typing
+- **Components**: Create reusable components in `src/components`
+- **Server Actions**: Implement data mutations with Next.js Server Actions
+- **Authentication**: Use Auth.js hooks for session management
+- **Database**: Use Prisma Client for database operations
+- **Styling**: Use Tailwind utility classes and DaisyUI components
+- **Testing**: Write tests for all new functionality
+
+### Running Tests
 
 This project uses Vitest for testing with dedicated configuration files for different test categories:
 
@@ -35,26 +109,15 @@ This project uses Vitest for testing with dedicated configuration files for diff
 # Run all tests
 npm test
 
-# Run auth tests using the auth config
+# Run auth tests
 npm run test:auth
 
-# Run auth tests using the db config
+# Run db tests
 npm run test:db
 
-# Run auth tests using the email config
+# Run email tests
 npm run test:email
-
 ```
-
-Each test category has its own Vitest configuration file:
-
-- `vitest.config.ts` - Default configuration for all tests
-- `vitest.auth.config.ts` - Configuration for auth-related tests
-- `vitest.db.config.ts` - Configuration for db-related tests
-- `vitest.email.config.ts` - Configuration for email-related tests
-
-
-To create a new test category, create a new config file with the appropriate include patterns and test name patterns, then add a corresponding script to package.json.
 
 ## Database Connection
 
@@ -76,7 +139,7 @@ This project connects to a Supabase PostgreSQL database using Prisma ORM. For re
    npm run test-db-pooler
    ```
 
-## PNPM Issues (SETUP-04)
+## PNPM Issues
 
 If you're experiencing issues with PNPM commands not running correctly, you can:
 
@@ -95,17 +158,30 @@ If you're experiencing issues with PNPM commands not running correctly, you can:
 
 3. See detailed troubleshooting steps in [docs/troubleshooting/pnpm-issues.md](docs/troubleshooting/pnpm-issues.md)
 
-## Learn More
+## Documentation
 
-To learn more about Next.js, take a look at the following resources:
+- [Technical Documentation](docs/tech-documentation.md) - Core technologies and references
+- [Development Guide](docs/development-guide.md) - Detailed development instructions
+- [API Documentation](docs/api-documentation.md) - API endpoints and usage
+- [Component Documentation](docs/component-documentation.md) - UI components and props
+- [Authentication Guide](docs/guides/authentication.md) - Auth.js implementation details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This application is designed to be deployed on any platform that supports Next.js applications:
 
-## Deploy on Vercel
+1. Build the application:
+   ```bash
+   npm run build
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Start the production server:
+   ```bash
+   npm start
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For detailed deployment instructions for specific platforms, see [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
