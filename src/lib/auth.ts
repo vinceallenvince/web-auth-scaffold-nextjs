@@ -42,10 +42,11 @@ export const authOptions: NextAuthOptions = {
         // Output to console with high visibility
         console.log(logEntry);
         
-        // Also save to file for easy reference
+        // Also save to file for easy reference - using async file operations to avoid blocking the event loop
         try {
           const logFile = path.join(logDir, 'magic-links.log');
-          fs.appendFileSync(logFile, logEntry);
+          // Use async file write instead of synchronous appendFileSync
+          await fs.promises.appendFile(logFile, logEntry);
           console.log(`✅ Magic link saved to ${logFile}`);
         } catch (error) {
           console.error('❌ Failed to save magic link to log file:', error);

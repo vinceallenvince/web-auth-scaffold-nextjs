@@ -149,6 +149,8 @@ middleware.ts        → Optional route guards or localization
 | **Zod**        | Runtime type validation                 |
 | **ESLint**     | Linting with TypeScript + accessibility |
 | **Prettier**   | Code formatting                         |
+| **Husky**      | Git hooks for code quality checks       |
+| **lint-staged**| Run linters on staged files only        |
 
 ### Guidelines
 
@@ -156,6 +158,20 @@ middleware.ts        → Optional route guards or localization
 - Write tests for all auth flows and DB access
 - Use `testid` attributes for Playwright selectors
 - Run `pnpm lint` and `pnpm test` before pushing
+
+### Git Hooks with Husky
+
+We use Husky to enforce code quality through Git hooks:
+
+- **Pre-commit hook**: Automatically runs ESLint on staged files
+  - Prevents committing code with linting errors
+  - Only checks files that are being committed (using lint-staged)
+  - Improves code quality by catching issues early
+  - Can be bypassed in emergencies with `git commit --no-verify` (use sparingly)
+
+The pre-commit hook configuration is defined in:
+- `.husky/pre-commit`: The hook script that runs lint-staged
+- `package.json`: Contains the lint-staged configuration that specifies which linters to run on which file types
 
 ---
 
