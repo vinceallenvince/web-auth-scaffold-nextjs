@@ -28,9 +28,6 @@
 **Testing Instructions**:
 - Step-by-step guide to verify the implementation works correctly
 
-**Relevant User Story**:
-- Insert relevant user story from /docs/specs. If you can't find a relevant user story, use "NA"
-
 **Reference Links**:
 - [Documentation Link]()
 - [Similar Implementation]()
