@@ -13,6 +13,8 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  // Initialize with the default theme set in the HTML element
+  const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<Theme>('bumblebee');
   
   // Initialize theme on first client-side render
@@ -26,13 +28,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const initialTheme = storedTheme || (prefersDark ? 'night' : 'bumblebee');
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
+    setMounted(true);
   }, []);
   
-  // Apply theme change
+  // Apply theme change (only after the component has mounted)
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    if (mounted) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme, mounted]);
   
   // Toggle between light and dark
   const toggleTheme = () => {

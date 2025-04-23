@@ -20,7 +20,7 @@ This document outlines the implementation tasks for building the core UX compone
   2. **Configure Tailwind**:
      - Update `tailwind.config.js` to include DaisyUI and set up themes
      - Configure content paths, theme extensions, and plugin settings
-     - Set up DaisyUI custom themes, Bumble Bee for light and Night for dark (https://daisyui.com/docs/themes/)
+     - Set up DaisyUI custom themes, bumblebee for light and Night for dark ([DaisyUI themes](https://daisyui.com/docs/themes/))
 
   3. **Set up global CSS variables**:
      - Update `src/styles/globals.css` to include custom CSS variables for theming
