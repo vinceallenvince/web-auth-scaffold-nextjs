@@ -28,15 +28,14 @@ export function Section<T extends ElementType = 'section'>({
 }: SectionProps<T>) {
   const Component = as || 'section';
   
-  const getSizeClass = () => {
-    switch(size) {
-      case 'sm': return 'py-4';
-      case 'md': return 'py-8';
-      case 'lg': return 'py-12 md:py-16';
-      case 'xl': return 'py-16 md:py-24';
-      default: return 'py-8';
-    }
+  const sizeClasses = {
+    sm: 'py-4',
+    md: 'py-8',
+    lg: 'py-12 md:py-16',
+    xl: 'py-16 md:py-24',
   };
+  
+  const getSizeClass = () => sizeClasses[size] || 'py-8';
 
   const content = container ? (
     <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -78,15 +77,16 @@ export function Divider<T extends ElementType = 'hr'>({
 }: DividerProps<T>) {
   const Component = as || 'hr';
   
-  const orientationClass = orientation === 'vertical'
-    ? 'h-full border-l border-t-0'
-    : 'w-full border-t border-l-0';
+  const orientationClasses = {
+    vertical: 'h-full border-l border-t-0',
+    horizontal: 'w-full border-t border-l-0'
+  };
 
   return (
     <Component
       className={cn(
         'border-gray-200 dark:border-gray-700',
-        orientationClass,
+        orientationClasses[orientation],
         className
       )}
       {...props}
