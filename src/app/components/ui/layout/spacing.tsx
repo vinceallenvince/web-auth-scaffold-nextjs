@@ -49,11 +49,22 @@ export function Spacer({
   );
 }
 
+type Direction = 'row' | 'column';
+
+type ResponsiveDirection = Direction | {
+  default: Direction;
+  sm?: Direction;
+  md?: Direction;
+  lg?: Direction;
+  xl?: Direction;
+  '2xl'?: Direction;
+};
+
 type StackProps = {
   children: React.ReactNode;
   className?: string;
   space?: SpacingSize;
-  direction?: 'row' | 'column';
+  direction?: ResponsiveDirection;
 };
 
 /**
@@ -62,7 +73,7 @@ type StackProps = {
  * @param children - The content to display inside the stack
  * @param className - Additional class names to apply
  * @param space - Size of the gap between elements
- * @param direction - Direction of the stack (row or column)
+ * @param direction - Direction of the stack (row or column), can be responsive
  */
 export function Stack({
   children,
@@ -72,13 +83,34 @@ export function Stack({
 }: StackProps) {
   const getSpaceClass = () => `gap-${SPACING_SIZE_MAP[space] || 8}`;
 
-  const directionClass = direction === 'row' ? 'flex-row' : 'flex-col';
+  const getDirectionClass = () => {
+    // Simple implementation for string values
+    if (typeof direction === 'string') {
+      return direction === 'row' ? 'flex-row' : 'flex-col';
+    }
+    
+    // When direction is an object with responsive values
+    // e.g. { default: 'column', md: 'row' }
+    const { default: defaultDir, ...breakpoints } = direction;
+    const baseClass = defaultDir === 'row' ? 'flex-row' : 'flex-col';
+    
+    // Create responsive classes using Tailwind's responsive prefixes
+    const responsiveClasses = Object.entries(breakpoints).reduce(
+      (classes, [breakpoint, dir]) => {
+        classes[`${breakpoint}:${dir === 'row' ? 'flex-row' : 'flex-col'}`] = true;
+        return classes;
+      },
+      {} as Record<string, boolean>
+    );
+    
+    return cn(baseClass, responsiveClasses);
+  };
 
   return (
     <div
       className={cn(
         'flex',
-        directionClass,
+        getDirectionClass(),
         getSpaceClass(),
         className
       )}
