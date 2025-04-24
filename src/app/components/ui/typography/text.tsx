@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { cn } from '@/app/lib/utils';
 import { TextProps } from './types';
 
-export const Text = forwardRef<HTMLParagraphElement, TextProps>(
+export const Text = forwardRef<HTMLElement, TextProps>(
   ({ className, as = 'p', variant = 'normal', children, id, ...props }, ref) => {
     const Component = as;
     
