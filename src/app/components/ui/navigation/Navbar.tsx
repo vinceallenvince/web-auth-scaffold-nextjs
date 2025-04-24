@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -40,10 +40,59 @@ interface NavbarProps {
 
 export function Navbar({ logo, className }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Close menu when pressing Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  // Handle focus management when opening/closing the menu
+  useEffect(() => {
+    if (isOpen && menuRef.current) {
+      // Focus the first focusable element in the menu
+      const focusableElements = menuRef.current.querySelectorAll(
+        'a[href], button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+      );
+      
+      if (focusableElements.length > 0) {
+        (focusableElements[0] as HTMLElement).focus();
+      }
+    } else if (!isOpen && menuButtonRef.current) {
+      // Return focus to the menu button when closing
+      menuButtonRef.current.focus();
+    }
+  }, [isOpen]);
+
+  // Handle clicks outside of the menu to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
 
   return (
     <header className={cn("bg-base-100", className)}>
@@ -82,6 +131,7 @@ export function Navbar({ logo, className }: NavbarProps) {
             {/* Mobile Menu Button */}
             <div className="flex lg:hidden">
               <button
+                ref={menuButtonRef}
                 type="button"
                 className="btn btn-ghost"
                 onClick={toggleMenu}
@@ -111,9 +161,19 @@ export function Navbar({ logo, className }: NavbarProps) {
           </div>
         </div>
 
+        {/* Backdrop for mobile menu */}
+        {isOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 transition-opacity lg:hidden"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
         {/* Mobile Navigation Drawer */}
         <div
           id="mobile-menu"
+          ref={menuRef}
           className={cn(
             "fixed inset-y-0 right-0 z-50 w-full max-w-xs transform overflow-auto bg-base-100 p-4 shadow-lg transition-transform duration-300 lg:hidden",
             isOpen ? "translate-x-0" : "translate-x-full"
