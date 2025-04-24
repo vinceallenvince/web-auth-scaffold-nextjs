@@ -2,16 +2,19 @@ import { forwardRef } from 'react';
 import { cn } from '@/app/lib/utils';
 import { TextProps } from './types';
 
-export const Text = forwardRef<HTMLElement, TextProps>(
+
+// Define variant styles outside component to prevent recreation on each render
+const variantStyles = {
+  lead: 'text-xl text-foreground leading-7',
+  normal: 'text-base text-foreground leading-7',
+  small: 'text-sm text-foreground/80 leading-6',
+  tiny: 'text-xs text-foreground/70 leading-5',
+};
+
+export const Text = forwardRef<HTMLParagraphElement, TextProps>(
+
   ({ className, as = 'p', variant = 'normal', children, id, ...props }, ref) => {
     const Component = as;
-    
-    const variantStyles = {
-      lead: 'text-xl text-foreground leading-7',
-      normal: 'text-base text-foreground leading-7',
-      small: 'text-sm text-foreground/80 leading-6',
-      tiny: 'text-xs text-foreground/70 leading-5',
-    };
     
     return (
       <Component

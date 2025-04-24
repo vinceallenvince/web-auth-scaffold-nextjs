@@ -2,128 +2,72 @@ import { forwardRef } from 'react';
 import { cn } from '@/app/lib/utils';
 import { HeadingProps } from './types';
 
-export const H1 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children, id, as = 'h1', ...props }, ref) => {
-    const Component = as;
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
+interface HeadingComponentProps extends HeadingProps {
+  level: HeadingLevel;
+}
+
+// Generic heading component
+const Heading = forwardRef<HTMLHeadingElement, HeadingComponentProps>(
+  ({ level, className, children, id, as, ...props }, ref) => {
+    // Use the provided tag or default to h1-h6 based on level
+    const Component = as || (`h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6');
+    
+    // Define styles for each heading level
+    const styles: Record<HeadingLevel, string> = {
+      1: 'scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl',
+      2: 'scroll-m-20 text-3xl font-semibold tracking-tight lg:text-4xl',
+      3: 'scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl',
+      4: 'scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl',
+      5: 'scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl',
+      6: 'scroll-m-20 text-base font-semibold tracking-tight',
+    };
     
     return (
       <Component
         id={id}
         ref={ref}
-        className={cn(
-          'scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl',
-          className
-        )}
+        className={cn(styles[level], className)}
         {...props}
       >
         {children}
       </Component>
     );
   }
+);
+Heading.displayName = 'Heading';
+
+// Export specific heading components
+export const H1 = forwardRef<HTMLHeadingElement, Omit<HeadingProps, 'level'>>(
+  (props, ref) => <Heading level={1} {...props} ref={ref} />
 );
 H1.displayName = 'H1';
 
-export const H2 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children, id, as = 'h2', ...props }, ref) => {
-    const Component = as;
-    
-    return (
-      <Component
-        id={id}
-        ref={ref}
-        className={cn(
-          'scroll-m-20 text-3xl font-semibold tracking-tight lg:text-4xl',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  }
+export const H2 = forwardRef<HTMLHeadingElement, Omit<HeadingProps, 'level'>>(
+  (props, ref) => <Heading level={2} {...props} ref={ref} />
 );
 H2.displayName = 'H2';
 
-export const H3 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children, id, as = 'h3', ...props }, ref) => {
-    const Component = as;
-    
-    return (
-      <Component
-        id={id}
-        ref={ref}
-        className={cn(
-          'scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  }
+export const H3 = forwardRef<HTMLHeadingElement, Omit<HeadingProps, 'level'>>(
+  (props, ref) => <Heading level={3} {...props} ref={ref} />
 );
 H3.displayName = 'H3';
 
-export const H4 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children, id, as = 'h4', ...props }, ref) => {
-    const Component = as;
-    
-    return (
-      <Component
-        id={id}
-        ref={ref}
-        className={cn(
-          'scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  }
+export const H4 = forwardRef<HTMLHeadingElement, Omit<HeadingProps, 'level'>>(
+  (props, ref) => <Heading level={4} {...props} ref={ref} />
 );
 H4.displayName = 'H4';
 
-export const H5 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children, id, as = 'h5', ...props }, ref) => {
-    const Component = as;
-    
-    return (
-      <Component
-        id={id}
-        ref={ref}
-        className={cn(
-          'scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  }
+export const H5 = forwardRef<HTMLHeadingElement, Omit<HeadingProps, 'level'>>(
+  (props, ref) => <Heading level={5} {...props} ref={ref} />
 );
 H5.displayName = 'H5';
 
-export const H6 = forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({ className, children, id, as = 'h6', ...props }, ref) => {
-    const Component = as;
-    
-    return (
-      <Component
-        id={id}
-        ref={ref}
-        className={cn(
-          'scroll-m-20 text-base font-semibold tracking-tight',
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Component>
-    );
-  }
+export const H6 = forwardRef<HTMLHeadingElement, Omit<HeadingProps, 'level'>>(
+  (props, ref) => <Heading level={6} {...props} ref={ref} />
 );
-H6.displayName = 'H6'; 
+H6.displayName = 'H6';
+
+// Also export the generic Heading component for flexibility
+export { Heading }; 
