@@ -42,7 +42,7 @@ export const Small = forwardRef<HTMLParagraphElement, Omit<TextProps, 'as' | 'va
 ));
 Small.displayName = 'Small';
 
-export const Tiny = forwardRef<HTMLParagraphElement, Omit<TextProps, 'as' | 'variant'>>((props, ref) => (
+export const Tiny = forwardRef<HTMLSpanElement, Omit<TextProps, 'as' | 'variant'>>((props, ref) => (
   <Text ref={ref} as="span" variant="tiny" {...props} />
 ));
 Tiny.displayName = 'Tiny'; 
