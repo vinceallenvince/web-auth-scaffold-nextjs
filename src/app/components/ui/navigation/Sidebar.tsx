@@ -59,6 +59,8 @@ export function Sidebar({
         isCollapsed ? "w-16" : "w-64",
         className
       )}
+      role="navigation"
+      aria-label="Main sidebar navigation"
     >
       <div className="flex h-full flex-col justify-between p-4">
         <div className="space-y-4">
