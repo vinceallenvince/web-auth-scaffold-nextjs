@@ -141,11 +141,11 @@ This document outlines the implementation tasks for building the core UX compone
      - Define responsive spacing scale in the application
 
 **Acceptance Criteria**:
-- [ ] Container component with responsive padding is implemented
-- [ ] Grid system with responsive columns is created
-- [ ] Section components with proper spacing are implemented
-- [ ] All components adapt correctly to different viewport sizes
-- [ ] Layout components ensure consistent spacing throughout the app
+- [X] Container component with responsive padding is implemented
+- [X] Grid system with responsive columns is created
+- [X] Section components with proper spacing are implemented
+- [X] All components adapt correctly to different viewport sizes
+- [X] Layout components ensure consistent spacing throughout the app
 
 **Common Pitfalls & Tips**:
 - Test layouts on various screen sizes to ensure proper responsiveness
@@ -166,7 +166,7 @@ This document outlines the implementation tasks for building the core UX compone
 **Time Estimate**: 3-4 hours
 **Story Points**: 2
 **Dependencies**: UX-01  
-**Status**: TODO
+**Status**: DONE
 
 ### UX-04: Implement Typography System
 **Type**: Task  
@@ -175,6 +175,7 @@ This document outlines the implementation tasks for building the core UX compone
 - Define a typography scale with responsive sizes
 - Create reusable text components for headings, body text, and other typographical elements
 - Implement responsive text utilities for consistent typography
+- All typography should align with [accessibility guidelines](/docs/specs/accessibility-specs.md)
 
 **Implementation Details**:
 - Follow these steps:
