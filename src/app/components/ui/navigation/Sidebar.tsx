@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { CollapseIcon } from "../icons";
 
 interface SidebarLinkProps {
   href: string;
@@ -75,24 +76,7 @@ export function Sidebar({
                 className="btn btn-ghost btn-sm"
                 aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d={
-                      isCollapsed
-                        ? "M13 5l7 7-7 7M5 5l7 7-7 7"
-                        : "M11 19l-7-7 7-7M19 19l-7-7 7-7"
-                    }
-                  />
-                </svg>
+                <CollapseIcon isCollapsed={isCollapsed} />
               </button>
             )}
           </div>
