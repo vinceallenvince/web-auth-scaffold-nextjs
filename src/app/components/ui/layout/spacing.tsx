@@ -1,8 +1,21 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
+// Define the size type for better type safety
+type SpacingSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+// Shared sizing constants
+const SPACING_SIZE_MAP: Record<SpacingSize, number> = {
+  xs: 2,
+  sm: 4,
+  md: 8,
+  lg: 12,
+  xl: 16,
+  '2xl': 24,
+};
+
 type SpacerProps = {
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  size?: SpacingSize;
   axis?: 'horizontal' | 'vertical';
   className?: string;
 };
@@ -20,15 +33,8 @@ export function Spacer({
   className,
 }: SpacerProps) {
   const getSizeClass = () => {
-    switch (size) {
-      case 'xs': return axis === 'vertical' ? 'h-2' : 'w-2';
-      case 'sm': return axis === 'vertical' ? 'h-4' : 'w-4';
-      case 'md': return axis === 'vertical' ? 'h-8' : 'w-8';
-      case 'lg': return axis === 'vertical' ? 'h-12' : 'w-12';
-      case 'xl': return axis === 'vertical' ? 'h-16' : 'w-16';
-      case '2xl': return axis === 'vertical' ? 'h-24' : 'w-24';
-      default: return axis === 'vertical' ? 'h-8' : 'w-8';
-    }
+    const sizeValue = SPACING_SIZE_MAP[size] || 8;
+    return axis === 'vertical' ? `h-${sizeValue}` : `w-${sizeValue}`;
   };
 
   return (
@@ -46,7 +52,7 @@ export function Spacer({
 type StackProps = {
   children: React.ReactNode;
   className?: string;
-  space?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  space?: SpacingSize;
   direction?: 'row' | 'column';
 };
 
@@ -64,17 +70,7 @@ export function Stack({
   space = 'md',
   direction = 'column',
 }: StackProps) {
-  const getSpaceClass = () => {
-    switch (space) {
-      case 'xs': return 'gap-2';
-      case 'sm': return 'gap-4';
-      case 'md': return 'gap-8';
-      case 'lg': return 'gap-12';
-      case 'xl': return 'gap-16';
-      case '2xl': return 'gap-24';
-      default: return 'gap-8';
-    }
-  };
+  const getSpaceClass = () => `gap-${SPACING_SIZE_MAP[space] || 8}`;
 
   const directionClass = direction === 'row' ? 'flex-row' : 'flex-col';
 
