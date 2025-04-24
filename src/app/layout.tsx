@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthSessionProvider } from "./providers/session-provider";
 import { getSession } from "@/lib/auth";
 import { ThemeProvider } from "./providers/theme-provider";
+import { Navbar, SkipToContent } from "./components/ui/navigation";
 
 const geistSans = Geist({
   variable: "--font-sans",
@@ -35,7 +36,11 @@ export default async function RootLayout({
       >
         <AuthSessionProvider session={session}>
           <ThemeProvider>
-            {children}
+            <SkipToContent />
+            <Navbar />
+            <main id="main-content">
+              {children}
+            </main>
           </ThemeProvider>
         </AuthSessionProvider>
       </body>
