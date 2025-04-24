@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Grid, GridItem, Section, Divider, Spacer, Stack } from '@/app/components/ui/layout';
 
 export default function TestLayoutPage() {
