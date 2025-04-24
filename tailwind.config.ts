@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 import tailwindForms from '@tailwindcss/forms';
 import daisyui from 'daisyui';
+import typography from '@tailwindcss/typography';
 
 // Use a more flexible type to include DaisyUI properties
 const config = {
@@ -15,6 +16,32 @@ const config = {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],
       },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem' }],             // 12px
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],         // 14px
+        'base': ['1rem', { lineHeight: '1.5rem' }],            // 16px - minimum for body text per accessibility
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],         // 18px
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],          // 20px
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],             // 24px
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],        // 30px
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],          // 36px
+        '5xl': ['3rem', { lineHeight: '1' }],                  // 48px
+        '6xl': ['3.75rem', { lineHeight: '1' }],               // 60px
+      },
+      fontWeight: {
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+      },
+      letterSpacing: {
+        tighter: '-0.05em',
+        tight: '-0.025em',
+        normal: '0',
+        wide: '0.025em',
+        wider: '0.05em',
+        widest: '0.1em',
+      },
       borderRadius: {
         'sm': '0.125rem',
         'md': '0.25rem',
@@ -28,7 +55,7 @@ const config = {
       },
     },
   },
-  plugins: [tailwindForms, daisyui],
+  plugins: [tailwindForms, daisyui, typography],
   daisyui: {
     themes: ["bumblebee", "night"],
     base: true,
