@@ -1,5 +1,6 @@
 import React, { ElementType } from 'react';
 import { cn } from '@/lib/utils';
+import { Container } from './container';
 
 type SectionProps<T extends ElementType = 'section'> = {
   children: React.ReactNode;
@@ -37,11 +38,7 @@ export function Section<T extends ElementType = 'section'>({
   
   const getSizeClass = () => sizeClasses[size] || 'py-8';
 
-  const content = container ? (
-    <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-      {children}
-    </div>
-  ) : children;
+  const content = container ? <Container>{children}</Container> : children;
 
   return (
     <Component
