@@ -3,9 +3,12 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+// Omit children from base props as it's already in React.HTMLAttributes
+export interface BaseCardComponentProps {
   className?: string;
-  children: React.ReactNode;
+}
+
+export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement>, BaseCardComponentProps {
 }
 
 export function CardHeader({ className, children, ...props }: CardHeaderProps) {
@@ -16,9 +19,7 @@ export function CardHeader({ className, children, ...props }: CardHeaderProps) {
   );
 }
 
-export interface CardBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  children: React.ReactNode;
+export interface CardBodyProps extends React.HTMLAttributes<HTMLDivElement>, BaseCardComponentProps {
 }
 
 export function CardBody({ className, children, ...props }: CardBodyProps) {
@@ -29,9 +30,7 @@ export function CardBody({ className, children, ...props }: CardBodyProps) {
   );
 }
 
-export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
-  children: React.ReactNode;
+export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement>, BaseCardComponentProps {
 }
 
 export function CardFooter({ className, children, ...props }: CardFooterProps) {
@@ -45,9 +44,7 @@ export function CardFooter({ className, children, ...props }: CardFooterProps) {
   );
 }
 
-export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
-  className?: string;
-  children: React.ReactNode;
+export interface CardTitleProps extends React.HTMLAttributes<HTMLHeadingElement>, BaseCardComponentProps {
   as?: React.ElementType;
 }
 
@@ -59,7 +56,9 @@ export function CardTitle({
 }: CardTitleProps) {
   return (
     <Component 
-      className={cn("card-title text-xl font-semibold", className)} 
+      className={cn("card-title text-xl font-semibold", className)}
+      aria-level={Component === "div" ? 2 : undefined}
+      role={Component === "div" ? "heading" : undefined}
       {...props}
     >
       {children}
@@ -67,15 +66,16 @@ export function CardTitle({
   );
 }
 
-export interface CardDividerProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string;
+export interface CardDividerProps extends React.HTMLAttributes<HTMLDivElement>, BaseCardComponentProps {
 }
 
-export function CardDivider({ className, ...props }: CardDividerProps) {
+export function CardDivider({ className, children, ...props }: CardDividerProps) {
   return (
     <div 
       className={cn("divider my-2", className)} 
       {...props}
-    />
+    >
+      {children}
+    </div>
   );
 } 

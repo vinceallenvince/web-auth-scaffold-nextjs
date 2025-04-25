@@ -100,7 +100,14 @@ export default function CardExamplesPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Interactive Cards</h2>
         <div className="flex flex-col md:flex-row gap-4">
-          <Card interactive onClick={() => alert('Card clicked!')} className="w-full md:w-1/2">
+          <Card 
+            interactive 
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+              e.preventDefault();
+              alert('Card clicked!');
+            }} 
+            className="w-full md:w-1/2"
+          >
             <CardHeader>
               <CardTitle>Interactive Card</CardTitle>
             </CardHeader>
@@ -112,7 +119,15 @@ export default function CardExamplesPage() {
             </CardFooter>
           </Card>
           
-          <Card interactive variant="elevated" onClick={() => alert('Card clicked!')} className="w-full md:w-1/2">
+          <Card 
+            interactive 
+            variant="elevated" 
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+              e.preventDefault();
+              alert('Card clicked!');
+            }} 
+            className="w-full md:w-1/2"
+          >
             <CardHeader>
               <CardTitle>Interactive Elevated Card</CardTitle>
             </CardHeader>
@@ -149,10 +164,10 @@ export default function CardExamplesPage() {
           columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
           gap="gap-6"
         >
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <Card key={item} variant={item % 2 === 0 ? "elevated" : "outlined"}>
+          {["intro", "features", "pricing", "benefits", "testimonials", "contact"].map((section, index) => (
+            <Card key={section} variant={index % 2 === 0 ? "elevated" : "outlined"}>
               <CardHeader>
-                <CardTitle>Card {item}</CardTitle>
+                <CardTitle>{section.charAt(0).toUpperCase() + section.slice(1)}</CardTitle>
               </CardHeader>
               <CardBody>
                 <p>This card is part of a responsive grid layout that adjusts based on screen size.</p>

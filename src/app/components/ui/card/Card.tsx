@@ -54,10 +54,12 @@ export function Card({
       {...props}
       tabIndex={interactive ? 0 : undefined}
       role={interactive ? "button" : undefined}
+      aria-pressed={interactive && props.onClick ? false : undefined}
       onKeyDown={interactive ? (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
+          const element = e.currentTarget as HTMLElement;
+          element.click();
         }
       } : undefined}
     >
