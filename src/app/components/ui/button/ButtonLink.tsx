@@ -79,8 +79,8 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       lg: "btn-lg",
     };
 
-    // Get actual color class based on variant
-    const colorClass = color !== "default" ? colorClasses[color] : "";
+    // Get color class (empty string for default)
+    const colorClass = colorClasses[color];
 
     // External link props
     const externalProps = external

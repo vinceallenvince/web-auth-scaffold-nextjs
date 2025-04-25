@@ -63,8 +63,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       lg: "btn-lg",
     };
 
-    // Get actual color class based on variant
-    const colorClass = color !== "default" ? colorClasses[color] : "";
+    // Get color class (empty string for default)
+    const colorClass = colorClasses[color];
 
     // Combine all classes
     const buttonClasses = cn(
