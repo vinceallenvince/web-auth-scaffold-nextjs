@@ -1,10 +1,10 @@
-import { Navbar, Sidebar } from "../components/ui/navigation";
+import { Navbar, Sidebar } from "@/app/components/ui/navigation";
 
-export default function TestNavigationPage() {
+export default function NavigationExamplesPage() {
   return (
     <div className="space-y-8 p-4">
       <section className="rounded-box bg-base-200 p-6">
-        <h2 className="mb-4 text-2xl font-bold">Navigation Components Test</h2>
+        <h2 className="mb-4 text-2xl font-bold">Navigation Components</h2>
         <p className="mb-6">
           This page demonstrates the navigation components created for the
           application.

@@ -121,7 +121,7 @@ export function Navbar({ logo, className }: NavbarProps) {
                 <NavLink href="/dashboard">Dashboard</NavLink>
               </li>
               <li>
-                <NavLink href="/about">About</NavLink>
+                <NavLink href="/examples">Examples</NavLink>
               </li>
             </ul>
           </div>
@@ -218,11 +218,11 @@ export function Navbar({ logo, className }: NavbarProps) {
               Dashboard
             </NavLink>
             <NavLink
-              href="/about"
+              href="/examples"
               className="block px-4 py-2 text-lg"
               onClick={() => setIsOpen(false)}
             >
-              About
+              Examples
             </NavLink>
           </div>
         </div>
