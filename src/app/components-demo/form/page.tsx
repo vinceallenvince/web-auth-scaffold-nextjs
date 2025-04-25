@@ -121,7 +121,6 @@ export default function FormComponentsDemo() {
                 value={formState.name}
                 onChange={(e) => handleChange('name', e.target.value)}
                 error={!!errors.name}
-                required
               />
             </FormField>
             
@@ -139,7 +138,6 @@ export default function FormComponentsDemo() {
                 value={formState.email}
                 onChange={(e) => handleChange('email', e.target.value)}
                 error={!!errors.email}
-                required
               />
             </FormField>
           </div>
@@ -157,7 +155,6 @@ export default function FormComponentsDemo() {
               value={formState.message}
               onChange={(e) => handleChange('message', e.target.value)}
               error={!!errors.message}
-              required
             />
           </FormField>
           
@@ -174,7 +171,6 @@ export default function FormComponentsDemo() {
               value={formState.country}
               onChange={(e) => handleChange('country', e.target.value)}
               error={!!errors.country}
-              required
             />
           </FormField>
           
@@ -201,16 +197,18 @@ export default function FormComponentsDemo() {
               id="dark-mode-switch"
             />
             
-            <Checkbox
-              label="I accept the terms and conditions"
-              checked={formState.acceptTerms}
-              onChange={(e) => handleChange('acceptTerms', e.target.checked)}
-              error={!!errors.acceptTerms}
-              id="terms-checkbox"
-            />
-            {errors.acceptTerms && (
-              <div className="text-error text-sm">{errors.acceptTerms}</div>
-            )}
+            <FormField
+              error={errors.acceptTerms}
+              id="terms-field"
+            >
+              <Checkbox
+                label="I accept the terms and conditions"
+                checked={formState.acceptTerms}
+                onChange={(e) => handleChange('acceptTerms', e.target.checked)}
+                error={!!errors.acceptTerms}
+                id="terms-checkbox"
+              />
+            </FormField>
           </div>
           
           <div className="mt-6">
@@ -243,7 +241,7 @@ export default function FormComponentsDemo() {
           </FormField>
           
           <FormField label="Required Input" required id="required-input">
-            <Input id="required-input" placeholder="Required field" required />
+            <Input id="required-input" placeholder="Required field" />
           </FormField>
           
           <FormField label="With Helper Text" helpText="This is some helper text" id="helper-input">
