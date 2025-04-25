@@ -83,16 +83,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className
     );
 
-    return (
-      <button
-        ref={ref}
-        className={buttonClasses}
-        disabled={isLoading || disabled}
-        aria-disabled={isLoading || disabled}
-        aria-busy={isLoading}
-        role={isLoading || disabled ? "button" : undefined}
-        {...props}
-      >
+    // Content with icons and loading state
+    const content = (
+      <>
         {isLoading && (
           <span className="loading loading-spinner loading-xs mr-2" aria-hidden="true"></span>
         )}
@@ -103,6 +96,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {!isLoading && trailingIcon && (
           <span className="ml-2">{trailingIcon}</span>
         )}
+      </>
+    );
+
+    return (
+      <button
+        ref={ref}
+        className={buttonClasses}
+        disabled={isLoading || disabled}
+        aria-disabled={isLoading || disabled}
+        aria-busy={isLoading}
+        role={isLoading || disabled ? "button" : undefined}
+        {...props}
+      >
+        {content}
       </button>
     );
   }

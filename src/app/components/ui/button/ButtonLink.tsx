@@ -107,6 +107,18 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       ...props
     };
 
+    // Content with icons and loading state
+    const content = (
+      <>
+        {isLoading && (
+          <span className="loading loading-spinner loading-xs mr-2" aria-hidden="true"></span>
+        )}
+        {!isLoading && leadingIcon && <span className="mr-2">{leadingIcon}</span>}
+        {children}
+        {!isLoading && trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+      </>
+    );
+
     // Use Next Link for internal links or standard <a> for external
     if (external) {
       return (
@@ -115,12 +127,7 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
           {...externalProps}
           {...commonProps}
         >
-          {isLoading && (
-            <span className="loading loading-spinner loading-xs mr-2" aria-hidden="true"></span>
-          )}
-          {!isLoading && leadingIcon && <span className="mr-2">{leadingIcon}</span>}
-          {children}
-          {!isLoading && trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+          {content}
         </a>
       );
     }
@@ -130,12 +137,7 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
         href={href}
         {...commonProps}
       >
-        {isLoading && (
-          <span className="loading loading-spinner loading-xs mr-2" aria-hidden="true"></span>
-        )}
-        {!isLoading && leadingIcon && <span className="mr-2">{leadingIcon}</span>}
-        {children}
-        {!isLoading && trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+        {content}
       </Link>
     );
   }

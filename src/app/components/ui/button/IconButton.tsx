@@ -76,6 +76,13 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       className
     );
 
+    // Content with icon or loading spinner
+    const content = isLoading ? (
+      <span className="loading loading-spinner loading-xs" aria-hidden="true"></span>
+    ) : (
+      icon
+    );
+
     return (
       <button
         ref={ref}
@@ -87,11 +94,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         aria-label={ariaLabel}
         {...props}
       >
-        {isLoading ? (
-          <span className="loading loading-spinner loading-xs" aria-hidden="true"></span>
-        ) : (
-          icon
-        )}
+        {content}
       </button>
     );
   }
