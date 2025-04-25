@@ -6,10 +6,12 @@ import { cn } from "@/app/lib/utils";
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Error state - visually indicates invalid input */
   error?: boolean;
+  /** Controls the resize behavior of the textarea */
+  resize?: 'none' | 'both' | 'horizontal' | 'vertical';
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, error, ...props }, ref) => {
+  ({ className, error, resize = 'vertical', "aria-describedby": ariaDescribedby, ...props }, ref) => {
     return (
       <textarea
         ref={ref}
@@ -21,11 +23,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           "text-base-content",
           "transition-colors",
           {
-            "textarea-error border-error focus:ring-error": error
+            "textarea-error border-error focus:ring-error": error,
+            "resize-none": resize === 'none',
+            "resize-y": resize === 'vertical',
+            "resize-x": resize === 'horizontal',
+            "resize": resize === 'both'
           },
           className
         )}
-        aria-invalid={error ? "true" : undefined}
+        aria-invalid={error ? "true" : "false"}
+        aria-describedby={ariaDescribedby}
         {...props}
       />
     );
