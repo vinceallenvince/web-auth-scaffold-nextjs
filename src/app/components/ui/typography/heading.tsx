@@ -15,13 +15,14 @@ const Heading = forwardRef<HTMLHeadingElement, HeadingComponentProps>(
     const Component = as || (`h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6');
     
     // Define styles for each heading level
+    // Added font-sans class to ensure consistent font usage
     const styles: Record<HeadingLevel, string> = {
-      1: 'scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl',
-      2: 'scroll-m-20 text-3xl font-semibold tracking-tight lg:text-4xl',
-      3: 'scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl',
-      4: 'scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl',
-      5: 'scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl',
-      6: 'scroll-m-20 text-base font-semibold tracking-tight',
+      1: 'scroll-m-20 text-4xl font-bold tracking-tight font-sans lg:text-5xl',
+      2: 'scroll-m-20 text-3xl font-semibold tracking-tight font-sans lg:text-4xl',
+      3: 'scroll-m-20 text-2xl font-semibold tracking-tight font-sans lg:text-3xl',
+      4: 'scroll-m-20 text-xl font-semibold tracking-tight font-sans lg:text-2xl',
+      5: 'scroll-m-20 text-lg font-semibold tracking-tight font-sans lg:text-xl',
+      6: 'scroll-m-20 text-base font-semibold tracking-tight font-sans',
     };
     
     return (
@@ -29,6 +30,9 @@ const Heading = forwardRef<HTMLHeadingElement, HeadingComponentProps>(
         id={id}
         ref={ref}
         className={cn(styles[level], className)}
+        style={{
+          fontFamily: 'var(--font-sans, var(--font-sans-fallback))'
+        }}
         {...props}
       >
         {children}

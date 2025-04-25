@@ -6,14 +6,21 @@ import { getSession } from "@/lib/auth";
 import { ThemeProvider } from "./providers/theme-provider";
 import { Navbar, SkipToContent } from "./components/ui/navigation";
 
+// Adding explicit font display strategy to avoid FOUT (Flash of Unstyled Text)
 const geistSans = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap", // Ensures text remains visible during font loading
+  preload: true,
+  fallback: ["system-ui", "sans-serif"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap", // Ensures text remains visible during font loading
+  preload: true,
+  fallback: ["monospace"],
 });
 
 export const metadata: Metadata = {
@@ -31,8 +38,14 @@ export default async function RootLayout({
 
   return (
     <html lang="en" data-theme="bumblebee">
+      <head>
+        {/* Preload fonts to improve loading performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ fontFamily: "var(--font-sans, var(--font-sans-fallback))" }}
       >
         <AuthSessionProvider session={session}>
           <ThemeProvider>
