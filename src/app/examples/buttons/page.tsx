@@ -1,5 +1,15 @@
 "use client";
 
+/**
+ * Button Examples Page
+ * 
+ * TODO: Icons should be extracted to a dedicated component file like:
+ * src/app/components/ui/icons/index.tsx
+ * 
+ * This would improve maintainability and reusability.
+ * For this example, we're keeping them inline for simplicity.
+ */
+
 import React, { useState } from 'react';
 import { Button, ButtonLink, IconButton } from '@/app/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -9,10 +19,10 @@ export default function ButtonExamplePage() {
 
   const handleLoadingClick = () => {
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+    setTimeout(() => setLoading(false), 1000);
   };
 
-  // Icons used in examples
+  // Icons used in examples - would normally be imported from a dedicated icons component file
   const PlusIcon = () => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
