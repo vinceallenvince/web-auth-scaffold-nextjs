@@ -21,8 +21,8 @@ export default function ComponentsDemoLayout({
         </div>
       </header>
       
-      <div className="flex flex-1">
-        <nav className="w-64 bg-base-100 border-r p-4">
+      <div className="flex flex-1 flex-col md:flex-row">
+        <nav className="w-full md:w-64 bg-base-100 border-r p-4">
           <h2 className="text-lg font-semibold mb-4">Component Categories</h2>
           <ul className="space-y-2">
             <li>
@@ -31,6 +31,14 @@ export default function ComponentsDemoLayout({
                 className="block p-2 hover:bg-base-200 rounded"
               >
                 Form Components
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/components-demo/radio-group" 
+                className="block p-2 hover:bg-base-200 rounded"
+              >
+                RadioGroup Demo
               </Link>
             </li>
             {/* Add other component category links here */}
