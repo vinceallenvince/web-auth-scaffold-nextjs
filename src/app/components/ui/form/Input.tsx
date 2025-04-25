@@ -11,10 +11,13 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, error, ...props }, ref) => {
+  ({ className, error, "aria-describedby": ariaDescribedby, ...props }, ref) => {
+    // We need to handle aria-describedby separately to merge it properly when there's an error
     return (
       <input
         ref={ref}
+        aria-invalid={error ? "true" : "false"}
+        aria-describedby={ariaDescribedby}
         className={cn(
           "input input-bordered w-full",
           "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50",
