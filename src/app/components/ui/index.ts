@@ -3,3 +3,4 @@ export * from './typography';
 export * from './theme-toggle';
 export * from './card';
 export * from './form';
+export * from './button';
