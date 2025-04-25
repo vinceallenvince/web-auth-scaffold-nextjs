@@ -121,6 +121,7 @@ This app is a modern web authentication scaffold with OTP and Magic Link authent
 1. * As a developer, I should be able to run this application locally with full database functionality
 2. * As a developer, when I'm running the application locally and enter my email address in the magic link auth flow, I want to retrieve the magic link from the logs rather than my email
 3. * As a developer, when I run tests, I want to group them by database, server and client and run them separately and sequentially
+4. * As a developer, I should be able to see example pages for styling themes and components like cards and forms
 
 ### Authentication Development
 * As a developer, I want to run automated tests for authentication flows to ensure the magic link authentication works correctly
