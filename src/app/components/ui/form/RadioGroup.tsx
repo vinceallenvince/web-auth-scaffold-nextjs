@@ -10,64 +10,108 @@ export interface RadioOption {
   disabled?: boolean;
 }
 
-export interface RadioGroupProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  /** Name attribute for the radio inputs */
-  name: string;
-  /** Options for the radio group */
-  options: RadioOption[];
-  /** Selected value */
+export interface RadioGroupProps extends Omit<React.FieldsetHTMLAttributes<HTMLFieldSetElement>, 'onChange'> {
+  /** Label text for the radio group */
+  label: React.ReactNode;
+  /** Optional description text */
+  description?: React.ReactNode;
+  /** Error message to display */
+  error?: string;
+  /** Whether the radio group is required */
+  required?: boolean;
+  /** Children components (typically Radio components) */
+  children?: React.ReactNode;
+  /** Array of radio options */
+  options?: RadioOption[];
+  /** Current selected value */
   value?: string;
-  /** Error state - visually indicates invalid selection */
-  error?: boolean;
-  /** Handler for value changes */
-  onChange?: (value: string) => void;
-  /** Whether the radio inputs are disabled */
-  disabled?: boolean;
-  /** Direction for the radio options */
+  /** Callback when value changes */
+  onValueChange?: (value: string) => void;
+  /** Layout direction of radio buttons */
   direction?: 'horizontal' | 'vertical';
 }
 
-export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
+export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   ({ 
     className, 
-    name, 
+    label, 
+    description, 
+    error, 
+    required, 
+    children, 
     options, 
     value, 
-    error, 
-    onChange, 
-    disabled = false,
+    onValueChange,
     direction = 'vertical',
     ...props 
   }, ref) => {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onChange?.(e.target.value);
+    const hasError = !!error;
+    const id = props.id || `radio-group-${Math.random().toString(36).substring(2, 9)}`;
+    const errorId = `${id}-error`;
+    const descriptionId = `${id}-description`;
+    
+    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onValueChange?.(e.target.value);
     };
-
+    
     return (
-      <div
+      <fieldset
         ref={ref}
-        role="radiogroup"
-        className={cn(
-          "flex",
-          direction === 'horizontal' ? "flex-row gap-4" : "flex-col gap-1",
-          className
+        className={cn("space-y-2", className)}
+        aria-invalid={hasError ? "true" : undefined}
+        aria-describedby={cn(
+          description ? descriptionId : undefined,
+          error ? errorId : undefined
         )}
+        role="radiogroup"
+        aria-required={required ? "true" : undefined}
         {...props}
       >
-        {options.map((option) => (
-          <Radio
-            key={option.value}
-            name={name}
-            id={`${name}-${option.value}`}
-            value={option.value}
-            label={option.label}
-            checked={value === option.value}
-            onChange={handleChange}
-            disabled={disabled || option.disabled}
-            error={error}
-          />
-        ))}
-      </div>
+        <legend className={cn(
+          "text-base font-medium", 
+          hasError && "text-error"
+        )}>
+          {label}
+          {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
+        </legend>
+        
+        {description && (
+          <p id={descriptionId} className="text-sm text-gray-500">
+            {description}
+          </p>
+        )}
+        
+        <div className={cn(
+          "space-y-2",
+          direction === 'horizontal' && "flex flex-row flex-wrap gap-4 space-y-0"
+        )}>
+          {options ? (
+            options.map((option) => (
+              <Radio
+                key={option.value}
+                name={props.name}
+                value={option.value}
+                label={option.label}
+                checked={value === option.value}
+                onChange={handleRadioChange}
+                disabled={option.disabled}
+                aria-describedby={cn(
+                  description ? descriptionId : undefined,
+                  error ? errorId : undefined
+                )}
+              />
+            ))
+          ) : (
+            children
+          )}
+        </div>
+        
+        {error && (
+          <p id={errorId} className="text-sm text-error mt-1" aria-live="polite">
+            {error}
+          </p>
+        )}
+      </fieldset>
     );
   }
 );

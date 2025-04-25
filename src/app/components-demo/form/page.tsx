@@ -187,8 +187,9 @@ export default function FormComponentsDemo() {
               name="notificationType"
               options={notificationOptions}
               value={formState.notificationType}
-              onChange={(value) => handleChange('notificationType', value)}
+              onValueChange={(value) => handleChange('notificationType', value)}
               direction="vertical"
+              label="Select a notification method"
             />
           </FormField>
           
