@@ -11,6 +11,11 @@ import {
 } from "@/app/components/ui";
 
 export default function CardExamplesPage() {
+  const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    alert('Card clicked!');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Card Component Examples</h1>
@@ -102,10 +107,7 @@ export default function CardExamplesPage() {
         <div className="flex flex-col md:flex-row gap-4">
           <Card 
             interactive 
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-              e.preventDefault();
-              alert('Card clicked!');
-            }} 
+            onClick={handleCardClick} 
             className="w-full md:w-1/2"
           >
             <CardHeader>
@@ -122,10 +124,7 @@ export default function CardExamplesPage() {
           <Card 
             interactive 
             variant="elevated" 
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-              e.preventDefault();
-              alert('Card clicked!');
-            }} 
+            onClick={handleCardClick} 
             className="w-full md:w-1/2"
           >
             <CardHeader>
