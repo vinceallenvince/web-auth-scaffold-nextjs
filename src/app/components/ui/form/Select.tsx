@@ -28,6 +28,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     error, 
     size = 'md',
     children,
+    "aria-label": ariaLabel,
+    "aria-describedby": ariaDescribedby,
     ...props 
   }, ref) => {
     // Determine size classes
@@ -52,6 +54,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           },
           className
         )}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedby}
+        aria-invalid={error ? "true" : "false"}
         {...props}
       >
         {placeholder && (
