@@ -3,15 +3,13 @@
 /**
  * Button Examples Page
  * 
- * TODO: Icons should be extracted to a dedicated component file like:
+ * Using icon components from the dedicated component library:
  * src/app/components/ui/icons/index.tsx
- * 
- * This would improve maintainability and reusability.
- * For this example, we're keeping them inline for simplicity.
  */
 
 import React, { useState } from 'react';
 import { Button, ButtonLink, IconButton } from '@/app/components/ui/button';
+import { PlusIcon, ArrowRightIcon, HeartIcon } from '@/app/components/ui/icons/index';
 import { cn } from '@/lib/utils';
 
 export default function ButtonExamplePage() {
@@ -21,57 +19,6 @@ export default function ButtonExamplePage() {
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
   };
-
-  // Icons used in examples - would normally be imported from a dedicated icons component file
-  const PlusIcon = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="12" y1="5" x2="12" y2="19"></line>
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
-  );
-
-  const ArrowRightIcon = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-      <polyline points="12 5 19 12 12 19"></polyline>
-    </svg>
-  );
-
-  const HeartIcon = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-    </svg>
-  );
 
   // Section Component for organizing example groups
   const ExampleSection = ({ 
