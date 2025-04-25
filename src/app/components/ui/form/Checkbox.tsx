@@ -3,7 +3,7 @@
 import React, { forwardRef } from "react";
 import { cn } from "@/app/lib/utils";
 
-export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
   /** Label text to display next to the checkbox */
   label?: React.ReactNode;
   /** Error state - visually indicates invalid selection */
