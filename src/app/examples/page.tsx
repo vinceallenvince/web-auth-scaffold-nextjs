@@ -5,6 +5,26 @@ export default function ExamplesPage() {
   // List of available example pages
   const examples = [
     {
+      title: 'DaisyUI Components',
+      description: 'DaisyUI component showcase with theme toggling and common UI elements.',
+      href: '/examples/daisyui',
+    },
+    {
+      title: 'Typography System',
+      description: 'Complete typography component system with headings, text variants, and font loading optimizations.',
+      href: '/examples/typography',
+    },
+    {
+      title: 'Layout Components',
+      description: 'Flexible layout system with containers, grids, sections, and spacing utilities.',
+      href: '/examples/layout',
+    },
+    {
+      title: 'Navigation Components',
+      description: 'Navigation components including navbar and sidebar for consistent app navigation.',
+      href: '/examples/navigation',
+    },
+    {
       title: 'Button System',
       description: 'A comprehensive button component system with variants, states and accessibility features.',
       href: '/examples/buttons',

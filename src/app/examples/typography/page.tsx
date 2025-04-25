@@ -4,11 +4,11 @@ import {
 } from '@/app/components/ui/typography';
 import { Container, Section } from '@/app/components/ui/layout';
 
-export default function TypographyTestPage() {
+export default function TypographyExamplesPage() {
   return (
     <Container>
       <Section>
-        <H1>Typography Test Page (H1)</H1>
+        <H1>Typography Examples (H1)</H1>
         <Lead>This page demonstrates all typography components to ensure they work correctly after fixing font loading issues in production builds.</Lead>
         
         <div className="space-y-8 my-8">

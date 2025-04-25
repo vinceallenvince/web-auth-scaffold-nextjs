@@ -1,12 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import ThemeToggle from '../components/ui/theme-toggle';
+import ThemeToggle from '@/app/components/ui/theme-toggle';
 
-export default function TestDaisyUI() {
+export default function DaisyUIExamplesPage() {
   return (
     <div className="container-padded py-10">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">DaisyUI Test Page</h1>
+        <h1 className="text-3xl font-bold">DaisyUI Components</h1>
         <ThemeToggle />
       </div>
       
@@ -117,8 +117,8 @@ export default function TestDaisyUI() {
       </div>
       
       <div className="mt-10 flex justify-center">
-        <Link href="/" className="btn btn-outline">
-          Back to Home
+        <Link href="/examples" className="btn btn-outline">
+          Back to Examples
         </Link>
       </div>
     </div>

@@ -118,3 +118,11 @@
 🔗 LINK:  http://localhost:3000/api/auth/callback/email?callbackUrl=http%3A%2F%2Flocalhost%3A3000&token=22df6fb40c4641fdae03adc33c082ab342928603be3a8adee9a61f3eb6b45642&email=vince%40vinceallen.com
 =======================================================================
 
+
+=======================================================================
+🔑🔑🔑 MAGIC LINK CREATED AT 2025-04-25T21:18:51.455Z 🔑🔑🔑
+-----------------------------------------------------------------------
+📧 EMAIL: vince@vinceallen.com
+🔗 LINK:  http://localhost:3000/api/auth/callback/email?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F&token=9f03734357db991dacac5740ce4fc1ae12a1e314d4e3d974f9e087438c2761b4&email=vince%40vinceallen.com
+=======================================================================
+

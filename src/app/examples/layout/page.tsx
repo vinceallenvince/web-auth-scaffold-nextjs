@@ -1,10 +1,10 @@
 import { Container, Grid, GridItem, Section, Divider, Spacer, Stack } from '@/app/components/ui/layout';
 
-export default function TestLayoutPage() {
+export default function LayoutExamplesPage() {
   return (
     <div>
       <Section size="md" container>
-        <h1 className="text-3xl font-bold mb-4">Layout Components Test</h1>
+        <h1 className="text-3xl font-bold mb-4">Layout Components</h1>
         <p className="text-lg mb-8">This page demonstrates the various layout components available in the application.</p>
       </Section>
       
