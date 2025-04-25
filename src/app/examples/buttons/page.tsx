@@ -180,7 +180,7 @@ export default function ButtonExamplePage() {
 
       <ExampleSection
         title="Icon Buttons"
-        description="Buttons that only contain an icon with an accessible label."
+        description="Buttons that only contain an icon with an accessible label. Uses 'ghost' as the default variant for a cleaner look when used as icon-only controls."
       >
         <ButtonRow>
           <IconButton 

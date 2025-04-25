@@ -22,7 +22,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   (
     {
       className,
-      variant = "ghost",
+      variant = "ghost", // Intentionally different from Button default for better icon-only appearance
       color = "default",
       size = "md",
       isLoading = false,
