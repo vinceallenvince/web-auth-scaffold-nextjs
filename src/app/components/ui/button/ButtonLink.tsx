@@ -24,6 +24,10 @@ export interface ButtonLinkProps
   children: React.ReactNode;
   /** External link (opens in new tab) */
   external?: boolean;
+  /** Disabled state (visually disabled, but still navigable for accessibility) */
+  disabled?: boolean;
+  /** Loading state with spinner */
+  isLoading?: boolean;
 }
 
 export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
@@ -38,6 +42,8 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       trailingIcon,
       fullWidth = false,
       external = false,
+      disabled = false,
+      isLoading = false,
       children,
       ...props
     },
@@ -87,23 +93,34 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       variantClasses[variant],
       colorClass,
       sizeClasses[size],
+      (disabled || isLoading) && "btn-disabled pointer-events-none",
       fullWidth && "w-full",
       className
     );
+
+    // Common props for both link types
+    const commonProps = {
+      className: linkClasses,
+      ref,
+      "aria-disabled": disabled || isLoading,
+      "aria-busy": isLoading,
+      ...props
+    };
 
     // Use Next Link for internal links or standard <a> for external
     if (external) {
       return (
         <a
-          ref={ref}
           href={href}
-          className={linkClasses}
           {...externalProps}
-          {...props}
+          {...commonProps}
         >
-          {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
+          {isLoading && (
+            <span className="loading loading-spinner loading-xs mr-2" aria-hidden="true"></span>
+          )}
+          {!isLoading && leadingIcon && <span className="mr-2">{leadingIcon}</span>}
           {children}
-          {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+          {!isLoading && trailingIcon && <span className="ml-2">{trailingIcon}</span>}
         </a>
       );
     }
@@ -111,13 +128,14 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
     return (
       <Link
         href={href}
-        className={linkClasses}
-        ref={ref}
-        {...props}
+        {...commonProps}
       >
-        {leadingIcon && <span className="mr-2">{leadingIcon}</span>}
+        {isLoading && (
+          <span className="loading loading-spinner loading-xs mr-2" aria-hidden="true"></span>
+        )}
+        {!isLoading && leadingIcon && <span className="mr-2">{leadingIcon}</span>}
         {children}
-        {trailingIcon && <span className="ml-2">{trailingIcon}</span>}
+        {!isLoading && trailingIcon && <span className="ml-2">{trailingIcon}</span>}
       </Link>
     );
   }

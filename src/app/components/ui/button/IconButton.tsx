@@ -82,6 +82,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         className={buttonClasses}
         disabled={isLoading || disabled}
         aria-disabled={isLoading || disabled}
+        aria-busy={isLoading}
+        role={isLoading || disabled ? "button" : undefined}
         aria-label={ariaLabel}
         {...props}
       >

@@ -231,6 +231,30 @@ export default function ButtonExamplePage() {
             Learn More
           </ButtonLink>
         </ButtonRow>
+        
+        <h3 className="text-xl font-semibold mb-4 mt-6">Disabled and Loading States</h3>
+        <ButtonRow>
+          <ButtonLink 
+            href="/examples" 
+            disabled
+          >
+            Disabled Link
+          </ButtonLink>
+          <ButtonLink 
+            href="/examples" 
+            isLoading
+          >
+            Loading Link
+          </ButtonLink>
+          <ButtonLink 
+            href="/examples" 
+            variant="outline" 
+            disabled
+            trailingIcon={<ArrowRightIcon />}
+          >
+            Disabled with Icon
+          </ButtonLink>
+        </ButtonRow>
       </ExampleSection>
 
       <ExampleSection
@@ -249,9 +273,11 @@ export default function ButtonExamplePage() {
         <ul className="list-disc ml-6 space-y-2">
           <li>All buttons have accessible focus states that meet WCAG contrast requirements</li>
           <li>Icon-only buttons include aria-label for screen reader users</li>
-          <li>Loading states are properly communicated to assistive technologies</li>
-          <li>Disabled states set both disabled and aria-disabled attributes</li>
+          <li>Loading states are properly communicated to assistive technologies using <code className="px-1 py-0.5 bg-base-200 rounded">aria-busy</code> attribute</li>
+          <li>Disabled states set both <code className="px-1 py-0.5 bg-base-200 rounded">disabled</code> and <code className="px-1 py-0.5 bg-base-200 rounded">aria-disabled</code> attributes</li>
+          <li>Explicit <code className="px-1 py-0.5 bg-base-200 rounded">role="button"</code> for disabled buttons ensures consistent behavior across browsers</li>
           <li>ButtonLinks maintain proper semantics based on internal/external destinations</li>
+          <li>Loading spinners have <code className="px-1 py-0.5 bg-base-200 rounded">aria-hidden="true"</code> to prevent duplicate announcements</li>
         </ul>
       </div>
     </div>

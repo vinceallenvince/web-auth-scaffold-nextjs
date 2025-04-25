@@ -89,6 +89,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={buttonClasses}
         disabled={isLoading || disabled}
         aria-disabled={isLoading || disabled}
+        aria-busy={isLoading}
+        role={isLoading || disabled ? "button" : undefined}
         {...props}
       >
         {isLoading && (
