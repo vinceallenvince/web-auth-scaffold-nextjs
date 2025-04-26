@@ -46,9 +46,7 @@ export function Navbar({ logo, className }: NavbarProps) {
   const menuRef = useRef<HTMLUListElement>(null);
   const menuButtonRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen(prev => !prev);
 
   // Close menu when pressing Escape key
   useEffect(() => {
