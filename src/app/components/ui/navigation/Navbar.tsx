@@ -140,8 +140,8 @@ export function Navbar({ logo, className }: NavbarProps) {
                     Hello World
                   </NavLink>
                 </li>
-                <li>
-                  <a>Examples</a>
+                <li className="menu-title">
+                  <span>Examples</span>
                   <ul className="p-2">
                     <li>
                       <NavLink href="/examples/buttons" onClick={() => setIsOpen(false)}>
