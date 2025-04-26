@@ -14,7 +14,7 @@ interface NavLinkProps {
 
 const NavLink = ({ href, children, className, onClick }: NavLinkProps) => {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive = pathname === href || (pathname?.startsWith(href) && href !== '/');
 
   return (
     <Link
@@ -40,8 +40,8 @@ interface NavbarProps {
 
 export function Navbar({ logo, className }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
+  const menuButtonRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -95,135 +95,152 @@ export function Navbar({ logo, className }: NavbarProps) {
   }, [isOpen]);
 
   return (
-    <header className={cn("bg-base-100", className)}>
-      <div className="container mx-auto px-4">
-        <div className="navbar py-4">
-          {/* Logo & Brand */}
+    <header className={cn("bg-base-100 shadow-sm", className)}>
+      <div className="container mx-auto">
+        <div className="navbar">
+          {/* Navbar Start - Logo and Mobile Menu */}
           <div className="navbar-start">
+            {/* Mobile Menu Dropdown */}
+            <div className="dropdown">
+              <div 
+                tabIndex={0} 
+                role="button" 
+                className="btn btn-ghost lg:hidden"
+                ref={menuButtonRef}
+                onClick={toggleMenu}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
+              >
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth="2" 
+                    d="M4 6h16M4 12h8m-8 6h16" 
+                  />
+                </svg>
+              </div>
+              <ul
+                id="mobile-menu"
+                ref={menuRef}
+                tabIndex={0}
+                className={cn(
+                  "menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52",
+                  isOpen ? "block" : "hidden"
+                )}
+              >
+                <li>
+                  <NavLink href="/helloworld" onClick={() => setIsOpen(false)}>
+                    Hello World
+                  </NavLink>
+                </li>
+                <li>
+                  <a>Examples</a>
+                  <ul className="p-2">
+                    <li>
+                      <NavLink href="/examples/buttons" onClick={() => setIsOpen(false)}>
+                        Buttons
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/cards" onClick={() => setIsOpen(false)}>
+                        Cards
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/typography" onClick={() => setIsOpen(false)}>
+                        Typography
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/layout" onClick={() => setIsOpen(false)}>
+                        Layout
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/navigation" onClick={() => setIsOpen(false)}>
+                        Navigation
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/daisyui" onClick={() => setIsOpen(false)}>
+                        DaisyUI
+                      </NavLink>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            
+            {/* Logo */}
             <div className="flex items-center">
               {logo ? (
                 logo
               ) : (
-                <Link href="/" className="text-xl font-bold">
+                <Link href="/" className="btn btn-ghost text-xl">
                   AppName
                 </Link>
               )}
             </div>
           </div>
-
-          {/* Desktop Navigation */}
+          
+          {/* Navbar Center - Desktop Navigation */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal space-x-6 p-0">
+            <ul className="menu menu-horizontal px-1">
               <li>
-                <NavLink href="/">Home</NavLink>
+                <NavLink href="/helloworld">
+                  Hello World
+                </NavLink>
               </li>
               <li>
-                <NavLink href="/dashboard">Dashboard</NavLink>
-              </li>
-              <li>
-                <NavLink href="/examples">Examples</NavLink>
+                <details>
+                  <summary className="text-base font-medium">Examples</summary>
+                  <ul className="p-2 bg-base-100 z-[1]">
+                    <li>
+                      <NavLink href="/examples/buttons">
+                        Buttons
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/cards">
+                        Cards
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/typography">
+                        Typography
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/layout">
+                        Layout
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/navigation">
+                        Navigation
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink href="/examples/daisyui">
+                        DaisyUI
+                      </NavLink>
+                    </li>
+                  </ul>
+                </details>
               </li>
             </ul>
           </div>
-
-          {/* Right Side Items */}
+          
+          {/* Navbar End - Additional Controls */}
           <div className="navbar-end">
-            {/* Mobile Menu Button */}
-            <div className="flex lg:hidden">
-              <button
-                ref={menuButtonRef}
-                type="button"
-                className="btn btn-ghost"
-                onClick={toggleMenu}
-                aria-expanded={isOpen}
-                aria-controls="mobile-menu"
-                aria-label="Toggle menu"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block h-6 w-6 stroke-current"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d={
-                      isOpen
-                        ? "M6 18L18 6M6 6l12 12"
-                        : "M4 6h16M4 12h16M4 18h16"
-                    }
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Backdrop for mobile menu */}
-        {isOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 transition-opacity lg:hidden"
-            onClick={() => setIsOpen(false)}
-            aria-hidden="true"
-          />
-        )}
-
-        {/* Mobile Navigation Drawer */}
-        <div
-          id="mobile-menu"
-          ref={menuRef}
-          className={cn(
-            "fixed inset-y-0 right-0 z-50 w-full max-w-xs transform overflow-auto bg-base-100 p-4 shadow-lg transition-transform duration-300 lg:hidden",
-            isOpen ? "translate-x-0" : "translate-x-full"
-          )}
-        >
-          <div className="flex justify-end">
-            <button
-              type="button"
-              className="btn btn-ghost p-2"
-              onClick={toggleMenu}
-              aria-label="Close menu"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div className="mt-8 flex flex-col space-y-4">
-            <NavLink
-              href="/"
-              className="block px-4 py-2 text-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              href="/dashboard"
-              className="block px-4 py-2 text-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              Dashboard
-            </NavLink>
-            <NavLink
-              href="/examples"
-              className="block px-4 py-2 text-lg"
-              onClick={() => setIsOpen(false)}
-            >
-              Examples
-            </NavLink>
+            <Link href="/dashboard" className="btn">Dashboard</Link>
           </div>
         </div>
       </div>
