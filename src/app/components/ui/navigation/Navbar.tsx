@@ -44,7 +44,7 @@ interface NavbarProps {
 export function Navbar({ logo, className }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLUListElement>(null);
-  const menuButtonRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const toggleMenu = () => setIsOpen(prev => !prev);
 
@@ -103,9 +103,8 @@ export function Navbar({ logo, className }: NavbarProps) {
           <div className="navbar-start">
             {/* Mobile Menu Dropdown */}
             <div className="dropdown">
-              <div 
-                tabIndex={0} 
-                role="button" 
+              <button
+                type="button"
                 className="btn btn-ghost lg:hidden"
                 ref={menuButtonRef}
                 onClick={toggleMenu}
@@ -126,7 +125,7 @@ export function Navbar({ logo, className }: NavbarProps) {
                     d="M4 6h16M4 12h8m-8 6h16" 
                   />
                 </svg>
-              </div>
+              </button>
               <ul
                 id="mobile-menu"
                 ref={menuRef}
