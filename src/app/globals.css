@@ -84,4 +84,13 @@
   .card-custom {
     @apply card bg-base-100 shadow-md;
   }
+  
+  /* Dropdown visibility control */
+  .dropdown-content[data-show="false"] {
+    @apply hidden;
+  }
+  
+  .dropdown-content[data-show="true"] {
+    @apply block;
+  }
 }
