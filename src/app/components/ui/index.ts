@@ -5,4 +5,4 @@ export * from './card';
 export * from './form';
 export * from './button';
 export * from './icons';
-export { HomeHero } from './hero';
+export { HomeHero, FeatureCard } from './hero';

@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { ButtonLink } from '../button';
 import { Container } from '../layout/container';
 import { H1 } from '../typography/heading';
+import { FeatureCard } from './FeatureCard';
 
 interface HomeHeroProps {
   className?: string;
@@ -79,22 +80,6 @@ function HomeHero({ className }: HomeHeroProps) {
         </Container>
       </div>
     </section>
-  );
-}
-
-interface FeatureCardProps {
-  title: string;
-  description: string;
-}
-
-function FeatureCard({ title, description }: FeatureCardProps) {
-  return (
-    <div className="card bg-base-100 border border-base-300">
-      <div className="card-body">
-        <h3 className="card-title text-lg font-semibold text-primary">{title}</h3>
-        <p className="text-base-content/70">{description}</p>
-      </div>
-    </div>
   );
 }
 
