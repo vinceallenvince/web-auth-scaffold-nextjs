@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { HomeHero } from "@/app/components/ui/hero";
+import { HomeHero } from "@/app/components/ui";
 
 export default function Home() {
   return (

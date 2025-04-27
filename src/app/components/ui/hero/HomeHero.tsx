@@ -10,7 +10,7 @@ interface HomeHeroProps {
   className?: string;
 }
 
-export function HomeHero({ className }: HomeHeroProps) {
+function HomeHero({ className }: HomeHeroProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   // Animation effect when component mounts
@@ -96,4 +96,6 @@ function FeatureCard({ title, description }: FeatureCardProps) {
       </div>
     </div>
   );
-} 
+}
+
+export default HomeHero; 
