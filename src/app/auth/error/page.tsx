@@ -39,45 +39,45 @@ export default async function AuthErrorPage({
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
       <div className="w-full max-w-4xl">
         <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
-          <div className="w-full lg:w-1/2 space-y-8 text-center">
-            <div>
-              <h1 className="text-2xl font-bold text-red-600">Authentication Error</h1>
-              <p className="mt-2 text-sm text-gray-600">
-                {errorMessage}
-              </p>
-            </div>
-            
-            <div className="mt-8">
-              <div className="rounded-md bg-red-50 p-4">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="ml-3 flex-1 md:flex md:justify-between">
-                    <p className="text-sm text-red-700">
-                      Error code: {error}
-                    </p>
+          <div className="w-full lg:w-1/2 space-y-8">
+            <div className="card bg-base-200 border border-base-300">
+              <div className="card-body">
+                <h1 className="text-2xl font-bold text-red-600 text-center">Authentication Error</h1>
+                <p className="text-sm text-gray-600 text-center">
+                  {errorMessage}
+                </p>
+                
+                <div className="my-4">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <svg className="h-5 w-5 text-error" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm text-error">
+                        Error code: {error}
+                      </p>
+                    </div>
                   </div>
                 </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                  <Link
+                    href="/auth/magic-link"
+                    className="btn btn-primary btn-sm"
+                  >
+                    Try signing in again
+                  </Link>
+                  
+                  <Link
+                    href="/"
+                    className="btn btn-outline btn-sm"
+                  >
+                    Back to home
+                  </Link>
+                </div>
               </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Link
-                href="/auth/magic-link"
-                className="px-4 py-2 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Try signing in again
-              </Link>
-              
-              <Link
-                href="/"
-                className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md text-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Back to home
-              </Link>
             </div>
           </div>
           
