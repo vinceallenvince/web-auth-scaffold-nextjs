@@ -18,6 +18,9 @@ function AuthHero({
   // Animation effect when component mounts
   useEffect(() => {
     setIsVisible(true);
+    return () => {
+      setIsVisible(false);
+    };
   }, []);
 
   return (

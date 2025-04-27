@@ -32,7 +32,6 @@ export default function MagicLinkForm() {
               required
               className="input input-bordered w-full"
               placeholder="name@example.com"
-              aria-describedby="email-description"
             />
           </div>
           
