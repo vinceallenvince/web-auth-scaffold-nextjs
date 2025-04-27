@@ -387,13 +387,14 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Integrate all new components with existing layout
      - Ensure consistent styling across components
      - Verify interactions between components
-
   2. **Accessibility testing**:
-     - Run automated accessibility tests
-     - Perform keyboard navigation testing
-     - Test with screen readers
-     - Verify color contrast compliance
-
+     - Run automated accessibility tests using axe-core or similar tools
+     - Perform keyboard navigation testing to ensure all interactive elements are reachable
+     - Test with screen readers (NVDA and VoiceOver) to verify proper announcements
+     - Verify color contrast compliance (minimum 4.5:1 for normal text, 3:1 for large text)
+     - Test focus management and focus visibility
+     - Verify that all interactive elements have accessible names
+     - Test with various zoom levels (up to 200%)
   3. **Performance optimization**:
      - Check for unnecessary re-renders
      - Optimize component bundle size
