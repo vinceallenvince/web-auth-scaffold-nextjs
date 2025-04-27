@@ -17,7 +17,6 @@ This document outlines the implementation tasks for refining the core UX as spec
 - Follow these steps:
   1. **Create base hero component**:
      - Implement a client component with welcome message
-     - Add attractive visual elements
      - Create prominent CTA button linking to login page
 
   2. **Add responsive layout**:
@@ -26,7 +25,6 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Optimize text sizing for different screens
 
   3. **Enhance with animations**:
-     - Add subtle animations for visual appeal
      - Implement smooth transitions on load
      - Ensure animations are not distracting
 
@@ -60,7 +58,7 @@ This document outlines the implementation tasks for refining the core UX as spec
 **Type**: Task  
 **Summary**: Build hero component for authentication pages with magic link explanation  
 **Description**:
-- Create informative hero component for login/auth pages
+- Create informative hero component for login/auth pages using DaisyUI's Hero with Form
 - Implement clear explanation of magic link authentication process
 - Ensure seamless integration with auth form
 
@@ -70,6 +68,7 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Create client component with explanatory content
      - Design layout that works alongside auth form
      - Implement clear instructions about magic link flow
+     - Use DaisyUI "Hero with form" component found [here](https://daisyui.com/components/hero/#hero-with-form)
 
   2. **Integrate with auth form**:
      - Ensure proper layout with the authentication form
@@ -82,11 +81,11 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Ensure readability of instructions on small screens
 
 **Acceptance Criteria**:
-- [ ] Auth hero clearly explains magic link authentication
-- [ ] Component integrates seamlessly with auth form
-- [ ] Design is consistent with application style
-- [ ] Component adapts appropriately to different screen sizes
-- [ ] Instructions are clear and easily understandable
+- [x] Auth hero clearly explains magic link authentication
+- [x] Component integrates seamlessly with auth form
+- [x] Design is consistent with application style
+- [x] Component adapts appropriately to different screen sizes
+- [x] Instructions are clear and easily understandable
 
 **Common Pitfalls & Tips**:
 - Don't overwhelm users with too much text
@@ -105,7 +104,7 @@ This document outlines the implementation tasks for refining the core UX as spec
 **Time Estimate**: 4-6 hours
 **Story Points**: 3
 **Dependencies**: Auth Form Component
-**Status**: TODO
+**Status**: DONE
 
 ### UXRF-03: Footer Component
 **Type**: Task  

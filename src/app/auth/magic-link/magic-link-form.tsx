@@ -15,9 +15,8 @@ export default function MagicLinkForm() {
   }, []);
 
   return (
-    <div className="card bg-base-200 shadow-xl">
+    <div className="card bg-base-200 border border-base-300">
       <div className="card-body">
-        <h2 className="card-title">Sign In with Magic Link</h2>
         
         <form action="/api/auth/signin/email" method="POST">
           <input name="csrfToken" type="hidden" defaultValue={csrfToken || ""} />
@@ -33,11 +32,7 @@ export default function MagicLinkForm() {
               required
               className="input input-bordered w-full"
               placeholder="name@example.com"
-              aria-describedby="email-description"
             />
-            <label className="label">
-              <span className="label-text-alt" id="email-description">We'll send a magic link to this address</span>
-            </label>
           </div>
           
           <div className="form-control mt-6">

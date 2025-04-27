@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import MagicLinkForm from "./magic-link-form";
+import { AuthHero } from "@/components/auth";
 
 export const metadata: Metadata = {
   title: "Magic Link Authentication | Web Auth Scaffold",
@@ -9,20 +10,18 @@ export const metadata: Metadata = {
 export default function MagicLinkPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold">Magic Link Authentication</h1>
-          <p className="mt-2 text-gray-600">
-            Enter your email to receive a secure login link
-          </p>
-        </div>
-        
-        <MagicLinkForm />
-        
-        <div className="mt-6 text-center text-sm">
-          <p className="text-gray-600">
-            No password needed! You'll receive an email with a secure link to sign in instantly.
-          </p>
+      <div className="w-full max-w-4xl">
+        <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
+          <div className="w-full lg:w-1/2">
+            <MagicLinkForm />
+          </div>
+          
+          <div className="w-full lg:w-1/2">
+            <AuthHero 
+              title="Secure Magic Link Login"
+              description="Secure, convenient authentication without the hassle of passwords."
+            />
+          </div>
         </div>
       </div>
     </div>
