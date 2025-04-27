@@ -61,6 +61,23 @@
   .container-padded {
     @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
+  
+  /* Subtle pulse animation for CTA buttons */
+  @keyframes subtle-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.03);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .animate-pulse-subtle {
+    animation: subtle-pulse 3s infinite ease-in-out;
+  }
 }
 
 /* Custom component styles */
