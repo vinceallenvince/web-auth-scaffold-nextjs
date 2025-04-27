@@ -68,7 +68,7 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Create client component with explanatory content
      - Design layout that works alongside auth form
      - Implement clear instructions about magic link flow
-     - Use DaisyUI "Hero with form" component found here: https://daisyui.com/components/hero/#hero-with-form
+     - Use DaisyUI "Hero with form" component found [here](https://daisyui.com/components/hero/#hero-with-form)
 
   2. **Integrate with auth form**:
      - Ensure proper layout with the authentication form
