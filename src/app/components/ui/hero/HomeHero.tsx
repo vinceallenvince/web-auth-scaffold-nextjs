@@ -51,7 +51,7 @@ function HomeHero({ className }: HomeHeroProps) {
                 size="lg"
                 variant="outline"
               >
-                Get Started
+                LOGIN
               </ButtonLink>
             </div>
             
