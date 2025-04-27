@@ -289,6 +289,7 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Implement proper state updates on login/logout
      - Add smooth transitions for UI changes
      - Ensure navigation reflects current auth state
+     - Handle the initial loading state when auth status is being determined
 
 **Acceptance Criteria**:
 - [ ] Navigation shows different options based on auth state
