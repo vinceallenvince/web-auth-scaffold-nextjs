@@ -5,3 +5,4 @@ export * from './card';
 export * from './form';
 export * from './button';
 export * from './icons/index';
+export * from './hero';

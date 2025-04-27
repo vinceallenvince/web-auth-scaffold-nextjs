@@ -101,3 +101,7 @@ Using @impl-plan01-app-setup.md and @task-template.md , please create implementa
 ## Task implementation
 
 Please implement TEST-01 in @impl-tasks01-app-setup.md . Do not stop working until you have confirmed the Acceptance Criteria. Once confirmed, please mark the task's status as DONE.
+
+## Creating Tasks
+
+Using [task-template.md](/docs/plans/task-template.md), please create implementation tasks in --.md based on the implementation plan described in --.md. The maximum story point level for any task should be no greater than 5 points. You can use --.md as an example. 
