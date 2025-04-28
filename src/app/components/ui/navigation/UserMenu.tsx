@@ -54,7 +54,7 @@ export function UserMenu() {
       </div>
       <ul tabIndex={0} className="dropdown-content z-10 menu p-3 shadow-lg bg-base-100 rounded-box w-60">
         <li>
-          <Link href="/dashboard" className="flex items-center gap-2 py-3 px-4">
+          <Link href="/profile" className="flex items-center gap-2 py-3 px-4">
             <User size={18} />
             <span className="text-base">Profile</span>
           </Link>
