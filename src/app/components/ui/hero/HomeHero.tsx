@@ -20,7 +20,7 @@ function HomeHero({ className }: HomeHeroProps) {
   }, []);
 
   return (
-    <section className={cn('hero bg-gradient-to-br from-base-200 to-base-100 py-24 md:py-32', className)}>
+    <section className={cn('hero bg-gradient-to-br py-24 md:py-32', className)}>
       <div className="hero-content text-center">
         <Container>
           <div className="flex flex-col items-center text-center space-y-12 max-w-4xl mx-auto">
