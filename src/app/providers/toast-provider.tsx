@@ -31,7 +31,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast = { id, message, type, duration };
     
-    setToasts((prev) => [...prev, newToast]);
+    setToasts((prev) => {
+      // Limit the number of toasts to 5, removing oldest ones first
+      const updatedToasts = [...prev, newToast];
+      return updatedToasts.length > 5 ? updatedToasts.slice(-5) : updatedToasts;
+    });
     
     // Auto-dismiss toast after duration
     if (duration !== Infinity) {
