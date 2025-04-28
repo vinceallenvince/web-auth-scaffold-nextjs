@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { getCsrfToken } from "next-auth/react";
 import { useToast } from "@/app/providers/toast-provider";
 import { useRouter } from "next/navigation";
+import { email as emailValidator } from "@/lib/form-validation";
 
 export default function MagicLinkForm() {
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
@@ -23,8 +24,9 @@ export default function MagicLinkForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    if (!email || !email.includes('@')) {
-      addToast("Please enter a valid email address", "error");
+    const emailValidation = emailValidator()(email);
+    if (!emailValidation.isValid) {
+      addToast(emailValidation.errorMessage || "Please enter a valid email address", "error");
       return;
     }
 
