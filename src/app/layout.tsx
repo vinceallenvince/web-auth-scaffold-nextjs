@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthSessionProvider } from "./providers/session-provider";
 import { getSession } from "@/lib/auth";
 import { ThemeProvider } from "./providers/theme-provider";
+import { ToastProvider } from "./providers/toast-provider";
 import { Navbar, SkipToContent } from "./components/ui/navigation";
 import { Footer } from "./components/ui/footer";
 
@@ -50,12 +51,14 @@ export default async function RootLayout({
       >
         <AuthSessionProvider session={session}>
           <ThemeProvider>
-            <SkipToContent />
-            <Navbar />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer />
+            <ToastProvider>
+              <SkipToContent />
+              <Navbar />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </ToastProvider>
           </ThemeProvider>
         </AuthSessionProvider>
       </body>

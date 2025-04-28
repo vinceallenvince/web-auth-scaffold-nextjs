@@ -7,3 +7,4 @@ export * from './button';
 export * from './icons';
 export * from './footer';
 export { HomeHero, FeatureCard } from './hero';
+export * from './toast';
