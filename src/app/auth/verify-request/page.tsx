@@ -9,7 +9,7 @@ export default function VerifyRequestPage() {
       <div className="w-full max-w-4xl">
         <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
           <div className="w-full lg:w-1/2 space-y-8">
-            <div className="card border border-base-300 bg-base-300">
+            <div className="card border border-base-300 bg-base-200">
               <div className="card-body">
                 <h1 className="text-2xl font-bold text-left">Magic Link Sent!</h1>
                 <p className="text-sm text-gray-600 text-left">
