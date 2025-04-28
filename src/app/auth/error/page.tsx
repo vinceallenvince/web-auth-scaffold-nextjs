@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AuthHero } from "@/components/auth";
+import AuthErrorAlert from "./auth-error-alert";
 
 export const metadata: Metadata = {
   title: "Authentication Error | Web Auth Scaffold",
@@ -89,6 +90,9 @@ export default async function AuthErrorPage({
           </div>
         </div>
       </div>
+      
+      {/* Client component that will show toast notification */}
+      <AuthErrorAlert error={error} message={errorMessage} />
     </div>
   );
 } 
