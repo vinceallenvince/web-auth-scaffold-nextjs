@@ -4,11 +4,18 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Completely turn the indicator off
+  devIndicators: false,
   
   // Configure environment-specific settings
+  /*
   env: {
     APP_ENV: process.env.NODE_ENV || 'development',
+    // Disable Next.js telemetry and development toast
+    NEXT_TELEMETRY_DISABLED: '1',
+    NEXT_DISABLE_NOTIFICATIONS: '1'
   },
+  */
   
   // Handle environment-specific logging and features
   onDemandEntries: {

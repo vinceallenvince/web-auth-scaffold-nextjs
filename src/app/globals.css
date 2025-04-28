@@ -111,3 +111,12 @@
     @apply block;
   }
 }
+
+/* Hide Next.js development toast notification */
+[data-nextjs-toast],
+[data-nextjs-toast] * {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

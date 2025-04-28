@@ -5,6 +5,7 @@ import { AuthSessionProvider } from "./providers/session-provider";
 import { getSession } from "@/lib/auth";
 import { ThemeProvider } from "./providers/theme-provider";
 import { Navbar, SkipToContent } from "./components/ui/navigation";
+import { Footer } from "./components/ui/footer";
 
 // Adding explicit font display strategy to avoid FOUT (Flash of Unstyled Text)
 const geistSans = Geist({
@@ -44,16 +45,17 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
         style={{ fontFamily: "var(--font-sans, var(--font-sans-fallback))" }}
       >
         <AuthSessionProvider session={session}>
           <ThemeProvider>
             <SkipToContent />
             <Navbar />
-            <main id="main-content">
+            <main id="main-content" className="flex-1">
               {children}
             </main>
+            <Footer />
           </ThemeProvider>
         </AuthSessionProvider>
       </body>
