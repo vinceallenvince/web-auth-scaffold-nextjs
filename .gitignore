@@ -14,7 +14,7 @@
 /coverage
 
 # logs
-/logs
+logs
 
 # next.js
 /.next/
