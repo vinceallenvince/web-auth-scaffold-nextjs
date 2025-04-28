@@ -3,6 +3,7 @@
 import React from "react";
 import { User } from "next-auth";
 import { format } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
 interface ProfileInfoProps {
   user: User;
@@ -11,11 +12,14 @@ interface ProfileInfoProps {
 
 export function ProfileInfo({ user, onEdit }: ProfileInfoProps) {
   // Extract first character of email or name for avatar
-  const avatarInitial = (user.name?.[0] || user.email?.[0] || "?").toUpperCase();
+  const avatarInitial = ((user?.name?.[0] || user?.email?.[0] || "?")).toUpperCase();
+  
+  // Get locale configuration for date formatting
+  const userLocale = enUS;
   
   // Format join date if emailVerified exists
-  const joinDate = user.emailVerified 
-    ? format(new Date(user.emailVerified), 'MMMM d, yyyy')
+  const joinDate = user?.emailVerified 
+    ? format(new Date(user.emailVerified), 'MMMM d, yyyy', { locale: userLocale })
     : 'Not available';
 
   return (

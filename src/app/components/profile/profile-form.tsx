@@ -6,6 +6,7 @@ import { useToast } from "@/app/providers/toast-provider";
 import { updateUserProfile } from "@/app/actions/profile-actions";
 import { FormField, Input } from "@/app/components/ui/form";
 import { validate, required, minLength, maxLength, email, Validator } from "@/lib/form-validation";
+import { ProfileUpdateRequest } from "@/types/profile";
 
 interface ProfileFormProps {
   user: User;
@@ -13,10 +14,8 @@ interface ProfileFormProps {
   onSuccess: () => void;
 }
 
-interface FormState {
-  name: string;
-  email: string;
-}
+// Use the type from the shared schema
+type FormState = ProfileUpdateRequest;
 
 export function ProfileForm({ user, onCancel, onSuccess }: ProfileFormProps) {
   const { addToast } = useToast();
@@ -49,8 +48,8 @@ export function ProfileForm({ user, onCancel, onSuccess }: ProfileFormProps) {
     
     // Validate all fields
     const newErrors: Record<string, string | undefined> = {
-      name: validateField('name', formState.name, [minLength(2), maxLength(50)]),
-      email: validateField('email', formState.email, [required(), email(), maxLength(255)]),
+      name: validateField('name', formState.name || "", [minLength(2), maxLength(50)]),
+      email: validateField('email', formState.email || "", [required(), email(), maxLength(255)]),
     };
     
     setErrors(newErrors);
@@ -72,7 +71,9 @@ export function ProfileForm({ user, onCancel, onSuccess }: ProfileFormProps) {
           addToast("Profile updated successfully", "success");
           onSuccess();
         } else {
-          addToast(`Failed to update profile: ${result.error}`, "error");
+          // Enhanced error handling using errorCode
+          const errorMessage = getErrorMessage(result.errorCode, result.error);
+          addToast(errorMessage, "error");
         }
       } catch (error) {
         addToast(`An error occurred while updating your profile`, "error");
@@ -80,6 +81,24 @@ export function ProfileForm({ user, onCancel, onSuccess }: ProfileFormProps) {
       } finally {
         setIsSubmitting(false);
       }
+    }
+  };
+
+  // Helper function to get user-friendly error messages based on error code
+  const getErrorMessage = (errorCode?: string, fallbackMessage?: string): string => {
+    if (!errorCode) return fallbackMessage || "An unknown error occurred";
+    
+    switch (errorCode) {
+      case "EmailInUse":
+        return "This email address is already being used by another account.";
+      case "ValidationError":
+        return fallbackMessage || "Please check your information and try again.";
+      case "EmptyUpdate":
+        return "Please provide at least one field to update.";
+      case "AuthRequired":
+        return "You need to be signed in to update your profile.";
+      default:
+        return fallbackMessage || "An error occurred while updating your profile.";
     }
   };
 
@@ -99,6 +118,7 @@ export function ProfileForm({ user, onCancel, onSuccess }: ProfileFormProps) {
             value={formState.name}
             onChange={(e) => handleChange('name', e.target.value)}
             error={!!errors.name}
+            autoFocus
           />
         </FormField>
         

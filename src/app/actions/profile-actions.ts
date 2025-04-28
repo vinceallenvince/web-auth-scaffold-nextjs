@@ -1,25 +1,11 @@
 "use server";
 
-import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 // getSession is used indirectly by the auth system to validate sessions
 // removing it causes runtime errors, so we need to keep it imported
 import { getSession, getCurrentUserId } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
-
-// Define validation schema for profile update
-const profileUpdateSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").max(50, "Name must be less than 50 characters").optional(),
-  email: z.string().email("Invalid email address").max(255, "Email must be less than 255 characters").optional(),
-});
-
-// Types for the request and response
-export type ProfileUpdateRequest = z.infer<typeof profileUpdateSchema>;
-
-export type ProfileUpdateResponse = {
-  success: boolean;
-  error?: string;
-};
+import { profileUpdateSchema, ProfileUpdateRequest, ProfileUpdateResponse } from "@/types/profile";
 
 /**
  * Server action to update user profile
@@ -35,7 +21,8 @@ export async function updateUserProfile(data: ProfileUpdateRequest): Promise<Pro
       await getSession();
       return { 
         success: false, 
-        error: "Authentication required" 
+        error: "Authentication required",
+        errorCode: "AuthRequired"
       };
     }
 
@@ -48,7 +35,8 @@ export async function updateUserProfile(data: ProfileUpdateRequest): Promise<Pro
     if (!currentUser) {
       return { 
         success: false, 
-        error: "User not found" 
+        error: "User not found",
+        errorCode: "UserNotFound"
       };
     }
 
@@ -61,7 +49,17 @@ export async function updateUserProfile(data: ProfileUpdateRequest): Promise<Pro
       
       return { 
         success: false, 
-        error: `Validation failed: ${errorMessages}` 
+        error: `Validation failed: ${errorMessages}`,
+        errorCode: "ValidationError"
+      };
+    }
+
+    // Check if at least one field is provided
+    if (!data.name && !data.email) {
+      return {
+        success: false,
+        error: "At least one field must be provided for update",
+        errorCode: "EmptyUpdate"
       };
     }
 
@@ -74,20 +72,23 @@ export async function updateUserProfile(data: ProfileUpdateRequest): Promise<Pro
       if (existingUser && existingUser.id !== userId) {
         return { 
           success: false, 
-          error: "Email address is already in use" 
+          error: "Email address is already in use",
+          errorCode: "EmailInUse"
         };
       }
     }
 
-    // Update user profile
-    await prisma.user.update({
-      where: { id: userId },
-      data: {
-        name: data.name,
-        email: data.email,
-        // If email changed, set emailVerified to null as it should be re-verified
-        ...(data.email && data.email !== currentUser.email ? { emailVerified: null } : {})
-      },
+    // Update user profile within a transaction
+    await prisma.$transaction(async (tx) => {
+      await tx.user.update({
+        where: { id: userId },
+        data: {
+          name: data.name,
+          email: data.email,
+          // If email changed, set emailVerified to null as it should be re-verified
+          ...(data.email && data.email !== currentUser.email ? { emailVerified: null } : {})
+        },
+      });
     });
 
     // Revalidate profile page to update UI
@@ -99,7 +100,8 @@ export async function updateUserProfile(data: ProfileUpdateRequest): Promise<Pro
     console.error("Error updating user profile:", error);
     return { 
       success: false, 
-      error: error instanceof Error ? error.message : "An unknown error occurred" 
+      error: error instanceof Error ? error.message : "An unknown error occurred",
+      errorCode: error instanceof Error ? error.name : "UnknownError"
     };
   }
 } 

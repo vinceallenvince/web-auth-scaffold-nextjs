@@ -17,7 +17,7 @@ export function ProfileCard({ session }: ProfileCardProps) {
       <div className="card bg-base-200">
         <div className="card-body">
           <h2 className="card-title">Profile not available</h2>
-          <p>Unable to load profile information.</p>
+          <p>Unable to load profile information. Please try signing out and signing back in, or contact support if the problem persists.</p>
         </div>
       </div>
     );
