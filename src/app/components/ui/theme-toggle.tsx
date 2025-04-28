@@ -10,7 +10,7 @@ const MoonIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="w-5 h-5"
+    className="w-6 h-6"
   >
     <path
       strokeLinecap="round"
@@ -27,7 +27,7 @@ const SunIcon = () => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="w-5 h-5"
+    className="w-6 h-6"
   >
     <path
       strokeLinecap="round"
@@ -43,7 +43,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="btn btn-ghost btn-circle text-base-content"
+      className="btn btn-ghost btn-circle min-h-12 h-12 w-12 flex items-center justify-center text-base-content transition-all"
       aria-label={`Switch to ${theme === 'bumblebee' ? 'night' : 'bumblebee'} theme`}
     >
       {theme === 'bumblebee' ? <MoonIcon /> : <SunIcon />}

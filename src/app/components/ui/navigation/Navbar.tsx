@@ -107,7 +107,7 @@ export function Navbar({ logo, className }: NavbarProps) {
             <div className="dropdown">
               <button
                 type="button"
-                className="btn btn-ghost lg:hidden"
+                className="btn btn-ghost min-h-12 min-w-12 h-12 w-12 rounded-full lg:hidden"
                 ref={menuButtonRef}
                 onClick={toggleMenu}
                 aria-expanded={isOpen}
@@ -115,7 +115,7 @@ export function Navbar({ logo, className }: NavbarProps) {
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  className="h-5 w-5" 
+                  className="h-6 w-6" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
@@ -134,55 +134,87 @@ export function Navbar({ logo, className }: NavbarProps) {
                 id="mobile-menu"
                 ref={menuRef}
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className={cn(
+                  "menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow-lg bg-base-100 rounded-box",
+                  "w-72 max-h-[80vh] overflow-y-auto transition-opacity duration-200",
+                  isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+                )}
                 data-show={isOpen}
               >
-                <li key="hello-world-mobile">
-                  <NavLink href="/helloworld" onClick={() => setIsOpen(false)}>
+                <li key="hello-world-mobile" className="py-1">
+                  <NavLink 
+                    href="/helloworld" 
+                    onClick={() => setIsOpen(false)}
+                    className="py-3 px-4"
+                  >
                     Hello World
                   </NavLink>
                 </li>
-                <li className="menu-title" key="examples-mobile">
-                  <span>Examples</span>
-                  <ul className="p-2">
+                <li className="menu-title pt-3" key="examples-mobile">
+                  <span className="text-base font-medium">Examples</span>
+                  <ul className="p-2 space-y-1">
                     <li key="buttons-mobile">
-                      <NavLink href="/examples/buttons" onClick={() => setIsOpen(false)}>
+                      <NavLink 
+                        href="/examples/buttons" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
                         Buttons
                       </NavLink>
                     </li>
                     <li key="cards-mobile">
-                      <NavLink href="/examples/cards" onClick={() => setIsOpen(false)}>
+                      <NavLink 
+                        href="/examples/cards" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
                         Cards
                       </NavLink>
                     </li>
                     <li key="typography-mobile">
-                      <NavLink href="/examples/typography" onClick={() => setIsOpen(false)}>
+                      <NavLink 
+                        href="/examples/typography" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
                         Typography
                       </NavLink>
                     </li>
                     <li key="layout-mobile">
-                      <NavLink href="/examples/layout" onClick={() => setIsOpen(false)}>
+                      <NavLink 
+                        href="/examples/layout" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
                         Layout
                       </NavLink>
                     </li>
                     <li key="navigation-mobile">
-                      <NavLink href="/examples/navigation" onClick={() => setIsOpen(false)}>
+                      <NavLink 
+                        href="/examples/navigation" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
                         Navigation
                       </NavLink>
                     </li>
                     <li key="daisyui-mobile">
-                      <NavLink href="/examples/daisyui" onClick={() => setIsOpen(false)}>
+                      <NavLink 
+                        href="/examples/daisyui" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
                         DaisyUI
                       </NavLink>
                     </li>
                   </ul>
                 </li>
-                <li key="auth-mobile" className="mt-4 pb-2 border-t border-base-300 pt-2">
+                <li key="auth-mobile" className="mt-6 pb-3 border-t border-base-300 pt-3">
                   <div className="flex justify-center">
                     <UserMenu />
                   </div>
                 </li>
-                <li key="theme-toggle-mobile" className="mt-2 flex justify-center">
+                <li key="theme-toggle-mobile" className="mt-4 flex justify-center">
                   <ThemeToggle />
                 </li>
               </ul>
@@ -250,7 +282,9 @@ export function Navbar({ logo, className }: NavbarProps) {
           
           {/* Navbar End - Additional Controls */}
           <div className="navbar-end">
-            <ThemeToggle />
+            <div className="hidden sm:block mr-4">
+              <ThemeToggle />
+            </div>
             <UserMenu />
           </div>
         </div>

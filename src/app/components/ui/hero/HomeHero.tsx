@@ -21,12 +21,12 @@ function HomeHero({ className }: HomeHeroProps) {
 
   return (
     <section className={cn('hero bg-gradient-to-br py-24 md:py-32', className)}>
-      <div className="hero-content text-center">
+      <div className="hero-content w-full">
         <Container>
-          <div className="flex flex-col items-center text-center space-y-12 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center space-y-12 max-w-4xl mx-auto">
             <div 
               className={cn(
-                'transform transition-all duration-500 ease-in-out',
+                'transform transition-all duration-500 ease-in-out text-center',
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               )}
             >
@@ -42,14 +42,14 @@ function HomeHero({ className }: HomeHeroProps) {
             
             <div 
               className={cn(
-                'transform transition-all duration-500 delay-150 ease-in-out',
+                'transform transition-all duration-500 delay-150 ease-in-out text-center',
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               )}
             >
               <ButtonLink 
                 href="/auth/magic-link" 
                 size="lg"
-                variant="outline"
+                variant="primary"
               >
                 LOGIN
               </ButtonLink>
