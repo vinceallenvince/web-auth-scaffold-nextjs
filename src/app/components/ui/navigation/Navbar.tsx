@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/app/components/ui/theme-toggle";
 
 interface NavLinkProps {
   href: string;
@@ -175,6 +176,9 @@ export function Navbar({ logo, className }: NavbarProps) {
                     </li>
                   </ul>
                 </li>
+                <li key="theme-toggle-mobile" className="mt-2 flex justify-center">
+                  <ThemeToggle />
+                </li>
               </ul>
             </div>
             
@@ -240,7 +244,8 @@ export function Navbar({ logo, className }: NavbarProps) {
           
           {/* Navbar End - Additional Controls */}
           <div className="navbar-end">
-            <Link href="/dashboard" className="btn">Dashboard</Link>
+            <ThemeToggle />
+            <Link href="/dashboard" className="btn ml-2">Dashboard</Link>
           </div>
         </div>
       </div>
