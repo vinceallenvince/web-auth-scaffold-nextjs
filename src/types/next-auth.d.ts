@@ -10,4 +10,12 @@ declare module "next-auth" {
       id: string;
     } & DefaultSession["user"];
   }
+
+  /**
+   * Extended User type to include additional fields from the database
+   */
+  interface User {
+    /** The date when user's email was verified */
+    emailVerified?: Date | null;
+  }
 } 

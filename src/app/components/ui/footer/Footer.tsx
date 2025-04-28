@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
   
   return (
     <footer className="footer p-6 bg-base-200 text-base-content" aria-label="Site footer">
@@ -31,10 +30,6 @@ export function Footer() {
           </ul>
         </nav>
         
-        {/* Copyright */}
-        <div className="mt-2 md:mt-0">
-          <p className="text-sm">© {currentYear} Web Auth Scaffold App. All rights reserved.</p>
-        </div>
       </div>
     </footer>
   );
