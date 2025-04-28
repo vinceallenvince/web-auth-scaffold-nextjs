@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto py-8 px-4">
+    <main className="container mx-auto py-8 px-4">
       <h1 className="text-3xl font-bold mb-6">About Us</h1>
       <div className="prose max-w-none">
         <p className="mb-4">
@@ -25,6 +25,6 @@ export default function AboutPage() {
           building secure web applications with modern authentication patterns.
         </p>
       </div>
-    </div>
+    </main>
   );
 } 
