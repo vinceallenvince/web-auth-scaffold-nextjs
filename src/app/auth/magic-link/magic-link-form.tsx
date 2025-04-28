@@ -50,7 +50,9 @@ export default function MagicLinkForm() {
         router.push("/auth/verify-request");
       } else {
         const errorData = await response.json().catch(() => ({}));
-        const errorMessage = errorData.error || "Error sending magic link. Please try again";
+        const errorMessage = errorData.error || 
+          (response.status === 429 ? "Too many attempts. Please try again later." : 
+           "Error sending magic link. Please try again");
         addToast(errorMessage, "error");
       }
     } catch {
