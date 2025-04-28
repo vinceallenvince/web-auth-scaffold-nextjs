@@ -294,11 +294,11 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Handle the initial loading state when auth status is being determined
 
 **Acceptance Criteria**:
-- [ ] Navigation shows different options based on auth state
-- [ ] Login/logout functionality works correctly
-- [ ] Profile link appears only for authenticated users
-- [ ] Auth state changes update navigation immediately
-- [ ] Components are accessible and keyboard navigable
+- [x] Navigation shows different options based on auth state
+- [x] Login/logout functionality works correctly
+- [x] Profile link appears only for authenticated users
+- [x] Auth state changes update navigation immediately
+- [x] Components are accessible and keyboard navigable
 
 **Common Pitfalls & Tips**:
 - Handle auth state loading gracefully
@@ -319,7 +319,7 @@ This document outlines the implementation tasks for refining the core UX as spec
 **Time Estimate**: 4-6 hours
 **Story Points**: 3
 **Dependencies**: Authentication Implementation, Navigation Component
-**Status**: TODO
+**Status**: DONE
 
 ### UXRF-07: Mobile Navigation Refinements
 **Type**: Task  

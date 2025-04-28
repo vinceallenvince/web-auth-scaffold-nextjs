@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/app/components/ui/theme-toggle";
+import { UserMenu } from "./UserMenu";
 
 interface NavLinkProps {
   href: string;
@@ -176,6 +177,11 @@ export function Navbar({ logo, className }: NavbarProps) {
                     </li>
                   </ul>
                 </li>
+                <li key="auth-mobile" className="mt-4 pb-2 border-t border-base-300 pt-2">
+                  <div className="flex justify-center">
+                    <UserMenu />
+                  </div>
+                </li>
                 <li key="theme-toggle-mobile" className="mt-2 flex justify-center">
                   <ThemeToggle />
                 </li>
@@ -245,7 +251,7 @@ export function Navbar({ logo, className }: NavbarProps) {
           {/* Navbar End - Additional Controls */}
           <div className="navbar-end">
             <ThemeToggle />
-            <Link href="/dashboard" className="btn ml-2">Dashboard</Link>
+            <UserMenu />
           </div>
         </div>
       </div>
