@@ -226,7 +226,7 @@ This document outlines the implementation tasks for refining the core UX as spec
 - Follow these steps:
   1. **Create theme toggle component**:
      - Implement client component for theme switching
-     - Add visual toggle indicator (icon/switch)
+     - Add visual toggle indicator (icon/switch) as a right justified item in the nav bar
      - Connect to theme state management
 
   2. **Add to navigation bar**:
@@ -240,11 +240,11 @@ This document outlines the implementation tasks for refining the core UX as spec
      - Test theme persistence across page navigation
 
 **Acceptance Criteria**:
-- [ ] Theme toggle is visible in navigation
-- [ ] Switching themes updates the application appearance
-- [ ] Transitions between themes are smooth
-- [ ] Selected theme persists across page refreshes
-- [ ] Toggle is accessible via keyboard and screen readers
+- [x] Theme toggle is visible in navigation
+- [x] Switching themes updates the application appearance
+- [x] Transitions between themes are smooth
+- [x] Selected theme persists across page refreshes
+- [x] Toggle is accessible via keyboard and screen readers
 
 **Common Pitfalls & Tips**:
 - Use localStorage or similar to persist theme preference
@@ -265,7 +265,7 @@ This document outlines the implementation tasks for refining the core UX as spec
 **Time Estimate**: 3-5 hours
 **Story Points**: 3
 **Dependencies**: Navigation Component
-**Status**: TODO
+**Status**: DONE
 
 ### UXRF-06: Auth-Aware Navigation
 **Type**: Task  

@@ -37,7 +37,7 @@ const SunIcon = () => (
   </svg>
 );
 
-export default function ThemeToggle() {
+export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
 
   return (
