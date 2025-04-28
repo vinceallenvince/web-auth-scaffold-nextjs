@@ -1,3 +1,10 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Learn about Web Auth Scaffold – a robust starting point for modern web authentication technologies.',
+};
+
 export default function AboutPage() {
   return (
     <div className="container mx-auto py-8 px-4">
