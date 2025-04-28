@@ -20,13 +20,13 @@ export function UserMenu() {
     return (
       <Link
         href="/auth/magic-link"
-        className="btn btn-primary"
+        className="btn btn-primary min-h-12 h-12 px-5"
         onClick={(e) => {
           e.preventDefault();
           login();
         }}
       >
-        Login
+        <span className="text-base">Login</span>
       </Link>
     );
   }
@@ -37,13 +37,13 @@ export function UserMenu() {
       <div 
         tabIndex={0} 
         role="button" 
-        className="btn btn-ghost flex items-center gap-2 focus:outline-none"
+        className="btn btn-ghost min-h-12 h-12 flex items-center gap-2 focus:outline-none"
         aria-label="User menu"
         aria-haspopup="true"
       >
         <div className="avatar placeholder">
-          <div className="bg-neutral text-neutral-content rounded-full w-8">
-            <span className="text-xs">
+          <div className="bg-neutral text-neutral-content rounded-full w-10 h-10">
+            <span className="text-sm">
               {session?.user?.email?.[0].toUpperCase() || "U"}
             </span>
           </div>
@@ -52,20 +52,20 @@ export function UserMenu() {
           {session?.user?.email?.split('@')[0] || "User"}
         </span>
       </div>
-      <ul tabIndex={0} className="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52">
+      <ul tabIndex={0} className="dropdown-content z-10 menu p-3 shadow-lg bg-base-100 rounded-box w-60">
         <li>
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <User size={16} />
-            <span>Profile</span>
+          <Link href="/dashboard" className="flex items-center gap-2 py-3 px-4">
+            <User size={18} />
+            <span className="text-base">Profile</span>
           </Link>
         </li>
         <li>
           <button 
             onClick={() => logout()} 
-            className="flex items-center gap-2 text-error"
+            className="flex items-center gap-2 text-error py-3 px-4"
           >
-            <LogOut size={16} />
-            <span>Logout</span>
+            <LogOut size={18} />
+            <span className="text-base">Logout</span>
           </button>
         </li>
       </ul>

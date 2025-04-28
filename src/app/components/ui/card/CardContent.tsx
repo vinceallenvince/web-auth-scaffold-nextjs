@@ -24,7 +24,7 @@ export interface CardBodyProps extends React.HTMLAttributes<HTMLDivElement>, Bas
 
 export function CardBody({ className, children, ...props }: CardBodyProps) {
   return (
-    <div className={cn("card-body p-6 pt-2", className)} {...props}>
+    <div className={cn("card-body p-6 pt-2 text-left", className)} {...props}>
       {children}
     </div>
   );
@@ -56,7 +56,7 @@ export function CardTitle({
 }: CardTitleProps) {
   return (
     <Component 
-      className={cn("card-title text-xl font-semibold", className)}
+      className={cn("card-title text-xl font-semibold text-left", className)}
       aria-level={Component === "div" ? 2 : undefined}
       role={Component === "div" ? "heading" : undefined}
       {...props}

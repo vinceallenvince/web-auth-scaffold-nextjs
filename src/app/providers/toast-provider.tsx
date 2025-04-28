@@ -48,15 +48,22 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
       {children}
-      <div aria-live="polite" aria-atomic="true" className="toast toast-end z-50">
-        {toasts.map((toast) => (
-          <Toast
-            key={toast.id}
-            message={toast.message}
-            type={toast.type}
-            onDismiss={() => removeToast(toast.id)}
-          />
-        ))}
+      <div 
+        aria-live="polite" 
+        aria-atomic="true" 
+        className="fixed bottom-0 right-0 p-4 sm:p-6 z-50 flex flex-col items-end"
+        style={{ maxWidth: '100%', width: 'auto' }}
+      >
+        <div className="flex flex-col items-end gap-2 w-full max-w-[90vw] sm:max-w-md">
+          {toasts.map((toast) => (
+            <Toast
+              key={toast.id}
+              message={toast.message}
+              type={toast.type}
+              onDismiss={() => removeToast(toast.id)}
+            />
+          ))}
+        </div>
       </div>
     </ToastContext.Provider>
   );

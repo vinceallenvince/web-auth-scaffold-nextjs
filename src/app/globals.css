@@ -78,6 +78,39 @@
   .animate-pulse-subtle {
     animation: subtle-pulse 3s infinite ease-in-out;
   }
+
+  /* Toast animation for smooth entrance */
+  @keyframes slideInVertical {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInHorizontal {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slideIn {
+    animation: slideInVertical 0.3s ease-out forwards;
+  }
+  
+  @media (min-width: 640px) {
+    .animate-slideIn {
+      animation: slideInHorizontal 0.3s ease-out forwards;
+    }
+  }
 }
 
 /* Custom component styles */
