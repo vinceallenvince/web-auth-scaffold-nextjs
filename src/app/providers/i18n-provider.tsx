@@ -34,12 +34,39 @@ export default function I18nProviderWrapper({
         dictionary,
         isLoaded: true,
       });
+    }).catch((error) => {
+      console.error('Failed to load dictionary:', error);
+      setState({
+        locale,
+        dictionary: null,
+        isLoaded: true, // Mark as loaded to render with fallback
+      });
     });
   }, []);
 
   // Show nothing until dictionary is loaded
-  if (!state.isLoaded || !state.dictionary) {
+  if (!state.isLoaded) {
     return null;
+  }
+
+  // If dictionary failed to load but isLoaded is true, we'll try to render with defaultLocale
+  if (!state.dictionary) {
+    // Attempt to load default locale as fallback
+    getDictionary(defaultLocale)
+      .then((dictionary) => {
+        setState({
+          locale: defaultLocale,
+          dictionary,
+          isLoaded: true,
+        });
+      })
+      .catch((error) => {
+        console.error('Failed to load fallback dictionary:', error);
+        // Continue rendering even without dictionary, components will have to handle missing translations
+      });
+    
+    // While waiting for fallback dictionary, show a minimal loading indicator
+    return <div className="loading loading-spinner loading-lg"></div>;
   }
 
   return (

@@ -61,7 +61,7 @@ export function middleware(request: NextRequest) {
   
   // If there's no NEXT_LOCALE cookie or it's different from the detected locale,
   // set the cookie for future requests
-  const currentCookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+  const currentCookieLocale = request.cookies?.get('NEXT_LOCALE')?.value;
   if (currentCookieLocale !== locale) {
     // Set the locale cookie with a 1-year expiry
     response.cookies.set('NEXT_LOCALE', locale, { 
