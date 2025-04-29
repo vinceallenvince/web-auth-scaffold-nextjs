@@ -9,7 +9,12 @@ vi.mock('next/server', () => {
       headers: new Headers()
     })),
     NextResponse: {
-      next: vi.fn().mockImplementation((options) => options)
+      next: vi.fn().mockImplementation((options) => ({
+        ...options,
+        cookies: {
+          set: vi.fn()
+        }
+      }))
     }
   };
 });
@@ -31,8 +36,11 @@ describe('Middleware', () => {
     const url = new URL('http://localhost:3000/test-path');
     const request = {
       nextUrl: url,
-      headers: new Headers()
-    } as NextRequest;
+      headers: new Headers(),
+      cookies: {
+        get: vi.fn().mockReturnValue(null)
+      }
+    } as unknown as NextRequest;
     
     // Act
     const response = middleware(request);
@@ -48,8 +56,11 @@ describe('Middleware', () => {
     const url = new URL('http://localhost:3000/');
     const request = {
       nextUrl: url,
-      headers: new Headers()
-    } as NextRequest;
+      headers: new Headers(),
+      cookies: {
+        get: vi.fn().mockReturnValue(null)
+      }
+    } as unknown as NextRequest;
     
     // Act
     const response = middleware(request);
@@ -65,8 +76,11 @@ describe('Middleware', () => {
     const url = new URL('https://localhost:3000/');
     const request = {
       nextUrl: url,
-      headers: new Headers()
-    } as NextRequest;
+      headers: new Headers(),
+      cookies: {
+        get: vi.fn().mockReturnValue(null)
+      }
+    } as unknown as NextRequest;
     
     // Act
     const response = middleware(request);
