@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { getDictionary } from '@/i18n';
 import { I18nProvider } from '@/i18n/client';
-import { getCookie } from '@/lib/client-cookies';
+import { getCookie } from '@/lib/cookies';
 import { getLocaleFromString } from '@/i18n';
 import { defaultLocale, Locale, Dictionary } from '@/i18n/config';
 

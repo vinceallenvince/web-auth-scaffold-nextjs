@@ -3,7 +3,7 @@
 import React, { useTransition } from 'react';
 import { useTranslations } from '@/i18n';
 import { locales, Locale } from '@/i18n/config';
-import { setCookie } from '@/lib/client-cookies';
+import { setCookie } from '@/lib/cookies';
 
 export default function LanguageToggle() {
   const { locale } = useTranslations();
