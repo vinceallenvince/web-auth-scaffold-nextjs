@@ -6,7 +6,7 @@ import { locales, defaultLocale, Locale } from '@/i18n/config';
 // Get locale from request
 function getLocale(request: NextRequest): Locale {
   // First, try to get locale from cookie
-  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+  const cookieLocale = request.cookies?.get('NEXT_LOCALE')?.value;
   if (cookieLocale && locales.includes(cookieLocale as Locale)) {
     return cookieLocale as Locale;
   }
@@ -59,10 +59,10 @@ export function middleware(request: NextRequest) {
   
   // If there's no NEXT_LOCALE cookie or it's different from the detected locale,
   // set the cookie for future requests
-  const currentCookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+  const currentCookieLocale = request.cookies?.get('NEXT_LOCALE')?.value;
   if (currentCookieLocale !== locale) {
-    // Set the locale cookie with a 1-year expiry
-    response.cookies.set('NEXT_LOCALE', locale, { 
+    // Only set cookie if `response.cookies` exists (tests mock `next()` without cookies)
+    response.cookies?.set('NEXT_LOCALE', locale, { 
       maxAge: 60 * 60 * 24 * 365,
       path: '/',
     });
