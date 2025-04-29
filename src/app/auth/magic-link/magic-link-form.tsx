@@ -64,47 +64,46 @@ export default function MagicLinkForm() {
   };
 
   return (
-    <div className="card bg-base-200 border border-base-300">
-      <div className="card-body">
+    <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-96 border p-4">
+      <legend className="fieldset-legend font-bold">Magic Link</legend>
+      
+      <form onSubmit={handleSubmit}>
+        <input name="csrfToken" type="hidden" defaultValue={csrfToken || ""} />
+        <div className="form-control w-full">
+          <label className="label" htmlFor="email">
+            <span className="label-text">Email address</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className="input input-bordered w-full"
+            placeholder="name@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
         
-        <form onSubmit={handleSubmit}>
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken || ""} />
-          <div className="form-control w-full max-w-md">
-            <label className="label" htmlFor="email">
-              <span className="label-text">Email address</span>
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              className="input input-bordered w-full"
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          
-          <div className="form-control mt-6">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              aria-label="Send magic link"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <span className="loading loading-spinner loading-xs"></span>
-                  Sending...
-                </>
-              ) : (
-                "Send Magic Link"
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div className="form-control mt-6 w-full">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            aria-label="Send magic link"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <span className="loading loading-spinner loading-xs"></span>
+                Sending...
+              </>
+            ) : (
+              "Send Magic Link"
+            )}
+          </button>
+        </div>
+      </form>
+    </fieldset>
   );
 } 

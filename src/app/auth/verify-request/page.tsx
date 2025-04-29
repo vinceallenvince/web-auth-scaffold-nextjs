@@ -1,46 +1,49 @@
 'use client';
 
 import Link from "next/link";
-import { AuthHero } from "@/components/auth";
+import { Container } from "@/app/components/ui/layout/container";
 
 export default function VerifyRequestPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl">
-        <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
-          <div className="w-full lg:w-1/2 space-y-8">
-            <div className="card border border-base-300 bg-base-200">
-              <div className="card-body">
-                <h1 className="text-2xl font-bold text-left">Magic Link Sent!</h1>
-                <p className="text-sm text-gray-600 text-left">
-                Check your email for the magic link to sign in.
-                </p>
-                <div className="mt-4 text-left">
-                  <p className="text-sm text-gray-600">
-                    Didn't receive the link?
-                  </p>
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                  <Link
-                    href="/auth/magic-link"
-                    className="btn btn-outline btn-sm"
-                  >
-                    Try a different email
-                  </Link>
+    <div className="flex flex-col">
+      <section className='hero bg-gradient-to-br py-24 md:py-32'>
+        <div className="hero-content w-full">
+          <Container>
+            <div className="flex flex-col lg:flex-row gap-8">
+              <div className="w-full">
+              <div className="card card-border border-base-300 bg-base-100 w-96">
+
+                    <div className="card-body p-4">
+                      <h1 className="card-title text-xl font-bold">Magic Link Sent!</h1>
+                      <p className="mt-2 text-base-content/70">
+                        Check your email for the magic link. If you don&apos;t see it, check your spam folder or try a different email.
+                      </p>
+                      
+                      <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-md">
+                        <Link
+                          href="/auth/magic-link"
+                          className="btn btn-outline btn-sm w-full"
+                        >
+                          Try a different email
+                        </Link>
+                      </div>
+                    </div>
+                 
                 </div>
               </div>
+              {/* intentional for layout spacing: */}
+              <div className="w-full">
+                  &nbsp;
+              </div>
+              {/* intentional for layout spacing: */}
+              <div className="w-full">
+                &nbsp;
+              </div>
+
             </div>
-          </div>
-          
-          <div className="w-full lg:w-1/2">
-            <AuthHero 
-              title="Email Verification"
-              description="We've sent a secure magic link to your email."
-            />
-          </div>
+          </Container>
         </div>
-      </div>
+      </section>
     </div>
   );
 } 

@@ -4,8 +4,8 @@ import Link from 'next/link';
 export function Footer() {
   
   return (
-    <footer className="footer p-6 bg-base-200 text-base-content" aria-label="Site footer">
-      <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row md:justify-between items-start">
+    <footer className="footer bg-base-200 text-base-content py-6" aria-label="Site footer">
+      <div className="w-full mx-auto px-6 md:px-6 lg:px-8">
         {/* Navigation Links */}
         <nav aria-label="Footer navigation" className="mb-4 md:mb-0">
           <ul className="flex flex-col md:flex-row gap-4">

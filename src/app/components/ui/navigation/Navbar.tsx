@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/app/components/ui/theme-toggle";
 import { UserMenu } from "./UserMenu";
+import { useAuth } from "@/lib/hooks/use-auth";
 
 interface NavLinkProps {
   href: string;
@@ -39,14 +40,14 @@ const NavLink = ({ href, children, className, onClick }: NavLinkProps) => {
 };
 
 interface NavbarProps {
-  logo?: React.ReactNode;
   className?: string;
 }
 
-export function Navbar({ logo, className }: NavbarProps) {
+export function Navbar({ className }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLUListElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const { isAuthenticated } = useAuth();
 
   const toggleMenu = () => setIsOpen(prev => !prev);
 
@@ -99,7 +100,7 @@ export function Navbar({ logo, className }: NavbarProps) {
 
   return (
     <header className={cn("bg-base-100 shadow-sm", className)}>
-      <div className="container mx-auto">
+      <div className="w-full px-6 md:px-6 lg:px-8 mx-auto">
         <div className="navbar">
           {/* Navbar Start - Logo and Mobile Menu */}
           <div className="navbar-start">
@@ -141,15 +142,17 @@ export function Navbar({ logo, className }: NavbarProps) {
                 )}
                 data-show={isOpen}
               >
-                <li key="hello-world-mobile" className="py-1">
-                  <NavLink 
-                    href="/helloworld" 
-                    onClick={() => setIsOpen(false)}
-                    className="py-3 px-4"
-                  >
-                    Hello World
-                  </NavLink>
-                </li>
+                {isAuthenticated && (
+                  <li key="hello-world-mobile" className="py-1">
+                    <NavLink 
+                      href="/helloworld" 
+                      onClick={() => setIsOpen(false)}
+                      className="py-3 px-4"
+                    >
+                      Hello World
+                    </NavLink>
+                  </li>
+                )}
                 <li className="menu-title pt-3" key="examples-mobile">
                   <span className="text-base font-medium">Examples</span>
                   <ul className="p-2 space-y-1">
@@ -220,64 +223,60 @@ export function Navbar({ logo, className }: NavbarProps) {
               </ul>
             </div>
             
-            {/* Logo */}
-            <div className="flex items-center">
-              {logo ? (
-                logo
-              ) : (
-                <Link href="/" className="btn btn-ghost text-xl">
-                  AppName
-                </Link>
-              )}
+            {/* Left navigation items - Desktop */}
+            <div className="hidden lg:flex">
+              <ul className="menu menu-horizontal gap-2">
+                <li key="home-desktop">
+                  <NavLink href="/">
+                    Home
+                  </NavLink>
+                </li>
+                <li key="examples-desktop">
+                  <details>
+                    <summary className="text-base font-medium">Examples</summary>
+                    <ul className="p-2 bg-base-100 z-[1]">
+                      <li key="buttons">
+                        <NavLink href="/examples/buttons">
+                          Buttons
+                        </NavLink>
+                      </li>
+                      <li key="cards">
+                        <NavLink href="/examples/cards">
+                          Cards
+                        </NavLink>
+                      </li>
+                      <li key="typography">
+                        <NavLink href="/examples/typography">
+                          Typography
+                        </NavLink>
+                      </li>
+                      <li key="layout">
+                        <NavLink href="/examples/layout">
+                          Layout
+                        </NavLink>
+                      </li>
+                      <li key="navigation">
+                        <NavLink href="/examples/navigation">
+                          Navigation
+                        </NavLink>
+                      </li>
+                      <li key="daisyui">
+                        <NavLink href="/examples/daisyui">
+                          DaisyUI
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                {isAuthenticated && (
+                  <li key="hello-world-desktop">
+                    <NavLink href="/helloworld">
+                      Hello World
+                    </NavLink>
+                  </li>
+                )}
+              </ul>
             </div>
-          </div>
-          
-          {/* Navbar Center - Desktop Navigation */}
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li key="hello-world">
-                <NavLink href="/helloworld">
-                  Hello World
-                </NavLink>
-              </li>
-              <li key="examples">
-                <details>
-                  <summary className="text-base font-medium">Examples</summary>
-                  <ul className="p-2 bg-base-100 z-[1]">
-                    <li key="buttons">
-                      <NavLink href="/examples/buttons">
-                        Buttons
-                      </NavLink>
-                    </li>
-                    <li key="cards">
-                      <NavLink href="/examples/cards">
-                        Cards
-                      </NavLink>
-                    </li>
-                    <li key="typography">
-                      <NavLink href="/examples/typography">
-                        Typography
-                      </NavLink>
-                    </li>
-                    <li key="layout">
-                      <NavLink href="/examples/layout">
-                        Layout
-                      </NavLink>
-                    </li>
-                    <li key="navigation">
-                      <NavLink href="/examples/navigation">
-                        Navigation
-                      </NavLink>
-                    </li>
-                    <li key="daisyui">
-                      <NavLink href="/examples/daisyui">
-                        DaisyUI
-                      </NavLink>
-                    </li>
-                  </ul>
-                </details>
-              </li>
-            </ul>
           </div>
           
           {/* Navbar End - Additional Controls */}

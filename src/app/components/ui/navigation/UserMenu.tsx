@@ -3,9 +3,11 @@
 import { useAuth } from "@/lib/hooks/use-auth";
 import Link from "next/link";
 import { LogOut, User } from "lucide-react";
+import { useToast } from "@/app/providers/toast-provider";
 
 export function UserMenu() {
   const { isAuthenticated, isLoading, session, login, logout } = useAuth();
+  const { addToast } = useToast();
 
   if (isLoading) {
     // Return a skeleton loader while checking auth state
@@ -30,6 +32,15 @@ export function UserMenu() {
       </Link>
     );
   }
+
+  const handleLogout = () => {
+    addToast("You have been signed out successfully.", "success");
+    
+    // Add a small delay to ensure the toast is displayed before redirect
+    setTimeout(() => {
+      logout({ callbackUrl: '/' });
+    }, 500);
+  };
 
   // User is authenticated, show dropdown menu
   return (
@@ -61,7 +72,7 @@ export function UserMenu() {
         </li>
         <li>
           <button 
-            onClick={() => logout()} 
+            onClick={handleLogout} 
             className="flex items-center gap-2 text-error py-3 px-4"
           >
             <LogOut size={18} />

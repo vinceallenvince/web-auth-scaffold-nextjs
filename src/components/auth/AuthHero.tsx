@@ -24,7 +24,7 @@ function AuthHero({
   }, []);
 
   return (
-    <div className={`hero-content text-center lg:text-left ${className}`}>
+    <div className={`hero-content ${className}`}>
       <div 
         className={`max-w-md transform transition-all duration-500 ease-in-out ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
