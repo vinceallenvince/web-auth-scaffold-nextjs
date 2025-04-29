@@ -1,4 +1,7 @@
+import 'server-only';
+import { headers } from 'next/headers';
 import { defaultLocale, Dictionary, Locale, isValidLocale } from './config';
+import { createTranslationFunction } from './utils';
 
 // Import the locale files
 import en from './locales/en.json';
@@ -11,69 +14,61 @@ const dictionaries = {
 };
 
 /**
- * Get dictionary for a specific locale
+ * Gets the appropriate dictionary for the provided locale
  */
 export async function getDictionary(locale: Locale): Promise<Dictionary> {
-  return Promise.resolve(dictionaries[locale]);
+  return dictionaries[locale] || dictionaries[defaultLocale];
 }
 
 /**
- * Get locale from string (used by both client and server)
+ * Extracts and validates locale from a string
  */
 export function getLocaleFromString(localeString: string | undefined): Locale {
   if (localeString && isValidLocale(localeString)) {
-    return localeString as Locale;
+    return localeString;
   }
   return defaultLocale;
 }
 
 /**
- * Get locale from request - ONLY USE IN SERVER COMPONENTS
- * 
- * In a real app with App Router, you would use headers() from 'next/headers'
- * to access the x-locale header that our middleware sets.
- * 
- * For now, we're keeping it simple to avoid build errors.
+ * Creates a translations object with the t() function for server components
  */
-export async function getLocaleFromRequest(): Promise<Locale> {
-  // For now, just return default locale
-  // In a real implementation, you would use:
-  // const headersList = headers();
-  // const localeHeader = headersList.get('x-locale');
-  return defaultLocale;
+export function createTranslations(dictionary: Dictionary) {
+  const t = createTranslationFunction(dictionary);
+  
+  return {
+    t,
+    dictionary,
+  };
 }
 
 /**
- * Server-side translation helper
+ * Gets the current locale from the Accept-Language header or falls back to default
  */
-export function createTranslations(dictionary: Dictionary) {
-  // Helper function to get nested translation values
-  return function t(key: string, placeholders?: Record<string, string>): string {
-    // Split the key by dots to access nested properties
-    const keys = key.split('.');
-    let value: unknown = dictionary;
+export async function getLocaleFromHeaders(): Promise<Locale> {
+  try {
+    // Get the Accept-Language header
+    const headersList = await headers();
+    const acceptLanguage = headersList.get('Accept-Language');
     
-    // Navigate through nested objects
-    for (const k of keys) {
-      if (typeof value === 'object' && value !== null && k in value) {
-        value = (value as Record<string, unknown>)[k];
-      } else {
-        return key; // Key not found, return the key as fallback
+    if (!acceptLanguage) {
+      return defaultLocale;
+    }
+    
+    // Parse the Accept-Language header
+    const preferredLocales = acceptLanguage.split(',')
+      .map((locale: string) => locale.split(';')[0].trim());
+    
+    // Find the first supported locale
+    for (const locale of preferredLocales) {
+      const localePrefix = locale.split('-')[0];
+      if (isValidLocale(localePrefix)) {
+        return localePrefix as Locale;
       }
     }
-    
-    // If the value is not a string, return the key
-    if (typeof value !== 'string') {
-      return key;
-    }
-    
-    // Replace placeholders if provided
-    if (placeholders) {
-      return Object.entries(placeholders).reduce((result, [placeholder, replacement]) => {
-        return result.replace(new RegExp(`{${placeholder}}`, 'g'), replacement);
-      }, value);
-    }
-    
-    return value;
-  };
+  } catch (error) {
+    console.error('Error getting locale from headers:', error);
+  }
+  
+  return defaultLocale;
 } 
