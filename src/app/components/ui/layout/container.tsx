@@ -28,9 +28,9 @@ export function Container<T extends ElementType = 'div'>({
   return (
     <Component
       className={cn(
-        'w-full mx-auto px-4 sm:px-6 lg:px-8',
-        // If not fluid, apply max-width constraints
-        !fluid && 'max-w-7xl',
+        'w-full mx-auto px-6 md:px-6 lg:px-8',
+        // If not fluid, apply max-width constraints but maintain left-justified content
+        !fluid && 'max-w-7xl mr-auto ml-0',
         className
       )}
       {...props}

@@ -23,10 +23,10 @@ function HomeHero({ className }: HomeHeroProps) {
     <section className={cn('hero bg-gradient-to-br py-24 md:py-32', className)}>
       <div className="hero-content w-full">
         <Container>
-          <div className="flex flex-col items-center space-y-12 max-w-4xl mx-auto">
+          <div className="flex flex-col space-y-12 w-full">
             <div 
               className={cn(
-                'transform transition-all duration-500 ease-in-out text-center',
+                'transform transition-all duration-500 ease-in-out',
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               )}
             >
@@ -34,7 +34,7 @@ function HomeHero({ className }: HomeHeroProps) {
                 Welcome to <span className="text-primary font-bold">Next.js Auth Scaffold</span>
               </H1>
               
-              <p className="text-lg md:text-xl text-base-content/80 max-w-2xl mx-auto mb-8">
+              <p className="text-lg md:text-xl text-base-content/80 max-w-2xl mb-8">
                 A secure, modern authentication system built with Next.js and Auth.js.
                 Get started with magic link authentication in minutes.
               </p>
@@ -42,7 +42,7 @@ function HomeHero({ className }: HomeHeroProps) {
             
             <div 
               className={cn(
-                'transform transition-all duration-500 delay-150 ease-in-out text-center',
+                'transform transition-all duration-500 delay-150 ease-in-out',
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               )}
             >
@@ -50,6 +50,7 @@ function HomeHero({ className }: HomeHeroProps) {
                 href="/auth/magic-link" 
                 size="lg"
                 variant="primary"
+                className="font-medium"
               >
                 LOGIN
               </ButtonLink>

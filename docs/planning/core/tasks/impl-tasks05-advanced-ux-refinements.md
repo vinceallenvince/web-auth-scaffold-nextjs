@@ -86,6 +86,10 @@ This document outlines the implementation tasks for advanced UX refinements as s
      - Refine navigation component alignment to match specifications
      - Update footer component alignment for consistency
      - Ensure content components maintain consistent padding
+     - Navbar items should be:
+        - left-justified: Home, Examples
+            - Note: When authentitcated, left-justified items should be Home, Examples, Hello World
+        - right-justified: theme switcher, user profile
      - Fix any layout inconsistencies across pages
 
   3. **Responsive behavior testing**:
@@ -95,11 +99,11 @@ This document outlines the implementation tasks for advanced UX refinements as s
      - Ensure smooth transitions between breakpoints
 
 **Acceptance Criteria**:
-- [ ] Navigation, main content, and footer have equal left-side padding
-- [ ] Layout maintains consistency across all application pages
-- [ ] Components align correctly across different viewports
-- [ ] Responsive behavior preserves layout consistency
-- [ ] Visual design appears balanced and professional
+- [x] Navigation, main content, and footer have equal left-side padding
+- [x] Layout maintains consistency across all application pages
+- [x] Components align correctly across different viewports
+- [x] Responsive behavior preserves layout consistency
+- [x] Visual design appears balanced and professional
 
 **Common Pitfalls & Tips**:
 - Avoid using fixed pixel values for padding; prefer relative units
@@ -121,7 +125,7 @@ This document outlines the implementation tasks for advanced UX refinements as s
 **Time Estimate**: 4-6 hours
 **Story Points**: 3
 **Dependencies**: None
-**Status**: TODO
+**Status**: DONE
 
 ### UXRF-11: Localization Framework Setup
 **Type**: Task  

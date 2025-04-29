@@ -37,7 +37,7 @@ export default function ExamplesPage() {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container-left-justified py-12">
       <h1 className="text-4xl font-bold mb-6">Component Examples</h1>
       <p className="text-lg mb-12">
         Browse these example pages to see our UI components in action.

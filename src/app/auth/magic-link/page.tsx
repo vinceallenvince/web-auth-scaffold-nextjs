@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import MagicLinkForm from "./magic-link-form";
-import { AuthHero } from "@/components/auth";
+import { Container } from "@/app/components/ui/layout/container";
 
 export const metadata: Metadata = {
   title: "Magic Link Authentication | Web Auth Scaffold",
@@ -9,21 +9,29 @@ export const metadata: Metadata = {
 
 export default function MagicLinkPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl">
-        <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
-          <div className="w-full lg:w-1/2">
-            <MagicLinkForm />
-          </div>
-          
-          <div className="w-full lg:w-1/2">
-            <AuthHero 
-              title="Secure Magic Link Login"
-              description="Secure, convenient authentication without the hassle of passwords."
-            />
-          </div>
+    <div className="flex flex-col">
+      <section className='hero bg-gradient-to-br py-24 md:py-32'>
+        <div className="hero-content w-full">
+          <Container>
+            <div className="flex flex-col lg:flex-row gap-8">
+              <div className="w-full">
+                <div className="max-w-md">
+                  <MagicLinkForm />
+                </div>
+              </div>
+              <div className="card card-border bg-base-100 w-full">
+                <div className="card-body">
+                <h1 className="text-3xl font-bold mb-3">Magic Link Login</h1>
+                  <p>Secure, convenient authentication without the hassle of passwords</p>
+                </div>
+              </div>
+              <div className="w-full">
+                &nbsp;
+              </div>
+            </div>
+          </Container>
         </div>
-      </div>
+      </section>
     </div>
   );
 } 
