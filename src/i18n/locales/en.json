@@ -1,0 +1,47 @@
+{
+  "common": {
+    "navigation": {
+      "home": "Home",
+      "examples": "Examples",
+      "helloworld": "Hello World",
+      "profile": "Profile"
+    },
+    "buttons": {
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "loading": "Loading..."
+    },
+    "footer": {
+      "copyright": "© 2025 Your Company. All rights reserved.",
+      "links": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "contact": "Contact Us"
+      }
+    }
+  },
+  "auth": {
+    "signin": "Sign In",
+    "signout": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "magicLink": "Sign in with Magic Link",
+    "magicLinkSent": "Check your email for a login link"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "name": "Name",
+    "email": "Email",
+    "joinDate": "Member since",
+    "editProfile": "Edit Profile",
+    "saveChanges": "Save Changes",
+    "cancelEdit": "Cancel"
+  },
+  "errors": {
+    "general": "An error occurred",
+    "sessionExpired": "Your session has expired",
+    "invalidInput": "Please check your input"
+  }
+} 

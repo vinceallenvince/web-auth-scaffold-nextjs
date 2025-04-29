@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/app/components/ui/theme-toggle";
 import { UserMenu } from "./UserMenu";
 import { useAuth } from "@/lib/hooks/use-auth";
+import LanguageToggle from "@/app/language-toggle";
 
 interface NavLinkProps {
   href: string;
@@ -210,6 +211,15 @@ export function Navbar({ className }: NavbarProps) {
                         DaisyUI
                       </NavLink>
                     </li>
+                    <li key="i18n-demo-mobile">
+                      <NavLink 
+                        href="/i18n-demo" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
+                        i18n Demo
+                      </NavLink>
+                    </li>
                   </ul>
                 </li>
                 <li key="auth-mobile" className="mt-6 pb-3 border-t border-base-300 pt-3">
@@ -219,6 +229,9 @@ export function Navbar({ className }: NavbarProps) {
                 </li>
                 <li key="theme-toggle-mobile" className="mt-4 flex justify-center">
                   <ThemeToggle />
+                </li>
+                <li key="language-toggle-mobile" className="mt-2 flex justify-center">
+                  <LanguageToggle />
                 </li>
               </ul>
             </div>
@@ -265,6 +278,11 @@ export function Navbar({ className }: NavbarProps) {
                           DaisyUI
                         </NavLink>
                       </li>
+                      <li key="i18n-demo">
+                        <NavLink href="/i18n-demo">
+                          i18n Demo
+                        </NavLink>
+                      </li>
                     </ul>
                   </details>
                 </li>
@@ -279,11 +297,21 @@ export function Navbar({ className }: NavbarProps) {
             </div>
           </div>
           
-          {/* Navbar End - Additional Controls */}
-          <div className="navbar-end">
-            <div className="hidden sm:block mr-4">
+          {/* Navbar End - Auth, Theme, etc. */}
+          <div className="navbar-end gap-2">
+            {isAuthenticated && (
+              <div className="hidden md:flex">
+                <NavLink href="/helloworld" className="btn btn-ghost">
+                  Hello World
+                </NavLink>
+              </div>
+            )}
+            
+            <div className="hidden md:flex md:items-center md:gap-2">
+              <LanguageToggle />
               <ThemeToggle />
             </div>
+            
             <UserMenu />
           </div>
         </div>

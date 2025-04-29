@@ -26,6 +26,14 @@ To effectively work with this application, refer to these official documentation
 | Tailwind CSS | [https://tailwindcss.com/docs](https://tailwindcss.com/docs) | Utility-first CSS framework documentation |
 | DaisyUI | [https://daisyui.com/docs](https://daisyui.com/docs) | Component library built on Tailwind CSS |
 
+### Localization
+
+| Technology | Documentation Link | Description |
+|------------|-------------------|-------------|
+| Next.js i18n | [https://nextjs.org/docs/app/building-your-application/routing/internationalization](https://nextjs.org/docs/app/building-your-application/routing/internationalization) | Official Next.js documentation for internationalization |
+| FormatJS | [https://formatjs.io/](https://formatjs.io/) | Library for internationalization features |
+| Custom i18n | [/src/i18n/README.md](/src/i18n/README.md) | Project-specific i18n implementation details |
+
 ### Testing
 
 | Technology | Documentation Link | Description |

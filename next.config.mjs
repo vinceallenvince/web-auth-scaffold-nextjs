@@ -24,6 +24,10 @@ const nextConfig = {
     // Number of pages to keep in memory
     pagesBufferLength: 5,
   },
+  
+  // Note: i18n configuration is not supported in App Router.
+  // We're using a custom i18n implementation instead.
+  // See: src/i18n/README.md
 };
 
 // Note: Environment validation is performed before build via npm script

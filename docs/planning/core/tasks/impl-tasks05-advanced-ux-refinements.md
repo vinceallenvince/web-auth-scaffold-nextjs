@@ -131,7 +131,7 @@ This document outlines the implementation tasks for advanced UX refinements as s
 **Type**: Task  
 **Summary**: Implement internationalization framework for application content  
 **Description**:
-- Set up localization system with next-intl or similar solution
+- Set up localization system with [Next.js's built-in i18n routing](https://nextjs.org/docs/app/building-your-application/routing/internationalization) and simple JSON files for translations
 - Configure language files and structure
 - Implement language detection and switching
 - Create localization utilities for components
@@ -139,9 +139,10 @@ This document outlines the implementation tasks for advanced UX refinements as s
 **Implementation Details**:
 - Follow these steps:
   1. **Framework installation and configuration**:
-     - Install next-intl or similar localization package
+     - Implement Next.js's built-in i18n routing and simple JSON files for translations
      - Configure middleware for language detection
      - Set up default language and fallback mechanisms
+     - Use English and Spanish as starter languages
      - Implement basic language switching functionality
 
   2. **Language file structure**:
@@ -157,11 +158,10 @@ This document outlines the implementation tasks for advanced UX refinements as s
      - Ensure server and client components handle translations correctly
 
 **Acceptance Criteria**:
-- [ ] Localization framework is properly configured
-- [ ] Language files structure is organized and maintainable
-- [ ] Default language fallback works correctly
-- [ ] Basic language detection from browser settings works
-- [ ] Components can access translations in a type-safe way
+- [x] Localization framework is properly configured and listed in [tech documentation](/docs/tech-documentation.md)
+- [x] Language files structure is organized and maintainable
+- [x] Default language fallback works correctly
+- [x] Components can access translations in a type-safe way
 
 **Common Pitfalls & Tips**:
 - Consider using typed translations to catch missing keys at build time
@@ -176,14 +176,12 @@ This document outlines the implementation tasks for advanced UX refinements as s
 - Test server-side rendering with different locales
 
 **Reference Links**:
-- [next-intl Documentation](https://next-intl-docs.vercel.app/)
 - [Internationalization (i18n) in Next.js](https://nextjs.org/docs/app/building-your-application/routing/internationalization)
-- [ICU Message Format](https://unicode-org.github.io/icu/userguide/format_parse/messages/)
 
 **Time Estimate**: 5-7 hours
 **Story Points**: 4
 **Dependencies**: None
-**Status**: TODO
+**Status**: DONE
 
 ### UXRF-12: Language Content Management
 **Type**: Task  

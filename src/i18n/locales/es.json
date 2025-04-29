@@ -1,0 +1,47 @@
+{
+  "common": {
+    "navigation": {
+      "home": "Inicio",
+      "examples": "Ejemplos",
+      "helloworld": "Hola Mundo",
+      "profile": "Perfil"
+    },
+    "buttons": {
+      "submit": "Enviar",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "loading": "Cargando..."
+    },
+    "footer": {
+      "copyright": "© 2025 Su Empresa. Todos los derechos reservados.",
+      "links": {
+        "privacy": "Política de Privacidad",
+        "terms": "Términos de Servicio",
+        "contact": "Contáctenos"
+      }
+    }
+  },
+  "auth": {
+    "signin": "Iniciar Sesión",
+    "signout": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidó su contraseña?",
+    "magicLink": "Iniciar sesión con Magic Link",
+    "magicLinkSent": "Revise su correo electrónico para un enlace de inicio de sesión"
+  },
+  "profile": {
+    "title": "Su Perfil",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "joinDate": "Miembro desde",
+    "editProfile": "Editar Perfil",
+    "saveChanges": "Guardar Cambios",
+    "cancelEdit": "Cancelar"
+  },
+  "errors": {
+    "general": "Ocurrió un error",
+    "sessionExpired": "Su sesión ha expirado",
+    "invalidInput": "Por favor revise su entrada"
+  }
+} 

@@ -7,6 +7,7 @@ import { ThemeProvider } from "./providers/theme-provider";
 import { ToastProvider } from "./providers/toast-provider";
 import { Navbar, SkipToContent } from "./components/ui/navigation";
 import { Footer } from "./components/ui/footer";
+import I18nProviderWrapper from "./providers/i18n-provider";
 
 // Adding explicit font display strategy to avoid FOUT (Flash of Unstyled Text)
 const geistSans = Geist({
@@ -52,12 +53,14 @@ export default async function RootLayout({
         <AuthSessionProvider session={session}>
           <ThemeProvider>
             <ToastProvider>
-              <SkipToContent />
-              <Navbar />
-              <main id="main-content" className="flex-1">
-                {children}
-              </main>
-              <Footer />
+              <I18nProviderWrapper>
+                <SkipToContent />
+                <Navbar />
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </I18nProviderWrapper>
             </ToastProvider>
           </ThemeProvider>
         </AuthSessionProvider>
