@@ -28,9 +28,9 @@ export function Container<T extends ElementType = 'div'>({
   return (
     <Component
       className={cn(
-        'w-full mx-auto px-6 md:px-6 lg:px-8',
-        // If not fluid, apply max-width constraints but maintain left-justified content
-        !fluid && 'max-w-7xl mr-auto ml-0',
+        'w-full px-6 md:px-6 lg:px-8',
+        // Apply either centered or left-justified alignment based on fluid prop
+        fluid ? 'mx-auto' : 'max-w-7xl mr-auto ml-0',
         className
       )}
       {...props}

@@ -25,6 +25,7 @@ export default function MagicLinkPage() {
                   <p>Secure, convenient authentication without the hassle of passwords</p>
                 </div>
               </div>
+              {/* intentional for layout spacing: */}
               <div className="w-full">
                 &nbsp;
               </div>

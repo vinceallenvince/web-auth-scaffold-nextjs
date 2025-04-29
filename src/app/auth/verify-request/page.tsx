@@ -31,10 +31,11 @@ export default function VerifyRequestPage() {
                  
                 </div>
               </div>
-
+              {/* intentional for layout spacing: */}
               <div className="w-full">
                   &nbsp;
               </div>
+              {/* intentional for layout spacing: */}
               <div className="w-full">
                 &nbsp;
               </div>
