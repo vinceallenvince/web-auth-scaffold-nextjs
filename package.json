@@ -40,6 +40,7 @@
     "@types/negotiator": "^0.6.3",
     "clsx": "^2.1.1",
     "daisyui": "^3.9.4",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.3.1",
     "lucide-react": "^0.503.0",
     "negotiator": "^1.0.0",

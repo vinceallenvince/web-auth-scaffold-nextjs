@@ -5,4 +5,4 @@ export * from './config';
 export { I18nProvider, useTranslations, useLocale } from './client';
 
 // Export server utilities
-export { getDictionary, getLocaleFromString, getLocaleFromRequest, createTranslations } from './server'; 
+export { getDictionary, getLocaleFromString, getLocaleFromRequest, getLocaleFromHeaders, createTranslations } from './server'; 
