@@ -1,17 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-
-// List of supported locales
-const locales = ['en', 'es'];
-const defaultLocale = 'en';
+import { locales, defaultLocale, Locale } from '@/i18n/config';
 
 // Get locale from request
-function getLocale(request: NextRequest): string {
+function getLocale(request: NextRequest): Locale {
   // First, try to get locale from cookie
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
-  if (cookieLocale && locales.includes(cookieLocale)) {
-    return cookieLocale;
+  if (cookieLocale && locales.includes(cookieLocale as Locale)) {
+    return cookieLocale as Locale;
   }
   
   // Negotiator expects plain object so we need to transform headers
@@ -26,8 +23,9 @@ function getLocale(request: NextRequest): string {
     return defaultLocale;
   }
   
-  // Match to supported locales 
-  return matchLocale(languages, locales, defaultLocale);
+  // Match to supported locales - need to convert to string[] for the matcher
+  const stringLocales = locales as unknown as string[];
+  return matchLocale(languages, stringLocales, defaultLocale) as Locale;
 }
 
 export function middleware(request: NextRequest) {
@@ -61,7 +59,7 @@ export function middleware(request: NextRequest) {
   
   // If there's no NEXT_LOCALE cookie or it's different from the detected locale,
   // set the cookie for future requests
-  const currentCookieLocale = request.cookies?.get('NEXT_LOCALE')?.value;
+  const currentCookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   if (currentCookieLocale !== locale) {
     // Set the locale cookie with a 1-year expiry
     response.cookies.set('NEXT_LOCALE', locale, { 
