@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { RadioGroup, Radio } from '@/components/ui/form';
-import { FormField } from '@/components/ui/form';
+import { RadioGroup, Radio, FormField } from '@/components/ui/form';
 
 export default function RadioGroupDemo() {
   const [selectedValue1, setSelectedValue1] = useState<string>('email');

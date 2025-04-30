@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthGuard } from "@/components/auth/auth-guard";
 import { getSession } from "@/lib/auth";
-import { ProfileCard } from "./components/profile-card";
+import { ProfileCard } from "./components";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
