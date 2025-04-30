@@ -1,6 +1,4 @@
 import { Resend } from 'resend';
-import fs from 'fs';
-import path from 'path';
 import { emailLogger } from './logger';
 
 // Configuration
@@ -10,12 +8,6 @@ const RETRY_DELAY_MS = 1000;
 
 // Initialize Resend with API key from environment variables
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
-
-// Create logs directory if it doesn't exist
-const logDir = path.join(process.cwd(), 'logs');
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
-}
 
 // Email sending options interface
 export interface SendEmailOptions {
@@ -83,46 +75,11 @@ export async function sendEmail(options: SendEmailOptions): Promise<EmailResult>
     emailSize: text.length + (html?.length || 0)
   });
 
-  // Save raw email to log file for debugging/audit purposes
-  try {
-    const logFile = path.join(logDir, 'emails.log');
-    const logEntry = JSON.stringify({
-      timestamp: new Date().toISOString(),
-      from,
-      to: recipients,
-      subject,
-      textLength: text.length,
-      htmlLength: html?.length || 0,
-      hasAttachments: !!attachments && attachments.length > 0
-    }, null, 2) + '\n\n';
-    
-    fs.appendFileSync(logFile, logEntry);
-    emailLogger.debug(`Email details saved to ${logFile}`);
-  } catch (error) {
-    emailLogger.error('Failed to save email to log file', error);
-  }
-
   // Check if we're in development mode or missing Resend API key
   const shouldSendEmail = process.env.FORCE_EMAIL_SENDING === 'true' || process.env.NODE_ENV === 'production';
   
   if (!resend || !shouldSendEmail) {
     emailLogger.info(`Email logged only (${!shouldSendEmail ? 'development mode' : 'no Resend API key provided'})`);
-    
-    // In development, write the full email content to a dedicated file for easy inspection
-    try {
-      // Create unique filename based on timestamp and recipient
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const safeRecipient = recipients.replace(/[<>@]/g, '_');
-      const emailFile = path.join(logDir, `email_${timestamp}_${safeRecipient}.html`);
-      
-      // Write full HTML email content to file
-      if (html) {
-        fs.writeFileSync(emailFile, html);
-        emailLogger.debug(`Full HTML email content saved to ${emailFile}`);
-      }
-    } catch (error) {
-      emailLogger.error('Failed to save full email content to file', error);
-    }
     
     return { 
       success: true, 
