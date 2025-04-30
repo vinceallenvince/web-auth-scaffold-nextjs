@@ -10,6 +10,8 @@ This is a secure, production-ready authentication scaffold for Next.js applicati
 - **TypeScript** - Full type safety throughout the codebase
 - **Testing** - Comprehensive test suite with Vitest and Playwright
 - **Accessibility** - WCAG 2.1 Level AA compliant components and pages
+- **Internationalization (i18n)** - Multi-language support with locale-based routing and dictionary-based translations
+
 
 ## Getting Started
 

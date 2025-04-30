@@ -1,0 +1,4 @@
+{
+    "installCommand": "npm install --legacy-peer-deps",
+    "buildCommand": "npm run validate-env && npx prisma generate && npx next build"
+  }
