@@ -1,57 +1,7 @@
 import 'server-only';
 import type { Locale } from '@/constants/i18n';
 import { defaultLocale } from '@/constants/i18n';
-
-// Define the dictionary structure type based on the existing JSON structure
-type Dictionary = {
-  common: {
-    appTitle: string;
-    appDescription: string;
-  };
-  navigation: {
-    skipToContent: string;
-    helloWorld: string;
-    examples: string;
-    buttons: string;
-    cards: string;
-    typography: string;
-    layout: string;
-    forms: string;
-    toggleTheme: string;
-  };
-  auth: {
-    login: string;
-    logout: string;
-    signIn: string;
-    signInWithMagicLink: string;
-    profile: string;
-    dashboard: string;
-    account: string;
-  };
-  footer: {
-    about: string;
-    contact: string;
-  };
-  home: {
-    welcome: string;
-    description: string;
-    magicLinkAuthTitle: string;
-    magicLinkAuthDescription: string;
-    modernStackTitle: string;
-    modernStackDescription: string;
-    readyToUseTitle: string;
-    readyToUseDescription: string;
-  };
-  errors: {
-    notFound: string;
-    goHome: string;
-    somethingWentWrong: string;
-  };
-  meta: {
-    title: string;
-    description: string;
-  };
-};
+import type { Dictionary } from '@/types/i18n.types';
 
 // Dictionary cache to avoid reloading the same file multiple times
 const dictionaries = new Map<Locale, Promise<Dictionary>>();

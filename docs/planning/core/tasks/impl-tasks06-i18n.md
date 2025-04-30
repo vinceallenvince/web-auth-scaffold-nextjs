@@ -236,12 +236,18 @@ This document outlines the implementation tasks for adding internationalization 
      - Update layout to provide translations to client components
      - Ensure context is only used where needed to minimize client JS
 
+  4. **Optimize type system**:
+     - Centralize Dictionary type definition in `src/types/i18n.types.ts`
+     - Use proper TypeScript strict mode with no 'any' types
+     - Share common types across components
+
 **Acceptance Criteria**:
-- [ ] I18nContext provider implemented with proper TypeScript types
-- [ ] useT() hook created with dot notation support
-- [ ] Context provider added to layout structure
-- [ ] Client components can access translations through the hook
-- [ ] Fallback handling implemented for missing translations
+- [X] I18nContext provider implemented with proper TypeScript types
+- [X] useT() hook created with dot notation support
+- [X] Context provider added to layout structure
+- [X] Client components can access translations through the hook
+- [X] Fallback handling implemented for missing translations
+- [X] Dictionary type centralized for type safety and DRY code
 
 **Common Pitfalls & Tips**:
 - Keep the client-side translation bundle as small as possible
@@ -265,7 +271,7 @@ This document outlines the implementation tasks for adding internationalization 
 **Time Estimate**: 2-4 hours  
 **Story Points**: 4  
 **Dependencies**: I18N-04  
-**Status**: TODO
+**Status**: DONE
 
 ### I18N-06: Language Switcher Component
 **Type**: Task  

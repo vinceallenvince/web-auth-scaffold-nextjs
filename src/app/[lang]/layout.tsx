@@ -7,6 +7,7 @@ import { Footer } from "@/components/ui/footer/server";
 import { locales } from "@/constants/i18n";
 import { getDictionary } from "./dictionaries";
 import type { Locale } from "@/constants/i18n";
+import { TranslationsProvider } from "./TranslationsProvider";
 
 // Define valid locales for static generation
 export function generateStaticParams() {
@@ -43,16 +44,21 @@ export default async function LocaleLayout({
   const { lang } = await params;
   const dictionary = await getDictionary(lang as Locale);
   
+  // Serialize the dictionary for client components
+  const serializedDictionary = JSON.parse(JSON.stringify(dictionary));
+  
   return (
     <html lang={lang} suppressHydrationWarning>
       <body>
         <ClientProviders session={session}>
-          <SkipToContent text={dictionary.navigation.skipToContent} />
-          <Navbar lang={lang as Locale} />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer lang={lang as Locale} />
+          <TranslationsProvider translations={serializedDictionary}>
+            <SkipToContent text={dictionary.navigation.skipToContent} />
+            <Navbar lang={lang as Locale} />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer lang={lang as Locale} />
+          </TranslationsProvider>
         </ClientProviders>
       </body>
     </html>
