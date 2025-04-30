@@ -11,6 +11,8 @@
  * - Each component type lives in its own directory with its own index.ts
  * - This file aggregates all exports to simplify imports throughout the application
  * - Route-specific UI components remain in their respective route folders
+ * 
+ * NOTE: Server components should be imported directly, not through this barrel file
  */
 
 export * from './layout';
@@ -20,6 +22,6 @@ export * from './card';
 export * from './form';
 export * from './button';
 export * from './icons';
-export * from './footer';
-export { HomeHero, FeatureCard } from './hero';
+// Footer is a server component - import from './footer/server' instead
+export { FeatureCard } from './hero';
 export * from './toast';

@@ -5,11 +5,13 @@ import { cn } from "@/lib/utils";
 interface SkipToContentProps {
   contentId?: string;
   className?: string;
+  text?: string;
 }
 
 export function SkipToContent({
   contentId = "main-content",
   className,
+  text = "Skip to content",
 }: SkipToContentProps) {
   return (
     <a
@@ -19,7 +21,7 @@ export function SkipToContent({
         className
       )}
     >
-      Skip to content
+      {text}
     </a>
   );
 } 

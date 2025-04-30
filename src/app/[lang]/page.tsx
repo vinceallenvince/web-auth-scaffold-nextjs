@@ -1,6 +1,6 @@
 import { getDictionary } from "./dictionaries";
 import type { Locale } from "@/constants/i18n";
-import HomeHero from "@/components/ui/hero/HomeHero";
+import { HomeHero } from "@/components/ui/hero/server";
 
 export default async function HomePage({ 
   params 
@@ -17,7 +17,7 @@ export default async function HomePage({
   
   return (
     <div className="container mx-auto py-12 max-w-5xl">
-      <HomeHero />
+      <HomeHero lang={lang} />
     </div>
   );
 } 

@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { sendEmail } from "@/lib/email";
 import generateMagicLinkEmail from "@/emails/magic-link-template";
+import { defaultLocale } from "@/constants/i18n";
 
 // Create logs directory if it doesn't exist
 const logDir = path.join(process.cwd(), 'logs');
@@ -69,11 +70,12 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  // Define custom auth pages but let redirect callback handle locale
   pages: {
-    signIn: '/auth/magic-link',
-    signOut: '/auth/signout',
-    error: '/auth/error',
-    verifyRequest: '/auth/verify-request',
+    signIn: "/auth/magic-link",
+    signOut: "/auth/signout",
+    error: "/auth/error",
+    verifyRequest: "/auth/verify-request",
   },
   callbacks: {
     async session({ session, user }) {
@@ -82,6 +84,22 @@ export const authOptions: NextAuthOptions = {
         session.user.id = user.id;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // 1. Absolute URL pointing outside our domain → send to home (default locale)
+      if (!url.startsWith('/')) {
+        return url.startsWith(baseUrl) ? url : `${baseUrl}/${defaultLocale}`;
+      }
+
+      // 2. Relative URL – extract the first path segment *before* query / fragment
+      const [ , first ] = url.split(/[/?#]/); // '' | 'en' | 'fr' | …
+
+      if (first && /^[a-z]{2}(?:-[a-z]{2})?$/i.test(first)) {
+        // Already has locale
+        return `${baseUrl}${url}`;
+      }
+
+      return `${baseUrl}/${defaultLocale}${url}`;
     },
   },
   session: {
