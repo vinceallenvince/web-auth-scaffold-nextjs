@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface DbStatusResponse {
   success: boolean;
   status: string;
@@ -60,13 +62,13 @@ export default async function VerifyDbPage() {
         </div>
         
         <div className="mt-6">
-          <a 
+          <Link 
             href="/" 
             className="underline text-blue-600 hover:text-blue-800"
             aria-label="Return to home page"
           >
             Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>

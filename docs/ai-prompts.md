@@ -100,7 +100,7 @@ Using @impl-plan01-app-setup.md and @task-template.md , please create implementa
 
 ## Task implementation
 
-Please implement TEST-01 in @impl-tasks01-app-setup.md . Do not stop working until you have confirmed the Acceptance Criteria. Once confirmed, please mark the task's status as DONE.
+Please implement I18N-01 in @impl-tasks06-i18n.md. Do not stop working until you have confirmed the Acceptance Criteria. Do not skip ahead to the next task. If you need to install packages, use npm since we have @pnpm-issues.md. Once confirmed, please mark the task's status as DONE.
 
 ## Creating Plans
 

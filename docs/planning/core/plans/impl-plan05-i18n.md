@@ -42,7 +42,7 @@ This approach avoids additional runtime dependencies while maintaining full comp
 
 1. Create the dictionary structure
    - Set up the `app/[lang]/dictionaries` directory
-   - Create initial JSON files for each supported locale (en.json, es.json, fr.json)
+   - Create initial JSON files for each supported locale (en.json, es.json)
    - Establish consistent schema across all locale files
    - Organize translations by component/feature area
 

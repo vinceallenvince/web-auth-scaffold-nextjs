@@ -31,11 +31,11 @@ This document outlines the implementation tasks for adding internationalization 
      - Check that dynamic routes work correctly with the new structure
 
 **Acceptance Criteria**:
-- [ ] `next.config.js` updated with correct i18n configuration
-- [ ] App directory restructured with `[lang]` segment as the root
-- [ ] All routes accessible via locale-prefixed URLs
-- [ ] Default locale redirection working correctly
-- [ ] No routing regressions from the restructuring
+- [X] `next.config.js` updated with correct i18n configuration
+- [X] App directory restructured with `[lang]` segment as the root
+- [X] All routes accessible via locale-prefixed URLs
+- [X] Default locale redirection working correctly
+- [X] No routing regressions from the restructuring
 
 **Common Pitfalls & Tips**:
 - If routing behavior changes unexpectedly, check that all path references are updated
@@ -57,7 +57,7 @@ This document outlines the implementation tasks for adding internationalization 
 **Time Estimate**: 2-3 hours  
 **Story Points**: 3  
 **Dependencies**: None  
-**Status**: TODO
+**Status**: DONE
 
 ### I18N-02: Translation Dictionary Structure
 **Type**: Task  

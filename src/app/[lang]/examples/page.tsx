@@ -1,38 +1,44 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 export default function ExamplesPage() {
-  // List of available example pages
+  const params = useParams();
+  const lang = params.lang as string;
+
+  // List of available example pages with localized paths
   const examples = [
     {
       title: 'DaisyUI Components',
       description: 'DaisyUI component showcase with theme toggling and common UI elements.',
-      href: '/examples/daisyui',
+      href: `/${lang}/examples/daisyui`,
     },
     {
       title: 'Typography System',
       description: 'Complete typography component system with headings, text variants, and font loading optimizations.',
-      href: '/examples/typography',
+      href: `/${lang}/examples/typography`,
     },
     {
       title: 'Layout Components',
       description: 'Flexible layout system with containers, grids, sections, and spacing utilities.',
-      href: '/examples/layout',
+      href: `/${lang}/examples/layout`,
     },
     {
       title: 'Navigation Components',
       description: 'Navigation components including navbar and sidebar for consistent app navigation.',
-      href: '/examples/navigation',
+      href: `/${lang}/examples/navigation`,
     },
     {
       title: 'Button System',
       description: 'A comprehensive button component system with variants, states and accessibility features.',
-      href: '/examples/buttons',
+      href: `/${lang}/examples/buttons`,
     },
     {
       title: 'Card Components',
       description: 'Card components for displaying content in consistent containers.',
-      href: '/examples/cards',
+      href: `/${lang}/examples/cards`,
     },
   ];
 

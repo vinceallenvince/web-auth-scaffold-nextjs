@@ -3,7 +3,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { getCsrfToken } from "next-auth/react";
 import { useToast } from "@/app/providers/toast-provider";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { email as emailValidator } from "@/lib/form-validation";
 
 export default function MagicLinkForm() {
@@ -12,6 +12,8 @@ export default function MagicLinkForm() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { addToast } = useToast();
   const router = useRouter();
+  const params = useParams();
+  const lang = params.lang as string;
 
   useEffect(() => {
     const loadCsrfToken = async () => {
@@ -47,7 +49,7 @@ export default function MagicLinkForm() {
 
       if (response.ok) {
         addToast(`Magic link sent to ${email}. Please check your inbox.`, "success");
-        router.push("/auth/verify-request");
+        router.push(`/${lang}/auth/verify-request`);
       } else {
         const errorData = await response.json().catch(() => ({}));
         const errorMessage = errorData.error || 

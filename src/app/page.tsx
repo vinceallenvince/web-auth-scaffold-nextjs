@@ -1,9 +1,7 @@
-import { HomeHero } from "@/components/ui";
+import { redirect } from 'next/navigation';
 
-export default function Home() {
-  return (
-    <div className="flex flex-col">
-      <HomeHero />
-    </div>
-  );
+// This component will never actually render
+// It just redirects to the default locale
+export default function RootPage() {
+  redirect('/en');
 }
