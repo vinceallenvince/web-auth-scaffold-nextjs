@@ -108,4 +108,8 @@ Please complete the implementation plan started in --.md. You can refer to --.md
 
 ## Creating Tasks
 
-Using [task-template.md](/docs/plans/task-template.md), please create implementation tasks in --.md based on the implementation plan described in --.md. The maximum story point level for any task should be no greater than 5 points. You can use --.md as an example. 
+Using [task-template.md](/docs/plans/task-template.md), please create implementation tasks in --.md based on the implementation plan described in --.md. Do not include example code. The maximum story point level for any task should be no greater than 5 points. You can use --.md as an example. 
+
+## Code Review
+
+I would like you to give some code review feedback on these changes. Look for anything we can improve or anything that is not aligned with our @development-guide.md or @pr-review-checklist.md.
