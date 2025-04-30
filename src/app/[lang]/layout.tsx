@@ -3,10 +3,11 @@ import { getSession } from "@/lib/auth";
 import ClientProviders from "./ClientProviders";
 import { Navbar, SkipToContent } from "@/components/ui/navigation";
 import { Footer } from "@/components/ui/footer";
+import { locales } from "@/constants/i18n";
 
 // Define valid locales for static generation
 export function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "es" }];
+  return locales.map(lang => ({ lang }));
 }
 
 // Generate metadata dynamically

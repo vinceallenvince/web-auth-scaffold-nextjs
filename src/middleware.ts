@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const locales = ['en', 'es'];
-const defaultLocale = 'en';
+import { locales, defaultLocale } from "@/constants/i18n";
 
 export function middleware(request: NextRequest) {
   // Get the pathname from the URL
@@ -11,7 +9,7 @@ export function middleware(request: NextRequest) {
   const pathnameHasLocale = locales.some(
     locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
-
+  
   // Clone the request headers
   const requestHeaders = new Headers(request.headers);
   
