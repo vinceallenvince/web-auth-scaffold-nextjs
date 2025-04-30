@@ -1,5 +1,28 @@
 ---
-description:
-globs:
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
+# Next.js Application Structure
+
+## I18n Structure
+- The app uses App Router with a `[lang]` segment at the root level
+- All routes should be inside the `src/app/[lang]/` directory
+- The root layout at `src/app/layout.tsx` sets the HTML lang attribute
+- The locale segment layout is in `src/app/[lang]/layout.tsx`
+- Supported locales are defined in `src/constants/i18n.ts`
+
+## Navigation
+- Use the Next.js Link component with locale-prefixed hrefs
+- Navigation links should maintain the current locale
+- Use relative paths within the same locale segment
+
+## Dictionaries
+- Translation files are located in `src/app/[lang]/dictionaries/`
+- Dictionary loader is kept server-side only (never imported in client components)
+- Language switcher preserves the current path when changing locales
+
+## Static Generation
+- Routes are pre-rendered for all supported locales
+- The `generateStaticParams` function in layouts defines which locales to pre-render
+
