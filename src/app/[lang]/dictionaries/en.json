@@ -45,5 +45,10 @@
   "meta": {
     "title": "Web Auth Scaffold",
     "description": "A modern authentication scaffold built with Next.js"
+  },
+  "language": {
+    "switchLanguage": "Language",
+    "en": "English",
+    "es": "Spanish"
   }
 } 
