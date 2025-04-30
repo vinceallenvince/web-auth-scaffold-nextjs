@@ -32,7 +32,12 @@ async function getDbStatus(): Promise<DbStatusResponse> {
   }
 }
 
-export default async function VerifyDbPage() {
+export default async function VerifyDbPage({
+  params
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const { lang } = await params;
   const dbStatus = await getDbStatus();
   
   return (
@@ -63,7 +68,7 @@ export default async function VerifyDbPage() {
         
         <div className="mt-6">
           <Link 
-            href="/" 
+            href={`/${lang}/`} 
             className="underline text-blue-600 hover:text-blue-800"
             aria-label="Return to home page"
           >
