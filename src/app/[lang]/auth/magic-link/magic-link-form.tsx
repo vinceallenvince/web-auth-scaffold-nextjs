@@ -6,6 +6,9 @@ import { useToast } from "@/app/providers/toast-provider";
 import { useRouter, useParams } from "next/navigation";
 import { email as emailValidator } from "@/lib/form-validation";
 
+// Configuration constants
+const API_TIMEOUT_MS = 10000; // 10 seconds
+
 export default function MagicLinkForm() {
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const [email, setEmail] = useState<string>("");
@@ -44,7 +47,7 @@ export default function MagicLinkForm() {
     
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10-second timeout
+      const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT_MS);
       
       const response = await fetch("/api/auth/signin/email", {
         method: "POST",
