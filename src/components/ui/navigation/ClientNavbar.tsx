@@ -246,7 +246,7 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
           
           {/* Navbar End - Additional Controls */}
           <div className="navbar-end">
-            <div className="hidden sm:block mr-4">
+            <div key="locale-switcher-desktop" className="hidden sm:block mr-4">
               <LocaleSwitcher />
             </div>
             <div className="hidden sm:block mr-4">

@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { useT } from "@/app/lib/i18n-context";
-import { locales, Locale } from "@/constants/i18n";
+import { locales, Locale, defaultLocale } from "@/constants/i18n";
 import { cn } from "@/lib/utils";
 
 export function LocaleSwitcher() {
@@ -13,8 +13,21 @@ export function LocaleSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Get current locale from pathname
-  const currentLocale = pathname.split("/")[1] as Locale;
+  // Get current locale from pathname with validation and fallback
+  const currentLocale = (() => {
+    // Split pathname and filter out empty segments
+    const segments = pathname.split('/').filter(Boolean);
+    // Get the first segment as a candidate locale
+    const candidateLocale = segments[0];
+    
+    // Check if candidate is a valid locale
+    if (candidateLocale && locales.includes(candidateLocale as Locale)) {
+      return candidateLocale as Locale;
+    }
+    
+    // Fall back to default locale if no valid locale is found
+    return defaultLocale;
+  })();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -25,10 +38,20 @@ export function LocaleSwitcher() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+    
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener("keydown", handleKeyDown);
+    
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isOpen]);
 
   // Replace the locale segment in the current pathname
   const switchLocale = (locale: Locale) => {
@@ -37,12 +60,21 @@ export function LocaleSwitcher() {
       return;
     }
 
-    // Get path segments and replace the locale segment
-    const segments = pathname.split("/");
-    segments[1] = locale;
+    // Handle different URL structures
+    const segments = pathname.split('/').filter(Boolean);
+    let newPath = '';
     
-    // Join the segments back together
-    const newPath = segments.join("/");
+    if (segments.length === 0) {
+      // If we're at the root path
+      newPath = `/${locale}`;
+    } else if (locales.includes(segments[0] as Locale)) {
+      // If first segment is a valid locale, replace it
+      segments[0] = locale;
+      newPath = `/${segments.join('/')}`;
+    } else {
+      // If first segment is not a locale, insert the locale at the beginning
+      newPath = `/${locale}/${segments.join('/')}`;
+    }
     
     // Navigate to the new path
     router.push(newPath);
