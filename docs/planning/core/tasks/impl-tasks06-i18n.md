@@ -134,11 +134,11 @@ This document outlines the implementation tasks for adding internationalization 
      - Update root layout to use the correct HTML lang attribute
 
 **Acceptance Criteria**:
-- [ ] Dictionary loader implemented with `server-only` protection
-- [ ] `getDictionary` function created with proper error handling
-- [ ] Static generation configured for all supported locales
-- [ ] HTML lang attribute correctly set based on current locale
-- [ ] No translation data included in client JavaScript bundle
+- [X] Dictionary loader implemented with `server-only` protection
+- [X] `getDictionary` function created with proper error handling
+- [X] Static generation configured for all supported locales
+- [X] HTML lang attribute correctly set based on current locale
+- [X] No translation data included in client JavaScript bundle
 
 **Common Pitfalls & Tips**:
 - Make sure to use `server-only` to prevent client-side imports of translations
@@ -161,7 +161,7 @@ This document outlines the implementation tasks for adding internationalization 
 **Time Estimate**: 2-4 hours  
 **Story Points**: 4  
 **Dependencies**: I18N-02  
-**Status**: TODO
+**Status**: DONE
 
 ### I18N-04: Server Component Translation Integration
 **Type**: Task  

@@ -4,6 +4,8 @@ import ClientProviders from "./ClientProviders";
 import { Navbar, SkipToContent } from "@/components/ui/navigation";
 import { Footer } from "@/components/ui/footer";
 import { locales } from "@/constants/i18n";
+import { getDictionary } from "./dictionaries";
+import type { Locale } from "@/constants/i18n";
 
 // Define valid locales for static generation
 export function generateStaticParams() {
@@ -16,12 +18,13 @@ export async function generateMetadata({
 }: { 
   params: Promise<{ lang: string }> 
 }): Promise<Metadata> {
+  // Get dictionary based on the current locale
   const { lang } = await params;
-  // Log the current language (this is just to use the params and avoid linting errors)
-  console.log(`Rendering page in language: ${lang}`);
+  const dictionary = await getDictionary(lang as Locale);
+  
   return {
-    title: "Web Auth Scaffold",
-    description: "A modern authentication scaffold built with Next.js",
+    title: dictionary.meta.title,
+    description: dictionary.meta.description,
   };
 }
 
@@ -35,8 +38,9 @@ export default async function LocaleLayout({
   // Get the session from the server
   const session = await getSession();
   
+  // Get the dictionary for the current locale
   const { lang } = await params;
-  // Log the current language (this is just to use the params and avoid linting errors)
+  //const dictionary = await getDictionary(lang as Locale);
   console.log(`Rendering page in language: ${lang}`);
   
   return (

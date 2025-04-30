@@ -6,6 +6,7 @@ import { ButtonLink } from '../button';
 import { Container } from '../layout/container';
 import { H1 } from '../typography/heading';
 import { FeatureCard } from './FeatureCard';
+import { useSession } from 'next-auth/react';
 
 interface HomeHeroProps {
   className?: string;
@@ -13,6 +14,8 @@ interface HomeHeroProps {
 
 function HomeHero({ className }: HomeHeroProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { status } = useSession();
+  const isAuthenticated = status === 'authenticated';
 
   // Animation effect when component mounts
   useEffect(() => {
@@ -40,21 +43,23 @@ function HomeHero({ className }: HomeHeroProps) {
               </p>
             </div>
             
-            <div 
-              className={cn(
-                'transform transition-all duration-500 delay-150 ease-in-out',
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-              )}
-            >
-              <ButtonLink 
-                href="/auth/magic-link" 
-                size="lg"
-                variant="primary"
-                className="font-medium"
+            {!isAuthenticated && (
+              <div 
+                className={cn(
+                  'transform transition-all duration-500 delay-150 ease-in-out',
+                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                )}
               >
-                LOGIN
-              </ButtonLink>
-            </div>
+                <ButtonLink 
+                  href="/auth/magic-link" 
+                  size="lg"
+                  variant="primary"
+                  className="font-medium"
+                >
+                  LOGIN
+                </ButtonLink>
+              </div>
+            )}
             
             <div 
               className={cn(
