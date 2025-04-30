@@ -76,7 +76,7 @@ async function loadDictionary(locale: Locale): Promise<Dictionary> {
     const dictionary = await import(`./dictionaries/${locale}.json`);
     return dictionary as Dictionary;
   } catch (error) {
-    console.error(`Error loading dictionary for locale ${locale}:`, error);
+    console.error(`Error loading dictionary for locale ${locale}. File might be missing or contain invalid JSON:`, error);
     
     // Fallback to default locale if requested locale is not available
     if (locale !== defaultLocale) {
