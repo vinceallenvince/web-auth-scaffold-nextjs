@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { getSession } from "@/lib/auth";
-import ClientProviders from "./ClientProviders";
-import { Navbar, SkipToContent } from "@/components/ui/navigation";
-import { Footer } from "@/components/ui/footer";
+import ClientProviders from "../ClientProviders";
+import { SkipToContent } from "@/components/ui/navigation";
+import { Navbar } from "@/components/ui/navigation/server";
+import { Footer } from "@/components/ui/footer/server";
 import { locales } from "@/constants/i18n";
 import { getDictionary } from "./dictionaries";
 import type { Locale } from "@/constants/i18n";
@@ -40,17 +41,20 @@ export default async function LocaleLayout({
   
   // Get the dictionary for the current locale
   const { lang } = await params;
-  //const dictionary = await getDictionary(lang as Locale);
-  console.log(`Rendering page in language: ${lang}`);
+  const dictionary = await getDictionary(lang as Locale);
   
   return (
-    <ClientProviders session={session}>
-      <SkipToContent />
-      <Navbar />
-      <main id="main-content" className="flex-1">
-        {children}
-      </main>
-      <Footer />
-    </ClientProviders>
+    <html lang={lang} suppressHydrationWarning>
+      <body>
+        <ClientProviders session={session}>
+          <SkipToContent text={dictionary.navigation.skipToContent} />
+          <Navbar lang={lang} />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer lang={lang} />
+        </ClientProviders>
+      </body>
+    </html>
   );
 } 

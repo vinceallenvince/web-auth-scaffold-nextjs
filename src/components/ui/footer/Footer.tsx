@@ -1,7 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Locale } from "@/constants/i18n";
+import { getDictionary } from "@/app/[lang]/dictionaries";
 
-export function Footer() {
+interface FooterProps {
+  lang: string;
+}
+
+export async function Footer({ lang }: FooterProps) {
+  // Load the dictionary for the current locale
+  const dictionary = await getDictionary(lang as Locale);
   
   return (
     <footer className="footer bg-base-200 text-base-content py-6" aria-label="Site footer">
@@ -11,20 +19,20 @@ export function Footer() {
           <ul className="flex flex-col md:flex-row gap-4">
             <li>
               <Link 
-                href="/about" 
+                href={`/${lang}/about`} 
                 className="link link-hover text-base font-medium" 
                 aria-label="About page"
               >
-                About
+                {dictionary.footer.about}
               </Link>
             </li>
             <li>
               <Link 
-                href="/contact" 
+                href={`/${lang}/contact`} 
                 className="link link-hover text-base font-medium" 
                 aria-label="Contact page"
               >
-                Contact
+                {dictionary.footer.contact}
               </Link>
             </li>
           </ul>

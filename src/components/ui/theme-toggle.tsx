@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/app/providers/theme-provider';
 
 const MoonIcon = () => (
@@ -37,14 +37,29 @@ const SunIcon = () => (
   </svg>
 );
 
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  className?: string;
+  'aria-label'?: string;
+}
+
+export function ThemeToggle({ className, 'aria-label': ariaLabel }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  
+  // Only show the UI after mounting to prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  if (!mounted) {
+    return <div className="w-12 h-12" />; // Empty placeholder with same dimensions
+  }
 
   return (
     <button
       onClick={toggleTheme}
-      className="btn btn-ghost btn-circle min-h-12 h-12 w-12 flex items-center justify-center text-base-content transition-all"
-      aria-label={`Switch to ${theme === 'bumblebee' ? 'night' : 'bumblebee'} theme`}
+      className={`btn btn-ghost btn-circle min-h-12 h-12 w-12 flex items-center justify-center text-base-content transition-all ${className || ''}`}
+      aria-label={ariaLabel || `Switch to ${theme === 'bumblebee' ? 'night' : 'bumblebee'} theme`}
     >
       {theme === 'bumblebee' ? <MoonIcon /> : <SunIcon />}
     </button>

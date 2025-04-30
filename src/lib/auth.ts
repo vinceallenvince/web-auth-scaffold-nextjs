@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { sendEmail } from "@/lib/email";
 import generateMagicLinkEmail from "@/emails/magic-link-template";
+import { defaultLocale } from "@/constants/i18n";
 
 // Create logs directory if it doesn't exist
 const logDir = path.join(process.cwd(), 'logs');
@@ -70,10 +71,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/auth/magic-link',
-    signOut: '/auth/signout',
-    error: '/auth/error',
-    verifyRequest: '/auth/verify-request',
+    signIn: `/${defaultLocale}/auth/magic-link`,
+    signOut: `/${defaultLocale}/auth/signout`,
+    error: `/${defaultLocale}/auth/error`,
+    verifyRequest: `/${defaultLocale}/auth/verify-request`,
   },
   callbacks: {
     async session({ session, user }) {
@@ -82,6 +83,28 @@ export const authOptions: NextAuthOptions = {
         session.user.id = user.id;
       }
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // Handle relative URLs and ensure they maintain the user's current locale
+      if (url.startsWith('/')) {
+        // Get the locale from the current URL if available
+        const locale = url.split('/')[1];
+        if (locale && /^[a-z]{2}(-[a-z]{2})?$/i.test(locale)) {
+          // URL already has a locale segment, return as is
+          return `${baseUrl}${url}`;
+        }
+        
+        // URL doesn't have a locale, add the default locale
+        return `${baseUrl}/${defaultLocale}${url}`;
+      }
+      
+      // Handle absolute URLs (starts with the baseUrl)
+      else if (url.startsWith(baseUrl)) {
+        return url;
+      }
+      
+      // Fall back to the base URL with default locale
+      return `${baseUrl}/${defaultLocale}`;
     },
   },
   session: {

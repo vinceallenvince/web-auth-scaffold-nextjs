@@ -1,6 +1,19 @@
-import { Navbar, Sidebar } from "@/components/ui/navigation";
+import { Sidebar } from "@/components/ui/navigation";
+import { Navbar } from "@/components/ui/navigation/server";
+import { getDictionary } from "@/app/[lang]/dictionaries";
+import type { Locale } from "@/constants/i18n";
 
-export default function NavigationExamplesPage() {
+interface NavigationExamplesPageProps {
+  params: Promise<{ lang: string }>;
+}
+
+export default async function NavigationExamplesPage({
+  params
+}: NavigationExamplesPageProps) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  console.log(dictionary.common.appTitle);
+  
   return (
     <div className="space-y-8 p-4">
       <section className="rounded-box bg-base-200 p-6">
@@ -14,7 +27,7 @@ export default function NavigationExamplesPage() {
           <div>
             <h3 className="mb-2 text-xl font-semibold">Default Navbar</h3>
             <div className="rounded-box border border-base-300">
-              <Navbar />
+              <Navbar lang={lang} />
             </div>
           </div>
 
