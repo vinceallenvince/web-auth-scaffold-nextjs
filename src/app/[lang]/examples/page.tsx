@@ -40,6 +40,11 @@ export default function ExamplesPage() {
       description: 'Card components for displaying content in consistent containers.',
       href: `/${lang}/examples/cards`,
     },
+    {
+      title: 'i18n Client-Side',
+      description: 'Demonstration of client-side internationalization with the useT() hook for translation access.',
+      href: `/${lang}/examples/i18n`,
+    },
   ];
 
   return (
