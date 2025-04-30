@@ -1,0 +1,49 @@
+{
+  "common": {
+    "appTitle": "Estructura de Autenticación Web",
+    "appDescription": "Una aplicación Next.js con autenticación Auth.js"
+  },
+  "navigation": {
+    "skipToContent": "Saltar al contenido",
+    "helloWorld": "Hola Mundo",
+    "examples": "Ejemplos",
+    "buttons": "Botones",
+    "cards": "Tarjetas",
+    "typography": "Tipografía",
+    "layout": "Diseño",
+    "forms": "Formularios",
+    "toggleTheme": "Cambiar tema"
+  },
+  "auth": {
+    "login": "INICIAR SESIÓN",
+    "logout": "Cerrar sesión",
+    "signIn": "Iniciar sesión",
+    "signInWithMagicLink": "Iniciar sesión con enlace mágico",
+    "profile": "Perfil",
+    "dashboard": "Panel",
+    "account": "Cuenta"
+  },
+  "footer": {
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "home": {
+    "welcome": "Bienvenido a <span>Next.js Auth Scaffold</span>",
+    "description": "Un sistema de autenticación moderno y seguro construido con Next.js y Auth.js. Comienza con autenticación de enlace mágico en minutos.",
+    "magicLinkAuthTitle": "Autenticación de Enlace Mágico",
+    "magicLinkAuthDescription": "Autenticación sin contraseña con enlaces mágicos seguros por correo electrónico",
+    "modernStackTitle": "Stack Moderno",
+    "modernStackDescription": "Construido con Next.js, TypeScript y Tailwind CSS",
+    "readyToUseTitle": "Listo para Usar",
+    "readyToUseDescription": "Preconfigurado con todo lo necesario para empezar a construir"
+  },
+  "errors": {
+    "notFound": "Página no encontrada",
+    "goHome": "Volver al inicio",
+    "somethingWentWrong": "Algo salió mal"
+  },
+  "meta": {
+    "title": "Estructura de Autenticación Web",
+    "description": "Una estructura de autenticación moderna construida con Next.js"
+  }
+} 

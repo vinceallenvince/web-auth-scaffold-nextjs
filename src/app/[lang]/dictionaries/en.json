@@ -1,0 +1,49 @@
+{
+  "common": {
+    "appTitle": "Web Auth Scaffold",
+    "appDescription": "A Next.js application with Auth.js authentication"
+  },
+  "navigation": {
+    "skipToContent": "Skip to content",
+    "helloWorld": "Hello World",
+    "examples": "Examples",
+    "buttons": "Buttons",
+    "cards": "Cards",
+    "typography": "Typography",
+    "layout": "Layout",
+    "forms": "Forms",
+    "toggleTheme": "Toggle theme"
+  },
+  "auth": {
+    "login": "LOGIN",
+    "logout": "Logout",
+    "signIn": "Sign In",
+    "signInWithMagicLink": "Sign in with Magic Link",
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "account": "Account"
+  },
+  "footer": {
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "welcome": "Welcome to <span>Next.js Auth Scaffold</span>",
+    "description": "A secure, modern authentication system built with Next.js and Auth.js. Get started with magic link authentication in minutes.",
+    "magicLinkAuthTitle": "Magic Link Auth",
+    "magicLinkAuthDescription": "Passwordless authentication with secure email magic links",
+    "modernStackTitle": "Modern Stack",
+    "modernStackDescription": "Built with Next.js, TypeScript, and Tailwind CSS",
+    "readyToUseTitle": "Ready to Use",
+    "readyToUseDescription": "Pre-configured with all you need to start building"
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "goHome": "Go back home",
+    "somethingWentWrong": "Something went wrong"
+  },
+  "meta": {
+    "title": "Web Auth Scaffold",
+    "description": "A modern authentication scaffold built with Next.js"
+  }
+} 

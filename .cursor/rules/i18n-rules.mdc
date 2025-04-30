@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Internationalization (i18n)
+
+## Dictionary Structure
+- Translations are stored in `src/app/[lang]/dictionaries/`
+- Each supported language has its own JSON file (`en.json`, `es.json`)
+- Translations are organized by component/feature area within each file
+- Full documentation is available at [src/app/[lang]/dictionaries/index.md](mdc:src/app/[lang]/dictionaries/index.md)
+
+## Key Structure
+- Translation keys follow a nested structure: `area.component.element`
+- Example: `navigation.skipToContent`, `home.welcome`, `auth.login`
+- This structure ensures consistency and makes maintenance easier
+
+## Usage Patterns
+- Server components: Load dictionary server-side using `getDictionary(lang)`
+- Client components: Access translations through the `useT()` hook
+- Always handle missing translations with fallbacks
+- Use dot notation for accessing nested translations
+
+## Adding New Content
+- Add new keys to all language files to maintain consistency
+- Use existing areas or add new ones for significant features
+- Document any special formatting needs for translations
+- Supported locales are defined in [src/constants/i18n.ts](mdc:src/constants/i18n.ts)
