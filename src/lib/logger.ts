@@ -3,8 +3,6 @@
  * Provides consistent log formatting and centralized log management
  */
 
-import fs from 'fs';
-import path from 'path';
 
 // Define log levels for different types of messages
 export enum LogLevel {
@@ -32,12 +30,6 @@ export interface LogEntry {
   message: string;
   data?: Record<string, unknown>;
   error?: Error | unknown;
-}
-
-// Create logs directory if it doesn't exist
-const logDir = path.join(process.cwd(), 'logs');
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
 }
 
 /**
@@ -110,44 +102,11 @@ function formatLogForConsole(entry: LogEntry): string {
 }
 
 /**
- * Formats a log entry as a string for file output
- */
-function formatLogForFile(entry: LogEntry): string {
-  // Convert entry to JSON string for structured logging
-  try {
-    return JSON.stringify(entry) + '\n';
-  } catch (e) {
-    // Fall back to simple format if JSON stringification fails
-    return `${entry.timestamp} [${entry.level}] [${entry.category}]: ${entry.message}\n`;
-  }
-}
-
-/**
- * Writes a log entry to the appropriate log file
- */
-function writeToLogFile(entry: LogEntry): void {
-  try {
-    // Use different log files for different categories
-    const logFile = path.join(logDir, `${entry.category.toLowerCase()}.log`);
-    const formattedLog = formatLogForFile(entry);
-    
-    // Append to log file
-    fs.appendFileSync(logFile, formattedLog);
-  } catch (error) {
-    // If logging fails, output to console as fallback
-    console.error('Failed to write to log file:', error);
-  }
-}
-
-/**
  * Log handler that processes log entries
  */
 function handleLog(entry: LogEntry): void {
-  // Output to console
+  // Output to console only
   console.log(formatLogForConsole(entry));
-  
-  // Write to log file
-  writeToLogFile(entry);
 }
 
 /**

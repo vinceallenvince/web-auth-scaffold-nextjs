@@ -3,17 +3,9 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import EmailProvider from "next-auth/providers/email";
 import { prisma } from "@/lib/prisma";
 import { type NextAuthOptions } from "next-auth";
-import fs from 'fs';
-import path from 'path';
 import { sendEmail } from "@/lib/email";
 import generateMagicLinkEmail from "@/emails/magic-link-template";
 import { defaultLocale } from "@/constants/i18n";
-
-// Create logs directory if it doesn't exist
-const logDir = path.join(process.cwd(), 'logs');
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir, { recursive: true });
-}
 
 // Auth.js configuration
 export const authOptions: NextAuthOptions = {
@@ -42,16 +34,6 @@ export const authOptions: NextAuthOptions = {
         
         // Output to console with high visibility
         console.log(logEntry);
-        
-        // Also save to file for easy reference - using async file operations to avoid blocking the event loop
-        try {
-          const logFile = path.join(logDir, 'magic-links.log');
-          // Use async file write instead of synchronous appendFileSync
-          await fs.promises.appendFile(logFile, logEntry);
-          console.log(`✅ Magic link saved to ${logFile}`);
-        } catch (error) {
-          console.error('❌ Failed to save magic link to log file:', error);
-        }
         
         // Generate the email content using our template
         const { html, text } = generateMagicLinkEmail(url, email);
