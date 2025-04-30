@@ -1,9 +1,9 @@
 "use client";
 
 import { Session } from "next-auth";
-import { AuthSessionProvider } from "../providers/session-provider";
-import { ThemeProvider } from "../providers/theme-provider";
-import { ToastProvider } from "../providers/toast-provider";
+import { AuthSessionProvider } from "@/app/providers/session-provider";
+import { ThemeProvider } from "@/app/providers/theme-provider";
+import { ToastProvider } from "@/app/providers/toast-provider";
 
 type ClientProvidersProps = {
   children: React.ReactNode;

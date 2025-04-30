@@ -50,6 +50,11 @@ This approach avoids additional runtime dependencies while maintaining full comp
    - Create `app/[lang]/dictionaries.ts` helper
    - Use dynamic imports with `server-only` to keep translations out of client bundle
    - Implement the `getDictionary` function to load locale-specific translations
+   - Add robust error handling for missing or invalid locale files:
+     - Implement fallback to default locale if requested locale is unavailable
+     - Log errors when dictionary loading fails but don't break the application
+     - Consider adding type guards to validate dictionary structure after loading
+     - Cache successful dictionary loads to improve performance
 
 3. Configure static generation for all locales
    - Add `generateStaticParams` to the root layout to pre-render all locale variants

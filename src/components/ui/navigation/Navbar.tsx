@@ -227,7 +227,7 @@ export function Navbar({ className }: NavbarProps) {
                         onClick={() => setIsOpen(false)}
                         className="py-3 px-4"
                       >
-                        DaisyUI
+                        Toast
                       </NavLink>
                     </li>
                   </ul>
