@@ -48,11 +48,11 @@ export default async function LocaleLayout({
       <body>
         <ClientProviders session={session}>
           <SkipToContent text={dictionary.navigation.skipToContent} />
-          <Navbar lang={lang} />
+          <Navbar lang={lang as Locale} />
           <main id="main-content" className="flex-1">
             {children}
           </main>
-          <Footer lang={lang} />
+          <Footer lang={lang as Locale} />
         </ClientProviders>
       </body>
     </html>

@@ -19,17 +19,21 @@ interface NavLinkProps {
 const NavLink = ({ href, children, className, onClick }: NavLinkProps) => {
   const pathname = usePathname();
   
-  // Extract the locale and the actual path
+  const isLinkActive = (pathname: string | null, href: string): boolean => {
+    // Extract the actual path
+    const actualPath = pathname?.replace(/^\/[^\/]+/, '') || '';
+    
+    // For the home page (root)
+    const isHome = href === '/' && (actualPath === '' || actualPath === '/');
+    
+    // For other pages
+    return isHome || (href !== '/' && (actualPath === href || actualPath?.startsWith(`${href}/`)));
+  }
+  
+  // Extract the locale for href generation
   const pathParts = pathname?.split('/') || [];
   const locale = pathParts.length > 1 ? pathParts[1] : '';
-  const actualPath = pathname?.replace(/^\/[^\/]+/, '') || '';
-  
-  // For the home page (root)
-  const isHome = href === '/' && (actualPath === '' || actualPath === '/');
-  
-  // For other pages
-  const isActive = isHome || 
-    (href !== '/' && (actualPath === href || actualPath?.startsWith(`${href}/`)));
+  const isActive = isLinkActive(pathname, href);
 
   // Include the current locale in the href if it exists
   const localizedHref = locale ? `/${locale}${href}` : href;
@@ -61,6 +65,17 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
   const menuRef = useRef<HTMLUListElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const { isAuthenticated } = useAuth();
+
+  // Define menu items for both mobile and desktop menus
+  const menuItems = [
+    { key: 'buttons', href: '/examples/buttons', label: translations.buttons },
+    { key: 'cards', href: '/examples/cards', label: translations.cards },
+    { key: 'typography', href: '/examples/typography', label: translations.typography },
+    { key: 'layout', href: '/examples/layout', label: translations.layout },
+    { key: 'navigation', href: '/examples/navigation', label: translations.navigation || 'Navigation' },
+    { key: 'daisyui', href: '/examples/daisyui', label: translations.daisyui || 'DaisyUI' },
+    { key: 'toast', href: '/examples/toast', label: translations.toast || 'Toast' },
+  ];
 
   const toggleMenu = () => setIsOpen(prev => !prev);
 
@@ -147,7 +162,6 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
               <ul
                 id="mobile-menu"
                 ref={menuRef}
-                tabIndex={0}
                 className={cn(
                   "menu menu-sm dropdown-content mt-3 z-[100] p-4 shadow-lg bg-base-100 rounded-box",
                   "w-72 max-h-[80vh] overflow-y-auto transition-opacity duration-200",
@@ -169,69 +183,17 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
                 <li className="menu-title pt-3" key="examples-mobile">
                   <span className="text-base font-medium">{translations.examples}</span>
                   <ul className="p-2 space-y-1">
-                    <li key="buttons-mobile">
-                      <NavLink 
-                        href="/examples/buttons" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        {translations.buttons}
-                      </NavLink>
-                    </li>
-                    <li key="cards-mobile">
-                      <NavLink 
-                        href="/examples/cards" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        {translations.cards}
-                      </NavLink>
-                    </li>
-                    <li key="typography-mobile">
-                      <NavLink 
-                        href="/examples/typography" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        {translations.typography}
-                      </NavLink>
-                    </li>
-                    <li key="layout-mobile">
-                      <NavLink 
-                        href="/examples/layout" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        {translations.layout}
-                      </NavLink>
-                    </li>
-                    <li key="navigation-mobile">
-                      <NavLink 
-                        href="/examples/navigation" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        Navigation
-                      </NavLink>
-                    </li>
-                    <li key="daisyui-mobile">
-                      <NavLink 
-                        href="/examples/daisyui" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        DaisyUI
-                      </NavLink>
-                    </li>
-                    <li key="toast-mobile">
-                      <NavLink 
-                        href="/examples/toast" 
-                        onClick={() => setIsOpen(false)}
-                        className="py-3 px-4"
-                      >
-                        Toast
-                      </NavLink>
-                    </li>
+                    {menuItems.map(item => (
+                      <li key={`${item.key}-mobile`}>
+                        <NavLink 
+                          href={item.href} 
+                          onClick={() => setIsOpen(false)}
+                          className="py-3 px-4"
+                        >
+                          {item.label}
+                        </NavLink>
+                      </li>
+                    ))}
                   </ul>
                 </li>
                 <li key="auth-mobile" className="mt-6 pb-3 border-t border-base-300 pt-3">
@@ -257,41 +219,13 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
                   <details>
                     <summary className="text-base font-medium">{translations.examples}</summary>
                     <ul className="p-2 bg-base-100 z-[1]">
-                      <li key="buttons">
-                        <NavLink href="/examples/buttons">
-                          {translations.buttons}
-                        </NavLink>
-                      </li>
-                      <li key="cards">
-                        <NavLink href="/examples/cards">
-                          {translations.cards}
-                        </NavLink>
-                      </li>
-                      <li key="typography">
-                        <NavLink href="/examples/typography">
-                          {translations.typography}
-                        </NavLink>
-                      </li>
-                      <li key="layout">
-                        <NavLink href="/examples/layout">
-                          {translations.layout}
-                        </NavLink>
-                      </li>
-                      <li key="navigation">
-                        <NavLink href="/examples/navigation">
-                          Navigation
-                        </NavLink>
-                      </li>
-                      <li key="daisyui">
-                        <NavLink href="/examples/daisyui">
-                          DaisyUI
-                        </NavLink>
-                      </li>
-                      <li key="toast">
-                        <NavLink href="/examples/toast">
-                          Toast
-                        </NavLink>
-                      </li>
+                      {menuItems.map(item => (
+                        <li key={item.key}>
+                          <NavLink href={item.href}>
+                            {item.label}
+                          </NavLink>
+                        </li>
+                      ))}
                     </ul>
                   </details>
                 </li>

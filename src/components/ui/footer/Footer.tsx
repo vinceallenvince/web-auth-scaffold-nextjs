@@ -4,7 +4,7 @@ import type { Locale } from "@/constants/i18n";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 
 interface FooterProps {
-  lang: string;
+  lang: Locale;
 }
 
 export async function Footer({ lang }: FooterProps) {

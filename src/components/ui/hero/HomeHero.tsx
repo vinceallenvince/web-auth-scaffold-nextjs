@@ -14,12 +14,11 @@ interface HomeHeroProps {
 }
 
 export async function HomeHero({ className, lang }: HomeHeroProps) {
-  // Get the dictionary for the current locale
-  const dictionary = await getDictionary(lang as Locale);
-  
-  // Check if user is authenticated
-  const session = await getSession();
-  const isAuthenticated = !!session;
+  const [dictionary, session] = await Promise.all([
+    getDictionary(lang as Locale),
+    getSession(),
+  ]);
+  const isAuthenticated = Boolean(session);
   
   // Parse the welcome message to separate the span text
   const welcomeText = dictionary.home.welcome;

@@ -27,7 +27,7 @@ export default async function NavigationExamplesPage({
           <div>
             <h3 className="mb-2 text-xl font-semibold">Default Navbar</h3>
             <div className="rounded-box border border-base-300">
-              <Navbar lang={lang} />
+              <Navbar lang={lang as Locale} />
             </div>
           </div>
 

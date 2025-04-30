@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '@/app/providers/theme-provider';
+import { cn } from '@/lib/utils';
 
 const MoonIcon = () => (
   <svg
@@ -58,7 +59,10 @@ export function ThemeToggle({ className, 'aria-label': ariaLabel }: ThemeToggleP
   return (
     <button
       onClick={toggleTheme}
-      className={`btn btn-ghost btn-circle min-h-12 h-12 w-12 flex items-center justify-center text-base-content transition-all ${className || ''}`}
+      className={cn(
+        "btn btn-ghost btn-circle min-h-12 h-12 w-12 flex items-center justify-center text-base-content transition-all",
+        className
+      )}
       aria-label={ariaLabel || `Switch to ${theme === 'bumblebee' ? 'night' : 'bumblebee'} theme`}
     >
       {theme === 'bumblebee' ? <MoonIcon /> : <SunIcon />}

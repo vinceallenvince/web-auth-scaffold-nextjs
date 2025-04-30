@@ -21,7 +21,13 @@ export default function ClientProviders({ children, session }: ClientProvidersPr
   }, []);
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen p-4">
+      <div className="animate-pulse flex space-x-2">
+        <div className="h-3 w-3 bg-primary rounded-full"></div>
+        <div className="h-3 w-3 bg-primary rounded-full"></div>
+        <div className="h-3 w-3 bg-primary rounded-full"></div>
+      </div>
+    </div>}>
       <SessionProvider session={session}>
         <ThemeProvider>
           <ToastProvider>

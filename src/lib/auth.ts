@@ -70,8 +70,13 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  // Let our redirect callback prepend the correct locale dynamically
-  pages: {},
+  // Define custom auth pages but let redirect callback handle locale
+  pages: {
+    signIn: "/auth/magic-link",
+    signOut: "/auth/signout",
+    error: "/auth/error",
+    verifyRequest: "/auth/verify-request",
+  },
   callbacks: {
     async session({ session, user }) {
       if (session.user) {

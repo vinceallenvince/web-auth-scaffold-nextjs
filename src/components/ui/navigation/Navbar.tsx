@@ -3,7 +3,7 @@ import { getDictionary } from "@/app/[lang]/dictionaries";
 import ClientNavbar from "./ClientNavbar";
 
 interface NavbarProps {
-  lang: string;
+  lang: Locale;
 }
 
 export async function Navbar({ lang }: NavbarProps) {
