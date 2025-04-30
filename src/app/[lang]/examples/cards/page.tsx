@@ -11,6 +11,7 @@ import {
 } from "@/components/ui";
 
 export default function CardExamplesPage() {
+  
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     alert('Card clicked!');

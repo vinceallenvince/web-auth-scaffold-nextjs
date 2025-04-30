@@ -17,14 +17,25 @@ interface NavLinkProps {
 
 const NavLink = ({ href, children, className, onClick }: NavLinkProps) => {
   const pathname = usePathname();
-  const isActive =
-    href === '/'
-      ? pathname === '/'
-      : pathname === href || pathname?.startsWith(`${href}/`);
+  
+  // Extract the locale and the actual path
+  const pathParts = pathname?.split('/') || [];
+  const locale = pathParts.length > 1 ? pathParts[1] : '';
+  const actualPath = pathname?.replace(/^\/[^\/]+/, '') || '';
+  
+  // For the home page (root)
+  const isHome = href === '/' && (actualPath === '' || actualPath === '/');
+  
+  // For other pages
+  const isActive = isHome || 
+    (href !== '/' && (actualPath === href || actualPath?.startsWith(`${href}/`)));
+
+  // Include the current locale in the href if it exists
+  const localizedHref = locale ? `/${locale}${href}` : href;
 
   return (
     <Link
-      href={href}
+      href={localizedHref}
       className={cn(
         "text-base font-medium transition-colors duration-200",
         isActive
@@ -210,6 +221,15 @@ export function Navbar({ className }: NavbarProps) {
                         DaisyUI
                       </NavLink>
                     </li>
+                    <li key="toast-mobile">
+                      <NavLink 
+                        href="/examples/toast" 
+                        onClick={() => setIsOpen(false)}
+                        className="py-3 px-4"
+                      >
+                        Toast
+                      </NavLink>
+                    </li>
                   </ul>
                 </li>
                 <li key="auth-mobile" className="mt-6 pb-3 border-t border-base-300 pt-3">
@@ -260,11 +280,16 @@ export function Navbar({ className }: NavbarProps) {
                           Navigation
                         </NavLink>
                       </li>
-                      <li key="daisyui">
-                        <NavLink href="/examples/daisyui">
-                          DaisyUI
-                        </NavLink>
-                      </li>
+                        <li key="daisyui">
+                          <NavLink href="/examples/daisyui">
+                            DaisyUI
+                          </NavLink>
+                        </li>
+                        <li key="toast">
+                          <NavLink href="/examples/toast">
+                            Toast
+                          </NavLink>
+                        </li>
                     </ul>
                   </details>
                 </li>

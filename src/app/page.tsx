@@ -1,9 +1,9 @@
-import { HomeHero } from "@/components/ui";
+import { redirect } from 'next/navigation';
+// Import default locale from a shared constants file
+import { defaultLocale } from '@/constants/i18n';
 
-export default function Home() {
-  return (
-    <div className="flex flex-col">
-      <HomeHero />
-    </div>
-  );
+// This component will never actually render
+// It just redirects to the default locale
+export default function RootPage() {
+  redirect(`/${defaultLocale}`);
 }

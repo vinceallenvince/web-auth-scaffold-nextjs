@@ -11,9 +11,12 @@ import React, { useState } from 'react';
 import { Button, ButtonLink, IconButton } from '@/components/ui/button';
 import { PlusIcon, ArrowRightIcon, HeartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
+import { useParams } from 'next/navigation';
 
 export default function ButtonExamplePage() {
   const [loading, setLoading] = useState(false);
+  const params = useParams();
+  const lang = params.lang as string;
 
   const handleLoadingClick = () => {
     setLoading(true);
@@ -172,7 +175,7 @@ export default function ButtonExamplePage() {
         description="Buttons that function as links to navigate to other pages."
       >
         <ButtonRow>
-          <ButtonLink href="/examples">Back to Examples</ButtonLink>
+          <ButtonLink href={`/${lang}/examples`}>Back to Examples</ButtonLink>
           <ButtonLink 
             href="https://github.com" 
             external 
@@ -181,7 +184,7 @@ export default function ButtonExamplePage() {
             External Link
           </ButtonLink>
           <ButtonLink 
-            href="/examples" 
+            href={`/${lang}/examples`} 
             variant="ghost"
             trailingIcon={<ArrowRightIcon />}
           >
@@ -192,19 +195,19 @@ export default function ButtonExamplePage() {
         <h3 className="text-xl font-semibold mb-4 mt-6">Disabled and Loading States</h3>
         <ButtonRow>
           <ButtonLink 
-            href="/examples" 
+            href={`/${lang}/examples`} 
             disabled
           >
             Disabled Link
           </ButtonLink>
           <ButtonLink 
-            href="/examples" 
+            href={`/${lang}/examples`} 
             isLoading
           >
             Loading Link
           </ButtonLink>
           <ButtonLink 
-            href="/examples" 
+            href={`/${lang}/examples`} 
             variant="outline" 
             disabled
             trailingIcon={<ArrowRightIcon />}
@@ -221,7 +224,7 @@ export default function ButtonExamplePage() {
         <div className="max-w-md space-y-4">
           <Button fullWidth>Full Width Button</Button>
           <Button variant="outline" fullWidth>Full Width Outline</Button>
-          <ButtonLink href="/examples" fullWidth>Full Width Link</ButtonLink>
+          <ButtonLink href={`/${lang}/examples`} fullWidth>Full Width Link</ButtonLink>
         </div>
       </ExampleSection>
 

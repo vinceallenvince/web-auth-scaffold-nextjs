@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import { Container } from "@/components/ui/layout/container";
+import { useParams } from "next/navigation";
 
 export default function VerifyRequestPage() {
+  const params = useParams();
+  const lang = params.lang as string;
+  
   return (
     <div className="flex flex-col">
       <section className='hero bg-gradient-to-br py-24 md:py-32'>
@@ -21,7 +25,7 @@ export default function VerifyRequestPage() {
                       
                       <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-md">
                         <Link
-                          href="/auth/magic-link"
+                          href={`/${lang}/auth/magic-link`}
                           className="btn btn-outline btn-sm w-full"
                         >
                           Try a different email
