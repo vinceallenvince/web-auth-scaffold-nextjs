@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run validate-env && npx next dev",
-    "build": "npm run validate-env && npx next build",
+    "build": "npm run validate-env && npx prisma generate && npx next build",
     "start": "NODE_ENV=production npm run validate-env && npx next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
