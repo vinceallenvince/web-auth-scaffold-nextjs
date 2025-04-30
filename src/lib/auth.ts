@@ -70,12 +70,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  pages: {
-    signIn: `/${defaultLocale}/auth/magic-link`,
-    signOut: `/${defaultLocale}/auth/signout`,
-    error: `/${defaultLocale}/auth/error`,
-    verifyRequest: `/${defaultLocale}/auth/verify-request`,
-  },
+  // Let our redirect callback prepend the correct locale dynamically
+  pages: {},
   callbacks: {
     async session({ session, user }) {
       if (session.user) {
@@ -85,26 +81,20 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async redirect({ url, baseUrl }) {
-      // Handle relative URLs and ensure they maintain the user's current locale
-      if (url.startsWith('/')) {
-        // Get the locale from the current URL if available
-        const locale = url.split('/')[1];
-        if (locale && /^[a-z]{2}(-[a-z]{2})?$/i.test(locale)) {
-          // URL already has a locale segment, return as is
-          return `${baseUrl}${url}`;
-        }
-        
-        // URL doesn't have a locale, add the default locale
-        return `${baseUrl}/${defaultLocale}${url}`;
+      // 1. Absolute URL pointing outside our domain → send to home (default locale)
+      if (!url.startsWith('/')) {
+        return url.startsWith(baseUrl) ? url : `${baseUrl}/${defaultLocale}`;
       }
-      
-      // Handle absolute URLs (starts with the baseUrl)
-      else if (url.startsWith(baseUrl)) {
-        return url;
+
+      // 2. Relative URL – extract the first path segment *before* query / fragment
+      const [ , first ] = url.split(/[/?#]/); // '' | 'en' | 'fr' | …
+
+      if (first && /^[a-z]{2}(?:-[a-z]{2})?$/i.test(first)) {
+        // Already has locale
+        return `${baseUrl}${url}`;
       }
-      
-      // Fall back to the base URL with default locale
-      return `${baseUrl}/${defaultLocale}`;
+
+      return `${baseUrl}/${defaultLocale}${url}`;
     },
   },
   session: {
