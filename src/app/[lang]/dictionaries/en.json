@@ -50,5 +50,32 @@
     "switchLanguage": "Language",
     "en": "English",
     "es": "Spanish"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn more about Web Auth Scaffold",
+    "description": "Web Auth Scaffold is a modern authentication template built with Next.js and Auth.js, designed to help developers quickly implement secure authentication in their web applications.",
+    "featuresTitle": "Key Features",
+    "feature1": "Magic Link Authentication",
+    "feature2": "Internationalization Support",
+    "feature3": "Modern Component Architecture",
+    "feature4": "Responsive Design",
+    "teamTitle": "Our Team",
+    "teamDescription": "Created by developers who understand the challenges of building secure web applications."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you",
+    "description": "Have questions about Web Auth Scaffold? We're here to help you with any inquiries.",
+    "formTitle": "Send us a message",
+    "nameLabel": "Your Name",
+    "emailLabel": "Email Address",
+    "messageLabel": "Message",
+    "submitButton": "Send Message",
+    "successMessage": "Thank you! Your message has been sent.",
+    "errorMessage": "Something went wrong. Please try again.",
+    "alternativeTitle": "Alternative Contact Methods",
+    "emailContact": "Email us at",
+    "githubContact": "Find us on GitHub"
   }
 } 

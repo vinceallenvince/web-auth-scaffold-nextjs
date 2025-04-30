@@ -50,5 +50,32 @@
     "switchLanguage": "Idioma",
     "en": "Inglés",
     "es": "Español"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Aprende más sobre Estructura de Autenticación Web",
+    "description": "Estructura de Autenticación Web es una plantilla de autenticación moderna construida con Next.js y Auth.js, diseñada para ayudar a los desarrolladores a implementar rápidamente una autenticación segura en sus aplicaciones web.",
+    "featuresTitle": "Características Principales",
+    "feature1": "Autenticación con Enlace Mágico",
+    "feature2": "Soporte de Internacionalización",
+    "feature3": "Arquitectura de Componentes Moderna",
+    "feature4": "Diseño Responsivo",
+    "teamTitle": "Nuestro Equipo",
+    "teamDescription": "Creado por desarrolladores que entienden los desafíos de construir aplicaciones web seguras."
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "Nos encantaría saber de ti",
+    "description": "¿Tienes preguntas sobre Estructura de Autenticación Web? Estamos aquí para ayudarte con cualquier consulta.",
+    "formTitle": "Envíanos un mensaje",
+    "nameLabel": "Tu Nombre",
+    "emailLabel": "Correo Electrónico",
+    "messageLabel": "Mensaje",
+    "submitButton": "Enviar Mensaje",
+    "successMessage": "¡Gracias! Tu mensaje ha sido enviado.",
+    "errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
+    "alternativeTitle": "Métodos de Contacto Alternativos",
+    "emailContact": "Envíanos un correo a",
+    "githubContact": "Encuéntranos en GitHub"
   }
 } 
