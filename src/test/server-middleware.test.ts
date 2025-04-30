@@ -82,6 +82,25 @@ describe('Middleware', () => {
       const redirectUrl = (NextResponse.redirect as any).mock.calls[0][0];
       expect(redirectUrl.protocol).toBe('https:');
     });
+
+    it('should preserve query parameters during redirection', () => {
+      // Arrange
+      const url = new URL('http://localhost:3000/search?q=test&page=2');
+      const request = {
+        nextUrl: url,
+        url: 'http://localhost:3000/search?q=test&page=2',
+        headers: new Headers()
+      } as NextRequest;
+      
+      // Act
+      middleware(request);
+      
+      // Assert
+      expect(NextResponse.redirect).toHaveBeenCalled();
+      const redirectUrl = (NextResponse.redirect as any).mock.calls[0][0];
+      expect(redirectUrl.pathname).toBe('/en/search');
+      expect(redirectUrl.search).toBe('?q=test&page=2');
+    });
   });
 
   describe('Header handling', () => {
@@ -141,6 +160,26 @@ describe('Middleware', () => {
       const options = (NextResponse.next as any).mock.calls[0][0];
       expect(options.request.headers.get('x-forwarded-proto')).toBe('https');
       expect(options.request.headers.get('x-locale')).toBe('es');
+    });
+
+    it('should handle undefined URL gracefully', () => {
+      // Arrange
+      const url = new URL('http://localhost:3000/some-path');
+      const request = {
+        nextUrl: url,
+        url: undefined, // Explicitly set url to undefined
+        headers: new Headers()
+      } as unknown as NextRequest;
+      
+      // Act
+      middleware(request);
+      
+      // Assert
+      expect(NextResponse.redirect).not.toHaveBeenCalled();
+      expect(NextResponse.next).toHaveBeenCalled();
+      const options = (NextResponse.next as any).mock.calls[0][0];
+      // Verify headers are still passed through
+      expect(options.request.headers.get('x-pathname')).toBe('/some-path');
     });
   });
 }); 

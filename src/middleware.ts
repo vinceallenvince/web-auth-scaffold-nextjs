@@ -26,12 +26,20 @@ export function middleware(request: NextRequest) {
   
   // If the pathname doesn't have a locale prefix, redirect to the default locale
   if (!pathnameHasLocale) {
+    // Check if request.url is defined to prevent TypeError
+    if (!request.url) {
+      return NextResponse.next({
+        request: {
+          headers: requestHeaders,
+        },
+      });
+    }
     // Create a URL object from the request URL
     const url = new URL(request.url);
 
-    // Set the pathname to include the default locale
+    // Set the pathname to include the default locale while preserving the query parameters
     url.pathname = `/${defaultLocale}${pathname === '/' ? '' : pathname}`;
-
+    
     // Return a redirect response
     return NextResponse.redirect(url);
   }
