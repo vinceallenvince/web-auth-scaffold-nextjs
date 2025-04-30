@@ -25,3 +25,4 @@ export * from './icons';
 // Footer is a server component - import from './footer/server' instead
 export { FeatureCard } from './hero';
 export * from './toast';
+export * from './locale-switcher';

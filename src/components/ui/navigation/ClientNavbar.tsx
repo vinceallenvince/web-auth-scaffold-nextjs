@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LocaleSwitcher } from "@/components/ui/locale-switcher";
 import { UserMenu } from "./UserMenu";
 import { useAuth } from "@/lib/hooks/use-auth";
 import { NavigationTranslations } from "./types";
@@ -204,6 +205,9 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
                 <li key="theme-toggle-mobile" className="mt-4 flex justify-center">
                   <ThemeToggle />
                 </li>
+                <li key="locale-switcher-mobile" className="mt-4 flex justify-center">
+                  <LocaleSwitcher />
+                </li>
               </ul>
             </div>
             
@@ -242,6 +246,9 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
           
           {/* Navbar End - Additional Controls */}
           <div className="navbar-end">
+            <div key="locale-switcher-desktop" className="hidden sm:block mr-4">
+              <LocaleSwitcher />
+            </div>
             <div className="hidden sm:block mr-4">
               <ThemeToggle aria-label={translations.toggleTheme} />
             </div>
