@@ -2,6 +2,11 @@
 
 This directory contains the translation files for the application. Each file corresponds to a supported locale. The translations are organized by component/feature area to make maintenance easier.
 
+For a complete understanding of our i18n approach, please refer to:
+- [I18N Implementation Tasks](/docs/planning/core/tasks/impl-tasks06-i18n.md) - Detailed task breakdown of the i18n implementation
+- [I18N Rules](/.cursor/rules/i18n-rules.mdc) - Formal rules for working with translations
+- [Next.js Structure Rules](/.cursor/rules/next-structure.mdc) - Next.js app structure with i18n considerations
+
 ## File Structure
 
 - `en.json`: English translations
@@ -11,7 +16,7 @@ This directory contains the translation files for the application. Each file cor
 
 The translations are organized in the following structure:
 
-```json
+```jsonc
 {
   "common": {
     // Common translations used throughout the app
