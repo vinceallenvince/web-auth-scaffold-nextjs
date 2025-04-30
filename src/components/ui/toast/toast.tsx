@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ToastType } from "@/app/providers/toast-provider";
+import { ToastType } from "@/types/toast";
 
 interface ToastProps {
   message: string;

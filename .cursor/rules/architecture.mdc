@@ -4,6 +4,26 @@ globs:
 alwaysApply: true
 ---
 
-# Architecture
+# Architecture and Component Organization
 
 - All application code should be organized in /src/app
+
+## Shared vs. Route-Specific
+- Shared, reusable components live in `/src/components`
+- Route-specific components live in their respective route folders (e.g., `/src/app/profile/components`)
+
+## Directory Structure
+- UI components are grouped by functional category in `/src/components/ui/`
+- Auth components are in `/src/components/auth/`
+- Each component type has its own subdirectory (button, form, layout, etc.)
+
+## Barrel Files
+- Each component directory has an index.ts barrel file
+- Barrel files re-export all components with JSDoc documentation
+- Import from barrels instead of direct component files when possible
+
+## Import Patterns
+- Use absolute imports with `@/` prefix for shared components
+- Use relative imports for route-specific components
+- Consolidate duplicate imports from the same path
+- With Next.js automatic JSX runtime, React import is not required

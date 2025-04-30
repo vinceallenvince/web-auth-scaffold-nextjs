@@ -1,4 +1,4 @@
-import { Navbar, Sidebar } from "@/app/components/ui/navigation";
+import { Navbar, Sidebar } from "@/components/ui/navigation";
 
 export default function NavigationExamplesPage() {
   return (

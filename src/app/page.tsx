@@ -1,4 +1,4 @@
-import { HomeHero } from "@/app/components/ui";
+import { HomeHero } from "@/components/ui";
 
 export default function Home() {
   return (

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { User } from "next-auth";
 import { useToast } from "@/app/providers/toast-provider";
 import { updateUserProfile } from "@/app/actions/profile-actions";
-import { FormField, Input } from "@/app/components/ui/form";
+import { FormField, Input } from "@/components/ui/form";
 import { validate, required, minLength, maxLength, email, Validator } from "@/lib/form-validation";
 import { ProfileUpdateRequest } from "@/types/profile";
 

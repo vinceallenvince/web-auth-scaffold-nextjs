@@ -1,4 +1,4 @@
-import { Container, Grid, GridItem, Section, Divider, Spacer, Stack } from '@/app/components/ui/layout';
+import { Container, Grid, GridItem, Section, Divider, Spacer, Stack } from '@/components/ui/layout';
 
 export default function LayoutExamplesPage() {
   return (

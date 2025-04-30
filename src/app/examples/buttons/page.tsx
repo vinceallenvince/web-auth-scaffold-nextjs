@@ -4,12 +4,12 @@
  * Button Examples Page
  * 
  * Using icon components from the dedicated component library:
- * src/app/components/ui/icons/index.tsx
+ * src/components/ui/icons/index.tsx
  */
 
 import React, { useState } from 'react';
-import { Button, ButtonLink, IconButton } from '@/app/components/ui/button';
-import { PlusIcon, ArrowRightIcon, HeartIcon } from '@/app/components/ui/icons/index';
+import { Button, ButtonLink, IconButton } from '@/components/ui/button';
+import { PlusIcon, ArrowRightIcon, HeartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
 
 export default function ButtonExamplePage() {

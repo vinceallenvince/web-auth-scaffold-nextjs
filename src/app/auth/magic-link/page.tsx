@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import MagicLinkForm from "./magic-link-form";
-import { Container } from "@/app/components/ui/layout/container";
+import { Container } from "@/components/ui/layout/container";
 
 export const metadata: Metadata = {
   title: "Magic Link Authentication | Web Auth Scaffold",

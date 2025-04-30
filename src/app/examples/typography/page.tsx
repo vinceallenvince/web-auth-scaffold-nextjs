@@ -1,8 +1,8 @@
 import { 
   H1, H2, H3, H4, H5, H6, 
   Paragraph, Lead, Small, Tiny, Text
-} from '@/app/components/ui/typography';
-import { Container, Section } from '@/app/components/ui/layout';
+} from '@/components/ui/typography';
+import { Container, Section } from '@/components/ui/layout';
 
 export default function TypographyExamplesPage() {
   return (

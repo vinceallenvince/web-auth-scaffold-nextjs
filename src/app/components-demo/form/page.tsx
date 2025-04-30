@@ -10,7 +10,7 @@ import {
   Radio,
   RadioGroup,
   Switch
-} from '@/app/components/ui/form';
+} from '@/components/ui/form';
 import { validate, required, email, minLength, ValidatableValue, Validator } from '@/lib/form-validation';
 
 export default function FormComponentsDemo() {
