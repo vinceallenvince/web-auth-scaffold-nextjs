@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardDivider,
   CardGrid
-} from "@/app/components/ui";
+} from "@/components/ui";
 
 export default function CardExamplesPage() {
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {

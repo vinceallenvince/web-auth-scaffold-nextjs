@@ -1,7 +1,8 @@
 'use client';
 
+import React from "react";
 import Link from "next/link";
-import { Container } from "@/app/components/ui/layout/container";
+import { Container } from "@/components/ui/layout/container";
 
 export default function VerifyRequestPage() {
   return (

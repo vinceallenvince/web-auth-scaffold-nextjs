@@ -1,16 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useState, useCallback } from "react";
-import { Toast } from "../components/ui/toast";
-
-export type ToastType = "success" | "error" | "info";
-
-export interface ToastMessage {
-  id: string;
-  message: string;
-  type: ToastType;
-  duration?: number;
-}
+import { Toast } from "@/components/ui/toast";
+import { ToastType, ToastMessage } from "@/types/toast";
 
 interface ToastContextType {
   toasts: ToastMessage[];
