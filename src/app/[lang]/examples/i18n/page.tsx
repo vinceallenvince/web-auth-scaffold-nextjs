@@ -2,9 +2,16 @@
 
 import { useT } from "@/app/lib/i18n-context";
 import { Card } from "@/components/ui/card";
+import { DotNotationPath } from "@/types/i18n.types";
 
 export default function I18nExamplePage() {
   const t = useT();
+  
+  // Create a wrapper function for safe translation access with fallbacks
+  const safeT = (key: DotNotationPath, fallback = "Translation not available") => {
+    const translation = t(key);
+    return translation === key ? fallback : translation;
+  };
   
   return (
     <div className="container mx-auto py-12 max-w-5xl">
@@ -23,8 +30,10 @@ export default function I18nExamplePage() {
         <Card className="p-6">
           <h2 className="text-xl font-semibold mb-4">Error Handling</h2>
           <div className="space-y-2">
-            <p><span className="font-medium">Missing Key:</span> {t("this.key.does.not.exist")}</p>
-            <p><span className="font-medium">Partial Path:</span> {t("home")}</p>
+            <p><span className="font-medium">Raw Missing Key:</span> {t("this.key.does.not.exist")}</p>
+            <p><span className="font-medium">Safe Missing Key:</span> {safeT("this.key.does.not.exist")}</p>
+            <p><span className="font-medium">Custom Fallback:</span> {safeT("another.missing.key", "Custom error message")}</p>
+            <p><span className="font-medium">Partial Path:</span> {safeT("home", "Invalid path")}</p>
           </div>
         </Card>
         
@@ -32,17 +41,28 @@ export default function I18nExamplePage() {
           <h2 className="text-xl font-semibold mb-4">How to Use</h2>
           <div className="mt-4 p-4 bg-muted rounded-md">
             <pre className="whitespace-pre-wrap overflow-x-auto">
-              {`// 1. Import the hook
+              {`// 1. Import the hook and types
 import { useT } from "@/app/lib/i18n-context";
+import { DotNotationPath } from "@/types/i18n.types";
 
-// 2. Use it in your component
+// 2. Use it in your component with safe error handling
 export function MyComponent() {
   const t = useT();
   
+  // Create a safe wrapper for graceful error handling
+  const safeT = (key: DotNotationPath, fallback = "Translation not available") => {
+    const translation = t(key);
+    return translation === key ? fallback : translation;
+  };
+  
   return (
     <div>
+      {/* Direct usage */}
       <h1>{t("some.translation.key")}</h1>
-      <p>{t("another.key")}</p>
+      
+      {/* With graceful error handling */}
+      <p>{safeT("another.key")}</p>
+      <p>{safeT("missing.key", "This text displays if key is missing")}</p>
     </div>
   );
 }`}

@@ -1,57 +1,7 @@
 "use client";
 
-import React, { createContext, useContext } from "react";
-
-// Define the dictionary structure type based on the existing JSON structure
-type Dictionary = {
-  common: {
-    appTitle: string;
-    appDescription: string;
-  };
-  navigation: {
-    skipToContent: string;
-    helloWorld: string;
-    examples: string;
-    buttons: string;
-    cards: string;
-    typography: string;
-    layout: string;
-    forms: string;
-    toggleTheme: string;
-  };
-  auth: {
-    login: string;
-    logout: string;
-    signIn: string;
-    signInWithMagicLink: string;
-    profile: string;
-    dashboard: string;
-    account: string;
-  };
-  footer: {
-    about: string;
-    contact: string;
-  };
-  home: {
-    welcome: string;
-    description: string;
-    magicLinkAuthTitle: string;
-    magicLinkAuthDescription: string;
-    modernStackTitle: string;
-    modernStackDescription: string;
-    readyToUseTitle: string;
-    readyToUseDescription: string;
-  };
-  errors: {
-    notFound: string;
-    goHome: string;
-    somethingWentWrong: string;
-  };
-  meta: {
-    title: string;
-    description: string;
-  };
-};
+import React, { createContext, useContext, useMemo } from "react";
+import type { Dictionary, DotNotationPath, NestedDictionaryValue } from "@/types/i18n.types";
 
 // Type for the i18n context value
 type I18nContextType = {
@@ -77,12 +27,6 @@ export function I18nProvider({ dictionary, children }: I18nProviderProps) {
   );
 }
 
-// Type for accessing nested properties using string paths
-type DotNotationPath = string;
-
-// Type for nested dictionary values
-type NestedDictionaryValue = string | Record<string, unknown>;
-
 // useT hook for accessing translations with dot notation
 export function useT() {
   // Get the context value
@@ -94,9 +38,17 @@ export function useT() {
       "useT must be used within an I18nProvider. Make sure you have wrapped your component tree with I18nProvider."
     );
   }
+
+  // Cache for previously resolved translations
+  const translationCache = useMemo(() => new Map<string, string>(), []);
   
   // Return a function that accepts a dot notation path and returns the translation
   return function t(path: DotNotationPath): string {
+    // Check cache first
+    if (translationCache.has(path)) {
+      return translationCache.get(path)!;
+    }
+    
     const { dictionary } = context;
     
     // Split the path into segments
@@ -113,6 +65,7 @@ export function useT() {
         !Object.prototype.hasOwnProperty.call(result, segment)
       ) {
         console.warn(`Translation key "${path}" not found in dictionary.`);
+        translationCache.set(path, path); // Cache the fallback
         return path; // Fallback to the key itself
       }
       
@@ -122,9 +75,12 @@ export function useT() {
     // If the result is not a string, log a warning and return the path
     if (typeof result !== "string") {
       console.warn(`Translation key "${path}" does not resolve to a string.`);
+      translationCache.set(path, path); // Cache the fallback
       return path;
     }
     
+    // Cache the successful result
+    translationCache.set(path, result);
     return result;
   };
 } 
