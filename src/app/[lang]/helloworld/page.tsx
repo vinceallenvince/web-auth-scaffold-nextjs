@@ -30,7 +30,7 @@ export default function HelloWorldPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <h1 className="text-3xl font-bold mb-4">Hello World</h1>
       <p className="mb-4">
         Welcome, {session?.user?.name || session?.user?.email || 'authenticated user'}!

@@ -129,8 +129,8 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
 
   return (
     <header className={cn("bg-base-100 shadow-sm", className)}>
-      <div className="w-full px-6 md:px-6 lg:px-8 mx-auto">
-        <div className="navbar">
+      <div className="w-full px-6 md:px-6 lg:px-8 ml-0 mr-auto">
+        <div className="navbar px-0">
           {/* Navbar Start - Logo and Mobile Menu */}
           <div className="navbar-start">
             {/* Mobile Menu Dropdown */}
@@ -213,7 +213,7 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
             
             {/* Left navigation items - Desktop */}
             <div className="hidden lg:flex">
-              <ul className="menu menu-horizontal gap-2">
+              <ul className="menu menu-horizontal gap-2 ml-0 pl-0">
                 <li key="home-desktop">
                   <NavLink href="/">
                     Home

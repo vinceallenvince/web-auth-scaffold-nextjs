@@ -13,7 +13,7 @@ export async function Footer({ lang }: FooterProps) {
   
   return (
     <footer className="footer bg-base-200 text-base-content py-6" aria-label="Site footer">
-      <div className="w-full mx-auto px-6 md:px-6 lg:px-8">
+      <div className="w-full ml-0 mr-auto px-12 md:px-12 lg:px-12">
         {/* Navigation Links */}
         <nav aria-label="Footer navigation" className="mb-4 md:mb-0">
           <ul className="flex flex-col md:flex-row gap-4">

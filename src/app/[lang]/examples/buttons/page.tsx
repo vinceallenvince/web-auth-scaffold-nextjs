@@ -54,7 +54,7 @@ export default function ButtonExamplePage() {
   );
 
   return (
-    <div className="container-left-justified py-12">
+    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <h1 className="text-4xl font-bold mb-6">Button Examples</h1>
       <p className="text-lg mb-12">
         A showcase of the button component system with various styles, states, and use cases.

@@ -19,7 +19,7 @@ export default function TestToastPage() {
   };
   
   return (
-    <div className="container mx-auto p-8">
+    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <h1 className="text-2xl font-bold mb-6">Toast Component Test</h1>
       
       <div className="flex flex-col gap-4">
