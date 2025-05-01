@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function MagicLinkPage() {
   return (
-    <div className="flex flex-col">
+    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <section className='hero bg-gradient-to-br py-24 md:py-32'>
         <div className="hero-content w-full">
           <Container>
@@ -24,10 +24,6 @@ export default function MagicLinkPage() {
                 <h1 className="text-3xl font-bold mb-3">Magic Link Login</h1>
                   <p>Secure, convenient authentication without the hassle of passwords</p>
                 </div>
-              </div>
-              {/* intentional for layout spacing: */}
-              <div className="w-full">
-                &nbsp;
               </div>
             </div>
           </Container>

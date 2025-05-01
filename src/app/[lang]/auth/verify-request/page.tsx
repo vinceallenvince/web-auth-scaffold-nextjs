@@ -9,7 +9,7 @@ export default function VerifyRequestPage() {
   const lang = params.lang as string;
   
   return (
-    <div className="flex flex-col">
+    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <section className='hero bg-gradient-to-br py-24 md:py-32'>
         <div className="hero-content w-full">
           <Container>
@@ -38,10 +38,6 @@ export default function VerifyRequestPage() {
               {/* intentional for layout spacing: */}
               <div className="w-full">
                   &nbsp;
-              </div>
-              {/* intentional for layout spacing: */}
-              <div className="w-full">
-                &nbsp;
               </div>
 
             </div>

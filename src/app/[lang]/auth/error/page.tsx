@@ -38,7 +38,7 @@ export default async function AuthErrorPage({
   const errorMessage = errorMessages[error] || errorMessages.default;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
+    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <AuthErrorAlert error={error} message={errorMessage} />
       <div className="w-full max-w-md space-y-8 text-center">
         <div>
