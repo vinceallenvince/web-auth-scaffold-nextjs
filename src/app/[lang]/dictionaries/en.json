@@ -44,6 +44,16 @@
       "tryDifferentEmail": "Try a different email",
       "metaTitle": "Check Your Email | Web Auth Scaffold",
       "metaDescription": "A magic link has been sent to your email address for authentication."
+    },
+    "errors": {
+      "prefix": "Authentication error:",
+      "default": "An error occurred during authentication",
+      "OAuthAccountNotLinked": "Email already used with a different provider",
+      "EmailSignin": "Error sending the login email",
+      "CredentialsSignin": "Invalid credentials",
+      "SessionRequired": "Please sign in to access this page",
+      "AccessDenied": "You don't have permission to access this resource",
+      "Verification": "The verification link may have expired or been used"
     }
   },
   "footer": {

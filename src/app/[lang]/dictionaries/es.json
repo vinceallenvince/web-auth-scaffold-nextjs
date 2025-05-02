@@ -44,6 +44,16 @@
       "tryDifferentEmail": "Intentar con otro correo",
       "metaTitle": "Revisa Tu Correo | Estructura de Autenticación Web",
       "metaDescription": "Se ha enviado un enlace mágico a tu dirección de correo para la autenticación."
+    },
+    "errors": {
+      "prefix": "Error de autenticación:",
+      "default": "Ocurrió un error durante la autenticación",
+      "OAuthAccountNotLinked": "El correo electrónico ya se usa con otro proveedor",
+      "EmailSignin": "Error al enviar el correo de inicio de sesión",
+      "CredentialsSignin": "Credenciales inválidas",
+      "SessionRequired": "Por favor, inicia sesión para acceder a esta página",
+      "AccessDenied": "No tienes permiso para acceder a este recurso",
+      "Verification": "El enlace de verificación puede haber expirado o ya sido utilizado"
     }
   },
   "footer": {
