@@ -76,7 +76,15 @@
     "errorMessage": "Something went wrong. Please try again.",
     "alternativeTitle": "Alternative Contact Methods",
     "emailContact": "Email us at",
-    "githubContact": "Find us on GitHub"
+    "githubContact": "Find us on GitHub",
+    "twitterContact": "Find us on Twitter"
+  },
+  "helloworld": {
+    "title": "Hello World",
+    "welcome": "Welcome, {name}!",
+    "description": "This is a protected page that requires authentication.",
+    "loading": "Loading...",
+    "authenticatedUser": "authenticated user"
   },
   "examples": {
     "title": "Component Examples",

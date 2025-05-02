@@ -32,6 +32,7 @@ export default async function ContactPage({
     alternativeTitle: string;
     emailContact: string;
     githubContact: string;
+    twitterContact: string;
   };
 
   return (
@@ -47,7 +48,7 @@ export default async function ContactPage({
           <ul className="list-disc pl-6 mb-4">
             <li>{t.emailContact}: <a href="mailto:example@example.com" className="link">example@example.com</a></li>
             <li>{t.githubContact}: <a href="https://github.com/example/repo" className="link" target="_blank" rel="noopener noreferrer">github.com/example/repo</a></li>
-            <li>Twitter: <a href="https://twitter.com/example" className="link" target="_blank" rel="noopener noreferrer">@example</a></li>
+            <li>{t.twitterContact}: <a href="https://twitter.com/example" className="link" target="_blank" rel="noopener noreferrer">@example</a></li>
           </ul>
         </section>
       </div>
