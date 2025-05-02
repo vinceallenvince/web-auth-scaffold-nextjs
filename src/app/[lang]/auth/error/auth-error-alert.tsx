@@ -15,14 +15,18 @@ export default function AuthErrorAlert({ error, message }: AuthErrorAlertProps) 
   const t = useT();
   
   // Memoize translations to prevent unnecessary re-creation
-  const translations = useMemo(() => ({
-    prefix: t('auth.errors.prefix'),
-    default: t('auth.errors.default'),
-    // Specific error translations if available
-    errorMessage: t(`auth.errors.${error}`) !== `auth.errors.${error}` 
-      ? t(`auth.errors.${error}`) 
-      : message || t('auth.errors.default')
-  }), [t, error, message]);
+  const translations = useMemo(() => {
+    const errorTranslation = t(`auth.errors.${error}`);
+    const hasErrorTranslation = errorTranslation !== `auth.errors.${error}`;
+    return {
+      prefix: t('auth.errors.prefix'),
+      default: t('auth.errors.default'),
+      // Specific error translations if available
+      errorMessage: hasErrorTranslation
+        ? errorTranslation
+        : message || t('auth.errors.default')
+    };
+  }, [t, error, message]);
 
   useEffect(() => {
     // Show toast notification on component mount with translated error message

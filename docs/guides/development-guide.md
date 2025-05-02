@@ -143,7 +143,7 @@ middleware.ts        → Optional route guards or localization
 To test authentication error handling and translations without triggering actual authentication failures:
 
 1. **Manually navigate to error URLs** with specific error codes:
-   ```
+   ```plaintext
    /<lang>/auth/error?error=<ERROR_CODE>&message=<CUSTOM_MESSAGE>
    ```
 
@@ -156,7 +156,7 @@ To test authentication error handling and translations without triggering actual
    - `Verification` - Expired verification link
 
 3. **Examples for testing:**
-   ```
+   ```plaintext
    /en/auth/error?error=Verification
    /es/auth/error?error=AccessDenied
    /en/auth/error?error=SessionRequired&message=Custom%20error%20message

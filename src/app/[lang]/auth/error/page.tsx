@@ -41,7 +41,7 @@ export default async function AuthErrorPage({
   const { lang } = await params;
   const dictionary = await getDictionary(lang as Locale);
   const auth = dictionary.auth as AuthDictionary;
-  const t = (auth.errors || {}) as ErrorMessages;
+  const t = ((auth?.errors) || {}) as ErrorMessages;
   
   const searchParamsValue = await searchParams;
   const error = typeof searchParamsValue.error === "string" ? searchParamsValue.error : "";
@@ -90,7 +90,7 @@ export default async function AuthErrorPage({
             href={`/${lang}/auth/magic-link`}
             className="px-4 py-2 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            {auth.signIn}
+            {auth?.signIn || "Sign in"}
           </Link>
         </div>
         
