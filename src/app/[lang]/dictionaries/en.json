@@ -21,7 +21,30 @@
     "signInWithMagicLink": "Sign in with Magic Link",
     "profile": "Profile",
     "dashboard": "Dashboard",
-    "account": "Account"
+    "account": "Account",
+    "magicLink": {
+      "title": "Magic Link Login",
+      "description": "Secure, convenient authentication without the hassle of passwords",
+      "formTitle": "Magic Link",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "name@example.com",
+      "emailError": "Please enter a valid email address",
+      "sendButton": "Send Magic Link",
+      "sending": "Sending...",
+      "successMessage": "Magic link sent to {email}. Please check your inbox.",
+      "rateLimitError": "Too many attempts. Please try again later.",
+      "timeoutError": "Request timed out. Please try again later.",
+      "networkError": "Network error. Please try again later",
+      "csrfError": "Failed to load CSRF token. Please refresh the page.",
+      "generalError": "Error sending magic link. Please try again"
+    },
+    "verifyRequest": {
+      "title": "Magic Link Sent!",
+      "description": "Check your email for the magic link. If you don't see it, check your spam folder or try a different email.",
+      "tryDifferentEmail": "Try a different email",
+      "metaTitle": "Check Your Email | Web Auth Scaffold",
+      "metaDescription": "A magic link has been sent to your email address for authentication."
+    }
   },
   "footer": {
     "about": "About",

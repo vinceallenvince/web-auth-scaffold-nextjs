@@ -21,7 +21,30 @@
     "signInWithMagicLink": "Iniciar sesión con enlace mágico",
     "profile": "Perfil",
     "dashboard": "Panel",
-    "account": "Cuenta"
+    "account": "Cuenta",
+    "magicLink": {
+      "title": "Inicio de Sesión con Enlace Mágico",
+      "description": "Autenticación segura y conveniente sin la molestia de las contraseñas",
+      "formTitle": "Enlace Mágico",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "nombre@ejemplo.com",
+      "emailError": "Por favor, ingresa un correo electrónico válido",
+      "sendButton": "Enviar Enlace Mágico",
+      "sending": "Enviando...",
+      "successMessage": "Enlace mágico enviado a {email}. Por favor, revisa tu bandeja de entrada.",
+      "rateLimitError": "Demasiados intentos. Por favor, inténtalo más tarde.",
+      "timeoutError": "La solicitud expiró. Por favor, inténtalo más tarde.",
+      "networkError": "Error de red. Por favor, inténtalo más tarde",
+      "csrfError": "No se pudo cargar el token CSRF. Por favor, actualiza la página.",
+      "generalError": "Error al enviar el enlace mágico. Por favor, inténtalo de nuevo"
+    },
+    "verifyRequest": {
+      "title": "¡Enlace Mágico Enviado!",
+      "description": "Revisa tu correo electrónico para encontrar el enlace mágico. Si no lo ves, revisa tu carpeta de spam o intenta con un correo diferente.",
+      "tryDifferentEmail": "Intentar con otro correo",
+      "metaTitle": "Revisa Tu Correo | Estructura de Autenticación Web",
+      "metaDescription": "Se ha enviado un enlace mágico a tu dirección de correo para la autenticación."
+    }
   },
   "footer": {
     "about": "Acerca de",
