@@ -76,7 +76,15 @@
     "errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo.",
     "alternativeTitle": "Métodos de Contacto Alternativos",
     "emailContact": "Envíanos un correo a",
-    "githubContact": "Encuéntranos en GitHub"
+    "githubContact": "Encuéntranos en GitHub",
+    "twitterContact": "Encuéntranos en Twitter"
+  },
+  "helloworld": {
+    "title": "Hola Mundo",
+    "welcome": "¡Bienvenido, {name}!",
+    "description": "Esta es una página protegida que requiere autenticación.",
+    "loading": "Cargando...",
+    "authenticatedUser": "usuario autenticado"
   },
   "examples": {
     "title": "Ejemplos de Componentes",
