@@ -5,6 +5,42 @@
  */
 
 /**
+ * Auth section of the dictionary with all sub-sections
+ */
+export type AuthDictionary = {
+  login: string;
+  logout: string;
+  signIn: string;
+  signInWithMagicLink: string;
+  profile: string;
+  dashboard: string;
+  account: string;
+  magicLink?: {
+    title: string;
+    description: string;
+    formTitle: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailError: string;
+    sendButton: string;
+    sending: string;
+    successMessage: string;
+    rateLimitError: string;
+    timeoutError: string;
+    networkError: string;
+    csrfError: string;
+    generalError: string;
+  };
+  verifyRequest?: {
+    title: string;
+    description: string;
+    tryDifferentEmail: string;
+    metaTitle: string;
+    metaDescription: string;
+  };
+};
+
+/**
  * Dictionary type definition based on the JSON translation structure
  */
 export type Dictionary = {
@@ -23,15 +59,7 @@ export type Dictionary = {
     forms: string;
     toggleTheme: string;
   };
-  auth: {
-    login: string;
-    logout: string;
-    signIn: string;
-    signInWithMagicLink: string;
-    profile: string;
-    dashboard: string;
-    account: string;
-  };
+  auth: AuthDictionary;
   footer: {
     about: string;
     contact: string;

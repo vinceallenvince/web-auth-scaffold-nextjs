@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useMemo } from "react";
 import { getCsrfToken } from "next-auth/react";
 import { useToast } from "@/app/providers/toast-provider";
 import { useRouter, useParams } from "next/navigation";
@@ -20,8 +20,8 @@ export default function MagicLinkForm() {
   const lang = params.lang as string;
   const t = useT();
   
-  // Translation keys
-  const translations = {
+  // Memoize translations to prevent unnecessary re-creation
+  const translations = useMemo(() => ({
     formTitle: t('auth.magicLink.formTitle'),
     emailLabel: t('auth.magicLink.emailLabel'),
     emailPlaceholder: t('auth.magicLink.emailPlaceholder'),
@@ -34,7 +34,7 @@ export default function MagicLinkForm() {
     networkError: t('auth.magicLink.networkError'),
     csrfError: t('auth.magicLink.csrfError'),
     generalError: t('auth.magicLink.generalError')
-  };
+  }), [t]);
   
   // Check email validity for form feedback
   const emailError = email.length > 0 && !emailValidator()(email).isValid;

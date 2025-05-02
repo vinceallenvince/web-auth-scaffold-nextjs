@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useT } from "@/app/lib/i18n-context";
 
+// Props interface for the VerifyRequestClient component
 interface VerifyRequestClientProps {
   lang: string;
 }

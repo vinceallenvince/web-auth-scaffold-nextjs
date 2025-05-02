@@ -3,33 +3,7 @@ import MagicLinkForm from "./magic-link-form";
 import { Container } from "@/components/ui/layout/container";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/constants/i18n";
-
-// Type for the MagicLink section of the dictionary
-type AuthDictionary = {
-  login: string;
-  logout: string;
-  signIn: string;
-  signInWithMagicLink: string;
-  profile: string;
-  dashboard: string;
-  account: string;
-  magicLink: {
-    title: string;
-    description: string;
-    formTitle: string;
-    emailLabel: string;
-    emailPlaceholder: string;
-    emailError: string;
-    sendButton: string;
-    sending: string;
-    successMessage: string;
-    rateLimitError: string;
-    timeoutError: string;
-    networkError: string;
-    csrfError: string;
-    generalError: string;
-  };
-};
+import { AuthDictionary } from "@/types/i18n.types";
 
 // Generate metadata dynamically based on the locale
 export async function generateMetadata({ 
@@ -42,8 +16,8 @@ export async function generateMetadata({
   const auth = dictionary.auth as AuthDictionary;
   
   return {
-    title: `${auth.magicLink.title} | ${dictionary.common.appTitle}`,
-    description: auth.magicLink.description,
+    title: `${auth.magicLink?.title} | ${dictionary.common.appTitle}`,
+    description: auth.magicLink?.description,
   };
 }
 
@@ -55,7 +29,7 @@ export default async function MagicLinkPage({
   const { lang } = await params;
   const dictionary = await getDictionary(lang as Locale);
   const auth = dictionary.auth as AuthDictionary;
-  const t = auth.magicLink;
+  const t = auth.magicLink!;
 
   return (
     <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">

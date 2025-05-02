@@ -3,24 +3,7 @@ import { Metadata } from "next";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/constants/i18n";
 import VerifyRequestClient from "./verify-request-client";
-
-// Type for the Auth section of the dictionary
-type AuthDictionary = {
-  login: string;
-  logout: string;
-  signIn: string;
-  signInWithMagicLink: string;
-  profile: string;
-  dashboard: string;
-  account: string;
-  verifyRequest: {
-    title: string;
-    description: string;
-    tryDifferentEmail: string;
-    metaTitle: string;
-    metaDescription: string;
-  };
-};
+import { AuthDictionary } from "@/types/i18n.types";
 
 // Generate metadata dynamically based on the locale
 export async function generateMetadata({ 
@@ -33,8 +16,8 @@ export async function generateMetadata({
   const auth = dictionary.auth as AuthDictionary;
   
   return {
-    title: auth.verifyRequest.metaTitle,
-    description: auth.verifyRequest.metaDescription,
+    title: auth.verifyRequest?.metaTitle,
+    description: auth.verifyRequest?.metaDescription,
   };
 }
 
