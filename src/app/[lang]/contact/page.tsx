@@ -1,25 +1,52 @@
 import { Metadata } from 'next';
+import { getDictionary } from '../dictionaries';
+import type { Locale } from '@/constants/i18n';
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Contact us for support or feedback about the Web Auth Scaffold project.',
-};
+// Generate metadata dynamically based on the locale
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ lang: string }> 
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  const t = dictionary.contact as { title: string; description: string };
+  
+  return {
+    title: t.title,
+    description: t.description,
+  };
+}
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params
+}: { 
+  params: Promise<{ lang: string }> 
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  // Use string assertion for type safety
+  const t = dictionary.contact as {
+    title: string;
+    description: string;
+    alternativeTitle: string;
+    emailContact: string;
+    githubContact: string;
+  };
+
   return (
     <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
-      <h1 className="text-3xl font-bold mb-6">Contact Us</h1>
+      <h1 className="text-3xl font-bold mb-6">{t.title}</h1>
       <div className="prose max-w-none">
         <p className="mb-4">
-          We'd love to hear from you! If you have any questions or feedback 
-          about the Web Auth Scaffold project, please feel free to reach out.
+          {t.description}
         </p>
         
         <section className="mt-8 mb-8" aria-labelledby="contact-methods">
-          <h2 id="contact-methods" className="text-2xl font-bold mb-4">Get in Touch</h2>
+          <h2 id="contact-methods" className="text-2xl font-bold mb-4">{t.alternativeTitle}</h2>
           <ul className="list-disc pl-6 mb-4">
-            <li>Email: <a href="mailto:example@example.com" className="link">example@example.com</a></li>
-            <li>GitHub: <a href="https://github.com/example/repo" className="link" target="_blank" rel="noopener noreferrer">github.com/example/repo</a></li>
+            <li>{t.emailContact}: <a href="mailto:example@example.com" className="link">example@example.com</a></li>
+            <li>{t.githubContact}: <a href="https://github.com/example/repo" className="link" target="_blank" rel="noopener noreferrer">github.com/example/repo</a></li>
             <li>Twitter: <a href="https://twitter.com/example" className="link" target="_blank" rel="noopener noreferrer">@example</a></li>
           </ul>
         </section>

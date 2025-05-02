@@ -1,28 +1,54 @@
 import { Metadata } from 'next';
+import { getDictionary } from '../dictionaries';
+import type { Locale } from '@/constants/i18n';
 
-export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn about Web Auth Scaffold – a robust starting point for modern web authentication technologies.',
-};
+// Generate metadata dynamically based on the locale
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ lang: string }> 
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  const t = dictionary.about as { title: string; description: string };
+  
+  return {
+    title: t.title,
+    description: t.description,
+  };
+}
 
-export default function AboutPage() {
+export default async function AboutPage({
+  params
+}: { 
+  params: Promise<{ lang: string }> 
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  // Use string assertion for type safety
+  const t = dictionary.about as {
+    title: string;
+    description: string;
+    featuresTitle: string;
+    feature1: string;
+    feature2: string;
+    teamTitle: string;
+    teamDescription: string;
+  };
+
   return (
     <main className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
-      <h1 className="text-3xl font-bold mb-6">About Us</h1>
+      <h1 className="text-3xl font-bold mb-6">{t.title}</h1>
       <div className="prose max-w-none">
         <p className="mb-4">
-          Welcome to the Web Auth Scaffold application. This project demonstrates 
-          a modern web authentication system built with Next.js and Auth.js.
+          {t.description}
         </p>
         <p className="mb-4">
-          Our application uses magic link authentication to provide a secure, 
-          passwordless login experience. This approach eliminates the need for users 
-          to remember passwords while maintaining strong security.
+          {t.feature1} {t.feature2}
         </p>
-        <h2 className="text-2xl font-bold mt-8 mb-4">Our Mission</h2>
+        <h2 className="text-2xl font-bold mt-8 mb-4">{t.featuresTitle}</h2>
         <p className="mb-4">
-          Our mission is to provide developers with a robust starting point for 
-          building secure web applications with modern authentication patterns.
+          {t.teamDescription}
         </p>
       </div>
     </main>
