@@ -1,13 +1,62 @@
 import { Metadata } from "next";
 import MagicLinkForm from "./magic-link-form";
 import { Container } from "@/components/ui/layout/container";
+import { getDictionary } from "@/app/[lang]/dictionaries";
+import type { Locale } from "@/constants/i18n";
 
-export const metadata: Metadata = {
-  title: "Magic Link Authentication | Web Auth Scaffold",
-  description: "Authenticate with a magic link sent to your email",
+// Type for the MagicLink section of the dictionary
+type AuthDictionary = {
+  login: string;
+  logout: string;
+  signIn: string;
+  signInWithMagicLink: string;
+  profile: string;
+  dashboard: string;
+  account: string;
+  magicLink: {
+    title: string;
+    description: string;
+    formTitle: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailError: string;
+    sendButton: string;
+    sending: string;
+    successMessage: string;
+    rateLimitError: string;
+    timeoutError: string;
+    networkError: string;
+    csrfError: string;
+    generalError: string;
+  };
 };
 
-export default function MagicLinkPage() {
+// Generate metadata dynamically based on the locale
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ lang: string }> 
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  const auth = dictionary.auth as AuthDictionary;
+  
+  return {
+    title: `${auth.magicLink.title} | ${dictionary.common.appTitle}`,
+    description: auth.magicLink.description,
+  };
+}
+
+export default async function MagicLinkPage({
+  params
+}: {
+  params: Promise<{ lang: string }>
+}) {
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as Locale);
+  const auth = dictionary.auth as AuthDictionary;
+  const t = auth.magicLink;
+
   return (
     <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
       <section className='hero bg-gradient-to-br py-24 md:py-32'>
@@ -21,8 +70,8 @@ export default function MagicLinkPage() {
               </div>
               <div className="card card-border bg-base-100 w-full">
                 <div className="card-body">
-                <h1 className="text-3xl font-bold mb-3">Magic Link Login</h1>
-                  <p>Secure, convenient authentication without the hassle of passwords</p>
+                  <h1 className="text-3xl font-bold mb-3">{t.title}</h1>
+                  <p>{t.description}</p>
                 </div>
               </div>
             </div>
