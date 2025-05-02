@@ -138,6 +138,34 @@ middleware.ts        → Optional route guards or localization
 - Store user session in DB with Prisma adapter
 - Use `getServerSession()` from Auth.js in Server Components and API routes
 
+### Testing Auth Error Flows
+
+To test authentication error handling and translations without triggering actual authentication failures:
+
+1. **Manually navigate to error URLs** with specific error codes:
+   ```plaintext
+   /<lang>/auth/error?error=<ERROR_CODE>&message=<CUSTOM_MESSAGE>
+   ```
+
+2. **Available error codes** that map to our translations:
+   - `OAuthAccountNotLinked` - Email already used with different provider
+   - `EmailSignin` - Error sending login email
+   - `CredentialsSignin` - Invalid credentials
+   - `SessionRequired` - Authorization required
+   - `AccessDenied` - Permission denied
+   - `Verification` - Expired verification link
+
+3. **Examples for testing:**
+   ```plaintext
+   /en/auth/error?error=Verification
+   /es/auth/error?error=AccessDenied
+   /en/auth/error?error=SessionRequired&message=Custom%20error%20message
+   ```
+
+4. **Observe localized errors** in both UI and toast notifications to ensure proper translation
+
+This approach enables quick testing of error handling without manipulating the database or authentication system.
+
 ---
 
 ## 💪 Testing & Code Quality

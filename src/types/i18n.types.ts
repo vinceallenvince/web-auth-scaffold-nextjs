@@ -38,6 +38,17 @@ export type AuthDictionary = {
     metaTitle: string;
     metaDescription: string;
   };
+  errors?: {
+    prefix: string;
+    default: string;
+    OAuthAccountNotLinked: string;
+    EmailSignin: string;
+    CredentialsSignin: string;
+    SessionRequired: string;
+    AccessDenied: string;
+    Verification: string;
+    [key: string]: string; // Allow for additional error types
+  };
 };
 
 /**
