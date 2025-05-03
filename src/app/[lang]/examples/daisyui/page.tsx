@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 export default function DaisyUIExamplesPage() {
@@ -114,12 +113,6 @@ export default function DaisyUIExamplesPage() {
             </div>
           </div>
         </div>
-      </div>
-      
-      <div className="mt-10 flex justify-center">
-        <Link href="/examples" className="btn btn-outline">
-          Back to Examples
-        </Link>
       </div>
     </div>
   );
