@@ -73,7 +73,6 @@ export default function ClientNavbar({ className, translations }: ClientNavbarPr
     { key: 'cards', href: '/examples/cards', label: translations.cards },
     { key: 'typography', href: '/examples/typography', label: translations.typography },
     { key: 'layout', href: '/examples/layout', label: translations.layout },
-    { key: 'navigation', href: '/examples/navigation', label: translations.navigation || 'Navigation' },
     { key: 'daisyui', href: '/examples/daisyui', label: translations.daisyui || 'DaisyUI' },
     { key: 'toast', href: '/examples/toast', label: translations.toast || 'Toast' },
   ];
