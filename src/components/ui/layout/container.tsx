@@ -28,7 +28,7 @@ export function Container<T extends ElementType = 'div'>({
   return (
     <Component
       className={cn(
-        'w-full px-6 md:px-6 lg:px-8',
+        'w-full px-6 ',
         // Apply either centered or left-justified alignment based on fluid prop
         fluid ? 'mx-auto' : 'max-w-7xl mr-auto ml-0',
         className

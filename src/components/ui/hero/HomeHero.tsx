@@ -29,7 +29,7 @@ export async function HomeHero({ className, lang }: HomeHeroProps) {
   return (
     <section className={cn('hero bg-gradient-to-br py-24 md:py-32', className)}>
       <div className="hero-content w-full">
-        <Container>
+        <Container fluid>
           <div className="flex flex-col space-y-12 w-full">
             <div className="animate-fadeIn">
               <H1 className="mb-6 tracking-tight">

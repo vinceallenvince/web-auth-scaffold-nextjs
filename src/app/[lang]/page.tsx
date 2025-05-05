@@ -1,6 +1,7 @@
 import { getDictionary } from "./dictionaries";
 import type { Locale } from "@/constants/i18n";
 import { HomeHero } from "@/components/ui/hero/server";
+import { PageContainer } from "@/components/ui/layout";
 
 export default async function HomePage({ 
   params 
@@ -16,8 +17,8 @@ export default async function HomePage({
   console.log(`Using dictionary with app title: ${dictionary.common.appTitle}`);
   
   return (
-    <div className="container mx-auto py-12 max-w-5xl">
+    <PageContainer centered>
       <HomeHero lang={lang} />
-    </div>
+    </PageContainer>
   );
 } 

@@ -1,6 +1,7 @@
 import { AuthGuard } from "@/components/auth/auth-guard";
 import { getSession } from "@/lib/auth";
 import type { Metadata } from "next";
+import { PageContainer } from "@/components/ui/layout";
 
 export const metadata: Metadata = {
   title: "Dashboard | Web Auth Scaffold",
@@ -13,7 +14,7 @@ export default async function DashboardPage() {
   
   return (
     <AuthGuard>
-      <main className="container mx-auto px-4 py-8">
+      <PageContainer centered variant="compact">
         <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
         
         <div className="bg-white shadow rounded-lg p-6">
@@ -33,7 +34,7 @@ export default async function DashboardPage() {
             </div>
           </div>
         </div>
-      </main>
+      </PageContainer>
     </AuthGuard>
   );
 } 
