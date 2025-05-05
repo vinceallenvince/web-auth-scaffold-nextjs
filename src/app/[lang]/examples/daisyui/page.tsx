@@ -1,9 +1,10 @@
 import React from 'react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { PageContainer } from '@/components/ui/layout';
 
 export default function DaisyUIExamplesPage() {
   return (
-    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
+    <PageContainer>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">DaisyUI Components</h1>
         <ThemeToggle />
@@ -114,6 +115,6 @@ export default function DaisyUIExamplesPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 } 

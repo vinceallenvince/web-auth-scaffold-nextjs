@@ -7,6 +7,7 @@
  * 
  * Organization Strategy:
  * - Container: Handles max-width and horizontal padding
+ * - PageContainer: Pre-configured container specifically for page content
  * - Grid: Provides CSS Grid-based layout with responsive columns
  * - Section: Defines vertical spacing and background colors for page sections
  * - Spacing: Utilities for consistent margins and paddings (Stack, Spacer, Divider)
@@ -16,6 +17,7 @@
  */
 
 export * from './container';
+export * from './page-container';
 export * from './grid';
 export * from './section';
 export * from './spacing'; 

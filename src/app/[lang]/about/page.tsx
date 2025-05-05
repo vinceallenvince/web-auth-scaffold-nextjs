@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDictionary } from '../dictionaries';
 import type { Locale } from '@/constants/i18n';
+import { PageContainer } from '@/components/ui/layout';
 
 // Generate metadata dynamically based on the locale
 export async function generateMetadata({ 
@@ -37,7 +38,7 @@ export default async function AboutPage({
   };
 
   return (
-    <main className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
+    <PageContainer>
       <h1 className="text-3xl font-bold mb-6">{t.title}</h1>
       <div className="prose max-w-none">
         <p className="mb-4">
@@ -51,6 +52,6 @@ export default async function AboutPage({
           {t.teamDescription}
         </p>
       </div>
-    </main>
+    </PageContainer>
   );
 } 
