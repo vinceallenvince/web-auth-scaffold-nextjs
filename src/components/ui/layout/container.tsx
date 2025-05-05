@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react';
 import { cn } from '@/lib/utils';
 
-type ContainerProps<T extends ElementType = 'div'> = {
+export type ContainerProps<T extends ElementType = 'div'> = {
   children: React.ReactNode;
   className?: string;
   as?: T;

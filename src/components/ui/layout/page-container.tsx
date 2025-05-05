@@ -4,9 +4,8 @@ import { Container } from './container';
 
 type PageContainerVariant = 'default' | 'compact';
 
-type PageContainerProps = {
-  children: React.ReactNode;
-  className?: string;
+// Create a more type-safe version
+type PageContainerProps = Omit<React.ComponentProps<typeof Container>, 'fluid'> & {
   centered?: boolean;
   variant?: PageContainerVariant;
 };
@@ -14,21 +13,26 @@ type PageContainerProps = {
 /**
  * PageContainer component for consistent page layout
  * Provides standardized padding, width, and alignment for page content
- * 
+ *
  * @param children - The content to display inside the container
  * @param className - Additional class names to apply
  * @param centered - Whether the container should be centered (true) or left-justified (false)
  * @param variant - Layout variant: 'default' (standard padding) or 'compact' (reduced padding)
+ * @param as - The HTML element to render (default: div)
+ * 
+ * All other props from Container are also supported (ARIA attributes, data attributes, event handlers, etc.)
  */
 export function PageContainer({
   children,
   className,
   centered = false,
   variant = 'default',
+  as,
   ...props
 }: PageContainerProps) {
   return (
-    <Container 
+    <Container
+      as={as}
       fluid={centered}
       className={cn(
         'max-w-5xl',
