@@ -1,4 +1,3 @@
-import React from 'react';
 import { cn } from '@/lib/utils';
 import { Container } from './container';
 
@@ -19,6 +18,7 @@ type PageContainerProps = Omit<React.ComponentProps<typeof Container>, 'fluid'> 
  * @param centered - Whether the container should be centered (true) or left-justified (false)
  * @param variant - Layout variant: 'default' (standard padding) or 'compact' (reduced padding)
  * @param as - The HTML element to render (default: div)
+ * @returns A responsive container element wrapping the page content.
  * 
  * All other props from Container are also supported (ARIA attributes, data attributes, event handlers, etc.)
  */
