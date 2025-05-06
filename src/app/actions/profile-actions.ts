@@ -93,7 +93,6 @@ export async function updateUserProfile(data: ProfileUpdateRequest): Promise<Pro
 
     // Revalidate profile page to update UI
     revalidatePath('/profile');
-    revalidatePath('/dashboard');
 
     return { success: true };
   } catch (error) {

@@ -2,11 +2,12 @@ import {
   H1, H2, H3, H4, H5, H6, 
   Paragraph, Lead, Small, Tiny, Text
 } from '@/components/ui/typography';
-import { Container, Section } from '@/components/ui/layout';
+import { PageContainer } from '@/components/ui/layout';
+import { Section } from '@/components/ui/layout';
 
 export default function TypographyExamplesPage() {
   return (
-    <Container>
+    <PageContainer>
       <Section>
         <H1>Typography Examples (H1)</H1>
         <Lead>This page demonstrates all typography components to ensure they work correctly after fixing font loading issues in production builds.</Lead>
@@ -59,6 +60,6 @@ export default function TypographyExamplesPage() {
           </div>
         </div>
       </Section>
-    </Container>
+    </PageContainer>
   );
 } 

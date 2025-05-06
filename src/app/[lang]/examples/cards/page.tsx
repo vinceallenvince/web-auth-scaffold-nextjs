@@ -9,6 +9,7 @@ import {
   CardDivider,
   CardGrid
 } from "@/components/ui";
+import { PageContainer } from "@/components/ui/layout";
 
 export default function CardExamplesPage() {
   
@@ -18,7 +19,7 @@ export default function CardExamplesPage() {
   };
 
   return (
-    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
+    <PageContainer>
       <h1 className="text-3xl font-bold mb-8">Card Component Examples</h1>
       
       <section className="mb-12">
@@ -179,6 +180,6 @@ export default function CardExamplesPage() {
           ))}
         </CardGrid>
       </section>
-    </div>
+    </PageContainer>
   );
 } 

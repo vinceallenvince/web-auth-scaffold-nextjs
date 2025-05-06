@@ -12,6 +12,7 @@ import { Button, ButtonLink, IconButton } from '@/components/ui/button';
 import { PlusIcon, ArrowRightIcon, HeartIcon } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
 import { useParams } from 'next/navigation';
+import { PageContainer } from '@/components/ui/layout';
 
 export default function ButtonExamplePage() {
   const [loading, setLoading] = useState(false);
@@ -54,7 +55,7 @@ export default function ButtonExamplePage() {
   );
 
   return (
-    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
+    <PageContainer>
       <h1 className="text-4xl font-bold mb-6">Button Examples</h1>
       <p className="text-lg mb-12">
         A showcase of the button component system with various styles, states, and use cases.
@@ -240,6 +241,6 @@ export default function ButtonExamplePage() {
           <li>Loading spinners have <code className="px-1 py-0.5 bg-base-200 rounded">aria-hidden="true"</code> to prevent duplicate announcements</li>
         </ul>
       </div>
-    </div>
+    </PageContainer>
   );
 } 

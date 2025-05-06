@@ -48,9 +48,8 @@ export function Sidebar({
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const defaultLinks: SidebarLinkProps[] = [
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/dashboard/profile", label: "Profile" },
-    { href: "/dashboard/settings", label: "Settings" },
+    { href: "/", label: "Home" },
+    { href: "/examples/typography", label: "Typography" },
   ];
 
   const sidebarLinks = links || defaultLinks;
@@ -68,7 +67,7 @@ export function Sidebar({
       <div className="flex h-full flex-col justify-between p-4">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            {!isCollapsed && <h2 className="text-xl font-bold">Dashboard</h2>}
+            {!isCollapsed && <h2 className="text-xl font-bold">Navigation</h2>}
             {collapsible && (
               <button
                 type="button"
