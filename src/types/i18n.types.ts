@@ -13,7 +13,6 @@ export type AuthDictionary = {
   signIn: string;
   signInWithMagicLink: string;
   profile: string;
-  dashboard: string;
   account: string;
   magicLink?: {
     title: string;

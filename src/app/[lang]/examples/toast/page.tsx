@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useToast } from '@/app/providers/toast-provider';
+import { PageContainer } from '@/components/ui/layout';
 
 export default function TestToastPage() {
   const { addToast } = useToast();
@@ -19,7 +20,7 @@ export default function TestToastPage() {
   };
   
   return (
-    <div className="container ml-0 mr-auto py-12 max-w-5xl px-12 md:px-12 lg:px-12">
+    <PageContainer>
       <h1 className="text-2xl font-bold mb-6">Toast Component Test</h1>
       
       <div className="flex flex-col gap-4">
@@ -35,6 +36,6 @@ export default function TestToastPage() {
           Show Info Toast
         </button>
       </div>
-    </div>
+    </PageContainer>
   );
 } 
