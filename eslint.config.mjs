@@ -142,7 +142,20 @@ const eslintConfig = [
     files: ["**/*.tsx"],
     rules: {
       // Allow unescaped entities in React components
-      "react/no-unescaped-entities": "off"
+      "react/no-unescaped-entities": "off",
+      // Relax JSDoc requirements for React components with destructured props
+      "jsdoc/check-param-names": "off",
+      "jsdoc/require-param": "off"
+    }
+  },
+  
+  // Strict JSDoc rules for library/utility files
+  {
+    files: ["src/lib/**/*.ts", "src/lib/**/*.tsx"],
+    rules: {
+      // Keep strict checking for lib files
+      "jsdoc/check-param-names": "error",
+      "jsdoc/require-param": "warn"
     }
   },
   
