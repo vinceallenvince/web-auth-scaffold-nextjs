@@ -93,13 +93,40 @@ export const authOptions: NextAuthOptions = {
 
 /**
  * Helper function to get the current session in server components and API routes
+ * 
  * @returns The current session or null if not authenticated
+ * 
+ * @example
+ * ```typescript
+ * // In a Server Component
+ * export default async function ProfilePage() {
+ *   const session = await getSession();
+ *   
+ *   if (!session) {
+ *     redirect('/auth/magic-link');
+ *   }
+ *   
+ *   return <div>Welcome {session.user.email}</div>;
+ * }
+ * ```
  */
 export const getSession = () => getServerSession(authOptions);
 
 /**
  * Helper function to check if a user is authenticated in server components and API routes
+ * 
  * @returns Boolean indicating if user is authenticated
+ * 
+ * @example
+ * ```typescript
+ * // In API route
+ * export async function GET() {
+ *   if (!await isAuthenticated()) {
+ *     return new Response('Unauthorized', { status: 401 });
+ *   }
+ *   // ... handle authenticated request
+ * }
+ * ```
  */
 export async function isAuthenticated(): Promise<boolean> {
   const session = await getSession();
@@ -108,7 +135,19 @@ export async function isAuthenticated(): Promise<boolean> {
 
 /**
  * Helper function to get the current user ID from session
+ * 
  * @returns The current user ID or null if not authenticated
+ * 
+ * @example
+ * ```typescript
+ * // Fetch user-specific data
+ * const userId = await getCurrentUserId();
+ * if (userId) {
+ *   const userPosts = await prisma.post.findMany({
+ *     where: { authorId: userId }
+ *   });
+ * }
+ * ```
  */
 export async function getCurrentUserId(): Promise<string | null> {
   const session = await getSession();

@@ -44,8 +44,33 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 /**
  * Sends an email using Resend in production or logs in development
  * 
+ * Automatically retries failed sends up to 3 times with exponential backoff.
+ * In development mode, emails are logged to console instead of being sent.
+ * 
  * @param options Email sending options including recipient, subject, and content
  * @returns Object containing success status and optional data or error
+ * 
+ * @example
+ * ```typescript
+ * // Simple email
+ * await sendEmail({
+ *   to: 'user@example.com',
+ *   subject: 'Welcome!',
+ *   text: 'Thanks for signing up'
+ * });
+ * 
+ * // Email with HTML and attachments
+ * await sendEmail({
+ *   to: ['user1@example.com', 'user2@example.com'],
+ *   subject: 'Monthly Report',
+ *   text: 'See attached report',
+ *   html: '<h1>Monthly Report</h1><p>See attached</p>',
+ *   attachments: [{
+ *     filename: 'report.pdf',
+ *     content: pdfBuffer
+ *   }]
+ * });
+ * ```
  */
 export async function sendEmail(options: SendEmailOptions): Promise<EmailResult> {
   const { 
