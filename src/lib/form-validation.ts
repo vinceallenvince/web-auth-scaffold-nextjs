@@ -123,9 +123,35 @@ export function pattern(pattern: RegExp, message: string): Validator {
 
 /**
  * Run multiple validators on a value
+ * 
+ * Executes validators in order and returns the first validation failure,
+ * or a success result if all validators pass.
+ * 
  * @param value Value to validate
  * @param validators Array of validators to run
  * @returns First failing validation result, or valid result if all pass
+ * 
+ * @example
+ * ```typescript
+ * // Email field validation
+ * const emailValidators = [
+ *   required('Email is required'),
+ *   email('Please enter a valid email')
+ * ];
+ * 
+ * const result = validate(userInput, emailValidators);
+ * if (!result.isValid) {
+ *   console.error(result.errorMessage);
+ * }
+ * 
+ * // Password field with multiple rules
+ * const passwordValidators = [
+ *   required('Password is required'),
+ *   minLength(8, 'Password must be at least 8 characters'),
+ *   pattern(/[A-Z]/, 'Password must contain an uppercase letter'),
+ *   pattern(/[0-9]/, 'Password must contain a number')
+ * ];
+ * ```
  */
 export function validate(value: ValidatableValue, validators: Validator[]): ValidationResult {
   for (const validator of validators) {
