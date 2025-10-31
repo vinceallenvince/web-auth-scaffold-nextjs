@@ -1,6 +1,7 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
+import jsdoc from "eslint-plugin-jsdoc";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -45,6 +46,47 @@ const eslintConfig = [
   },
 
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  
+  // JSDoc configuration
+  {
+    plugins: {
+      jsdoc
+    },
+    rules: {
+      // Require JSDoc comments for exported functions and classes
+      "jsdoc/require-jsdoc": ["warn", {
+        publicOnly: true,
+        require: {
+          FunctionDeclaration: true,
+          ClassDeclaration: true,
+          MethodDefinition: false
+        },
+        contexts: [
+          "ExportNamedDeclaration > FunctionDeclaration",
+          "ExportNamedDeclaration > VariableDeclaration",
+          "ExportDefaultDeclaration > FunctionDeclaration"
+        ]
+      }],
+      // Require description in JSDoc
+      "jsdoc/require-description": ["warn", {
+        contexts: ["any"]
+      }],
+      // Require @param for function parameters
+      "jsdoc/require-param": "warn",
+      // Require @returns for functions that return values
+      "jsdoc/require-returns": "warn",
+      // Check param names match function signature
+      "jsdoc/check-param-names": "error",
+      // Enforce valid JSDoc types
+      "jsdoc/check-types": "warn",
+      // Ensure JSDoc comments are valid
+      "jsdoc/valid-types": "warn",
+      // Don't require @param descriptions (optional)
+      "jsdoc/require-param-description": "off",
+      // Don't require @returns descriptions (optional)
+      "jsdoc/require-returns-description": "off"
+    }
+  },
   
   // Add specific rules for script files
   {
