@@ -10,11 +10,17 @@ import type { Locale } from "@/constants/i18n";
 import { TranslationsProvider } from "./TranslationsProvider";
 
 // Define valid locales for static generation
+/**
+ *
+ */
 export function generateStaticParams() {
   return locales.map(lang => ({ lang }));
 }
 
 // Generate metadata dynamically
+/**
+ *
+ */
 export async function generateMetadata({ 
   params 
 }: { 
@@ -30,6 +36,9 @@ export async function generateMetadata({
   };
 }
 
+/**
+ *
+ */
 export default async function LocaleLayout({
   children,
   params,
@@ -48,19 +57,15 @@ export default async function LocaleLayout({
   const serializedDictionary = JSON.parse(JSON.stringify(dictionary));
   
   return (
-    <html lang={lang} suppressHydrationWarning>
-      <body>
-        <ClientProviders session={session}>
-          <TranslationsProvider translations={serializedDictionary}>
-            <SkipToContent text={dictionary.navigation.skipToContent} />
-            <Navbar lang={lang as Locale} />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer lang={lang as Locale} />
-          </TranslationsProvider>
-        </ClientProviders>
-      </body>
-    </html>
+    <ClientProviders session={session}>
+      <TranslationsProvider translations={serializedDictionary}>
+        <SkipToContent text={dictionary.navigation.skipToContent} />
+        <Navbar lang={lang as Locale} />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer lang={lang as Locale} />
+      </TranslationsProvider>
+    </ClientProviders>
   );
 } 
