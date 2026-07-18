@@ -8,6 +8,9 @@ interface AuthHeroProps {
   description?: string;
 }
 
+/**
+ *
+ */
 function AuthHero({ 
   className = '',
   title = "Magic Link Authentication", 
@@ -17,6 +20,7 @@ function AuthHero({
 
   // Animation effect when component mounts
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- entrance animation needs a first render in the hidden state
     setIsVisible(true);
     return () => {
       setIsVisible(false);

@@ -1,25 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useT } from '@/app/lib/i18n-context';
 
+/**
+ *
+ */
 export default function HelloWorldPage() {
   const { data: session, status } = useSession();
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const t = useT();
+
+  // Loading state is derived directly from the session status
+  const isLoading = status === 'loading';
 
   useEffect(() => {
     // If the user is not authenticated, redirect to login
     if (status === 'unauthenticated') {
       router.push('/auth/magic-link');
-    }
-
-    // If we know the session status, stop loading
-    if (status !== 'loading') {
-      setIsLoading(false);
     }
   }, [status, router]);
 

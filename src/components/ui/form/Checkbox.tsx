@@ -10,12 +10,15 @@ export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputE
   error?: boolean;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+export /**
+ *
+ */
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, label, error, id, ...props }, ref) => {
     const checkboxId = id || Math.random().toString(36).substring(2, 9);
     
     return (
-      <div className="form-control">
+      <div className="flex flex-col">
         <label 
           htmlFor={checkboxId}
           className={cn(
@@ -39,7 +42,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             {...props}
           />
           {label && (
-            <span className="label-text">{label}</span>
+            <span className="text-sm">{label}</span>
           )}
         </label>
       </div>

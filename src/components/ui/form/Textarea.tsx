@@ -10,13 +10,16 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   resize?: 'none' | 'both' | 'horizontal' | 'vertical';
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export /**
+ *
+ */
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, error, resize = 'vertical', "aria-describedby": ariaDescribedby, ...props }, ref) => {
     return (
       <textarea
         ref={ref}
         className={cn(
-          "textarea textarea-bordered w-full",
+          "textarea w-full",
           "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50",
           "min-h-[80px] py-2 px-3",
           "placeholder:text-base-content/50",

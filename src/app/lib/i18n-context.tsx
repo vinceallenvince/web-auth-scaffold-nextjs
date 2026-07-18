@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useRef } from "react";
 import type { Dictionary, DotNotationPath, NestedDictionaryValue } from "@/types/i18n.types";
 
 // Type for the i18n context value
@@ -19,6 +19,9 @@ type I18nProviderProps = {
 };
 
 // Provider component that wraps client components needing translations
+/**
+ *
+ */
 export function I18nProvider({ dictionary, children }: I18nProviderProps) {
   return (
     <I18nContext.Provider value={{ dictionary }}>
@@ -28,6 +31,9 @@ export function I18nProvider({ dictionary, children }: I18nProviderProps) {
 }
 
 // useT hook for accessing translations with dot notation
+/**
+ *
+ */
 export function useT() {
   // Get the context value
   const context = useContext(I18nContext);
@@ -39,8 +45,8 @@ export function useT() {
     );
   }
 
-  // Cache for previously resolved translations
-  const translationCache = useMemo(() => new Map<string, string>(), []);
+  // Cache for previously resolved translations; ref holds the mutable Map
+  const translationCache = useRef(new Map<string, string>()).current;
   
   // Return a function that accepts a dot notation path and returns the translation
   return function t(path: DotNotationPath): string {

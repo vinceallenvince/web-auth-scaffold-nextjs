@@ -11,12 +11,16 @@ interface ClientProvidersProps {
   session: Session | null;
 }
 
+/**
+ *
+ */
 export default function ClientProviders({ children, session }: ClientProvidersProps) {
   // Add a client-side only flag to prevent hydration mismatch
   const [mounted, setMounted] = useState(false);
   
   // Only after mounting on client, render the providers to prevent hydration mismatch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount gate for hydration-safe rendering
     setMounted(true);
   }, []);
   

@@ -10,12 +10,15 @@ export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   error?: boolean;
 }
 
-export const Radio = forwardRef<HTMLInputElement, RadioProps>(
+export /**
+ *
+ */
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ className, label, id, error, ...props }, ref) => {
     const radioId = id || `radio-${Math.random().toString(36).substring(2, 9)}`;
     
     return (
-      <div className="form-control">
+      <div className="flex flex-col">
         <label 
           htmlFor={radioId}
           className={cn(
@@ -36,7 +39,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           />
           {label && (
             <span className={cn(
-              "label-text",
+              "text-sm",
               error && "text-error"
             )}>
               {label}

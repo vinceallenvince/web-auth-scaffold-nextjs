@@ -10,6 +10,9 @@ import { useT } from "@/app/lib/i18n-context";
 // Configuration constants
 const API_TIMEOUT_MS = 10000; // 10 seconds
 
+/**
+ *
+ */
 export default function MagicLinkForm() {
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
   const [email, setEmail] = useState<string>("");
@@ -109,9 +112,9 @@ export default function MagicLinkForm() {
       
       <form onSubmit={handleSubmit}>
         <input name="csrfToken" type="hidden" defaultValue={csrfToken || ""} />
-        <div className="form-control w-full">
+        <div className="flex flex-col w-full">
           <label className="label" htmlFor="email">
-            <span className="label-text">{translations.emailLabel}</span>
+            <span className="text-sm">{translations.emailLabel}</span>
           </label>
           <input
             id="email"
@@ -119,7 +122,7 @@ export default function MagicLinkForm() {
             type="email"
             autoComplete="email"
             required
-            className="input input-bordered w-full"
+            className="input w-full"
             placeholder={translations.emailPlaceholder}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -133,7 +136,7 @@ export default function MagicLinkForm() {
           )}
         </div>
         
-        <div className="form-control mt-6 w-full">
+        <div className="flex flex-col mt-6 w-full">
           <button
             type="submit"
             className="btn btn-primary"

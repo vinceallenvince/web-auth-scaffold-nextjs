@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "@/constants/i18n";
 
-export function middleware(request: NextRequest) {
+/**
+ *
+ * @param request
+ */
+export function proxy(request: NextRequest) {
   // Get the pathname from the URL
   const pathname = request.nextUrl.pathname;
   
@@ -59,7 +63,10 @@ export function middleware(request: NextRequest) {
 }
 
 // Specify which paths the middleware should run on
-export const config = {
+export /**
+ *
+ */
+const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:

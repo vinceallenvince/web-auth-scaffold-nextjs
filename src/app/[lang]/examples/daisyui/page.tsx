@@ -2,6 +2,9 @@ import React from 'react';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { PageContainer } from '@/components/ui/layout';
 
+/**
+ *
+ */
 export default function DaisyUIExamplesPage() {
   return (
     <PageContainer>
@@ -62,21 +65,21 @@ export default function DaisyUIExamplesPage() {
           <div className="card-body">
             <h2 className="card-title">Form Elements</h2>
             <form className="flex flex-col gap-4">
-              <div className="form-control">
+              <div className="flex flex-col">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="text-sm">Email</span>
                 </label>
-                <input type="email" placeholder="email@example.com" className="input input-bordered" />
+                <input type="email" placeholder="email@example.com" className="input" />
               </div>
-              <div className="form-control">
+              <div className="flex flex-col">
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="text-sm">Password</span>
                 </label>
-                <input type="password" placeholder="password" className="input input-bordered" />
+                <input type="password" placeholder="password" className="input" />
               </div>
-              <div className="form-control">
+              <div className="flex flex-col">
                 <label className="label cursor-pointer">
-                  <span className="label-text">Remember me</span>
+                  <span className="text-sm">Remember me</span>
                   <input type="checkbox" className="checkbox" />
                 </label>
               </div>
