@@ -22,7 +22,10 @@ export interface FormFieldProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
+export /**
+ *
+ */
+const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
   (
     {
       id,
@@ -45,14 +48,14 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
     return (
       <div 
         ref={ref}
-        className={cn("form-control w-full mb-4", className)}
+        className={cn("flex flex-col w-full mb-4", className)}
         {...props}
       >
         {label && !hideLabel && (
           <label 
             htmlFor={fieldId}
             className={cn(
-              "label label-text font-medium mb-1",
+              "label text-sm font-medium mb-1",
               disabled && "opacity-70",
               error && "text-error"
             )}

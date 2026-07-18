@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { middleware } from '@/middleware';
+import { proxy as middleware } from '@/proxy';
 import { locales } from '@/constants/i18n';
 
 // We need to mock next/server first, before importing middleware

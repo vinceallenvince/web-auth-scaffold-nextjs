@@ -14,6 +14,39 @@ import { cn } from '@/lib/utils';
 import { useParams } from 'next/navigation';
 import { PageContainer } from '@/components/ui/layout';
 
+// Section Component for organizing example groups
+const ExampleSection = ({
+  title,
+  description,
+  children
+}: {
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}) => (
+  <section className="mb-12">
+    <h2 className="text-2xl font-bold mb-2">{title}</h2>
+    {description && <p className="text-base-content/70 mb-6">{description}</p>}
+    {children}
+  </section>
+);
+
+// Component to display multiple buttons in an example row
+const ButtonRow = ({
+  children,
+  className
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={cn("flex flex-wrap gap-4 mb-8", className)}>
+    {children}
+  </div>
+);
+
+/**
+ *
+ */
 export default function ButtonExamplePage() {
   const [loading, setLoading] = useState(false);
   const params = useParams();
@@ -23,36 +56,6 @@ export default function ButtonExamplePage() {
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
   };
-
-  // Section Component for organizing example groups
-  const ExampleSection = ({ 
-    title, 
-    description, 
-    children 
-  }: { 
-    title: string; 
-    description?: string; 
-    children: React.ReactNode;
-  }) => (
-    <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-2">{title}</h2>
-      {description && <p className="text-base-content/70 mb-6">{description}</p>}
-      {children}
-    </section>
-  );
-
-  // Component to display multiple buttons in an example row
-  const ButtonRow = ({ 
-    children, 
-    className 
-  }: { 
-    children: React.ReactNode; 
-    className?: string;
-  }) => (
-    <div className={cn("flex flex-wrap gap-4 mb-8", className)}>
-      {children}
-    </div>
-  );
 
   return (
     <PageContainer>

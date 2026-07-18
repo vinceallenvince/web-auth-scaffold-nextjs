@@ -43,12 +43,16 @@ interface ThemeToggleProps {
   'aria-label'?: string;
 }
 
+/**
+ *
+ */
 export function ThemeToggle({ className, 'aria-label': ariaLabel }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   
   // Only show the UI after mounting to prevent hydration mismatch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount gate for hydration-safe rendering
     setMounted(true);
   }, []);
   

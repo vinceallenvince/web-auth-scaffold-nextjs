@@ -10,12 +10,15 @@ export interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
   error?: boolean;
 }
 
-export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
+export /**
+ *
+ */
+const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   ({ className, label, error, id, ...props }, ref) => {
     const switchId = id || Math.random().toString(36).substring(2, 9);
     
     return (
-      <div className="form-control">
+      <div className="flex flex-col">
         <label 
           htmlFor={switchId}
           className={cn(
@@ -40,7 +43,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
             {...props}
           />
           {label && (
-            <span className="label-text">{label}</span>
+            <span className="text-sm">{label}</span>
           )}
         </label>
       </div>

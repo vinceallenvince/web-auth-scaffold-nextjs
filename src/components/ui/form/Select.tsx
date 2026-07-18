@@ -20,7 +20,10 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+export /**
+ *
+ */
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ 
     className, 
     options = [], 
@@ -43,7 +46,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <select
         ref={ref}
         className={cn(
-          "select select-bordered w-full appearance-none",
+          "select w-full appearance-none",
           "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50",
           "px-3",
           "text-base-content",

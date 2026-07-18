@@ -12,6 +12,9 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+/**
+ *
+ */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Initialize with the default theme set in the HTML element
   const [mounted, setMounted] = useState(false);
@@ -34,6 +37,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         : 'bumblebee'
     ) as Theme;
     
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- theme must be read from localStorage/matchMedia, which are only available client-side
     setTheme(validTheme);
     document.documentElement.setAttribute('data-theme', validTheme);
     setMounted(true);
@@ -85,6 +89,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 }
 
 // Custom hook to use the theme context
+/**
+ *
+ */
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
